@@ -1,0 +1,47 @@
+{
+  "header": {
+    "title": "首页",
+    "notificationsTitle": "通知",
+    "noNotifications": "暂无未读通知。",
+    "profileTitle": "个人资料",
+    "openingProfile": "正在打开个人资料..."
+  },
+  "userProfile": {
+    "greeting": "你好，{{name}} 👋",
+    "subtitle": "今天准备好练习了吗？",
+    "walletTitle": "金币钱包",
+    "walletMessage": "购买金币包或观看激励视频获取余额。"
+  },
+  "languageFilter": {
+    "practiceLabel": "学习语言：",
+    "nativeLabel": "母语：",
+    "selectLanguageTitle": "选择语言",
+    "selectLanguageMessage": "选择你想练习的语言和你的 CEFR 等级。"
+  },
+  "instantPractice": {
+    "badgeLive": "实时在线",
+    "badgeRate": "{{rate}} 金币 / 分钟",
+    "title": "即时口语匹配",
+    "subtitle": "立即为你连线可用的母语者",
+    "ctaButton": "立即寻找语伴",
+    "searchingTitle": "即时口语匹配",
+    "searchingMessage": "正在连线实时在线的母语者..."
+  },
+  "teacherAvailability": {
+    "title": "接收 {{language}} 辅导通话...",
+    "earningRate": "每分钟赚取 {{rate}} 金币"
+  },
+  "featuredPeers": {
+    "title": "精选语伴",
+    "onlineCount": "{{count}} 人在线",
+    "viewAll": "查看全部",
+    "reviews": "({{count}} 条评价)",
+    "rateLabel": "费率：",
+    "ratePerMin": "{{rate}}/分钟",
+    "callButton": "通话",
+    "callDialogTitle": "发起通话",
+    "callDialogMessage": "是否与 {{name}} 发起视频通话？费率：{{rate}} 金币/分钟。",
+    "chatDialogTitle": "聊天",
+    "chatDialogMessage": "正在打开与 {{name}} 的私信对话。"
+  }
+}

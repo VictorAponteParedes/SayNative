@@ -1,0 +1,37 @@
+{
+  "title": "探索母语者",
+  "searchPlaceholder": "按姓名、国家或话题搜索...",
+  "filters": {
+    "online": "当前在线",
+    "nativeEnglish": "🇺🇸 英语母语者",
+    "topRated": "⭐ 高分评价"
+  },
+  "speakersAvailable": "{{count}} 位可用语伴",
+  "sort": {
+    "mostRelevant": "综合排序",
+    "title": "语伴排序",
+    "desc": "排序方式：综合推荐、最高评分、最低费率或最新加入。"
+  },
+  "card": {
+    "reviews": "({{count}} 条评价)",
+    "ratePerMin": "{{rate}}/分钟",
+    "native": "母语：",
+    "learns": "正在学习：",
+    "callNow": "立即连线"
+  },
+  "help": {
+    "title": "探索母语者",
+    "desc": "在这里发现来自世界各地的母语者。你可以按语言、评分筛选，或按共同话题搜索。"
+  },
+  "advancedFilters": {
+    "title": "高级筛选",
+    "desc": "按国家、年龄段、每分钟费率和空闲时间进行筛选。"
+  },
+  "dialog": {
+    "callTitle": "直通视频通话",
+    "callMessage": "正在连线 {{name}}。费率：每分钟 {{rate}} 金币。",
+    "chatTitle": "私信沟通",
+    "chatMessage": "正在发起与 {{name}} 的文字对话。"
+  },
+  "empty": "未找到符合筛选条件的在线语伴。"
+}

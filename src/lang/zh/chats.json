@@ -1,0 +1,67 @@
+{
+  "title": "消息",
+  "searchPlaceholder": "搜索聊天记录或语伴...",
+  "onlineSection": {
+    "title": "当前在线",
+    "onlineCount": "{{count}} 位语伴",
+    "new": "新"
+  },
+  "filters": {
+    "all": "全部",
+    "unread": "未读",
+    "videocalls": "视频通话"
+  },
+  "callTypes": {
+    "callEnded": "视频通话已结束 · {{duration}}",
+    "missedCall": "未接通话"
+  },
+  "tipCard": {
+    "title": "流利表达技巧",
+    "subtitle": "每天坚持口语交流10分钟，有效激活日常词汇。"
+  },
+  "options": {
+    "title": "消息设置",
+    "markAllRead": "全部标为已读",
+    "newChat": "发起新聊天",
+    "newChatMessage": "寻找语伴开始一段新的语言交流。"
+  },
+  "empty": "未找到符合搜索条件的对话。",
+  "privateChat": {
+    "activeChat": "正在交谈",
+    "online": "在线",
+    "practicingPrefix": "你正在练习 ",
+    "practicingSuffix": "。随时让对方为你纠错！",
+    "topic": "话题",
+    "today": "今天",
+    "native": "母语者",
+    "callRate": "通话 (🪙{{rate}}/分)",
+    "translate": "翻译",
+    "translated": "译文：你好 Victor！今天英语口语练习进展如何？",
+    "transcribeTranslate": "转写 / 翻译",
+    "transcribedText": "语音转写：Sounds great! Let's focus on daily conversational vocabulary today.",
+    "recommendedTopics": "今日推荐交流话题：",
+    "typing": "{{name}} 正在输入...",
+    "inputPlaceholder": "用英文发条消息吧...",
+    "topics": {
+      "gastronomy": "美食文化",
+      "travelCulture": "旅行与风土",
+      "idioms": "地道习语"
+    },
+    "alerts": {
+      "callTitle": "发起视频通话",
+      "callMessage": "是否与 {{name}} 发起视频通话？费率：每分钟 {{rate}} 金币。",
+      "optionsTitle": "聊天选项",
+      "optionsMessage": "查看资料、静音消息、屏蔽或举报用户。",
+      "profileTitle": "个人资料",
+      "profileMessage": "正在打开 {{name}} 的个人主页...",
+      "topicsTitle": "会话话题",
+      "topicsMessage": "选择一个话题开始今日口语交流，获得实时指正。",
+      "attachmentTitle": "发送附件",
+      "attachmentMessage": "分享照片、语音片段或文化链接。",
+      "aiAssistTitle": "AI 语言助手",
+      "aiAssistMessage": "为你提供地道应答建议、纠正语法并推荐高阶词汇。",
+      "micTitle": "语音消息",
+      "micMessage": "长按录制语音留言。"
+    }
+  }
+}

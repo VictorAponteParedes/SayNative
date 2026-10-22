@@ -1,0 +1,120 @@
+{
+  "headerTitle": "充值金币",
+  "hero": {
+    "title": "充值金币",
+    "balance": "当前余额：{{count}} 金币",
+    "rateExplanation": "10 金币 = 与母语者进行 1 分钟视频交流"
+  },
+  "rewardedAd": {
+    "title": "观看简短广告",
+    "badgeFree": "+5 免费",
+    "available": "今日可用：{{available}} / {{total}}",
+    "button": "观看",
+    "adStarted": "广告正在加载播放...",
+    "rewardEarned": "恭喜！观看广告获得 +5 金币奖励。"
+  },
+  "packagesSection": {
+    "title": "金币充值套餐",
+    "oneTimePayment": "单次付款"
+  },
+  "packages": {
+    "basic": {
+      "badge": "入门",
+      "title": "基础体验包",
+      "coins": "200 金币",
+      "subtitle": "约 20 分钟母语视频通话",
+      "button": "购买套餐"
+    },
+    "popular": {
+      "floatingBadge": "🔥 最受欢迎",
+      "extraFree": "额外赠送 +12%",
+      "title": "高频练习包",
+      "coins": "900",
+      "originalCoins": "800",
+      "subtitle": "约 90 分钟深度口语强化",
+      "button": "获取 900 金币"
+    },
+    "bestValue": {
+      "floatingBadge": "⭐ 超值推荐 · 立省 30%",
+      "giftCoins": "赠送 +500 奖励金币",
+      "title": "全沉浸式套餐",
+      "coins": "2,500",
+      "originalCoins": "2,000",
+      "subtitle": "4+ 小时专业母语辅导",
+      "button": "获取 2,500 金币"
+    }
+  },
+  "benefits": {
+    "noExpiry": "金币永久有效，无过期时间",
+    "instantConnection": "即时连线各大母语交流空间",
+    "securePurchase": "100% 官方安全支付保障"
+  },
+  "trust": {
+    "ssl": "SSL 256 位加密",
+    "iap": "应用内购买保障",
+    "guaranteed": "官方正品保障"
+  },
+  "legal": {
+    "disclaimer": "确认购买后，费用将记入你的 Apple App Store 或 Google Play 账户。虚拟金币仅供在 SayNative 平台内用于母语通话和辅导，不具备法定货币价值，不支持退款。",
+    "restore": "恢复购买",
+    "terms": "服务条款",
+    "privacy": "隐私政策"
+  },
+  "dialog": {
+    "purchaseTitle": "确认购买",
+    "purchaseMessage": "是否确认以 {{price}} 购买 {{title}}？",
+    "purchaseSuccess": "购买成功！已向你的账户充入 {{coins}} 金币。"
+  },
+  "history": {
+    "headerTitle": "金币明细",
+    "balanceTitle": "当前可用余额",
+    "synced": "已同步",
+    "monedas": "金币",
+    "totalEarned": "累计获得",
+    "consumed": "累计消费",
+    "filters": {
+      "all": "全部",
+      "purchases": "充值",
+      "earned": "收益",
+      "spent": "消费",
+      "empty": "该分类下暂无金币明细记录"
+    },
+    "sections": {
+      "today": "今天",
+      "thisWeek": "本周",
+      "september2024": "2024年9月",
+      "movementsCount": "{{count}} 笔明细"
+    },
+    "items": {
+      "popularPurchase": "购买高频练习包",
+      "appleIap": "Apple IAP ($9.99 USD) · 14:20",
+      "callSarah": "与 Sarah J. 的视频通话",
+      "callSarahSub": "时长：8 分钟 (10🪙/分) · 11:05",
+      "taughtDavid": "为 David 辅导西班牙语",
+      "taughtDavidSub": "辅导：12 分钟 (+7🪙/分) · 昨天",
+      "adReward": "观看激励广告奖励",
+      "adRewardSub": "激励视频 · 昨天 16:45",
+      "callEmma": "与 Emma 的视频通话",
+      "callEmmaSub": "时长：15 分钟 · 周二",
+      "welcomeBonus": "新手欢迎礼金",
+      "welcomeBonusSub": "新用户注册奖励 · 9月15日",
+      "basicPurchase": "购买基础体验包",
+      "googlePlay": "Google Play ($2.99 USD) · 9月15日"
+    },
+    "support": {
+      "banner": "账单遇到疑问？联系在线客服",
+      "accountId": "账户 ID: LL-849204 · SSL 银行级加密传输",
+      "calendarTitle": "按日期筛选",
+      "calendarMessage": "请选择日期区间查询明细。",
+      "supportTitle": "SayNative 官方客服",
+      "supportMessage": "我们的客服专员将为你核实任何费用明细。"
+    }
+  },
+  "toasts": {
+    "adLimitTitle": "今日次数已达上限",
+    "adLimitMessage": "今日所有激励广告已观看完毕，明天再来领取奖励吧。",
+    "rewardEarnedTitle": "奖励已到账！",
+    "rewardEarnedMessage": "观看广告成功获得 +5 金币奖励。",
+    "purchaseSuccessTitle": "充值成功！"
+  }
+}

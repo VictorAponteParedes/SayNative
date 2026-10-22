@@ -1,0 +1,61 @@
+{
+  "header": {
+    "title": "安全与社区治理"
+  },
+  "safeCommunity": {
+    "title": "安全社区保障",
+    "badge": "SayShield",
+    "description": "在 SayNative，我们提倡相互尊重与多元包容的语言交流环境。对任何骚扰、不当言论或违规举动坚决实施零容忍严惩政策。",
+    "guidelinesLink": "阅读社区文明守则 →",
+    "guidelinesTitle": "社区文明守则",
+    "guidelinesMessage": "SayNative 致力于构建安全健康的环境。严厉禁止骚扰、露骨敏感内容以及任何形式的歧视。"
+  },
+  "privacy": {
+    "sectionTitle": "隐私安全设置",
+    "activeProtection": "实时防护中",
+    "hideAgeTitle": "隐藏我的年龄",
+    "hideAgeDesc": "其他语伴将仅能查看你所在的国家/地区以及对应的外语水平等级。",
+    "reputationFilterTitle": "通话好评门槛过滤",
+    "reputationFilterDesc": "仅接收综合好评度高于 4.0 星级的语伴发起的语音/视频请求。",
+    "antiShockTitle": "通话防意外防窥保护",
+    "recommendedBadge": "官方推荐",
+    "antiShockDesc": "在视频接通的前 5 秒内自动虚化对方摄像头画面，直到你手动确认网络安全。"
+  },
+  "blockedUsers": {
+    "sectionTitle": "黑名单用户 ({{count}})",
+    "description": "已被加入黑名单的用户将无法向你发送消息、收听你的语音留言或进入你的通话房间。",
+    "unblockButton": "解除屏蔽",
+    "noBlocked": "你的黑名单中暂无任何用户。",
+    "blockedDate": "屏蔽于 {{date}}",
+    "spamReason": "垃圾广告 / 恶意骚扰",
+    "behaviorReason": "违规不当举止",
+    "unblockConfirmTitle": "解除用户屏蔽",
+    "unblockConfirmMessage": "确定要解除对 {{name}} 的屏蔽吗？解除后该用户将恢复与你的互动权限。",
+    "cancel": "取消",
+    "confirm": "解除屏蔽"
+  },
+  "moderation": {
+    "sectionTitle": "举报反馈与账号治理",
+    "reportsStatusTitle": "我的举报进度",
+    "inReviewBadge": "1 件审核中",
+    "reportsStatusDesc": "安全团队将在 24 小时内核查每一份违规线索...",
+    "reportsModalTitle": "我的举报记录",
+    "reportsModalMessage": "你提交的社区违规举报正在由平台安全审核专员紧急核查中。",
+    "complianceText": "我们严格执行 Google Play 及 Apple App Store 移动端安全合规条例。任何危害用户身心健康或发布不当敏感内容的行为，将面临永久封禁并依法移交相关主管机关。",
+    "deleteAccountButton": "注销账户并清除个人数据",
+    "deleteAccountWarning": "此操作无法撤销，将永久抹除你的所有学习进度、连胜记录、交流历史和剩余金币。",
+    "deleteConfirmTitle": "确认永久注销账号？",
+    "deleteConfirmMessage": "此操作不可逆。你名下的所有个人信息、金币资产及聊天记录都将从服务器中彻底粉碎清除。",
+    "deleteConfirmAction": "彻底注销"
+  },
+  "toasts": {
+    "unblockSuccessTitle": "已解除屏蔽",
+    "unblockSuccessMessage": "已成功将 {{name}} 从黑名单中移除。",
+    "privacyUpdatedTitle": "隐私偏好已保存",
+    "privacyUpdatedMessage": "你的个人隐私安全策略设置已同步生效。",
+    "antiShockEnabledTitle": "防窥保护已开启",
+    "antiShockEnabledMessage": "视频通话接通前 5 秒内将自动对摄像头画面应用虚化滤镜。",
+    "accountDeletedTitle": "账号已彻底注销",
+    "accountDeletedMessage": "你的所有个人数据已从系统中完全抹除并安全退出。"
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "header": {
+    "title": "个人资料",
+    "edit": "编辑"
+  },
+  "user": {
+    "editAvatar": "更换头像",
+    "verified": "已认证",
+    "bioPlaceholder": "写几句话介绍一下自己吧..."
+  },
+  "wallet": {
+    "badge": "虚拟钱包",
+    "historyLink": "消费明细",
+    "coins": "{{count}} 金币",
+    "rechargeButton": "充值",
+    "freeAdButton": "+{{count}} 免费"
+  },
+  "stats": {
+    "practiced": "练习时长",
+    "practicedValue": "{{hours}} 小时",
+    "calls": "交流场次",
+    "callsValue": "{{count}} 次",
+    "reputation": "好评度",
+    "reputationValue": "{{rating}}"
+  },
+  "languages": {
+    "title": "我的语言",
+    "edit": "管理",
+    "nativeLabel": "母语",
+    "nativeBadge": "母语者",
+    "targetProgress": "距离 {{target}} 进度 {{percent}}%",
+    "addLanguage": "添加练习语言",
+    "addLanguageTitle": "添加新语言",
+    "addLanguageMessage": "选择你希望开始练习的外语语种。"
+  },
+  "teachingMode": {
+    "sectionTitle": "母语辅导模式",
+    "cardTitle": "接收母语辅导通话",
+    "cardSubtitle": "随时上线连线其他学习{{language}}的语伴。",
+    "rateLabel": "我的通话费率",
+    "rateValue": "{{rate}} / 分钟"
+  },
+  "account": {
+    "sectionTitle": "账户与偏好设置",
+    "personalInfo": "个人资料与账号",
+    "personalInfoSubtitle": "邮箱、电话与登录凭据",
+    "notifications": "推送通知",
+    "security": "安全与社区治理",
+    "securitySubtitle": "黑名单与隐私保护",
+    "help": "帮助与客服支持",
+    "terms": "服务协议与隐私条款",
+    "logout": "退出登录",
+    "logoutConfirmTitle": "退出登录",
+    "logoutConfirmMessage": "确定要退出当前账号登录吗？",
+    "cancel": "取消",
+    "confirm": "退出"
+  },
+  "footer": {
+    "version": "SayNative v1.0.0 · 匠心打造"
+  },
+  "editProfile": {
+    "title": "个人信息",
+    "save": "保存修改",
+    "changePhoto": "修改头像",
+    "fullName": "昵称/姓名",
+    "fullNamePlaceholder": "输入你的姓名",
+    "email": "电子邮箱",
+    "emailPlaceholder": "your@email.com",
+    "phone": "手机号码",
+    "phonePlaceholder": "+86 138 0000 0000",
+    "bio": "个人简介",
+    "country": "常驻国家/地区",
+    "nativeLanguage": "母语",
+    "userId": "账户 ID",
+    "memberSince": "加入时间",
+    "saveSuccess": "个人信息已成功更新！",
+    "saveError": "请确保填写的姓名和邮箱格式正确。"
+  },
+  "toasts": {
+    "profileUpdatedTitle": "资料已更新",
+    "profileUpdatedMessage": "你的个人详细信息已成功保存。",
+    "incompleteDataTitle": "信息未填写完整",
+    "incompleteDataMessage": "请检查并填写有效的姓名和邮箱地址。",
+    "rewardEarnedTitle": "奖励已领取",
+    "rewardEarnedMessage": "观看广告成功获得 +5 金币奖励！",
+    "teachingEnabledTitle": "辅导模式已开启",
+    "teachingEnabledMessage": "语伴现在可以向你发起母语练习通话。",
+    "teachingDisabledTitle": "辅导模式已暂停",
+    "teachingDisabledMessage": "你将暂时不会收到来自语伴的通话邀请。"
+  }
+}

@@ -31,6 +31,16 @@ import ptProfile from './pt/profile.json';
 import ptNotifications from './pt/notifications.json';
 import ptSecurity from './pt/security.json';
 
+// ZH (Chino Simplificado)
+import zhCommon from './zh/common.json';
+import zhHome from './zh/home.json';
+import zhExplore from './zh/explore.json';
+import zhChats from './zh/chats.json';
+import zhCoins from './zh/coins.json';
+import zhProfile from './zh/profile.json';
+import zhNotifications from './zh/notifications.json';
+import zhSecurity from './zh/security.json';
+
 export const defaultNS = 'common';
 
 export const resources = {
@@ -63,6 +73,16 @@ export const resources = {
     profile: ptProfile,
     notifications: ptNotifications,
     security: ptSecurity,
+  },
+  zh: {
+    common: zhCommon,
+    home: zhHome,
+    explore: zhExplore,
+    chats: zhChats,
+    coins: zhCoins,
+    profile: zhProfile,
+    notifications: zhNotifications,
+    security: zhSecurity,
   },
 } as const;
 

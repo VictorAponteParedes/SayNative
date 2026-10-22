@@ -1,0 +1,55 @@
+{
+  "header": {
+    "title": "动态通知",
+    "newBadge": "{{count}} 条新消息",
+    "markAllRead": "全部已读"
+  },
+  "filters": {
+    "all": "全部",
+    "calls": "通话",
+    "coins": "金币",
+    "social": "语伴圈"
+  },
+  "sections": {
+    "today": "今天",
+    "todayCount": "{{count}} 条最新",
+    "yesterday": "昨天",
+    "thisWeek": "本周",
+    "empty": "该分类下暂无任何通知。"
+  },
+  "items": {
+    "missedCallTitle": "来自 Sarah J. 的未接通话",
+    "missedCallDesc": "曾尝试与你连线进行英语口语日常练习。",
+    "missedCallAction": "回拨通话 (🪙 10/分)",
+    "coinsEarnedTitle": "成功赚取 42 金币！",
+    "coinsEarnedDesc": "来自你与 David Smith 的西班牙语辅导交流 (6分钟)。",
+    "coinsEarnedBadge": "+42",
+    "newMessageTitle": "来自 Emma W. 的新消息",
+    "newMessageDesc": "Emma 给你发送了一条发音练习语音。",
+    "newMessageAudio": "语音留言 (0:45)",
+    "streakTitle": "恭喜达成连续练习成就",
+    "streakDesc": "你已连续练习 5 天！立即领取你的 10 金币每日连胜奖励。",
+    "streakAction": "领取奖励",
+    "streakClaimed": "已领取",
+    "tutorOnlineTitle": "Liam Davies 🇬🇧 刚刚上线",
+    "tutorOnlineDesc": "你关注的高级英语母语语伴刚刚登录平台。",
+    "tutorOnlineAction": "打个招呼 👋",
+    "practiceReminderTitle": "每日口语练习提醒",
+    "practiceReminderDesc": "今天抽出10分钟，轻松保持地道外语语感。",
+    "time15m": "15分钟前",
+    "time2h": "2小时前",
+    "time4h": "4小时前",
+    "time1830": "18:30",
+    "time1120": "11:20",
+    "time3d": "3天前"
+  },
+  "toasts": {
+    "markedAllReadTitle": "全部已读",
+    "markedAllReadMessage": "已将所有动态通知标记为已读状态。",
+    "bonusClaimedTitle": "连胜奖励已到账！",
+    "bonusClaimedMessage": "+10 金币已成功充入你的账户余额。",
+    "alreadyClaimed": "该连胜奖励已经领取过了。",
+    "greetingSentTitle": "问候已送达！",
+    "greetingSentMessage": "已成功向 Liam 发送了热情问候。"
+  }
+}
