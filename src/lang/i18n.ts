@@ -7,6 +7,7 @@ import esHome from './es/home.json';
 import esExplore from './es/explore.json';
 import esChats from './es/chats.json';
 import esCoins from './es/coins.json';
+import esProfile from './es/profile.json';
 
 // EN
 import enCommon from './en/common.json';
@@ -14,6 +15,7 @@ import enHome from './en/home.json';
 import enExplore from './en/explore.json';
 import enChats from './en/chats.json';
 import enCoins from './en/coins.json';
+import enProfile from './en/profile.json';
 
 // PT
 import ptCommon from './pt/common.json';
@@ -21,6 +23,7 @@ import ptHome from './pt/home.json';
 import ptExplore from './pt/explore.json';
 import ptChats from './pt/chats.json';
 import ptCoins from './pt/coins.json';
+import ptProfile from './pt/profile.json';
 
 export const defaultNS = 'common';
 
@@ -31,6 +34,7 @@ export const resources = {
     explore: esExplore,
     chats: esChats,
     coins: esCoins,
+    profile: esProfile,
   },
   en: {
     common: enCommon,
@@ -38,6 +42,7 @@ export const resources = {
     explore: enExplore,
     chats: enChats,
     coins: enCoins,
+    profile: enProfile,
   },
   pt: {
     common: ptCommon,
@@ -45,6 +50,7 @@ export const resources = {
     explore: ptExplore,
     chats: ptChats,
     coins: ptCoins,
+    profile: ptProfile,
   },
 } as const;
 

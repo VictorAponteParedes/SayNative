@@ -10,6 +10,7 @@ export const Routes = {
     Chats: 'Chats',
     PrivateChat: 'PrivateChat',
     Profile: 'Profile',
+    EditProfile: 'EditProfile',
     ActiveCall: 'ActiveCall',
     CallLobby: 'CallLobby',
     Coins: 'Coins',

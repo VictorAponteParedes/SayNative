@@ -88,6 +88,8 @@ export const BottomTabBar: React.FC<BottomTabBarProps> = ({ activeTab }) => {
       navigate(Routes.App.Explore);
     } else if (tab.route === 'Chats') {
       navigate(Routes.App.Chats);
+    } else if (tab.route === 'Profile') {
+      navigate(Routes.App.Profile);
     } else {
       const label = t(tab.labelKey);
       Alert.alert(label, `${label} estará disponible pronto.`);

@@ -4,6 +4,7 @@ import { HomeScreen } from '../features/home';
 import { ExploreScreen } from '../features/discovery';
 import { ChatsScreen, PrivateChatScreen } from '../features/chats';
 import { CoinsScreen, CoinsHistoryScreen } from '../features/coins';
+import { ProfileScreen, EditProfileScreen } from '../features/profile';
 import { Routes } from './routes';
 import type { AppStackParamList } from './types';
 
@@ -40,6 +41,14 @@ export const AppStack: React.FC = () => {
       <Stack.Screen
         name={Routes.App.CoinsHistory as keyof AppStackParamList}
         component={CoinsHistoryScreen}
+      />
+      <Stack.Screen
+        name={Routes.App.Profile as keyof AppStackParamList}
+        component={ProfileScreen}
+      />
+      <Stack.Screen
+        name={Routes.App.EditProfile as keyof AppStackParamList}
+        component={EditProfileScreen}
       />
     </Stack.Navigator>
   );

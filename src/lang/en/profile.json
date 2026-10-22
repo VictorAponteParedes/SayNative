@@ -1,0 +1,79 @@
+{
+  "header": {
+    "title": "My Profile",
+    "edit": "Edit"
+  },
+  "user": {
+    "editAvatar": "Change photo",
+    "verified": "Verified",
+    "bioPlaceholder": "Write a short bio about yourself..."
+  },
+  "wallet": {
+    "badge": "VIRTUAL WALLET",
+    "historyLink": "Usage history",
+    "coins": "{{count}} Coins",
+    "rechargeButton": "Recharge",
+    "freeAdButton": "+{{count}} free"
+  },
+  "stats": {
+    "practiced": "Practiced",
+    "practicedValue": "{{hours}} hrs",
+    "calls": "Calls",
+    "callsValue": "{{count}} ses.",
+    "reputation": "Reputation",
+    "reputationValue": "{{rating}}"
+  },
+  "languages": {
+    "title": "My Languages",
+    "edit": "Edit",
+    "nativeLabel": "Native Language",
+    "nativeBadge": "Native",
+    "targetProgress": "{{percent}}% to {{target}}",
+    "addLanguage": "Add another language",
+    "addLanguageTitle": "Add new language",
+    "addLanguageMessage": "Choose the language you wish to start practicing."
+  },
+  "teachingMode": {
+    "sectionTitle": "Teaching Mode",
+    "cardTitle": "Receive calls in my language",
+    "cardSubtitle": "Available to guide other students of {{language}}.",
+    "rateLabel": "My rate per minute",
+    "rateValue": "{{rate}} / min"
+  },
+  "account": {
+    "sectionTitle": "Account & Preferences",
+    "personalInfo": "Personal Info",
+    "personalInfoSubtitle": "Email, phone and account details",
+    "notifications": "Notifications",
+    "security": "Security & Moderation",
+    "securitySubtitle": "Blocked users and privacy",
+    "help": "Help & Support",
+    "terms": "Terms & Privacy",
+    "logout": "Log Out",
+    "logoutConfirmTitle": "Log Out",
+    "logoutConfirmMessage": "Are you sure you want to log out of your account?",
+    "cancel": "Cancel",
+    "confirm": "Log Out"
+  },
+  "footer": {
+    "version": "SayNative v1.0.0 · Made with passion"
+  },
+  "editProfile": {
+    "title": "Personal Info",
+    "save": "Save",
+    "changePhoto": "Change photo",
+    "fullName": "Full Name",
+    "fullNamePlaceholder": "Enter your name",
+    "email": "Email Address",
+    "emailPlaceholder": "your@email.com",
+    "phone": "Mobile Phone",
+    "phonePlaceholder": "+1 555 000 0000",
+    "bio": "Bio",
+    "country": "Country of Residence",
+    "nativeLanguage": "Native Language",
+    "userId": "Account ID",
+    "memberSince": "Member since",
+    "saveSuccess": "Personal info saved successfully!",
+    "saveError": "Please ensure your name and email are valid."
+  }
+}

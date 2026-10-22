@@ -10,6 +10,7 @@ export type AppStackParamList = {
     ratePerMinute?: number;
   };
   Profile: undefined;
+  EditProfile?: undefined;
   ActiveCall?: {
     peerId: string;
     peerName: string;

@@ -1,0 +1,82 @@
+import React from 'react';
+import { ScrollView } from 'react-native';
+import { SafeAreaContainer, BottomTabBar } from '../../../../components';
+import {
+  ProfileHeader,
+  UserIdentityCard,
+  ProfileWalletCard,
+  ProfileStatsRow,
+  LanguagesSection,
+  TeachingModeCard,
+  AccountPreferencesSection,
+} from '../../components';
+import { useProfile } from '../../hooks/useProfile';
+import { styles } from './styles';
+
+export const ProfileScreen: React.FC = () => {
+  const {
+    user,
+    handleEditProfile,
+    handleGoToCoins,
+    handleGoToHistory,
+    handleWatchRewardedAd,
+    handleToggleTeachingMode,
+    handleAddLanguage,
+    handleLogout,
+  } = useProfile();
+
+  return (
+    <SafeAreaContainer edges={['top']} style={styles.container}>
+      <ProfileHeader />
+
+      <ScrollView
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={false}
+      >
+        {/* Identidad del Usuario: Avatar con lápiz, Nombre, Bandera, Correo y Bio */}
+        <UserIdentityCard user={user} onPressEdit={handleEditProfile} />
+
+        {/* Billetera Virtual: Saldo, botón Recargar y botón +5 gratis */}
+        <ProfileWalletCard
+          coins={user.coins}
+          onPressRecharge={handleGoToCoins}
+          onPressHistory={handleGoToHistory}
+          onPressRewardedAd={handleWatchRewardedAd}
+        />
+
+        {/* Fila de Métricas: Horas Practicadas, Llamadas y Reputación */}
+        <ProfileStatsRow
+          hoursPracticed={user.hoursPracticed}
+          totalCalls={user.totalCalls}
+          rating={user.rating}
+        />
+
+        {/* Sección Mis Idiomas (Nativo y en aprendizaje con barra de progreso) */}
+        <LanguagesSection
+          user={user}
+          onPressAddLanguage={handleAddLanguage}
+          onPressEditLanguages={handleEditProfile}
+        />
+
+        {/* Sección Modo Enseñar con Toggle y Tarifa fija */}
+        <TeachingModeCard
+          isAvailable={user.isAvailableToTeach}
+          onToggle={handleToggleTeachingMode}
+          ratePerMin={user.earningRatePerMin}
+          languageName={user.nativeLanguage.name}
+        />
+
+        {/* Cuenta y Preferencias (con acceso a Datos Personales, Soporte, Cerrar Sesión) */}
+        <AccountPreferencesSection
+          onPressPersonalInfo={handleEditProfile}
+          onPressLogout={handleLogout}
+        />
+      </ScrollView>
+
+      {/* Barra de navegación inferior */}
+      <BottomTabBar activeTab="Perfil" />
+    </SafeAreaContainer>
+  );
+};
+
+export default ProfileScreen;

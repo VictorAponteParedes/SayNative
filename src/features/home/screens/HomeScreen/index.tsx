@@ -26,10 +26,7 @@ export const HomeScreen: React.FC = () => {
   };
 
   const handleProfile = () => {
-    Alert.alert(
-      t('header.profileTitle'),
-      t('header.openingProfile')
-    );
+    navigate(Routes.App.Profile);
   };
 
   const handleAddCoins = () => {

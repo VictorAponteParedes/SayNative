@@ -1,0 +1,79 @@
+{
+  "header": {
+    "title": "Mi Perfil",
+    "edit": "Editar"
+  },
+  "user": {
+    "editAvatar": "Cambiar foto",
+    "verified": "Verificado",
+    "bioPlaceholder": "Escribe una breve presentación sobre ti..."
+  },
+  "wallet": {
+    "badge": "BILLETERA VIRTUAL",
+    "historyLink": "Historial de consumos",
+    "coins": "{{count}} Monedas",
+    "rechargeButton": "Recargar",
+    "freeAdButton": "+{{count}} gratis"
+  },
+  "stats": {
+    "practiced": "Practicadas",
+    "practicedValue": "{{hours}} hrs",
+    "calls": "Llamadas",
+    "callsValue": "{{count}} ses.",
+    "reputation": "Reputación",
+    "reputationValue": "{{rating}}"
+  },
+  "languages": {
+    "title": "Mis Idiomas",
+    "edit": "Editar",
+    "nativeLabel": "Idioma Nativo",
+    "nativeBadge": "Nativo",
+    "targetProgress": "{{percent}}% a {{target}}",
+    "addLanguage": "Agregar otro idioma",
+    "addLanguageTitle": "Agregar nuevo idioma",
+    "addLanguageMessage": "Elige el idioma que deseas empezar a practicar."
+  },
+  "teachingMode": {
+    "sectionTitle": "Modo Enseñar",
+    "cardTitle": "Recibir llamadas en mi idioma",
+    "cardSubtitle": "Disponible para guiar a otros estudiantes de {{language}}.",
+    "rateLabel": "Mi tarifa por minuto",
+    "rateValue": "{{rate}} / min"
+  },
+  "account": {
+    "sectionTitle": "Cuenta y Preferencias",
+    "personalInfo": "Datos Personales",
+    "personalInfoSubtitle": "Correo, teléfono y cuenta",
+    "notifications": "Notificaciones",
+    "security": "Seguridad y Moderación",
+    "securitySubtitle": "Usuarios bloqueados y privacidad",
+    "help": "Ayuda y Soporte",
+    "terms": "Términos y Privacidad",
+    "logout": "Cerrar Sesión",
+    "logoutConfirmTitle": "Cerrar Sesión",
+    "logoutConfirmMessage": "¿Estás seguro de que deseas salir de tu cuenta?",
+    "cancel": "Cancelar",
+    "confirm": "Salir"
+  },
+  "footer": {
+    "version": "SayNative v1.0.0 · Hecho con pasión"
+  },
+  "editProfile": {
+    "title": "Datos Personales",
+    "save": "Guardar",
+    "changePhoto": "Cambiar foto",
+    "fullName": "Nombre completo",
+    "fullNamePlaceholder": "Ingresa tu nombre",
+    "email": "Correo electrónico",
+    "emailPlaceholder": "tu@correo.com",
+    "phone": "Teléfono móvil",
+    "phonePlaceholder": "+34 600 000 000",
+    "bio": "Biografía",
+    "country": "País de residencia",
+    "nativeLanguage": "Idioma Nativo",
+    "userId": "ID de Cuenta",
+    "memberSince": "Miembro desde",
+    "saveSuccess": "¡Tus datos personales se han guardado con éxito!",
+    "saveError": "Por favor revisa que el nombre y el correo sean válidos."
+  }
+}

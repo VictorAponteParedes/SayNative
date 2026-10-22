@@ -5,18 +5,32 @@ export interface UserLanguage {
   name: string;
   flag: string;
   level?: string;
+  progressPercentage?: number;
+  targetLevel?: string;
 }
 
 export interface UserProfile {
   id: string;
   name: string;
+  email: string;
+  phone?: string;
+  bio?: string;
   avatarUrl: string;
+  countryCode?: string;
+  countryFlag?: string;
+  isVerified?: boolean;
   coins: number;
   nativeLanguage: UserLanguage;
   learningLanguage: UserLanguage;
+  learningLanguagesList?: UserLanguage[];
   isAvailableToTeach: boolean;
   earningRatePerMin: number;
   learningCostPerMin: number;
+  hoursPracticed: number;
+  totalCalls: number;
+  rating: number;
+  reviewCount: number;
+  memberSince?: string;
 }
 
 interface AuthState {
@@ -25,6 +39,7 @@ interface AuthState {
   setAuthenticated: (status: boolean) => void;
   setAvailableToTeach: (available: boolean) => void;
   updateLearningLanguage: (language: UserLanguage) => void;
+  updateUserProfile: (data: Partial<UserProfile>) => void;
   addCoins: (amount: number) => void;
   deductCoins: (amount: number) => void;
 }
@@ -32,10 +47,16 @@ interface AuthState {
 export const useAuthStore = create<AuthState>((set) => ({
   isAuthenticated: true,
   user: {
-    id: 'usr_victor_1',
-    name: 'Victor',
+    id: 'LL-849204',
+    name: 'Victor Aponte',
+    email: 'victor.aponte@saynative.com',
+    phone: '+34 612 345 678',
+    bio: 'Apasionado por la tecnología y la música. Aprendiendo inglés con ganas de viajar ✈️',
     avatarUrl:
       'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
+    countryCode: 'ES',
+    countryFlag: '🇪🇸',
+    isVerified: true,
     coins: 150,
     nativeLanguage: {
       code: 'es',
@@ -46,11 +67,28 @@ export const useAuthStore = create<AuthState>((set) => ({
       code: 'en',
       name: 'Inglés',
       flag: '🇺🇸',
-      level: 'B1',
+      level: 'Nivel B1 · Intermedio',
+      progressPercentage: 60,
+      targetLevel: 'B2',
     },
+    learningLanguagesList: [
+      {
+        code: 'en',
+        name: 'Inglés',
+        flag: '🇺🇸',
+        level: 'Nivel B1 · Intermedio',
+        progressPercentage: 60,
+        targetLevel: 'B2',
+      },
+    ],
     isAvailableToTeach: true,
     earningRatePerMin: 7,
     learningCostPerMin: 10,
+    hoursPracticed: 4.5,
+    totalCalls: 12,
+    rating: 4.9,
+    reviewCount: 28,
+    memberSince: 'Octubre 2024',
   },
   setAuthenticated: (status) => set({ isAuthenticated: status }),
   setAvailableToTeach: (available) =>
@@ -60,6 +98,10 @@ export const useAuthStore = create<AuthState>((set) => ({
   updateLearningLanguage: (language) =>
     set((state) => ({
       user: { ...state.user, learningLanguage: language },
+    })),
+  updateUserProfile: (data) =>
+    set((state) => ({
+      user: { ...state.user, ...data },
     })),
   addCoins: (amount) =>
     set((state) => ({
