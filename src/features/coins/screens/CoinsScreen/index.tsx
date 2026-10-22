@@ -1,7 +1,7 @@
 import React from 'react';
 import { ScrollView, Alert } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { SafeAreaContainer } from '../../../../components';
+import { SafeAreaContainer, Toast } from '../../../../components';
 import { CoinsScreenHeader } from '../../components/CoinsScreenHeader';
 import { CoinsHeroSection } from '../../components/CoinsHeroSection';
 import { RewardedAdCard } from '../../components/RewardedAdCard';
@@ -30,21 +30,20 @@ export const CoinsScreen: React.FC = () => {
 
   const handleWatchAd = () => {
     if (adsAvailable <= 0) {
-      Alert.alert('Límite alcanzado', 'Has visto todos los anuncios disponibles por hoy.');
+      Toast.warning(
+        t('toasts.adLimitTitle'),
+        t('toasts.adLimitMessage')
+      );
       return;
     }
 
-    Alert.alert(t('rewardedAd.title'), t('rewardedAd.adStarted'), [
-      {
-        text: 'OK',
-        onPress: () => {
-          const success = watchRewardedAd();
-          if (success) {
-            Alert.alert('Recompensa', t('rewardedAd.rewardEarned'));
-          }
-        },
-      },
-    ]);
+    const success = watchRewardedAd();
+    if (success) {
+      Toast.success(
+        t('toasts.rewardEarnedTitle'),
+        t('rewardedAd.rewardEarned')
+      );
+    }
   };
 
   const handleBuyPackage = (pkg: CoinPackage) => {
@@ -60,8 +59,8 @@ export const CoinsScreen: React.FC = () => {
           text: 'Comprar',
           onPress: () => {
             purchasePackage(pkg);
-            Alert.alert(
-              '¡Éxito!',
+            Toast.success(
+              t('toasts.purchaseSuccessTitle'),
               t('dialog.purchaseSuccess', { coins: pkg.coinsCount })
             );
           },

@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useAuthStore } from '../../../store/useAuthStore';
 import { navigate } from '../../../navigation/NavigationRef';
 import { Routes } from '../../../navigation/routes';
+import { Toast } from '../../../components';
 
 export const useProfile = () => {
   const { t } = useTranslation('profile');
@@ -24,23 +25,26 @@ export const useProfile = () => {
   };
 
   const handleWatchRewardedAd = () => {
-    Alert.alert(
-      t('wallet.freeAdButton'),
-      t('wallet.freeAdButton'),
-      [
-        {
-          text: t('account.confirm'),
-          onPress: () => {
-            addCoins(5);
-            Alert.alert('🪙 +5 Monedas', '¡Has ganado 5 monedas gratis por ver el anuncio!');
-          },
-        },
-      ]
+    addCoins(5);
+    Toast.success(
+      t('toasts.rewardEarnedTitle'),
+      t('toasts.rewardEarnedMessage')
     );
   };
 
   const handleToggleTeachingMode = (value: boolean) => {
     setAvailableToTeach(value);
+    if (value) {
+      Toast.success(
+        t('toasts.teachingEnabledTitle'),
+        t('toasts.teachingEnabledMessage')
+      );
+    } else {
+      Toast.warning(
+        t('toasts.teachingDisabledTitle'),
+        t('toasts.teachingDisabledMessage')
+      );
+    }
   };
 
   const handleAddLanguage = () => {

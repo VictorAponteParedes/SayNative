@@ -3,6 +3,7 @@ import { Alert } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { useAuthStore } from '../../../store/useAuthStore';
 import { goBack } from '../../../navigation/NavigationRef';
+import { Toast } from '../../../components';
 
 export const useEditProfile = () => {
   const { t } = useTranslation('profile');
@@ -36,7 +37,10 @@ export const useEditProfile = () => {
 
   const handleSave = () => {
     if (!name.trim() || !email.trim() || !email.includes('@')) {
-      Alert.alert('Error', t('editProfile.saveError'));
+      Toast.error(
+        t('toasts.incompleteDataTitle'),
+        t('toasts.incompleteDataMessage')
+      );
       return;
     }
 
@@ -48,9 +52,13 @@ export const useEditProfile = () => {
       avatarUrl,
     });
 
-    Alert.alert('Éxito', t('editProfile.saveSuccess'), [
-      { text: 'OK', onPress: () => goBack() },
-    ]);
+    Toast.success(
+      t('toasts.profileUpdatedTitle'),
+      t('toasts.profileUpdatedMessage')
+    );
+    setTimeout(() => {
+      goBack();
+    }, 800);
   };
 
   return {

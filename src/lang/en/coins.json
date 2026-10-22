@@ -109,5 +109,12 @@
       "supportTitle": "SayNative Support",
       "supportMessage": "Our support team will review any questions regarding your transactions."
     }
+  },
+  "toasts": {
+    "adLimitTitle": "Daily limit reached",
+    "adLimitMessage": "You have watched all available ads for today. Come back tomorrow for more rewards.",
+    "rewardEarnedTitle": "Reward credited!",
+    "rewardEarnedMessage": "You have earned +5 free coins for watching the ad.",
+    "purchaseSuccessTitle": "Purchase successful!"
   }
 }

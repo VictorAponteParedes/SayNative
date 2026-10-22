@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { navigationRef } from './src/navigation/NavigationRef';
 import AppNavigation from './src/navigation/AppNavigation';
+import { ToastContainer } from './src/components';
 import './src/lang'; // Inicialización global de i18n
 
 export const App: React.FC = () => {
@@ -11,6 +12,7 @@ export const App: React.FC = () => {
       <NavigationContainer ref={navigationRef}>
         <AppNavigation />
       </NavigationContainer>
+      <ToastContainer />
     </SafeAreaProvider>
   );
 };

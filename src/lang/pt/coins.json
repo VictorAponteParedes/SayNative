@@ -109,5 +109,12 @@
       "supportTitle": "Suporte SayNative",
       "supportMessage": "Nossa equipe de suporte verificará qualquer dúvida sobre suas transações."
     }
+  },
+  "toasts": {
+    "adLimitTitle": "Limite diário atingido",
+    "adLimitMessage": "Você assistiu a todos os anúncios disponíveis por hoje. Volte amanhã para mais recompensas.",
+    "rewardEarnedTitle": "Recompensa creditada!",
+    "rewardEarnedMessage": "Você ganhou +5 moedas grátis por assistir ao anúncio.",
+    "purchaseSuccessTitle": "Compra realizada com sucesso!"
   }
 }

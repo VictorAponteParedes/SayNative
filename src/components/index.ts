@@ -6,5 +6,6 @@ export * from './ui/CoinBadge';
 export * from './ui/Tag';
 export * from './ui/SearchBar';
 export * from './ui/StatusBadge';
+export * from './ui/Toast';
 export * from './layout/SafeAreaContainer';
 export * from './layout/BottomTabBar';

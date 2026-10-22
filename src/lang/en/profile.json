@@ -75,5 +75,17 @@
     "memberSince": "Member since",
     "saveSuccess": "Personal info saved successfully!",
     "saveError": "Please ensure your name and email are valid."
+  },
+  "toasts": {
+    "profileUpdatedTitle": "Profile updated",
+    "profileUpdatedMessage": "Your personal details have been saved successfully.",
+    "incompleteDataTitle": "Incomplete information",
+    "incompleteDataMessage": "Please ensure your name and email are valid.",
+    "rewardEarnedTitle": "Reward earned",
+    "rewardEarnedMessage": "You have earned +5 free coins for watching the ad!",
+    "teachingEnabledTitle": "Teaching mode active",
+    "teachingEnabledMessage": "You are now visible to receive calls from students.",
+    "teachingDisabledTitle": "Teaching mode paused",
+    "teachingDisabledMessage": "You will not receive call requests for now."
   }
 }

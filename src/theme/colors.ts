@@ -70,6 +70,25 @@ export const colors = {
   star: '#F59E0B',
   starRed: '#F87171',
 
+  // Toasts flotantes modernos
+  toastSuccessBg: '#13231B',
+  toastSuccessBorder: '#1A3326',
+  toastSuccessIcon: '#10B981',
+  toastSuccessIconBg: '#1C382B',
+
+  toastWarningBg: '#211E14',
+  toastWarningBorder: '#332D1C',
+  toastWarningIcon: '#F59E0B',
+  toastWarningIconBg: '#362E1A',
+
+  toastErrorBg: '#231619',
+  toastErrorBorder: '#381E24',
+  toastErrorIcon: '#EF4444',
+  toastErrorIconBg: '#3D2027',
+
+  toastTextTitle: '#FFFFFF',
+  toastTextMessage: '#94A3B8',
+
   // Sombra estándar
   shadow: '#000000',
 } as const;

@@ -75,5 +75,17 @@
     "memberSince": "Membro desde",
     "saveSuccess": "Dados pessoais salvos com sucesso!",
     "saveError": "Por favor verifique se o nome e o e-mail são válidos."
+  },
+  "toasts": {
+    "profileUpdatedTitle": "Perfil atualizado",
+    "profileUpdatedMessage": "Seus dados pessoais foram salvos com sucesso.",
+    "incompleteDataTitle": "Dados incompletos",
+    "incompleteDataMessage": "Por favor verifique se o nome e o e-mail são válidos.",
+    "rewardEarnedTitle": "Recompensa recebida",
+    "rewardEarnedMessage": "Você ganhou +5 moedas grátis por assistir ao anúncio!",
+    "teachingEnabledTitle": "Modo Ensinar ativo",
+    "teachingEnabledMessage": "Agora você está visível para receber chamadas de alunos.",
+    "teachingDisabledTitle": "Modo Ensinar pausado",
+    "teachingDisabledMessage": "Você não receberá solicitações de chamada no momento."
   }
 }
