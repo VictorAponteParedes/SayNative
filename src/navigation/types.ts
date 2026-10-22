@@ -24,6 +24,7 @@ export type AppStackParamList = {
   Coins?: undefined;
   CoinsHistory?: undefined;
   Notifications?: undefined;
+  Security?: undefined;
 };
 
 export type AuthStackParamList = {

@@ -1,0 +1,61 @@
+{
+  "header": {
+    "title": "Security & Moderation"
+  },
+  "safeCommunity": {
+    "title": "Safe Community",
+    "badge": "SayShield",
+    "description": "At SayNative we foster a space of mutual respect and learning. Harassment, inappropriate language or misconduct are strictly prohibited with zero tolerance.",
+    "guidelinesLink": "Read Community Guidelines →",
+    "guidelinesTitle": "Community Guidelines",
+    "guidelinesMessage": "SayNative promotes respect, diversity, and integrity. Harassment, sensitive content, and discrimination are strictly prohibited."
+  },
+  "privacy": {
+    "sectionTitle": "PRIVACY SETTINGS",
+    "activeProtection": "Active Protection",
+    "hideAgeTitle": "Hide my age",
+    "hideAgeDesc": "Other students will only see your country of residence and language proficiency level.",
+    "reputationFilterTitle": "Reputation filter for calls",
+    "reputationFilterDesc": "Only accept voice/video requests from peers with ratings above 4.0 stars.",
+    "antiShockTitle": "Anti-shock protection",
+    "recommendedBadge": "Recommended",
+    "antiShockDesc": "Blurs the incoming camera feed during the first 5 seconds of each call until you confirm connection."
+  },
+  "blockedUsers": {
+    "sectionTitle": "BLOCKED USERS ({{count}})",
+    "description": "Restricted users cannot message you, listen to your audio notes, or join your rooms.",
+    "unblockButton": "Unblock",
+    "noBlocked": "You have no blocked users.",
+    "blockedDate": "Blocked on {{date}}",
+    "spamReason": "Spam / Unsolicited messages",
+    "behaviorReason": "Inappropriate behavior",
+    "unblockConfirmTitle": "Unblock user",
+    "unblockConfirmMessage": "Do you want to unblock {{name}}? They will be able to interact with you again.",
+    "cancel": "Cancel",
+    "confirm": "Unblock"
+  },
+  "moderation": {
+    "sectionTitle": "MODERATION & REPORTS",
+    "reportsStatusTitle": "Report status",
+    "inReviewBadge": "1 in review",
+    "reportsStatusDesc": "We review each case in under 24 hours...",
+    "reportsModalTitle": "My Reports",
+    "reportsModalMessage": "Your community conduct report is currently being reviewed by the Trust & Safety team.",
+    "complianceText": "We strictly adhere to Google Play and Apple App Store safety standards. Any content threatening physical, psychological, or sexual integrity leads to immediate expulsion and reporting to legal authorities.",
+    "deleteAccountButton": "Delete my account and personal data",
+    "deleteAccountWarning": "This action is irreversible and will permanently delete your progress, exchange history, and coins.",
+    "deleteConfirmTitle": "Permanently delete account?",
+    "deleteConfirmMessage": "This action cannot be undone. All your personal data, coin balance, and chats will be permanently deleted from our servers.",
+    "deleteConfirmAction": "Delete Permanently"
+  },
+  "toasts": {
+    "unblockSuccessTitle": "User unblocked",
+    "unblockSuccessMessage": "You have unblocked {{name}} successfully.",
+    "privacyUpdatedTitle": "Privacy updated",
+    "privacyUpdatedMessage": "Your privacy settings have been saved.",
+    "antiShockEnabledTitle": "Anti-shock enabled",
+    "antiShockEnabledMessage": "Incoming video will be blurred for the first 5 seconds.",
+    "accountDeletedTitle": "Account deleted",
+    "accountDeletedMessage": "Your account and personal data have been removed from the system."
+  }
+}

@@ -6,6 +6,7 @@ import { ChatsScreen, PrivateChatScreen } from '../features/chats';
 import { CoinsScreen, CoinsHistoryScreen } from '../features/coins';
 import { ProfileScreen, EditProfileScreen } from '../features/profile';
 import { NotificationsScreen } from '../features/notifications';
+import { SecurityScreen } from '../features/security';
 import { Routes } from './routes';
 import type { AppStackParamList } from './types';
 
@@ -54,6 +55,10 @@ export const AppStack: React.FC = () => {
       <Stack.Screen
         name={Routes.App.Notifications as keyof AppStackParamList}
         component={NotificationsScreen}
+      />
+      <Stack.Screen
+        name={Routes.App.Security as keyof AppStackParamList}
+        component={SecurityScreen}
       />
     </Stack.Navigator>
   );

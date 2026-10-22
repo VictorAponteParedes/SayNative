@@ -9,6 +9,7 @@ import esChats from './es/chats.json';
 import esCoins from './es/coins.json';
 import esProfile from './es/profile.json';
 import esNotifications from './es/notifications.json';
+import esSecurity from './es/security.json';
 
 // EN
 import enCommon from './en/common.json';
@@ -18,6 +19,7 @@ import enChats from './en/chats.json';
 import enCoins from './en/coins.json';
 import enProfile from './en/profile.json';
 import enNotifications from './en/notifications.json';
+import enSecurity from './en/security.json';
 
 // PT
 import ptCommon from './pt/common.json';
@@ -27,6 +29,7 @@ import ptChats from './pt/chats.json';
 import ptCoins from './pt/coins.json';
 import ptProfile from './pt/profile.json';
 import ptNotifications from './pt/notifications.json';
+import ptSecurity from './pt/security.json';
 
 export const defaultNS = 'common';
 
@@ -39,6 +42,7 @@ export const resources = {
     coins: esCoins,
     profile: esProfile,
     notifications: esNotifications,
+    security: esSecurity,
   },
   en: {
     common: enCommon,
@@ -48,6 +52,7 @@ export const resources = {
     coins: enCoins,
     profile: enProfile,
     notifications: enNotifications,
+    security: enSecurity,
   },
   pt: {
     common: ptCommon,
@@ -57,6 +62,7 @@ export const resources = {
     coins: ptCoins,
     profile: ptProfile,
     notifications: ptNotifications,
+    security: ptSecurity,
   },
 } as const;
 

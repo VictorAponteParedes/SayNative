@@ -82,12 +82,7 @@ export const AccountPreferencesSection: React.FC<
         {/* Seguridad y Moderación */}
         <TouchableOpacity
           activeOpacity={0.7}
-          onPress={() =>
-            handleSimpleAlert(
-              'account.security',
-              'Gestión de privacidad, bloqueo de contactos y reporte de conducta comunitaria.'
-            )
-          }
+          onPress={() => navigate(Routes.App.Security)}
           style={styles.menuRow}
         >
           <View style={[styles.iconCircle, { backgroundColor: colors.primaryBgSubtle }]}>

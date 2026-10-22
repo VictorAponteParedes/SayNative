@@ -1,0 +1,61 @@
+{
+  "header": {
+    "title": "Seguridad y Moderación"
+  },
+  "safeCommunity": {
+    "title": "Comunidad Segura",
+    "badge": "SayShield",
+    "description": "En SayNative promovemos un espacio de respeto y enriquecimiento mutuo. El acoso, lenguaje inapropiado o conducta indebida están estrictamente prohibidos con tolerancia cero.",
+    "guidelinesLink": "Leer Normas de Convivencia →",
+    "guidelinesTitle": "Normas de Convivencia",
+    "guidelinesMessage": "SayNative promueve respeto, diversidad e integridad. Queda prohibido el acoso, contenido sensible y discriminación."
+  },
+  "privacy": {
+    "sectionTitle": "AJUSTES DE PRIVACIDAD",
+    "activeProtection": "Protección Activa",
+    "hideAgeTitle": "Ocultar mi edad",
+    "hideAgeDesc": "Otros estudiantes solo verán tu país de residencia y nivel de competencia lingüística.",
+    "reputationFilterTitle": "Filtro de reputación para llamadas",
+    "reputationFilterDesc": "Aceptar únicamente solicitudes de voz/video de compañeros con valoración superior a 4.0 estrellas.",
+    "antiShockTitle": "Protección anti-shock",
+    "recommendedBadge": "Recomendado",
+    "antiShockDesc": "Difumina la cámara entrante durante los primeros 5 segundos de cada llamada hasta que confirmes la conexión."
+  },
+  "blockedUsers": {
+    "sectionTitle": "USUARIOS BLOQUEADOS ({{count}})",
+    "description": "Los usuarios restringidos no podrán enviarte mensajes, escuchar tus notas de audio ni unirse a tus salas.",
+    "unblockButton": "Desbloquear",
+    "noBlocked": "No tienes usuarios bloqueados.",
+    "blockedDate": "Bloqueado el {{date}}",
+    "spamReason": "Spam / Mensajes no deseados",
+    "behaviorReason": "Conducta inadecuada",
+    "unblockConfirmTitle": "Desbloquear usuario",
+    "unblockConfirmMessage": "¿Deseas desbloquear a {{name}}? Podrá volver a interactuar contigo en la plataforma.",
+    "cancel": "Cancelar",
+    "confirm": "Desbloquear"
+  },
+  "moderation": {
+    "sectionTitle": "MODERACIÓN Y REPORTES",
+    "reportsStatusTitle": "Estado de mis reportes",
+    "inReviewBadge": "1 en revisión",
+    "reportsStatusDesc": "Revisamos cada caso en menos de 24 h...",
+    "reportsModalTitle": "Mis Reportes",
+    "reportsModalMessage": "Tu reporte sobre conducta comunitaria está siendo investigado por el equipo de confianza y seguridad.",
+    "complianceText": "Cumplimos rigurosamente las pautas de seguridad de Google Play y App Store. Cualquier contenido que amenace la integridad física, psicológica o sexual de los usuarios conlleva la expulsión inmediata y reporte ante las autoridades correspondientes.",
+    "deleteAccountButton": "Eliminar mi cuenta y datos personales",
+    "deleteAccountWarning": "Esta acción es irreversible y borrará todo tu progreso, historial de intercambios y monedas.",
+    "deleteConfirmTitle": "¿Eliminar cuenta definitivamente?",
+    "deleteConfirmMessage": "Esta acción no se puede deshacer. Todos tus datos personales, saldo de monedas y chats se eliminarán permanentemente de los servidores.",
+    "deleteConfirmAction": "Eliminar definitivamente"
+  },
+  "toasts": {
+    "unblockSuccessTitle": "Usuario desbloqueado",
+    "unblockSuccessMessage": "Has desbloqueado a {{name}} con éxito.",
+    "privacyUpdatedTitle": "Privacidad actualizada",
+    "privacyUpdatedMessage": "Tus preferencias de privacidad se han guardado.",
+    "antiShockEnabledTitle": "Anti-shock activado",
+    "antiShockEnabledMessage": "La cámara entrante se difuminará durante los primeros 5 segundos de videollamada.",
+    "accountDeletedTitle": "Cuenta eliminada",
+    "accountDeletedMessage": "Tu cuenta y datos personales han sido eliminados del sistema."
+  }
+}

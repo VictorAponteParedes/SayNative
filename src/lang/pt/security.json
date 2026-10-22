@@ -1,0 +1,61 @@
+{
+  "header": {
+    "title": "Segurança e Moderação"
+  },
+  "safeCommunity": {
+    "title": "Comunidade Segura",
+    "badge": "SayShield",
+    "description": "No SayNative promovemos um espaço de respeito e enriquecimento mútuo. Assédio, linguagem inadequada ou má conduta são estritamente proibidos com tolerância zero.",
+    "guidelinesLink": "Ler Normas de Convivência →",
+    "guidelinesTitle": "Normas de Convivência",
+    "guidelinesMessage": "O SayNative promove respeito, diversidade e integridade. É estritamente proibido assédio, conteúdo sensível e discriminação."
+  },
+  "privacy": {
+    "sectionTitle": "AJUSTES DE PRIVACIDADE",
+    "activeProtection": "Proteção Ativa",
+    "hideAgeTitle": "Ocultar minha idade",
+    "hideAgeDesc": "Outros estudantes verão apenas seu país de residência e nível de proficiência no idioma.",
+    "reputationFilterTitle": "Filtro de reputação para chamadas",
+    "reputationFilterDesc": "Aceitar apenas solicitações de voz/vídeo de colegas com avaliação superior a 4.0 estrelas.",
+    "antiShockTitle": "Proteção anti-shock",
+    "recommendedBadge": "Recomendado",
+    "antiShockDesc": "Desfoca a câmera recebida durante os primeiros 5 segundos de cada chamada até você confirmar a conexão."
+  },
+  "blockedUsers": {
+    "sectionTitle": "USUÁRIOS BLOQUEADOS ({{count}})",
+    "description": "Usuários restritos não poderão lhe enviar mensagens, ouvir suas notas de áudio ou entrar em suas salas.",
+    "unblockButton": "Desbloquear",
+    "noBlocked": "Você não tem usuários bloqueados.",
+    "blockedDate": "Bloqueado em {{date}}",
+    "spamReason": "Spam / Mensagens indesejadas",
+    "behaviorReason": "Conduta inadequada",
+    "unblockConfirmTitle": "Desbloquear usuário",
+    "unblockConfirmMessage": "Deseja desbloquear {{name}}? O usuário poderá voltar a interagir com você.",
+    "cancel": "Cancelar",
+    "confirm": "Desbloquear"
+  },
+  "moderation": {
+    "sectionTitle": "MODERAÇÃO E DENÚNCIAS",
+    "reportsStatusTitle": "Status das minhas denúncias",
+    "inReviewBadge": "1 em análise",
+    "reportsStatusDesc": "Analisamos cada caso em menos de 24 h...",
+    "reportsModalTitle": "Minhas Denúncias",
+    "reportsModalMessage": "Sua denúncia sobre conduta comunitária está sendo investigada pela equipe de confiança e segurança.",
+    "complianceText": "Cumprimos rigorosamente as diretrizes de segurança da Google Play e App Store. Qualquer conteúdo que ameace a integridade física, psicológica ou sexual dos usuários resulta em expulsão imediata e encaminhamento às autoridades.",
+    "deleteAccountButton": "Excluir minha conta e dados pessoais",
+    "deleteAccountWarning": "Esta ação é irreversível e apagará todo o seu progresso, histórico de intercâmbios e moedas.",
+    "deleteConfirmTitle": "Excluir conta definitivamente?",
+    "deleteConfirmMessage": "Esta ação não pode ser desfeita. Todos os seus dados pessoais, saldo de moedas e conversas serão excluídos permanentemente.",
+    "deleteConfirmAction": "Excluir Definitivamente"
+  },
+  "toasts": {
+    "unblockSuccessTitle": "Usuário desbloqueado",
+    "unblockSuccessMessage": "Você desbloqueou {{name}} com sucesso.",
+    "privacyUpdatedTitle": "Privacidade atualizada",
+    "privacyUpdatedMessage": "Suas preferências de privacidade foram salvas.",
+    "antiShockEnabledTitle": "Anti-shock ativado",
+    "antiShockEnabledMessage": "A câmera recebida será desfocada durante os primeiros 5 segundos.",
+    "accountDeletedTitle": "Conta excluída",
+    "accountDeletedMessage": "Sua conta e dados pessoais foram removidos do sistema."
+  }
+}
