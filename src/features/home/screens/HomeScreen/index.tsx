@@ -1,7 +1,7 @@
 import React from 'react';
 import { ScrollView, Alert } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { SafeAreaContainer, BottomTabBar } from '../../../../componentes';
+import { SafeAreaContainer, BottomTabBar } from '../../../../components';
 import { HomeHeader } from '../../components/HomeHeader';
 import { UserProfileBar } from '../../components/UserProfileBar';
 import { LanguageFilterBar } from '../../components/LanguageFilterBar';

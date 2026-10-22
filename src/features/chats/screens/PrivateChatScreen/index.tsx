@@ -7,7 +7,7 @@ import {
   Alert,
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { SafeAreaContainer, AppText } from '../../../../componentes';
+import { SafeAreaContainer, AppText } from '../../../../components';
 import { PrivateChatHeader } from '../../components/private/PrivateChatHeader';
 import { LearningContextBanner } from '../../components/private/LearningContextBanner';
 import { PartnerCallPill } from '../../components/private/PartnerCallPill';

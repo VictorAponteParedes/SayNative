@@ -3,7 +3,7 @@ import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { HelpCircle } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
 import { colors, spacing } from '../../../theme';
-import { AppText } from '../../../componentes';
+import { AppText } from '../../../components';
 
 export interface ExploreHeaderProps {
   totalCount?: number;
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     color: colors.textPrimary,
   },
   countBadge: {
-    backgroundColor: '#EEF2FF',
+    backgroundColor: colors.primaryBgSubtle,
     paddingHorizontal: 8,
     paddingVertical: 2,
     borderRadius: 12,

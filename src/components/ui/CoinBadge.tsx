@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     gap: 4,
   },
   pill: {
-    backgroundColor: '#E2E8F0',
+    backgroundColor: colors.border,
     paddingHorizontal: spacing.md,
     paddingVertical: spacing.xs + 2,
     borderRadius: 20,

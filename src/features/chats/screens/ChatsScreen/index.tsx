@@ -1,8 +1,7 @@
 import React from 'react';
 import { View, FlatList, Alert } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { SafeAreaContainer, BottomTabBar, AppText } from '../../../../componentes';
-import { SearchAndFilterBar } from '../../../discovery/components/SearchAndFilterBar';
+import { SafeAreaContainer, BottomTabBar, AppText, SearchBar } from '../../../../components';
 import { ChatsHeader } from '../../components/ChatsHeader';
 import { OnlinePeersRow } from '../../components/OnlinePeersRow';
 import { ChatFilterTabs } from '../../components/ChatFilterTabs';
@@ -74,11 +73,11 @@ export const ChatsScreen: React.FC = () => {
         onPressOptions={handleOptions}
       />
 
-      {/* Buscador de conversaciones */}
-      <SearchAndFilterBar
+      {/* Buscador global de conversaciones */}
+      <SearchBar
         value={searchQuery}
         onChangeText={setSearchQuery}
-        onPressFilterButton={handleFilterSearch}
+        onPressFilter={handleFilterSearch}
         placeholder={t('searchPlaceholder')}
       />
 

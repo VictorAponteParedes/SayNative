@@ -3,7 +3,7 @@ import { View, StyleSheet, Switch } from 'react-native';
 import { Volume2 } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
 import { colors, spacing, borderRadius } from '../../../theme';
-import { AppText } from '../../../componentes';
+import { AppText } from '../../../components';
 import { useAuthStore } from '../../../store/useAuthStore';
 
 export interface TeachingAvailabilityCardProps {
@@ -48,9 +48,9 @@ export const TeachingAvailabilityCard: React.FC<TeachingAvailabilityCardProps> =
       <Switch
         value={isAvailableToTeach}
         onValueChange={handleToggle}
-        trackColor={{ false: '#CBD5E1', true: colors.action }}
+        trackColor={{ false: colors.borderDark, true: colors.action }}
         thumbColor={colors.surface}
-        ios_backgroundColor="#CBD5E1"
+        ios_backgroundColor={colors.borderDark}
       />
     </View>
   );

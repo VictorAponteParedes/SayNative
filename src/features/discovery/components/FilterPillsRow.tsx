@@ -2,7 +2,7 @@ import React from 'react';
 import { View, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { colors, spacing } from '../../../theme';
-import { AppText } from '../../../componentes';
+import { AppText } from '../../../components';
 import { ExploreFilterType } from '../types';
 
 export interface FilterPillsRowProps {
@@ -41,7 +41,7 @@ export const FilterPillsRow: React.FC<FilterPillsRowProps> = ({
               <View
                 style={[
                   styles.dot,
-                  { backgroundColor: isActive ? '#34D399' : colors.textMuted },
+                  { backgroundColor: isActive ? colors.online : colors.textMuted },
                 ]}
               />
             )}

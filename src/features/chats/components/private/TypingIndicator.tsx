@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { colors, spacing } from '../../../../theme';
-import { AppText } from '../../../../componentes';
+import { AppText } from '../../../../components';
 
 export interface TypingIndicatorProps {
   partnerName?: string;

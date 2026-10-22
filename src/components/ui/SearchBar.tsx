@@ -4,25 +4,31 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  StyleProp,
+  ViewStyle,
 } from 'react-native';
 import { Search, SlidersHorizontal } from 'lucide-react-native';
-import { colors, spacing, borderRadius } from '../../../theme';
+import { colors, spacing, borderRadius } from '../../theme';
 
-export interface SearchAndFilterBarProps {
+export interface SearchBarProps {
   value: string;
   onChangeText: (text: string) => void;
-  onPressFilterButton?: () => void;
+  onPressFilter?: () => void;
   placeholder?: string;
+  style?: StyleProp<ViewStyle>;
+  showFilterButton?: boolean;
 }
 
-export const SearchAndFilterBar: React.FC<SearchAndFilterBarProps> = ({
+export const SearchBar: React.FC<SearchBarProps> = ({
   value,
   onChangeText,
-  onPressFilterButton,
-  placeholder = 'Buscar por nombre, país o tema...',
+  onPressFilter,
+  placeholder,
+  style,
+  showFilterButton = true,
 }) => {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]}>
       <View style={styles.inputWrapper}>
         <Search size={18} color={colors.textSecondary} style={styles.searchIcon} />
         <TextInput
@@ -36,13 +42,15 @@ export const SearchAndFilterBar: React.FC<SearchAndFilterBarProps> = ({
         />
       </View>
 
-      <TouchableOpacity
-        activeOpacity={0.7}
-        onPress={onPressFilterButton}
-        style={styles.filterButton}
-      >
-        <SlidersHorizontal size={20} color={colors.textPrimary} />
-      </TouchableOpacity>
+      {showFilterButton && (
+        <TouchableOpacity
+          activeOpacity={0.7}
+          onPress={onPressFilter}
+          style={styles.filterButton}
+        >
+          <SlidersHorizontal size={20} color={colors.textPrimary} />
+        </TouchableOpacity>
+      )}
     </View>
   );
 };

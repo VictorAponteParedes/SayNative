@@ -3,7 +3,7 @@ import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Star, MessageSquare, Video, Check } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
 import { colors, spacing, borderRadius } from '../../../theme';
-import { AppText, Avatar, Tag } from '../../../componentes';
+import { AppText, Avatar, Tag } from '../../../components';
 import { SpeakerUser } from '../types';
 
 export interface SpeakerCardProps {
@@ -52,7 +52,7 @@ export const SpeakerCard: React.FC<SpeakerCardProps> = ({
           </View>
 
           <View style={styles.ratingRow}>
-            <Star size={14} color="#F59E0B" fill="#F59E0B" />
+            <Star size={14} color={colors.star} fill={colors.star} />
             <AppText variant="bodySmall" style={styles.ratingScore}>
               {speaker.rating.toFixed(1)}
             </AppText>
@@ -165,13 +165,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   superTutorBadge: {
-    backgroundColor: '#FEE2E2',
+    backgroundColor: colors.dangerLight,
     paddingHorizontal: 6,
     paddingVertical: 2,
     borderRadius: 6,
   },
   superTutorText: {
-    color: '#DC2626',
+    color: colors.dangerDark,
     fontWeight: '800',
     fontSize: 10,
     letterSpacing: 0.5,
@@ -189,7 +189,7 @@ const styles = StyleSheet.create({
   rateBadge: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#FEF3C7',
+    backgroundColor: colors.coinLight,
     paddingHorizontal: spacing.sm + 2,
     paddingVertical: spacing.xs,
     borderRadius: 14,
@@ -200,11 +200,11 @@ const styles = StyleSheet.create({
   },
   rateText: {
     fontWeight: '700',
-    color: '#92400E',
+    color: colors.coinDark,
     fontSize: 12,
   },
   languagesBox: {
-    backgroundColor: '#F1F5F9',
+    backgroundColor: colors.surfaceSubtle,
     borderRadius: borderRadius.sm + 2,
     paddingHorizontal: spacing.md,
     paddingVertical: spacing.sm,
@@ -232,7 +232,7 @@ const styles = StyleSheet.create({
   chatButton: {
     width: 48,
     height: 48,
-    backgroundColor: '#EEF2FF',
+    backgroundColor: colors.primaryBgSubtle,
     borderRadius: borderRadius.md,
     alignItems: 'center',
     justifyContent: 'center',

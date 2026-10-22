@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
   },
   onlineBadge: {
     position: 'absolute',
-    backgroundColor: '#34D399',
+    backgroundColor: colors.online,
     borderColor: colors.surface,
   },
   flagContainer: {

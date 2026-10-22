@@ -3,7 +3,7 @@ import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { MessageSquare, ChevronRight } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
 import { colors, spacing, borderRadius } from '../../../theme';
-import { AppText } from '../../../componentes';
+import { AppText } from '../../../components';
 
 export interface DailyTipCardProps {
   onPress?: () => void;

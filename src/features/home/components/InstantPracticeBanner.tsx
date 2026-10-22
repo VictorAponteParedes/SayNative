@@ -3,7 +3,7 @@ import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Video } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
 import { colors, spacing, borderRadius } from '../../../theme';
-import { AppText } from '../../../componentes';
+import { AppText } from '../../../components';
 
 export interface InstantPracticeBannerProps {
   onPressStartSearch: () => void;
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     width: 8,
     height: 8,
     borderRadius: 4,
-    backgroundColor: '#34D399',
+    backgroundColor: colors.online,
   },
   liveText: {
     color: colors.textWhite,

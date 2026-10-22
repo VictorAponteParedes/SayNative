@@ -3,7 +3,7 @@ import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { MessageSquarePlus, MoreVertical } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
 import { colors, spacing } from '../../../theme';
-import { AppText } from '../../../componentes';
+import { AppText } from '../../../components';
 
 export interface ChatsHeaderProps {
   totalCount?: number;
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     color: colors.textPrimary,
   },
   badge: {
-    backgroundColor: '#EEF2FF',
+    backgroundColor: colors.primaryBgSubtle,
     width: 24,
     height: 24,
     borderRadius: 12,
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     width: 38,
     height: 38,
     borderRadius: 12,
-    backgroundColor: '#F1F5F9',
+    backgroundColor: colors.surfaceSubtle,
     alignItems: 'center',
     justifyContent: 'center',
   },

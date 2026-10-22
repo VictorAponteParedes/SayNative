@@ -3,7 +3,7 @@ import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Star, MessageSquare, Video } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
 import { colors, spacing, borderRadius } from '../../../theme';
-import { AppText, Avatar, Tag } from '../../../componentes';
+import { AppText, Avatar, Tag } from '../../../components';
 import { PeerUser } from '../types';
 
 export interface PeerCardProps {
@@ -36,7 +36,7 @@ export const PeerCard: React.FC<PeerCardProps> = ({
 
       {/* Rating */}
       <View style={styles.ratingRow}>
-        <Star size={13} color="#F87171" fill="#F87171" />
+        <Star size={13} color={colors.starRed} fill={colors.starRed} />
         <AppText variant="caption" style={styles.ratingScore}>
           {peer.rating.toFixed(1)}
         </AppText>
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
     marginTop: spacing.xs,
   },
   chatButton: {
-    backgroundColor: '#EEF2FF',
+    backgroundColor: colors.primaryBgSubtle,
     paddingVertical: 9,
     paddingHorizontal: 12,
     borderRadius: 10,

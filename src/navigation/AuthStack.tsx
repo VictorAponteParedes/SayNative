@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Routes } from './routes';
 import type { AuthStackParamList } from './types';
-import { AppText, AppButton } from '../componentes';
+import { AppText, AppButton } from '../components';
 import { useAuthStore } from '../store/useAuthStore';
 import { colors } from '../theme';
 

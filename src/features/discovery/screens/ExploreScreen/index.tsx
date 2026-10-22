@@ -1,10 +1,9 @@
 import React from 'react';
 import { View, FlatList, Alert } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { SafeAreaContainer, BottomTabBar, AppText } from '../../../../componentes';
+import { SafeAreaContainer, BottomTabBar, AppText, SearchBar } from '../../../../components';
 import { HomeHeader } from '../../../home/components/HomeHeader';
 import { ExploreHeader } from '../../components/ExploreHeader';
-import { SearchAndFilterBar } from '../../components/SearchAndFilterBar';
 import { FilterPillsRow } from '../../components/FilterPillsRow';
 import { SpeakersCountSortRow } from '../../components/SpeakersCountSortRow';
 import { SpeakerCard } from '../../components/SpeakerCard';
@@ -32,24 +31,15 @@ export const ExploreScreen: React.FC = () => {
   };
 
   const handleHelp = () => {
-    Alert.alert(
-      t('help.title'),
-      t('help.desc')
-    );
+    Alert.alert(t('help.title'), t('help.desc'));
   };
 
   const handleOpenFilters = () => {
-    Alert.alert(
-      t('advancedFilters.title'),
-      t('advancedFilters.desc')
-    );
+    Alert.alert(t('advancedFilters.title'), t('advancedFilters.desc'));
   };
 
   const handleSort = () => {
-    Alert.alert(
-      t('sort.title'),
-      t('sort.desc')
-    );
+    Alert.alert(t('sort.title'), t('sort.desc'));
   };
 
   const handleCallSpeaker = (speaker: SpeakerUser) => {
@@ -74,11 +64,11 @@ export const ExploreScreen: React.FC = () => {
       {/* Título de la sección con badge de total y botón de ayuda */}
       <ExploreHeader totalCount={totalAvailable} onPressHelp={handleHelp} />
 
-      {/* Buscador y botón de filtros */}
-      <SearchAndFilterBar
+      {/* Buscador global y botón de filtros */}
+      <SearchBar
         value={searchQuery}
         onChangeText={setSearchQuery}
-        onPressFilterButton={handleOpenFilters}
+        onPressFilter={handleOpenFilters}
         placeholder={t('searchPlaceholder')}
       />
 

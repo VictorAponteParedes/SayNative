@@ -3,7 +3,7 @@ import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Lightbulb } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
 import { colors, spacing, borderRadius } from '../../../../theme';
-import { AppText } from '../../../../componentes';
+import { AppText } from '../../../../components';
 
 export interface LearningContextBannerProps {
   languageName?: string;
@@ -19,7 +19,7 @@ export const LearningContextBanner: React.FC<LearningContextBannerProps> = ({
   return (
     <View style={styles.container}>
       <View style={styles.iconCircle}>
-        <Lightbulb size={18} color="#E11D48" />
+        <Lightbulb size={18} color={colors.waveformRed} />
       </View>
 
       <View style={styles.textContainer}>
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#F0F5FF',
+    backgroundColor: colors.surfaceHighlight,
     marginHorizontal: spacing.lg,
     marginTop: spacing.md,
     marginBottom: spacing.sm,
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     width: 32,
     height: 32,
     borderRadius: 16,
-    backgroundColor: '#FFE4E6',
+    backgroundColor: colors.dangerBgSubtle,
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: spacing.sm,
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     color: colors.primary,
   },
   topicButton: {
-    backgroundColor: '#E0E7FF',
+    backgroundColor: colors.borderHighlight,
     paddingHorizontal: spacing.md,
     paddingVertical: 5,
     borderRadius: 12,

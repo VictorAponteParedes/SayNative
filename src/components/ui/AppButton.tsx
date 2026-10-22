@@ -41,9 +41,8 @@ export const AppButton: React.FC<AppButtonProps> = ({
       case 'white':
         return colors.surface;
       case 'secondary':
-        return '#EEF2F6';
       case 'iconOnly':
-        return '#EEF2F6';
+        return colors.surfaceSubtle;
       case 'primary':
       default:
         return colors.primary;

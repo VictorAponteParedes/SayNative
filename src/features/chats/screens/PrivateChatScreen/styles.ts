@@ -4,7 +4,7 @@ import { colors, spacing } from '../../../../theme';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F8FAFC',
+    backgroundColor: colors.background,
   },
   keyboardAvoid: {
     flex: 1,
@@ -17,7 +17,7 @@ export const styles = StyleSheet.create({
     marginVertical: spacing.md,
   },
   datePill: {
-    backgroundColor: '#EEF2FF',
+    backgroundColor: colors.primaryBgSubtle,
     paddingHorizontal: spacing.md,
     paddingVertical: 4,
     borderRadius: 12,

@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { Video, PhoneMissed, CheckCheck, Phone } from 'lucide-react-native';
 import { colors, spacing, borderRadius } from '../../../theme';
-import { AppText } from '../../../componentes';
+import { AppText } from '../../../components';
 import { ChatConversation } from '../types';
 
 export interface ChatItemCardProps {
@@ -63,7 +63,7 @@ export const ChatItemCard: React.FC<ChatItemCardProps> = ({ chat, onPress }) => 
               <Video size={15} color={colors.primary} style={styles.msgIcon} />
             )}
             {isMissedCall && (
-              <PhoneMissed size={15} color="#EF4444" style={styles.msgIcon} />
+              <PhoneMissed size={15} color={colors.danger} style={styles.msgIcon} />
             )}
             <AppText
               variant="bodySmall"
@@ -86,10 +86,10 @@ export const ChatItemCard: React.FC<ChatItemCardProps> = ({ chat, onPress }) => 
               </AppText>
             </View>
           ) : chat.isRead ? (
-            <CheckCheck size={18} color="#6366F1" />
+            <CheckCheck size={18} color={colors.primaryLight} />
           ) : isMissedCall ? (
             <View style={styles.missedCallButton}>
-              <Phone size={13} color="#DC2626" />
+              <Phone size={13} color={colors.dangerDark} />
             </View>
           ) : null}
         </View>
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     width: 12,
     height: 12,
     borderRadius: 6,
-    backgroundColor: '#10B981',
+    backgroundColor: colors.online,
     borderWidth: 2,
     borderColor: colors.surface,
   },
@@ -166,13 +166,13 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   superTutorBadge: {
-    backgroundColor: '#CCFBF1',
+    backgroundColor: colors.actionLight,
     paddingHorizontal: 6,
     paddingVertical: 1,
     borderRadius: 6,
   },
   superTutorText: {
-    color: '#0F766E',
+    color: colors.textDarkTeal,
     fontSize: 10,
     fontWeight: '700',
   },
@@ -207,7 +207,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   missedCallText: {
-    color: '#EF4444',
+    color: colors.danger,
     fontWeight: '600',
   },
   unreadBadge: {
@@ -227,7 +227,7 @@ const styles = StyleSheet.create({
     width: 26,
     height: 26,
     borderRadius: 13,
-    backgroundColor: '#FEE2E2',
+    backgroundColor: colors.dangerLight,
     alignItems: 'center',
     justifyContent: 'center',
   },

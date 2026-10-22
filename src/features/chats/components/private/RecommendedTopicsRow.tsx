@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { colors, spacing } from '../../../../theme';
-import { AppText } from '../../../../componentes';
+import { AppText } from '../../../../components';
 
 export interface RecommendedTopicsRowProps {
   onSelectTopic: (topic: string) => void;
