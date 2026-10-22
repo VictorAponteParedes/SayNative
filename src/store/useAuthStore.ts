@@ -20,7 +20,9 @@ export interface UserProfile {
 }
 
 interface AuthState {
+  isAuthenticated: boolean;
   user: UserProfile;
+  setAuthenticated: (status: boolean) => void;
   setAvailableToTeach: (available: boolean) => void;
   updateLearningLanguage: (language: UserLanguage) => void;
   addCoins: (amount: number) => void;
@@ -28,10 +30,12 @@ interface AuthState {
 }
 
 export const useAuthStore = create<AuthState>((set) => ({
+  isAuthenticated: true,
   user: {
     id: 'usr_victor_1',
     name: 'Victor',
-    avatarUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
+    avatarUrl:
+      'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
     coins: 150,
     nativeLanguage: {
       code: 'es',
@@ -48,6 +52,7 @@ export const useAuthStore = create<AuthState>((set) => ({
     earningRatePerMin: 7,
     learningCostPerMin: 10,
   },
+  setAuthenticated: (status) => set({ isAuthenticated: status }),
   setAvailableToTeach: (available) =>
     set((state) => ({
       user: { ...state.user, isAvailableToTeach: available },

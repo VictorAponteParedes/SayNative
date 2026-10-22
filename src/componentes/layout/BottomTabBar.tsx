@@ -1,8 +1,10 @@
 import React from 'react';
-import { View, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { Home, Compass, MessageSquare, User } from 'lucide-react-native';
 import { colors, spacing } from '../../theme';
 import { AppText } from '../ui/AppText';
+import { navigate } from '../../navigation/NavigationRef';
+import { Routes } from '../../navigation/routes';
 import { useAppConfigStore } from '../../store/useAppConfigStore';
 
 export type TabKey = 'Inicio' | 'Explorar' | 'Chats' | 'Perfil';
@@ -10,6 +12,7 @@ export type TabKey = 'Inicio' | 'Explorar' | 'Chats' | 'Perfil';
 interface TabItem {
   key: TabKey;
   label: string;
+  route?: keyof typeof Routes.App;
   icon: (active: boolean) => React.ReactNode;
 }
 
@@ -17,6 +20,7 @@ const TABS: TabItem[] = [
   {
     key: 'Inicio',
     label: 'Inicio',
+    route: 'Home',
     icon: (active) => (
       <Home
         size={22}
@@ -28,6 +32,7 @@ const TABS: TabItem[] = [
   {
     key: 'Explorar',
     label: 'Explorar',
+    route: 'Explore',
     icon: (active) => (
       <Compass
         size={22}
@@ -39,6 +44,7 @@ const TABS: TabItem[] = [
   {
     key: 'Chats',
     label: 'Chats',
+    route: 'Chats',
     icon: (active) => (
       <MessageSquare
         size={22}
@@ -50,6 +56,7 @@ const TABS: TabItem[] = [
   {
     key: 'Perfil',
     label: 'Perfil',
+    route: 'Profile',
     icon: (active) => (
       <User
         size={22}
@@ -60,8 +67,25 @@ const TABS: TabItem[] = [
   },
 ];
 
-export const BottomTabBar: React.FC = () => {
-  const { currentTab, setCurrentTab } = useAppConfigStore();
+export interface BottomTabBarProps {
+  activeTab?: TabKey;
+}
+
+export const BottomTabBar: React.FC<BottomTabBarProps> = ({ activeTab }) => {
+  const storeTab = useAppConfigStore((state) => state.currentTab);
+  const setStoreTab = useAppConfigStore((state) => state.setCurrentTab);
+  const currentTab = activeTab || storeTab;
+
+  const handleTabPress = (tab: TabItem) => {
+    setStoreTab(tab.key);
+    if (tab.route === 'Home') {
+      navigate(Routes.App.Home);
+    } else if (tab.route === 'Explore') {
+      navigate(Routes.App.Explore);
+    } else {
+      Alert.alert(tab.label, `La sección de ${tab.label} estará disponible pronto.`);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -71,7 +95,7 @@ export const BottomTabBar: React.FC = () => {
           <TouchableOpacity
             key={tab.key}
             activeOpacity={0.7}
-            onPress={() => setCurrentTab(tab.key)}
+            onPress={() => handleTabPress(tab)}
             style={styles.tabItem}
           >
             {tab.icon(isActive)}

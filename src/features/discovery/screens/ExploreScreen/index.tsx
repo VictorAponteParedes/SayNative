@@ -119,7 +119,7 @@ export const ExploreScreen: React.FC = () => {
       />
 
       {/* Barra de navegación inferior */}
-      <BottomTabBar />
+      <BottomTabBar activeTab="Explorar" />
     </SafeAreaContainer>
   );
 };

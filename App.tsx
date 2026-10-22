@@ -1,23 +1,17 @@
 import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { HomeScreen } from './src/features/home';
-import { ExploreScreen } from './src/features/discovery';
-import { useAppConfigStore } from './src/store/useAppConfigStore';
+import { navigationRef } from './src/navigation/NavigationRef';
+import AppNavigation from './src/navigation/AppNavigation';
 
 export const App: React.FC = () => {
-  const currentTab = useAppConfigStore((state) => state.currentTab);
-
-  const renderActiveScreen = () => {
-    switch (currentTab) {
-      case 'Explorar':
-        return <ExploreScreen />;
-      case 'Inicio':
-      default:
-        return <HomeScreen />;
-    }
-  };
-
-  return <SafeAreaProvider>{renderActiveScreen()}</SafeAreaProvider>;
+  return (
+    <SafeAreaProvider>
+      <NavigationContainer ref={navigationRef}>
+        <AppNavigation />
+      </NavigationContainer>
+    </SafeAreaProvider>
+  );
 };
 
 export default App;
