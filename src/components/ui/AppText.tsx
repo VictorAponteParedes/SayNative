@@ -44,14 +44,18 @@ export const AppText: React.FC<AppTextProps> = ({
 
   const resolvedFontFamily = getFontFamilyForWeight(baseStyle?.fontWeight);
 
+  // En React Native (especialmente Android), si fontFamily apunta a un archivo específico
+  // como 'Outfit-Bold' y se mantiene fontWeight: '700'/'bold', el motor busca 'Outfit-Bold_bold.ttf'
+  // y al no encontrarlo hace fallback a la fuente del sistema (Roboto).
+  // Al remover fontWeight, Android e iOS cargan directamente el archivo de fuente con su peso nativo.
+  const finalStyle: TextStyle = {
+    ...baseStyle,
+    fontFamily: resolvedFontFamily,
+    fontWeight: undefined,
+  };
+
   return (
-    <Text
-      style={[
-        baseStyle,
-        { fontFamily: resolvedFontFamily },
-      ]}
-      {...props}
-    >
+    <Text style={finalStyle} {...props}>
       {children}
     </Text>
   );
