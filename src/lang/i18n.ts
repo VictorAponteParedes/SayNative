@@ -6,18 +6,21 @@ import esCommon from './es/common.json';
 import esHome from './es/home.json';
 import esExplore from './es/explore.json';
 import esChats from './es/chats.json';
+import esCoins from './es/coins.json';
 
 // EN
 import enCommon from './en/common.json';
 import enHome from './en/home.json';
 import enExplore from './en/explore.json';
 import enChats from './en/chats.json';
+import enCoins from './en/coins.json';
 
 // PT
 import ptCommon from './pt/common.json';
 import ptHome from './pt/home.json';
 import ptExplore from './pt/explore.json';
 import ptChats from './pt/chats.json';
+import ptCoins from './pt/coins.json';
 
 export const defaultNS = 'common';
 
@@ -27,18 +30,21 @@ export const resources = {
     home: esHome,
     explore: esExplore,
     chats: esChats,
+    coins: esCoins,
   },
   en: {
     common: enCommon,
     home: enHome,
     explore: enExplore,
     chats: enChats,
+    coins: enCoins,
   },
   pt: {
     common: ptCommon,
     home: ptHome,
     explore: ptExplore,
     chats: ptChats,
+    coins: ptCoins,
   },
 } as const;
 

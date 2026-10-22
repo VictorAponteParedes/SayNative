@@ -1,0 +1,68 @@
+{
+  "headerTitle": "Recarregar Moedas",
+  "hero": {
+    "title": "Recarregar Moedas",
+    "balance": "Seu saldo: {{count}} moedas",
+    "rateExplanation": "10 moedas = 1 minuto de videochamada com falantes nativos"
+  },
+  "rewardedAd": {
+    "title": "Assistir anúncio curto",
+    "badgeFree": "+5 grátis",
+    "available": "Disponíveis: {{available}} de {{total}} hoje",
+    "button": "Ver",
+    "adStarted": "Reproduzindo anúncio...",
+    "rewardEarned": "Parabéns! Você ganhou +5 moedas por assistir ao anúncio."
+  },
+  "packagesSection": {
+    "title": "Pacotes de Moedas",
+    "oneTimePayment": "Pagamento único"
+  },
+  "packages": {
+    "basic": {
+      "badge": "ENTRADA",
+      "title": "Pacote Básico",
+      "coins": "200 moedas",
+      "subtitle": "~20 min de videochamada",
+      "button": "Comprar pacote"
+    },
+    "popular": {
+      "floatingBadge": "🔥 MAIS POPULAR",
+      "extraFree": "+12% extra grátis",
+      "title": "Prática Frequente",
+      "coins": "900",
+      "originalCoins": "800",
+      "subtitle": "~90 min de prática intensiva",
+      "button": "Obter 900 moedas"
+    },
+    "bestValue": {
+      "floatingBadge": "⭐ MELHOR VALOR · ECONOMIZE 30%",
+      "giftCoins": "+500 moedas de bônus",
+      "title": "Imersão Total",
+      "coins": "2,500",
+      "originalCoins": "2,000",
+      "subtitle": "~4+ horas com tutores e nativos",
+      "button": "Obter 2,500 moedas"
+    }
+  },
+  "benefits": {
+    "noExpiry": "Moedas sem data de validade",
+    "instantConnection": "Conexão instantânea em salas de conversa",
+    "securePurchase": "Compra 100% segura e protegida"
+  },
+  "trust": {
+    "ssl": "SSL 256-Bit",
+    "iap": "In-App Purchase",
+    "guaranteed": "Garantido"
+  },
+  "legal": {
+    "disclaimer": "O valor será cobrado na sua conta Apple App Store ou Google Play na confirmação da compra. As moedas virtuais são de uso exclusivo no SayNative para videochamadas e tutorias comunitárias; não têm valor legal nem são reembolsáveis.",
+    "restore": "Restaurar compras",
+    "terms": "Termos",
+    "privacy": "Privacidade"
+  },
+  "dialog": {
+    "purchaseTitle": "Confirmar Compra",
+    "purchaseMessage": "Deseja comprar o pacote {{title}} por {{price}}?",
+    "purchaseSuccess": "Compra concluída com sucesso! {{coins}} moedas foram adicionadas ao seu saldo."
+  }
+}

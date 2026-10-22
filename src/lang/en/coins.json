@@ -1,0 +1,68 @@
+{
+  "headerTitle": "Top Up Coins",
+  "hero": {
+    "title": "Top Up Coins",
+    "balance": "Your balance: {{count}} coins",
+    "rateExplanation": "10 coins = 1 minute of video call with native speakers"
+  },
+  "rewardedAd": {
+    "title": "Watch short ad",
+    "badgeFree": "+5 free",
+    "available": "Available: {{available}} of {{total}} today",
+    "button": "Watch",
+    "adStarted": "Playing rewarded ad...",
+    "rewardEarned": "Congratulations! You earned +5 coins for watching the ad."
+  },
+  "packagesSection": {
+    "title": "Coin Packages",
+    "oneTimePayment": "One-time payment"
+  },
+  "packages": {
+    "basic": {
+      "badge": "STARTER",
+      "title": "Basic Package",
+      "coins": "200 coins",
+      "subtitle": "~20 min video call",
+      "button": "Buy package"
+    },
+    "popular": {
+      "floatingBadge": "🔥 MOST POPULAR",
+      "extraFree": "+12% extra free",
+      "title": "Frequent Practice",
+      "coins": "900",
+      "originalCoins": "800",
+      "subtitle": "~90 min intensive practice",
+      "button": "Get 900 coins"
+    },
+    "bestValue": {
+      "floatingBadge": "⭐ BEST VALUE · SAVE 30%",
+      "giftCoins": "+500 bonus coins",
+      "title": "Total Immersion",
+      "coins": "2,500",
+      "originalCoins": "2,000",
+      "subtitle": "~4+ hours with tutors and natives",
+      "button": "Get 2,500 coins"
+    }
+  },
+  "benefits": {
+    "noExpiry": "Coins never expire",
+    "instantConnection": "Instant connection in exchange rooms",
+    "securePurchase": "100% secure and protected purchase"
+  },
+  "trust": {
+    "ssl": "SSL 256-Bit",
+    "iap": "In-App Purchase",
+    "guaranteed": "Guaranteed"
+  },
+  "legal": {
+    "disclaimer": "Payment will be charged to your Apple App Store or Google Play account at confirmation of purchase. Virtual coins are for exclusive use within SayNative for video calls and community tutoring; they have no legal tender value and are non-refundable.",
+    "restore": "Restore purchases",
+    "terms": "Terms",
+    "privacy": "Privacy"
+  },
+  "dialog": {
+    "purchaseTitle": "Confirm Purchase",
+    "purchaseMessage": "Do you want to buy the {{title}} package for {{price}}?",
+    "purchaseSuccess": "Purchase successful! {{coins}} coins have been added to your balance."
+  }
+}

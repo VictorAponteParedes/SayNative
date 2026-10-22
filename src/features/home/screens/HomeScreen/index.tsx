@@ -33,10 +33,7 @@ export const HomeScreen: React.FC = () => {
   };
 
   const handleAddCoins = () => {
-    Alert.alert(
-      t('userProfile.walletTitle'),
-      t('userProfile.walletMessage')
-    );
+    navigate(Routes.App.Coins);
   };
 
   const handleSelectLearningLanguage = () => {

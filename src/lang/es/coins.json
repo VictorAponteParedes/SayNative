@@ -1,0 +1,68 @@
+{
+  "headerTitle": "Recargar Monedas",
+  "hero": {
+    "title": "Recargar Monedas",
+    "balance": "Tu saldo: {{count}} monedas",
+    "rateExplanation": "10 monedas = 1 minuto de videollamada con hablantes nativos"
+  },
+  "rewardedAd": {
+    "title": "Ver anuncio corto",
+    "badgeFree": "+5 gratis",
+    "available": "Disponibles: {{available}} de {{total}} hoy",
+    "button": "Ver",
+    "adStarted": "Reproduciendo anuncio publicitario...",
+    "rewardEarned": "¡Felicidades! Has ganado +5 monedas por ver el anuncio."
+  },
+  "packagesSection": {
+    "title": "Paquetes de Monedas",
+    "oneTimePayment": "Pago único"
+  },
+  "packages": {
+    "basic": {
+      "badge": "ENTRADA",
+      "title": "Paquete Básico",
+      "coins": "200 monedas",
+      "subtitle": "~20 min de videollamada",
+      "button": "Comprar paquete"
+    },
+    "popular": {
+      "floatingBadge": "🔥 MÁS POPULAR",
+      "extraFree": "+12% extra gratis",
+      "title": "Práctica Frecuente",
+      "coins": "900",
+      "originalCoins": "800",
+      "subtitle": "~90 min de práctica intensiva",
+      "button": "Obtener 900 monedas"
+    },
+    "bestValue": {
+      "floatingBadge": "⭐ MEJOR VALOR · AHORRA 30%",
+      "giftCoins": "+500 monedas de regalo",
+      "title": "Inmersión Total",
+      "coins": "2,500",
+      "originalCoins": "2,000",
+      "subtitle": "~4+ horas con tutores y nativos",
+      "button": "Obtener 2,500 monedas"
+    }
+  },
+  "benefits": {
+    "noExpiry": "Monedas sin fecha de caducidad",
+    "instantConnection": "Conexión instantánea en salas de intercambio",
+    "securePurchase": "Compra 100% segura y protegida"
+  },
+  "trust": {
+    "ssl": "SSL 256-Bit",
+    "iap": "In-App Purchase",
+    "guaranteed": "Garantizado"
+  },
+  "legal": {
+    "disclaimer": "El importe se cargará a tu cuenta de Apple App Store o Google Play al confirmar la compra. Las monedas virtuales son de uso exclusivo dentro de SayNative para videollamadas y tutorías comunitarias; no tienen valor en moneda de curso legal ni son reembolsables.",
+    "restore": "Restaurar compras",
+    "terms": "Términos",
+    "privacy": "Privacidad"
+  },
+  "dialog": {
+    "purchaseTitle": "Confirmar Compra",
+    "purchaseMessage": "¿Deseas comprar el paquete {{title}} por {{price}}?",
+    "purchaseSuccess": "¡Compra realizada con éxito! Se han agregado {{coins}} monedas a tu balance."
+  }
+}
