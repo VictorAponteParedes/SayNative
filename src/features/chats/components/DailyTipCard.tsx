@@ -40,14 +40,14 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#EEF2FF',
+    backgroundColor: colors.primaryBgSubtle,
     marginHorizontal: spacing.lg,
     marginTop: spacing.sm,
     marginBottom: spacing.lg,
     padding: spacing.md,
     borderRadius: borderRadius.lg,
     borderWidth: 1,
-    borderColor: '#E0E7FF',
+    borderColor: colors.borderHighlight,
   },
   iconCircle: {
     width: 44,

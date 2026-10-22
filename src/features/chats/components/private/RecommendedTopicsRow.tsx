@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
   topicPill: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#EEF2FF',
+    backgroundColor: colors.primaryBgSubtle,
     paddingHorizontal: spacing.md,
     paddingVertical: 7,
     borderRadius: 20,

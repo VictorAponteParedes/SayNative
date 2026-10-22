@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(255, 255, 255, 0.25)',
   },
   inactiveBadge: {
-    backgroundColor: '#EEF2FF',
+    backgroundColor: colors.primaryBgSubtle,
   },
   badgeText: {
     fontSize: 11,
@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
     color: colors.primary,
   },
   unreadRedBadge: {
-    backgroundColor: '#DC2626',
+    backgroundColor: colors.dangerDark,
     width: 20,
     height: 20,
     borderRadius: 10,

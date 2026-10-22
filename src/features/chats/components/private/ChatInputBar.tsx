@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import { Plus, Sparkles, Mic, Send } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
-import { colors, spacing, borderRadius } from '../../../../theme';
+import { colors, spacing } from '../../../../theme';
 
 export interface ChatInputBarProps {
   value: string;
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
     width: 42,
     height: 42,
     borderRadius: 21,
-    backgroundColor: '#EEF2FF',
+    backgroundColor: colors.primaryBgSubtle,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#F8FAFC',
+    backgroundColor: colors.surfaceInput,
     borderRadius: 22,
     paddingHorizontal: spacing.md,
     borderWidth: 1,

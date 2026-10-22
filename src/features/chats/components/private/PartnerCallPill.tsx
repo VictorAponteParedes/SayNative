@@ -41,7 +41,7 @@ export const PartnerCallPill: React.FC<PartnerCallPillProps> = ({
         onPress={onPressCall}
         style={styles.callButton}
       >
-        <Video size={14} color="#0D695A" fill="#0D695A" />
+        <Video size={14} color={colors.action} fill={colors.action} />
         <AppText variant="caption" style={styles.callButtonText}>
           {t('privateChat.callRate', { rate: ratePerMinute })}
         </AppText>
@@ -79,27 +79,27 @@ const styles = StyleSheet.create({
     fontSize: 13,
   },
   nativeBadge: {
-    backgroundColor: '#CCFBF1',
+    backgroundColor: colors.actionLight,
     paddingHorizontal: 6,
     paddingVertical: 2,
     borderRadius: 6,
   },
   nativeBadgeText: {
-    color: '#0F766E',
+    color: colors.actionDark,
     fontWeight: '700',
     fontSize: 10,
   },
   callButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#CCFBF1',
+    backgroundColor: colors.actionLight,
     paddingHorizontal: spacing.sm + 2,
     paddingVertical: 5,
     borderRadius: 12,
     gap: 4,
   },
   callButtonText: {
-    color: '#0D695A',
+    color: colors.action,
     fontWeight: '700',
     fontSize: 11,
   },

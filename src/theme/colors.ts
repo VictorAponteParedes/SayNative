@@ -69,6 +69,9 @@ export const colors = {
   // Estrellas de valoración
   star: '#F59E0B',
   starRed: '#F87171',
+
+  // Sombra estándar
+  shadow: '#000000',
 } as const;
 
 export type Colors = typeof colors;

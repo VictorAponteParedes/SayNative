@@ -38,7 +38,7 @@ export const ChatMessageItem: React.FC<ChatMessageItemProps> = ({ message }) => 
             <AppText variant="caption" style={styles.userTime}>
               {message.time}
             </AppText>
-            <CheckCheck size={16} color="#A5B4FC" />
+            <CheckCheck size={16} color={colors.primaryLighter} />
           </View>
         </View>
       </View>
@@ -66,15 +66,15 @@ export const ChatMessageItem: React.FC<ChatMessageItemProps> = ({ message }) => 
 
             {/* Barras de onda simuladas multicolor */}
             <View style={styles.waveformContainer}>
-              <View style={[styles.bar, { height: 14, backgroundColor: '#6366F1' }]} />
-              <View style={[styles.bar, { height: 24, backgroundColor: '#4338CA' }]} />
-              <View style={[styles.bar, { height: 18, backgroundColor: '#EC4899' }]} />
-              <View style={[styles.bar, { height: 28, backgroundColor: '#E11D48' }]} />
-              <View style={[styles.bar, { height: 20, backgroundColor: '#F43F5E' }]} />
-              <View style={[styles.bar, { height: 12, backgroundColor: '#A5B4FC' }]} />
-              <View style={[styles.bar, { height: 22, backgroundColor: '#4338CA' }]} />
-              <View style={[styles.bar, { height: 16, backgroundColor: '#94A3B8' }]} />
-              <View style={[styles.bar, { height: 10, backgroundColor: '#CBD5E1' }]} />
+              <View style={[styles.bar, { height: 14, backgroundColor: colors.waveformPurple }]} />
+              <View style={[styles.bar, { height: 24, backgroundColor: colors.waveformIndigo }]} />
+              <View style={[styles.bar, { height: 18, backgroundColor: colors.waveformPink }]} />
+              <View style={[styles.bar, { height: 28, backgroundColor: colors.waveformRed }]} />
+              <View style={[styles.bar, { height: 20, backgroundColor: colors.waveformRose }]} />
+              <View style={[styles.bar, { height: 12, backgroundColor: colors.waveformLavender }]} />
+              <View style={[styles.bar, { height: 22, backgroundColor: colors.waveformIndigo }]} />
+              <View style={[styles.bar, { height: 16, backgroundColor: colors.waveformSlate }]} />
+              <View style={[styles.bar, { height: 10, backgroundColor: colors.waveformLight }]} />
             </View>
 
             <View style={styles.durationWrapper}>
@@ -200,7 +200,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.borderLight,
     elevation: 1,
-    shadowColor: '#000',
+    shadowColor: colors.shadow,
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.03,
     shadowRadius: 4,
@@ -277,13 +277,13 @@ const styles = StyleSheet.create({
   },
   audioSpeedText: {
     fontWeight: '800',
-    color: '#0D695A',
+    color: colors.action,
     fontSize: 11,
   },
   transcriptionBox: {
     marginTop: spacing.sm,
     padding: spacing.sm,
-    backgroundColor: '#F8FAFC',
+    backgroundColor: colors.surfaceSubtle,
     borderRadius: 8,
   },
   transcriptionText: {
