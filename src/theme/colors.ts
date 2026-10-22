@@ -5,6 +5,8 @@ export const colors = {
   surfaceSubtle: '#F1F5F9',
   surfaceHighlight: '#EEF2FF',
   surfaceInput: '#F8FAFC',
+  white: '#FFFFFF',
+  overlay: 'rgba(15, 23, 42, 0.6)',
 
   // Primarios (Azul / Índigo)
   primary: '#4338CA',

@@ -5,3 +5,4 @@ export * from './ProfileStatsRow';
 export * from './LanguagesSection';
 export * from './TeachingModeCard';
 export * from './AccountPreferencesSection';
+export * from './LanguageSelectorBottomSheet';

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Alert } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { useAuthStore } from '../../../store/useAuthStore';
@@ -11,6 +12,16 @@ export const useProfile = () => {
   const setAvailableToTeach = useAuthStore((state) => state.setAvailableToTeach);
   const addCoins = useAuthStore((state) => state.addCoins);
   const setAuthenticated = useAuthStore((state) => state.setAuthenticated);
+
+  const [isLanguageSheetOpen, setIsLanguageSheetOpen] = useState(false);
+
+  const handleOpenLanguageSheet = () => {
+    setIsLanguageSheetOpen(true);
+  };
+
+  const handleCloseLanguageSheet = () => {
+    setIsLanguageSheetOpen(false);
+  };
 
   const handleEditProfile = () => {
     navigate(Routes.App.EditProfile);
@@ -48,10 +59,7 @@ export const useProfile = () => {
   };
 
   const handleAddLanguage = () => {
-    Alert.alert(
-      t('languages.addLanguageTitle'),
-      t('languages.addLanguageMessage')
-    );
+    handleOpenLanguageSheet();
   };
 
   const handleLogout = () => {
@@ -73,6 +81,9 @@ export const useProfile = () => {
 
   return {
     user,
+    isLanguageSheetOpen,
+    handleOpenLanguageSheet,
+    handleCloseLanguageSheet,
     handleEditProfile,
     handleGoToCoins,
     handleGoToHistory,

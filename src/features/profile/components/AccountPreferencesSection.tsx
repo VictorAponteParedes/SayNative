@@ -2,6 +2,7 @@ import React from 'react';
 import { View, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import {
   User,
+  Globe,
   Bell,
   Shield,
   HelpCircle,
@@ -17,13 +18,33 @@ import { Routes } from '../../../navigation/routes';
 
 export interface AccountPreferencesSectionProps {
   onPressPersonalInfo: () => void;
+  onPressLanguage: () => void;
   onPressLogout: () => void;
 }
 
 export const AccountPreferencesSection: React.FC<
   AccountPreferencesSectionProps
-> = ({ onPressPersonalInfo, onPressLogout }) => {
-  const { t } = useTranslation('profile');
+> = ({ onPressPersonalInfo, onPressLanguage, onPressLogout }) => {
+  const { t, i18n } = useTranslation('profile');
+
+  const getLanguageLabel = (lang: string) => {
+    switch (lang) {
+      case 'es':
+        return 'Español 🇪🇸';
+      case 'en':
+        return 'English 🇺🇸';
+      case 'pt':
+        return 'Português 🇧🇷';
+      case 'fr':
+        return 'Français 🇫🇷';
+      case 'ja':
+        return '日本語 🇯🇵';
+      case 'zh':
+        return '中文 (简体) 🇨🇳';
+      default:
+        return 'Español 🇪🇸';
+    }
+  };
 
   const handleSimpleAlert = (titleKey: string, message: string) => {
     Alert.alert(t(titleKey), message);
@@ -51,6 +72,29 @@ export const AccountPreferencesSection: React.FC<
             </AppText>
             <AppText variant="caption" style={styles.rowSubtitle}>
               {t('account.personalInfoSubtitle')}
+            </AppText>
+          </View>
+          <ChevronRight size={18} color={colors.textSecondary} />
+        </TouchableOpacity>
+
+        {/* Separador */}
+        <View style={styles.divider} />
+
+        {/* Idioma de la Aplicación */}
+        <TouchableOpacity
+          activeOpacity={0.7}
+          onPress={onPressLanguage}
+          style={styles.menuRow}
+        >
+          <View style={[styles.iconCircle, { backgroundColor: colors.surfaceSubtle }]}>
+            <Globe size={18} color={colors.primary} />
+          </View>
+          <View style={styles.textColumn}>
+            <AppText variant="body" style={styles.rowTitle}>
+              {t('account.appLanguage')}
+            </AppText>
+            <AppText variant="caption" style={styles.rowSubtitle}>
+              {getLanguageLabel(i18n.language)}
             </AppText>
           </View>
           <ChevronRight size={18} color={colors.textSecondary} />

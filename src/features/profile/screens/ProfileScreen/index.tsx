@@ -11,6 +11,7 @@ import {
   LanguagesSection,
   TeachingModeCard,
   AccountPreferencesSection,
+  LanguageSelectorBottomSheet,
 } from '../../components';
 import { useProfile } from '../../hooks/useProfile';
 import { styles } from './styles';
@@ -18,6 +19,9 @@ import { styles } from './styles';
 export const ProfileScreen: React.FC = () => {
   const {
     user,
+    isLanguageSheetOpen,
+    handleOpenLanguageSheet,
+    handleCloseLanguageSheet,
     handleEditProfile,
     handleGoToCoins,
     handleGoToHistory,
@@ -68,12 +72,19 @@ export const ProfileScreen: React.FC = () => {
           languageName={user.nativeLanguage.name}
         />
 
-        {/* Cuenta y Preferencias (con acceso a Datos Personales, Soporte, Cerrar Sesión) */}
+        {/* Cuenta y Preferencias (con acceso a Datos Personales, Idioma, Soporte, Cerrar Sesión) */}
         <AccountPreferencesSection
           onPressPersonalInfo={handleEditProfile}
+          onPressLanguage={handleOpenLanguageSheet}
           onPressLogout={handleLogout}
         />
       </ScrollView>
+
+      {/* Selector de idioma con AppBottomSheet */}
+      <LanguageSelectorBottomSheet
+        visible={isLanguageSheetOpen}
+        onClose={handleCloseLanguageSheet}
+      />
 
       {/* Barra de navegación inferior */}
       <BottomTabBar activeTab="Perfil" />
