@@ -8,16 +8,16 @@ export interface RecommendedTopicsRowProps {
   onSelectTopic: (topic: string) => void;
 }
 
-const TOPICS = [
-  { id: '1', emoji: '🍜', label: 'Gastronomía' },
-  { id: '2', emoji: '✈️', label: 'Viajes y Cultura' },
-  { id: '3', emoji: '💬', label: 'Modismos' },
-];
-
 export const RecommendedTopicsRow: React.FC<RecommendedTopicsRowProps> = ({
   onSelectTopic,
 }) => {
   const { t } = useTranslation('chats');
+
+  const topics = [
+    { id: '1', emoji: '🍜', label: t('privateChat.topics.gastronomy') },
+    { id: '2', emoji: '✈️', label: t('privateChat.topics.travelCulture') },
+    { id: '3', emoji: '💬', label: t('privateChat.topics.idioms') },
+  ];
 
   return (
     <View style={styles.container}>
@@ -29,7 +29,7 @@ export const RecommendedTopicsRow: React.FC<RecommendedTopicsRowProps> = ({
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.scrollList}
       >
-        {TOPICS.map((item) => (
+        {topics.map((item) => (
           <TouchableOpacity
             key={item.id}
             activeOpacity={0.8}

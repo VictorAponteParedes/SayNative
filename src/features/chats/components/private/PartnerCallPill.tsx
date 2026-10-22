@@ -43,7 +43,7 @@ export const PartnerCallPill: React.FC<PartnerCallPillProps> = ({
       >
         <Video size={14} color="#0D695A" fill="#0D695A" />
         <AppText variant="caption" style={styles.callButtonText}>
-          Llamar (🪙{ratePerMinute}/m)
+          {t('privateChat.callRate', { rate: ratePerMinute })}
         </AppText>
       </TouchableOpacity>
     </View>

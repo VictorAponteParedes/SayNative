@@ -47,49 +47,61 @@ export const PrivateChatScreen: React.FC<PrivateChatScreenProps> = ({ route }) =
 
   const handleCall = () => {
     Alert.alert(
-      'Iniciar Videollamada',
-      `¿Deseas iniciar videollamada con ${partnerName}? Tarifa: ${ratePerMinute} monedas por minuto.`
+      t('privateChat.alerts.callTitle'),
+      t('privateChat.alerts.callMessage', {
+        name: partnerName,
+        rate: ratePerMinute,
+      })
     );
   };
 
   const handleOptions = () => {
     Alert.alert(
-      'Opciones de Chat',
-      'Ver perfil, Silenciar notificaciones, Bloquear o Reportar usuario.'
+      t('privateChat.alerts.optionsTitle'),
+      t('privateChat.alerts.optionsMessage')
     );
   };
 
   const handleProfile = () => {
-    Alert.alert('Perfil', `Abriendo perfil de ${partnerName}...`);
+    Alert.alert(
+      t('privateChat.alerts.profileTitle'),
+      t('privateChat.alerts.profileMessage', { name: partnerName })
+    );
   };
 
   const handleTopicBanner = () => {
     Alert.alert(
-      'Temas de Conversación',
-      'Selecciona un tema para practicar hoy y recibir correcciones en vivo.'
+      t('privateChat.alerts.topicsTitle'),
+      t('privateChat.alerts.topicsMessage')
     );
   };
 
   const handleAttachment = () => {
-    Alert.alert('Adjuntar', 'Compartir foto, nota de voz o enlace cultural.');
+    Alert.alert(
+      t('privateChat.alerts.attachmentTitle'),
+      t('privateChat.alerts.attachmentMessage')
+    );
   };
 
   const handleAiAssist = () => {
     Alert.alert(
-      'Asistente de Lenguaje IA',
-      'Te ayuda a sugerir respuestas naturales, corregir tu gramática o sugerir vocabulario nativo.'
+      t('privateChat.alerts.aiAssistTitle'),
+      t('privateChat.alerts.aiAssistMessage')
     );
   };
 
   const handleMic = () => {
-    Alert.alert('Nota de Voz', 'Mantén presionado para grabar un audio.');
+    Alert.alert(
+      t('privateChat.alerts.micTitle'),
+      t('privateChat.alerts.micMessage')
+    );
   };
 
   return (
     <SafeAreaContainer edges={['top', 'left', 'right']}>
       {/* Cabecera superior con botón volver, info y llamadas */}
       <PrivateChatHeader
-        partnerName="Active Chat"
+        partnerName={t('privateChat.activeChat')}
         isOnline
         onPressCall={handleCall}
         onPressOptions={handleOptions}

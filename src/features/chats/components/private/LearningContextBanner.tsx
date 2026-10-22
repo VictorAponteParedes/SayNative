@@ -24,7 +24,9 @@ export const LearningContextBanner: React.FC<LearningContextBannerProps> = ({
 
       <View style={styles.textContainer}>
         <AppText variant="bodySmall" numberOfLines={1} style={styles.text}>
-          Estás practicando <AppText style={styles.highlightText}>{languageName}</AppText>. ¡Pide correcciones!
+          {t('privateChat.practicingPrefix')}
+          <AppText style={styles.highlightText}>{languageName}</AppText>
+          {t('privateChat.practicingSuffix')}
         </AppText>
       </View>
 

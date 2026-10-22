@@ -27,8 +27,10 @@
   },
   "empty": "No hay conversaciones que coincidan con tu búsqueda.",
   "privateChat": {
+    "activeChat": "Active Chat",
     "online": "En línea",
-    "practicing": "Estás practicando {{language}}. ¡Pide correcciones!",
+    "practicingPrefix": "Estás practicando ",
+    "practicingSuffix": ". ¡Pide correcciones!",
     "topic": "Tema",
     "today": "Hoy",
     "native": "Nativa",
@@ -44,6 +46,22 @@
       "gastronomy": "Gastronomía",
       "travelCulture": "Viajes y Cultura",
       "idioms": "Modismos"
+    },
+    "alerts": {
+      "callTitle": "Iniciar Videollamada",
+      "callMessage": "¿Deseas iniciar videollamada con {{name}}? Tarifa: {{rate}} monedas por minuto.",
+      "optionsTitle": "Opciones de Chat",
+      "optionsMessage": "Ver perfil, Silenciar notificaciones, Bloquear o Reportar usuario.",
+      "profileTitle": "Perfil",
+      "profileMessage": "Abriendo perfil de {{name}}...",
+      "topicsTitle": "Temas de Conversación",
+      "topicsMessage": "Selecciona un tema para practicar hoy y recibir correcciones en vivo.",
+      "attachmentTitle": "Adjuntar",
+      "attachmentMessage": "Compartir foto, nota de voz o enlace cultural.",
+      "aiAssistTitle": "Asistente de Lenguaje IA",
+      "aiAssistMessage": "Te ayuda a sugerir respuestas naturales, corregir tu gramática o sugerir vocabulario nativo.",
+      "micTitle": "Nota de Voz",
+      "micMessage": "Mantén presionado para grabar un audio."
     }
   }
 }

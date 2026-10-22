@@ -16,13 +16,14 @@ export interface PrivateChatHeaderProps {
 }
 
 export const PrivateChatHeader: React.FC<PrivateChatHeaderProps> = ({
-  partnerName = 'Active Chat',
+  partnerName,
   isOnline = true,
   onPressCall,
   onPressOptions,
   onPressProfile,
 }) => {
   const { t } = useTranslation('chats');
+  const displayName = partnerName || t('privateChat.activeChat');
 
   return (
     <View style={styles.container}>
@@ -44,7 +45,7 @@ export const PrivateChatHeader: React.FC<PrivateChatHeaderProps> = ({
 
         <View style={styles.textContainer}>
           <AppText variant="h3" style={styles.nameText} numberOfLines={1}>
-            {partnerName}
+            {displayName}
           </AppText>
           <View style={styles.statusRow}>
             <View style={styles.statusDot} />
