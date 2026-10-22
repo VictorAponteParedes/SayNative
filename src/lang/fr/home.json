@@ -1,0 +1,47 @@
+{
+  "header": {
+    "title": "Accueil",
+    "notificationsTitle": "Notifications",
+    "noNotifications": "Vous n'avez aucune notification en attente.",
+    "profileTitle": "Profil",
+    "openingProfile": "Ouverture du profil de l'utilisateur..."
+  },
+  "userProfile": {
+    "greeting": "Bonjour, {{name}} 👋",
+    "subtitle": "Prêt à pratiquer aujourd'hui ?",
+    "walletTitle": "Portefeuille de pièces",
+    "walletMessage": "Achetez des packs de pièces ou regardez des vidéos sponsorisées pour recharger votre solde."
+  },
+  "languageFilter": {
+    "practiceLabel": "Pratiquer :",
+    "nativeLabel": "Natif :",
+    "selectLanguageTitle": "Sélectionner la langue",
+    "selectLanguageMessage": "Choisissez la langue que vous souhaitez pratiquer et votre niveau CECR."
+  },
+  "instantPractice": {
+    "badgeLive": "EN DIRECT",
+    "badgeRate": "{{rate}} pièces / min",
+    "title": "Pratique instantanée",
+    "subtitle": "Nous vous connectons immédiatement avec un locuteur natif disponible",
+    "ctaButton": "Trouver un locuteur maintenant",
+    "searchingTitle": "Pratique instantanée",
+    "searchingMessage": "Recherche d'un locuteur natif disponible en direct..."
+  },
+  "teacherAvailability": {
+    "title": "Disponible pour enseigner le {{language}}...",
+    "earningRate": "Gagnez {{rate}} pièces par minute"
+  },
+  "featuredPeers": {
+    "title": "Partenaires à la une",
+    "onlineCount": "{{count}} en ligne",
+    "viewAll": "Voir tout",
+    "reviews": "({{count}} avis)",
+    "rateLabel": "Tarif :",
+    "ratePerMin": "{{rate}}/min",
+    "callButton": "Appeler",
+    "callDialogTitle": "Démarrer l'appel",
+    "callDialogMessage": "Voulez-vous démarrer un appel vidéo avec {{name}} ? Tarif : {{rate}} pièces/min.",
+    "chatDialogTitle": "Chat",
+    "chatDialogMessage": "Ouverture de la conversation directe avec {{name}}."
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "header": {
+    "title": "Sécurité et Modération"
+  },
+  "safeCommunity": {
+    "title": "Communauté sécurisée",
+    "badge": "SayShield",
+    "description": "Chez SayNative, nous encourageons un espace d'échange respectueux et bienveillant. Le harcèlement, les propos inappropriés ou les comportements abusifs sont strictement interdits selon le principe de tolérance zéro.",
+    "guidelinesLink": "Consulter les règles de la communauté →",
+    "guidelinesTitle": "Règles de la communauté",
+    "guidelinesMessage": "SayNative prône le respect, la diversité et l'intégrité. Tout harcèlement, contenu sensible ou comportement discriminatoire est formellement interdit."
+  },
+  "privacy": {
+    "sectionTitle": "PARAMÈTRES DE CONFIDENTIALITÉ",
+    "activeProtection": "Protection Active",
+    "hideAgeTitle": "Masquer mon âge",
+    "hideAgeDesc": "Les autres apprenants verront uniquement votre pays de résidence et votre niveau linguistique.",
+    "reputationFilterTitle": "Filtre de réputation pour les appels",
+    "reputationFilterDesc": "N'accepter que les demandes vocales/vidéo de partenaires ayant une note supérieure à 4,0 étoiles.",
+    "antiShockTitle": "Protection anti-choc",
+    "recommendedBadge": "Recommandé",
+    "antiShockDesc": "Floute la caméra entrante pendant les 5 premières secondes de chaque appel jusqu'à ce que vous confirmiez la connexion."
+  },
+  "blockedUsers": {
+    "sectionTitle": "UTILISATEURS BLOQUÉS ({{count}})",
+    "description": "Les utilisateurs restreints ne peuvent ni vous envoyer de messages, ni écouter vos vocaux, ni rejoindre vos salons.",
+    "unblockButton": "Débloquer",
+    "noBlocked": "Vous n'avez aucun utilisateur bloqué.",
+    "blockedDate": "Bloqué le {{date}}",
+    "spamReason": "Spam / Messages non sollicités",
+    "behaviorReason": "Comportement inapproprié",
+    "unblockConfirmTitle": "Débloquer l'utilisateur",
+    "unblockConfirmMessage": "Voulez-vous débloquer {{name}} ? Cette personne pourra de nouveau échanger avec vous sur la plateforme.",
+    "cancel": "Annuler",
+    "confirm": "Débloquer"
+  },
+  "moderation": {
+    "sectionTitle": "MODÉRATION ET SIGNALEMENTS",
+    "reportsStatusTitle": "État de mes signalements",
+    "inReviewBadge": "1 en cours",
+    "reportsStatusDesc": "Nous traitons chaque signalement en moins de 24 h...",
+    "reportsModalTitle": "Mes Signalements",
+    "reportsModalMessage": "Votre signalement concernant le respect de la communauté est en cours d'examen par notre équipe sécurité.",
+    "complianceText": "Nous respectons rigoureusement les directives de sécurité de Google Play et de l'App Store. Tout contenu portant atteinte à l'intégrité physique, psychologique ou sexuelle entraîne un bannissement définitif et un signalement aux autorités compétentes.",
+    "deleteAccountButton": "Supprimer mon compte et mes données",
+    "deleteAccountWarning": "Cette action est irréversible et effacera votre progression, votre historique d'échanges et vos pièces.",
+    "deleteConfirmTitle": "Supprimer définitivement le compte ?",
+    "deleteConfirmMessage": "Cette action est irréversible. Toutes vos données personnelles, votre solde de pièces et vos discussions seront définitivement supprimés des serveurs.",
+    "deleteConfirmAction": "Supprimer définitivement"
+  },
+  "toasts": {
+    "unblockSuccessTitle": "Utilisateur débloqué",
+    "unblockSuccessMessage": "Vous avez débloqué {{name}} avec succès.",
+    "privacyUpdatedTitle": "Confidentialité mise à jour",
+    "privacyUpdatedMessage": "Vos préférences de confidentialité ont bien été enregistrées.",
+    "antiShockEnabledTitle": "Anti-choc activé",
+    "antiShockEnabledMessage": "La caméra entrante sera floutée pendant les 5 premières secondes d'appel vidéo.",
+    "accountDeletedTitle": "Compte supprimé",
+    "accountDeletedMessage": "Votre compte et vos données ont été définitivement supprimés."
+  }
+}

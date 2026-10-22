@@ -1,0 +1,20 @@
+{
+  "tabs": {
+    "home": "Accueil",
+    "explore": "Explorer",
+    "chats": "Messages",
+    "profile": "Profil"
+  },
+  "actions": {
+    "call": "Appeler",
+    "callNow": "Appeler maintenant",
+    "chat": "Chat",
+    "cancel": "Annuler",
+    "confirm": "Confirmer",
+    "viewAll": "Voir tout"
+  },
+  "coins": {
+    "perMinute": "/min",
+    "coinsPerMinute": "pièces / min"
+  }
+}

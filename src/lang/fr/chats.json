@@ -1,0 +1,67 @@
+{
+  "title": "Messages",
+  "searchPlaceholder": "Rechercher dans les discussions ou partenaires...",
+  "onlineSection": {
+    "title": "En ligne actuellement",
+    "onlineCount": "{{count}} partenaires",
+    "new": "Nouveau"
+  },
+  "filters": {
+    "all": "Tous",
+    "unread": "Non lus",
+    "videocalls": "Appels vidéo"
+  },
+  "callTypes": {
+    "callEnded": "Appel vidéo terminé · {{duration}}",
+    "missedCall": "Appel manqué"
+  },
+  "tipCard": {
+    "title": "Conversation fluide",
+    "subtitle": "Pratiquez 10 minutes par jour pour maintenir actif votre vocabulaire."
+  },
+  "options": {
+    "title": "Options des messages",
+    "markAllRead": "Tout marquer comme lu",
+    "newChat": "Nouvelle discussion",
+    "newChatMessage": "Trouver un partenaire pour démarrer une conversation."
+  },
+  "empty": "Aucune conversation ne correspond à votre recherche.",
+  "privateChat": {
+    "activeChat": "Discussion active",
+    "online": "En ligne",
+    "practicingPrefix": "Vous pratiquez l'",
+    "practicingSuffix": ". N'hésitez pas à demander des corrections !",
+    "topic": "Sujet",
+    "today": "Aujourd'hui",
+    "native": "Natif",
+    "callRate": "Appeler (🪙{{rate}}/m)",
+    "translate": "Traduire",
+    "translated": "Traduit : Bonjour Victor ! Comment se passe ta pratique de l'anglais ?",
+    "transcribeTranslate": "Transcrire / Traduire",
+    "transcribedText": "Transcription : Sounds great! Let's focus on daily conversational vocabulary today.",
+    "recommendedTopics": "Sujets recommandés pour aujourd'hui :",
+    "typing": "{{name}} est en train d'écrire",
+    "inputPlaceholder": "Écrivez en anglais...",
+    "topics": {
+      "gastronomy": "Gastronomie",
+      "travelCulture": "Voyages et Culture",
+      "idioms": "Expressions idiomatiques"
+    },
+    "alerts": {
+      "callTitle": "Démarrer l'appel vidéo",
+      "callMessage": "Voulez-vous démarrer un appel vidéo avec {{name}} ? Tarif : {{rate}} pièces par minute.",
+      "optionsTitle": "Options de discussion",
+      "optionsMessage": "Voir le profil, Couper les notifications, Bloquer ou Signaler l'utilisateur.",
+      "profileTitle": "Profil",
+      "profileMessage": "Ouverture du profil de {{name}}...",
+      "topicsTitle": "Sujets de conversation",
+      "topicsMessage": "Sélectionnez un sujet à pratiquer aujourd'hui pour recevoir des retours en direct.",
+      "attachmentTitle": "Joindre",
+      "attachmentMessage": "Partager une photo, un message vocal ou un lien culturel.",
+      "aiAssistTitle": "Assistant linguistique IA",
+      "aiAssistMessage": "Vous suggère des réponses naturelles, corrige votre grammaire et enrichit votre vocabulaire natif.",
+      "micTitle": "Message vocal",
+      "micMessage": "Maintenez appuyé pour enregistrer un audio."
+    }
+  }
+}

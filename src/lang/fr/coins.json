@@ -1,0 +1,120 @@
+{
+  "headerTitle": "Recharger des pièces",
+  "hero": {
+    "title": "Recharger des pièces",
+    "balance": "Votre solde : {{count}} pièces",
+    "rateExplanation": "10 pièces = 1 minute d'appel vidéo avec des locuteurs natifs"
+  },
+  "rewardedAd": {
+    "title": "Regarder une courte vidéo",
+    "badgeFree": "+5 gratuites",
+    "available": "Disponibles : {{available}} sur {{total}} aujourd'hui",
+    "button": "Regarder",
+    "adStarted": "Lecture de la vidéo publicitaire...",
+    "rewardEarned": "Félicitations ! Vous avez gagné +5 pièces en regardant l'annonce."
+  },
+  "packagesSection": {
+    "title": "Packs de pièces",
+    "oneTimePayment": "Paiement unique"
+  },
+  "packages": {
+    "basic": {
+      "badge": "DÉBUTANT",
+      "title": "Pack Découverte",
+      "coins": "200 pièces",
+      "subtitle": "~20 min d'appel vidéo",
+      "button": "Acheter le pack"
+    },
+    "popular": {
+      "floatingBadge": "🔥 PLUS POPULAIRE",
+      "extraFree": "+12% offerts",
+      "title": "Pratique Régulière",
+      "coins": "900",
+      "originalCoins": "800",
+      "subtitle": "~90 min de pratique intensive",
+      "button": "Obtenir 900 pièces"
+    },
+    "bestValue": {
+      "floatingBadge": "⭐ MEILLEURE OFFRE · ÉCONOMISEZ 30%",
+      "giftCoins": "+500 pièces en cadeau",
+      "title": "Immersion Totale",
+      "coins": "2 500",
+      "originalCoins": "2 000",
+      "subtitle": "~4+ heures avec tuteurs et natifs",
+      "button": "Obtenir 2 500 pièces"
+    }
+  },
+  "benefits": {
+    "noExpiry": "Pièces sans date d'expiration",
+    "instantConnection": "Connexion instantanée dans les salles d'échange",
+    "securePurchase": "Achat 100% sécurisé et protégé"
+  },
+  "trust": {
+    "ssl": "SSL 256-Bit",
+    "iap": "In-App Purchase",
+    "guaranteed": "Garanti"
+  },
+  "legal": {
+    "disclaimer": "Le montant sera débité de votre compte Apple App Store ou Google Play lors de la confirmation d'achat. Les pièces virtuelles sont strictement réservées à SayNative pour les appels vidéo et le tutorat communautaire ; elles n'ont aucune valeur monétaire légale et ne sont pas remboursables.",
+    "restore": "Restaurer les achats",
+    "terms": "Conditions",
+    "privacy": "Confidentialité"
+  },
+  "dialog": {
+    "purchaseTitle": "Confirmer l'achat",
+    "purchaseMessage": "Voulez-vous acheter le pack {{title}} pour {{price}} ?",
+    "purchaseSuccess": "Achat réussi ! {{coins}} pièces ont été ajoutées à votre solde."
+  },
+  "history": {
+    "headerTitle": "Historique des pièces",
+    "balanceTitle": "Solde actuel disponible",
+    "synced": "Synchronisé",
+    "monedas": "Pièces",
+    "totalEarned": "Total Gagnées",
+    "consumed": "Consommées",
+    "filters": {
+      "all": "Tous",
+      "purchases": "Achats",
+      "earned": "Gagnées",
+      "spent": "Dépenses",
+      "empty": "Aucune transaction enregistrée dans cette catégorie"
+    },
+    "sections": {
+      "today": "AUJOURD'HUI",
+      "thisWeek": "CETTE SEMAINE",
+      "september2024": "SEPTEMBRE 2024",
+      "movementsCount": "{{count}} opérations"
+    },
+    "items": {
+      "popularPurchase": "Achat Pack Populaire",
+      "appleIap": "Apple IAP ($9.99 USD) · 14:20",
+      "callSarah": "Appel vidéo avec Sarah J...",
+      "callSarahSub": "Durée : 8 min (10🪙/m) · 11:05",
+      "taughtDavid": "Tutorat espagnol donné à David...",
+      "taughtDavidSub": "Session : 12 min (+7🪙/m) · Hier",
+      "adReward": "Récompense vidéo publicitaire",
+      "adRewardSub": "Vidéo récompensée · Hier 16:45",
+      "callEmma": "Appel vidéo avec Emma...",
+      "callEmmaSub": "Durée : 15 min · Mardi",
+      "welcomeBonus": "Bonus de bienvenue SayNative...",
+      "welcomeBonusSub": "Cadeau de bienvenue · 15 Sep",
+      "basicPurchase": "Achat Pack Découverte",
+      "googlePlay": "Google Play ($2.99 USD) · 15 Sep"
+    },
+    "support": {
+      "banner": "Une question sur un paiement ? Contacter le support",
+      "accountId": "ID Compte : LL-849204 · Transactions sécurisées cryptées SSL",
+      "calendarTitle": "Filtrer par date",
+      "calendarMessage": "Sélectionnez une période pour consulter vos transactions.",
+      "supportTitle": "Assistance SayNative",
+      "supportMessage": "Notre équipe d'assistance examinera toute question relative à vos facturations."
+    }
+  },
+  "toasts": {
+    "adLimitTitle": "Limite quotidienne atteinte",
+    "adLimitMessage": "Vous avez regardé toutes les annonces disponibles aujourd'hui. Revenez demain pour plus de récompenses.",
+    "rewardEarnedTitle": "Récompense créditée !",
+    "rewardEarnedMessage": "Vous avez reçu +5 pièces gratuites pour avoir regardé l'annonce.",
+    "purchaseSuccessTitle": "Achat réussi !"
+  }
+}

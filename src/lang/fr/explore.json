@@ -1,0 +1,37 @@
+{
+  "title": "Explorer les locuteurs",
+  "searchPlaceholder": "Rechercher par nom, pays ou centre d'intérêt...",
+  "filters": {
+    "online": "En ligne actuellement",
+    "nativeEnglish": "🇺🇸 Anglophones natifs",
+    "topRated": "⭐ Les mieux notés"
+  },
+  "speakersAvailable": "{{count}} locuteurs disponibles",
+  "sort": {
+    "mostRelevant": "Plus pertinents",
+    "title": "Trier les locuteurs",
+    "desc": "Trier par : Plus pertinents, Meilleures notes, Tarif le plus bas ou Récents."
+  },
+  "card": {
+    "reviews": "({{count}} avis)",
+    "ratePerMin": "{{rate}}/min",
+    "native": "Natif : ",
+    "learns": "Apprend : ",
+    "callNow": "Appeler maintenant"
+  },
+  "help": {
+    "title": "Explorer les locuteurs",
+    "desc": "Trouvez ici des locuteurs natifs du monde entier. Filtrez par langue, note ou centres d'intérêt de conversation."
+  },
+  "advancedFilters": {
+    "title": "Filtres avancés",
+    "desc": "Filtrer par pays, tranche d'âge, tarif à la minute et disponibilité."
+  },
+  "dialog": {
+    "callTitle": "Appel vidéo direct",
+    "callMessage": "Démarrage de l'appel avec {{name}}. Tarif : {{rate}} pièces par minute.",
+    "chatTitle": "Chat direct",
+    "chatMessage": "Ouverture de la discussion écrite avec {{name}}."
+  },
+  "empty": "Aucun locuteur disponible ne correspond à vos critères de recherche."
+}

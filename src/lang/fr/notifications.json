@@ -1,0 +1,55 @@
+{
+  "header": {
+    "title": "Activité",
+    "newBadge": "{{count}} nouvelles",
+    "markAllRead": "Tout lire"
+  },
+  "filters": {
+    "all": "Toutes",
+    "calls": "Appels",
+    "coins": "Pièces",
+    "social": "Communauté"
+  },
+  "sections": {
+    "today": "AUJOURD'HUI",
+    "todayCount": "{{count}} récentes",
+    "yesterday": "HIER",
+    "thisWeek": "CETTE SEMAINE",
+    "empty": "Vous n'avez aucune notification dans cette catégorie."
+  },
+  "items": {
+    "missedCallTitle": "Appel manqué de Sarah J.",
+    "missedCallDesc": "A tenté de vous joindre pour une session d'anglais.",
+    "missedCallAction": "Rappeler (🪙 10/m)",
+    "coinsEarnedTitle": "Vous avez gagné 42 pièces !",
+    "coinsEarnedDesc": "Pour votre tutorat d'espagnol avec David Smith (6 min).",
+    "coinsEarnedBadge": "+42",
+    "newMessageTitle": "Nouveau message de Emma W.",
+    "newMessageDesc": "Emma vous a envoyé un audio pour travailler la prononciation.",
+    "newMessageAudio": "Audio (0:45)",
+    "streakTitle": "Série hebdomadaire atteinte",
+    "streakDesc": "Vous avez pratiqué 5 jours d'affilée. Récupérez votre bonus de 10 pièces.",
+    "streakAction": "Récupérer le bonus",
+    "streakClaimed": "Bonus récupéré",
+    "tutorOnlineTitle": "Liam Davies 🇬🇧 est en ligne",
+    "tutorOnlineDesc": "Votre tuteur d'anglais favori vient de se connecter.",
+    "tutorOnlineAction": "Saluer 👋",
+    "practiceReminderTitle": "Rappel de pratique",
+    "practiceReminderDesc": "Consacrez 10 minutes aujourd'hui pour maintenir votre aisance à l'oral.",
+    "time15m": "15 min",
+    "time2h": "Il y a 2 h",
+    "time4h": "4 h",
+    "time1830": "18:30",
+    "time1120": "11:20",
+    "time3d": "Il y a 3 j"
+  },
+  "toasts": {
+    "markedAllReadTitle": "Notifications lues",
+    "markedAllReadMessage": "Toutes vos notifications ont été marquées comme lues.",
+    "bonusClaimedTitle": "Bonus récupéré !",
+    "bonusClaimedMessage": "+10 pièces ont été ajoutées à votre solde.",
+    "alreadyClaimed": "Vous avez déjà récupéré ce bonus.",
+    "greetingSentTitle": "Salutation envoyée !",
+    "greetingSentMessage": "Vous avez envoyé un petit bonjour à Liam."
+  }
+}

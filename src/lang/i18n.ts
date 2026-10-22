@@ -51,6 +51,16 @@ import jaProfile from './ja/profile.json';
 import jaNotifications from './ja/notifications.json';
 import jaSecurity from './ja/security.json';
 
+// FR (Francés)
+import frCommon from './fr/common.json';
+import frHome from './fr/home.json';
+import frExplore from './fr/explore.json';
+import frChats from './fr/chats.json';
+import frCoins from './fr/coins.json';
+import frProfile from './fr/profile.json';
+import frNotifications from './fr/notifications.json';
+import frSecurity from './fr/security.json';
+
 export const defaultNS = 'common';
 
 export const resources = {
@@ -103,6 +113,16 @@ export const resources = {
     profile: jaProfile,
     notifications: jaNotifications,
     security: jaSecurity,
+  },
+  fr: {
+    common: frCommon,
+    home: frHome,
+    explore: frExplore,
+    chats: frChats,
+    coins: frCoins,
+    profile: frProfile,
+    notifications: frNotifications,
+    security: frSecurity,
   },
 } as const;
 

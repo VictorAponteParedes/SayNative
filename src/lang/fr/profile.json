@@ -1,0 +1,91 @@
+{
+  "header": {
+    "title": "Mon Profil",
+    "edit": "Modifier"
+  },
+  "user": {
+    "editAvatar": "Changer la photo",
+    "verified": "Vérifié",
+    "bioPlaceholder": "Rédigez une brève présentation..."
+  },
+  "wallet": {
+    "badge": "PORTEFEUILLE VIRTUEL",
+    "historyLink": "Historique des transactions",
+    "coins": "{{count}} Pièces",
+    "rechargeButton": "Recharger",
+    "freeAdButton": "+{{count}} gratuites"
+  },
+  "stats": {
+    "practiced": "Pratiquées",
+    "practicedValue": "{{hours}} h",
+    "calls": "Appels",
+    "callsValue": "{{count}} sess.",
+    "reputation": "Réputation",
+    "reputationValue": "{{rating}}"
+  },
+  "languages": {
+    "title": "Mes Langues",
+    "edit": "Modifier",
+    "nativeLabel": "Langue maternelle",
+    "nativeBadge": "Natif",
+    "targetProgress": "{{percent}}% vers {{target}}",
+    "addLanguage": "Ajouter une autre langue",
+    "addLanguageTitle": "Ajouter une langue",
+    "addLanguageMessage": "Choisissez la langue que vous souhaitez commencer à pratiquer."
+  },
+  "teachingMode": {
+    "sectionTitle": "Mode Enseignement",
+    "cardTitle": "Recevoir des appels dans ma langue",
+    "cardSubtitle": "Disponible pour guider d'autres apprenants en {{language}}.",
+    "rateLabel": "Mon tarif à la minute",
+    "rateValue": "{{rate}} / min"
+  },
+  "account": {
+    "sectionTitle": "Compte et Préférences",
+    "personalInfo": "Informations personnelles",
+    "personalInfoSubtitle": "E-mail, téléphone et identifiant",
+    "notifications": "Notifications",
+    "security": "Sécurité et Modération",
+    "securitySubtitle": "Utilisateurs bloqués et confidentialité",
+    "help": "Aide et Support",
+    "terms": "Conditions et Confidentialité",
+    "logout": "Se déconnecter",
+    "logoutConfirmTitle": "Déconnexion",
+    "logoutConfirmMessage": "Êtes-vous sûr de vouloir vous déconnecter ?",
+    "cancel": "Annuler",
+    "confirm": "Quitter"
+  },
+  "footer": {
+    "version": "SayNative v1.0.0 · Créé avec passion"
+  },
+  "editProfile": {
+    "title": "Informations personnelles",
+    "save": "Enregistrer",
+    "changePhoto": "Changer la photo",
+    "fullName": "Nom complet",
+    "fullNamePlaceholder": "Entrez votre nom",
+    "email": "Adresse e-mail",
+    "emailPlaceholder": "vous@exemple.com",
+    "phone": "Téléphone portable",
+    "phonePlaceholder": "+33 6 00 00 00 00",
+    "bio": "Biographie",
+    "country": "Pays de résidence",
+    "nativeLanguage": "Langue maternelle",
+    "userId": "ID de Compte",
+    "memberSince": "Membre depuis",
+    "saveSuccess": "Vos informations personnelles ont été enregistrées avec succès !",
+    "saveError": "Veuillez vérifier que le nom et l'e-mail sont valides."
+  },
+  "toasts": {
+    "profileUpdatedTitle": "Profil mis à jour",
+    "profileUpdatedMessage": "Vos informations personnelles ont été enregistrées avec succès.",
+    "incompleteDataTitle": "Données incomplètes",
+    "incompleteDataMessage": "Veuillez vérifier que le nom et l'e-mail sont valides.",
+    "rewardEarnedTitle": "Récompense obtenue",
+    "rewardEarnedMessage": "Vous avez gagné +5 pièces gratuites en regardant la vidéo publicitaire !",
+    "teachingEnabledTitle": "Mode Enseignement activé",
+    "teachingEnabledMessage": "Vous êtes désormais visible pour recevoir les appels des étudiants.",
+    "teachingDisabledTitle": "Mode Enseignement suspendu",
+    "teachingDisabledMessage": "Vous ne recevrez plus de demandes d'appels vidéo pour le moment."
+  }
+}
