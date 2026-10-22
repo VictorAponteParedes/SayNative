@@ -41,6 +41,16 @@ import zhProfile from './zh/profile.json';
 import zhNotifications from './zh/notifications.json';
 import zhSecurity from './zh/security.json';
 
+// JA (Japonés)
+import jaCommon from './ja/common.json';
+import jaHome from './ja/home.json';
+import jaExplore from './ja/explore.json';
+import jaChats from './ja/chats.json';
+import jaCoins from './ja/coins.json';
+import jaProfile from './ja/profile.json';
+import jaNotifications from './ja/notifications.json';
+import jaSecurity from './ja/security.json';
+
 export const defaultNS = 'common';
 
 export const resources = {
@@ -83,6 +93,16 @@ export const resources = {
     profile: zhProfile,
     notifications: zhNotifications,
     security: zhSecurity,
+  },
+  ja: {
+    common: jaCommon,
+    home: jaHome,
+    explore: jaExplore,
+    chats: jaChats,
+    coins: jaCoins,
+    profile: jaProfile,
+    notifications: jaNotifications,
+    security: jaSecurity,
   },
 } as const;
 

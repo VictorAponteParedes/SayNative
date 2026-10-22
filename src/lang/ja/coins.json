@@ -1,0 +1,120 @@
+{
+  "headerTitle": "コインチャージ",
+  "hero": {
+    "title": "コインチャージ",
+    "balance": "保有残高: {{count}} コイン",
+    "rateExplanation": "10 コイン = ネイティブスピーカーとの1分間の通話"
+  },
+  "rewardedAd": {
+    "title": "短い広告を見る",
+    "badgeFree": "+5 無料",
+    "available": "本日視聴可能: {{available}} / {{total}}",
+    "button": "視聴する",
+    "adStarted": "広告を読み込んでいます...",
+    "rewardEarned": "おめでとうございます！広告視聴で +5 コインを獲得しました。"
+  },
+  "packagesSection": {
+    "title": "コインパッケージ",
+    "oneTimePayment": "都度払い"
+  },
+  "packages": {
+    "basic": {
+      "badge": "スターター",
+      "title": "ベーシックパック",
+      "coins": "200 コイン",
+      "subtitle": "約20分間のビデオ通話",
+      "button": "パックを購入"
+    },
+    "popular": {
+      "floatingBadge": "🔥 一番人気",
+      "extraFree": "+12% 増量無料",
+      "title": "スタンダードパック",
+      "coins": "900",
+      "originalCoins": "800",
+      "subtitle": "約90分間の集中レッスン",
+      "button": "900 コインを入手"
+    },
+    "bestValue": {
+      "floatingBadge": "⭐ 最安値 · 30% お得",
+      "giftCoins": "+500 コインのボーナス付き",
+      "title": "プレミアムパック",
+      "coins": "2,500",
+      "originalCoins": "2,000",
+      "subtitle": "4時間以上の実践通話",
+      "button": "2,500 コインを入手"
+    }
+  },
+  "benefits": {
+    "noExpiry": "コインに使用期限はありません",
+    "instantConnection": "会話ルームへの即時接続",
+    "securePurchase": "安心・安全の決済システム"
+  },
+  "trust": {
+    "ssl": "SSL 256ビット暗号化",
+    "iap": "アプリ内課金認証",
+    "guaranteed": "公式品質保証"
+  },
+  "legal": {
+    "disclaimer": "購入を確定すると、Apple App Store または Google Play アカウントに請求されます。仮想コインは SayNative 内での通話やレッスン専用であり、法定通貨としての価値や払い戻しはありません。",
+    "restore": "購入を復元",
+    "terms": "利用規約",
+    "privacy": "プライバシーポリシー"
+  },
+  "dialog": {
+    "purchaseTitle": "購入の確認",
+    "purchaseMessage": "{{title}} を {{price}} で購入しますか？",
+    "purchaseSuccess": "購入が完了しました！ {{coins}} コインが残高に追加されました。"
+  },
+  "history": {
+    "headerTitle": "コイン履歴",
+    "balanceTitle": "利用可能残高",
+    "synced": "同期済み",
+    "monedas": "コイン",
+    "totalEarned": "獲得合計",
+    "consumed": "消費合計",
+    "filters": {
+      "all": "すべて",
+      "purchases": "チャージ",
+      "earned": "獲得",
+      "spent": "消費",
+      "empty": "このカテゴリーの履歴はありません"
+    },
+    "sections": {
+      "today": "今日",
+      "thisWeek": "今週",
+      "september2024": "2024年9月",
+      "movementsCount": "{{count}}件の履歴"
+    },
+    "items": {
+      "popularPurchase": "スタンダードパック購入",
+      "appleIap": "Apple IAP ($9.99 USD) · 14:20",
+      "callSarah": "Sarah J. とのビデオ通話",
+      "callSarahSub": "通話時間：8分 (10🪙/分) · 11:05",
+      "taughtDavid": "David へのスペイン語レッスン",
+      "taughtDavidSub": "レッスン：12分 (+7🪙/分) · 昨日",
+      "adReward": "リワード広告の視聴特典",
+      "adRewardSub": "動画広告 · 昨日 16:45",
+      "callEmma": "Emma とのビデオ通話",
+      "callEmmaSub": "通話時間：15分 · 火曜日",
+      "welcomeBonus": "ウェルカムボーナス",
+      "welcomeBonusSub": "登録特典プレゼント · 9月15日",
+      "basicPurchase": "ベーシックパック購入",
+      "googlePlay": "Google Play ($2.99 USD) · 9月15日"
+    },
+    "support": {
+      "banner": "請求に関するお問い合わせはこちら",
+      "accountId": "アカウントID: LL-849204 · SSL暗号化による安全な取引",
+      "calendarTitle": "日付で絞り込み",
+      "calendarMessage": "確認したい期間を選択してください。",
+      "supportTitle": "SayNative サポート",
+      "supportMessage": "サポート担当者がコイン明細について詳しくお答えします。"
+    }
+  },
+  "toasts": {
+    "adLimitTitle": "本日の上限に達しました",
+    "adLimitMessage": "本日視聴可能な広告は終了しました。また明日チェックしてください。",
+    "rewardEarnedTitle": "特典が付与されました！",
+    "rewardEarnedMessage": "広告視聴で +5 コインを獲得しました。",
+    "purchaseSuccessTitle": "購入が完了しました！"
+  }
+}

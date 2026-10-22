@@ -1,0 +1,67 @@
+{
+  "title": "チャット",
+  "searchPlaceholder": "メッセージやパートナーを検索...",
+  "onlineSection": {
+    "title": "オンライン中",
+    "onlineCount": "{{count}}人のパートナー",
+    "new": "NEW"
+  },
+  "filters": {
+    "all": "すべて",
+    "unread": "未読",
+    "videocalls": "ビデオ通話"
+  },
+  "callTypes": {
+    "callEnded": "通話終了 · {{duration}}",
+    "missedCall": "不在着信"
+  },
+  "tipCard": {
+    "title": "会話上達のコツ",
+    "subtitle": "毎日10分の会話練習で、使える語彙力をキープしましょう。"
+  },
+  "options": {
+    "title": "メッセージ設定",
+    "markAllRead": "すべて既読にする",
+    "newChat": "新しいチャット",
+    "newChatMessage": "パートナーを探して会話をはじめましょう。"
+  },
+  "empty": "一致する会話が見つかりませんでした。",
+  "privateChat": {
+    "activeChat": "チャット中",
+    "online": "オンライン",
+    "practicingPrefix": "現在 ",
+    "practicingSuffix": " を練習中です。積極的に添削をお願いしてみましょう！",
+    "topic": "トピック",
+    "today": "今日",
+    "native": "ネイティブ",
+    "callRate": "通話 (🪙{{rate}}/分)",
+    "translate": "翻訳",
+    "translated": "翻訳：Victorさんこんにちは！英語の練習の調子はいかがですか？",
+    "transcribeTranslate": "文字起こし / 翻訳",
+    "transcribedText": "文字起こし：Sounds great! Let's focus on daily conversational vocabulary today.",
+    "recommendedTopics": "今日のおすすめ会話トピック：",
+    "typing": "{{name}}さんが入力中...",
+    "inputPlaceholder": "英語でメッセージを入力...",
+    "topics": {
+      "gastronomy": "グルメ・食文化",
+      "travelCulture": "旅行とカルチャー",
+      "idioms": "ネイティブの慣用句"
+    },
+    "alerts": {
+      "callTitle": "ビデオ通話を開始",
+      "callMessage": "{{name}}さんとビデオ通話を始めますか？ 料金: 1分あたり{{rate}}コイン。",
+      "optionsTitle": "チャットオプション",
+      "optionsMessage": "プロフィールの表示、通知のミュート、ブロックまたは通報。",
+      "profileTitle": "プロフィール",
+      "profileMessage": "{{name}}さんのプロフィールを開いています...",
+      "topicsTitle": "会話トピック",
+      "topicsMessage": "トピックを選んで会話をスタートし、リアルタイムで添削を受けましょう。",
+      "attachmentTitle": "添付",
+      "attachmentMessage": "写真、音声メッセージ、リンクを共有します。",
+      "aiAssistTitle": "AI 言語アシスタント",
+      "aiAssistMessage": "自然な返信の提案、文法添削、ネイティブ表現のサジェストを行います。",
+      "micTitle": "音声メッセージ",
+      "micMessage": "長押しして音声を録音します。"
+    }
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "header": {
+    "title": "アクティビティ",
+    "newBadge": "{{count}}件の未読",
+    "markAllRead": "すべて既読"
+  },
+  "filters": {
+    "all": "すべて",
+    "calls": "通話",
+    "coins": "コイン",
+    "social": "コミュニティ"
+  },
+  "sections": {
+    "today": "今日",
+    "todayCount": "{{count}}件の最新",
+    "yesterday": "昨日",
+    "thisWeek": "今週",
+    "empty": "このカテゴリーのお知らせはありません。"
+  },
+  "items": {
+    "missedCallTitle": "Sarah J. からの不在着信",
+    "missedCallDesc": "英語の会話練習のため通話リクエストがありました。",
+    "missedCallAction": "折り返し通話 (🪙 10/分)",
+    "coinsEarnedTitle": "42 コインを獲得しました！",
+    "coinsEarnedDesc": "David Smith さんへのスペイン語レッスン（6分間）の報酬です。",
+    "coinsEarnedBadge": "+42",
+    "newMessageTitle": "Emma W. からの新着メッセージ",
+    "newMessageDesc": "発音練習用のボイスメッセージが届きました。",
+    "newMessageAudio": "音声メッセージ (0:45)",
+    "streakTitle": "連続練習ストリーク達成",
+    "streakDesc": "5日連続で練習しました！デイリーボーナスの10コインを受け取りましょう。",
+    "streakAction": "ボーナスを受け取る",
+    "streakClaimed": "受け取り済み",
+    "tutorOnlineTitle": "Liam Davies 🇬🇧 がログインしました",
+    "tutorOnlineDesc": "お気に入りの上級英語パートナーが現在オンラインです。",
+    "tutorOnlineAction": "あいさつする 👋",
+    "practiceReminderTitle": "毎日の練習リマインダー",
+    "practiceReminderDesc": "今日も10分間の会話で、英語の流暢さを維持しましょう。",
+    "time15m": "15分前",
+    "time2h": "2時間前",
+    "time4h": "4時間前",
+    "time1830": "18:30",
+    "time1120": "11:20",
+    "time3d": "3日前"
+  },
+  "toasts": {
+    "markedAllReadTitle": "既読にしました",
+    "markedAllReadMessage": "すべての通知を既読に設定しました。",
+    "bonusClaimedTitle": "ボーナス獲得！",
+    "bonusClaimedMessage": "+10 コインが残高に追加されました。",
+    "alreadyClaimed": "このボーナスはすでに受け取り済みです。",
+    "greetingSentTitle": "あいさつを送信しました！",
+    "greetingSentMessage": "Liam さんにメッセージを送りました。"
+  }
+}

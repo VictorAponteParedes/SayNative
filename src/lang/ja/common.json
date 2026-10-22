@@ -1,0 +1,20 @@
+{
+  "tabs": {
+    "home": "ホーム",
+    "explore": "見つける",
+    "chats": "チャット",
+    "profile": "プロフィール"
+  },
+  "actions": {
+    "call": "通話",
+    "callNow": "今すぐ通話",
+    "chat": "チャット",
+    "cancel": "キャンセル",
+    "confirm": "確認",
+    "viewAll": "すべて見る"
+  },
+  "coins": {
+    "perMinute": "/分",
+    "coinsPerMinute": "コイン / 分"
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "header": {
+    "title": "マイプロフィール",
+    "edit": "編集"
+  },
+  "user": {
+    "editAvatar": "写真を変更",
+    "verified": "認証済み",
+    "bioPlaceholder": "自己紹介を書いてみましょう..."
+  },
+  "wallet": {
+    "badge": "ウォレット",
+    "historyLink": "利用履歴",
+    "coins": "{{count}} コイン",
+    "rechargeButton": "チャージ",
+    "freeAdButton": "+{{count}} 無料"
+  },
+  "stats": {
+    "practiced": "会話時間",
+    "practicedValue": "{{hours}} 時間",
+    "calls": "通話回数",
+    "callsValue": "{{count}} 回",
+    "reputation": "評価",
+    "reputationValue": "{{rating}}"
+  },
+  "languages": {
+    "title": "設定言語",
+    "edit": "変更",
+    "nativeLabel": "母国語",
+    "nativeBadge": "ネイティブ",
+    "targetProgress": "{{target}}まで {{percent}}%",
+    "addLanguage": "学習言語を追加",
+    "addLanguageTitle": "新しい言語を追加",
+    "addLanguageMessage": "練習を始めたい言語を選択してください。"
+  },
+  "teachingMode": {
+    "sectionTitle": "レッスン受付モード",
+    "cardTitle": "母国語での会話通話を受け付ける",
+    "cardSubtitle": "{{language}}を学習中の生徒といつでも繋がることができます。",
+    "rateLabel": "1分あたりのレッスン料",
+    "rateValue": "{{rate}} / 分"
+  },
+  "account": {
+    "sectionTitle": "アカウントと設定",
+    "personalInfo": "アカウント基本情報",
+    "personalInfoSubtitle": "メールアドレス、電話番号、会員情報",
+    "notifications": "通知設定",
+    "security": "セキュリティと管理",
+    "securitySubtitle": "ブロックリストとプライバシー",
+    "help": "ヘルプとサポート",
+    "terms": "利用規約とプライバシーポリシー",
+    "logout": "ログアウト",
+    "logoutConfirmTitle": "ログアウトの確認",
+    "logoutConfirmMessage": "本当にログアウトしますか？",
+    "cancel": "キャンセル",
+    "confirm": "ログアウト"
+  },
+  "footer": {
+    "version": "SayNative v1.0.0 · こだわりの開発"
+  },
+  "editProfile": {
+    "title": "基本情報",
+    "save": "変更を保存",
+    "changePhoto": "写真を変更",
+    "fullName": "お名前 / ニックネーム",
+    "fullNamePlaceholder": "名前を入力",
+    "email": "メールアドレス",
+    "emailPlaceholder": "your@email.com",
+    "phone": "携帯電話番号",
+    "phonePlaceholder": "+81 90 0000 0000",
+    "bio": "自己紹介",
+    "country": "居住国",
+    "nativeLanguage": "母国語",
+    "userId": "アカウントID",
+    "memberSince": "登録日",
+    "saveSuccess": "基本情報が正常に更新されました！",
+    "saveError": "名前とメールアドレスが正しく入力されているか確認してください。"
+  },
+  "toasts": {
+    "profileUpdatedTitle": "更新完了",
+    "profileUpdatedMessage": "基本情報が正常に保存されました。",
+    "incompleteDataTitle": "入力内容を確認してください",
+    "incompleteDataMessage": "有効な名前とメールアドレスを入力してください。",
+    "rewardEarnedTitle": "特典を獲得しました",
+    "rewardEarnedMessage": "広告視聴で +5 コインを獲得しました！",
+    "teachingEnabledTitle": "レッスン受付中",
+    "teachingEnabledMessage": "生徒からの通話リクエストを受け取れるようになりました。",
+    "teachingDisabledTitle": "レッスン受付停止",
+    "teachingDisabledMessage": "通話リクエストの受信を一時停止しました。"
+  }
+}

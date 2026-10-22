@@ -1,0 +1,61 @@
+{
+  "header": {
+    "title": "セキュリティと管理"
+  },
+  "safeCommunity": {
+    "title": "安心のコミュニティ設計",
+    "badge": "SayShield",
+    "description": "SayNative では、互いを尊重し高め合える環境づくりを推進しています。嫌がらせ、不適切な発言、違反行為は一切禁止されており、厳格に対処されます。",
+    "guidelinesLink": "コミュニティガイドラインを読む →",
+    "guidelinesTitle": "コミュニティガイドライン",
+    "guidelinesMessage": "SayNative は尊重、多様性、健全性を大切にしています。嫌がらせ、不適切なコンテンツ、差別行為は禁止されています。"
+  },
+  "privacy": {
+    "sectionTitle": "プライバシー設定",
+    "activeProtection": "保護中",
+    "hideAgeTitle": "年齢を非公開にする",
+    "hideAgeDesc": "他の生徒には居住国と語学レベルのみが表示されます。",
+    "reputationFilterTitle": "高評価パートナー限定フィルター",
+    "reputationFilterDesc": "総合評価が4.0以上のユーザーからの通話リクエストのみを受信します。",
+    "antiShockTitle": "通話前の安心ぼかし機能",
+    "recommendedBadge": "推奨",
+    "antiShockDesc": "通話開始時の最初の5秒間、お互いのカメラ映像にぼかしを適用します。"
+  },
+  "blockedUsers": {
+    "sectionTitle": "ブロック中のユーザー ({{count}})",
+    "description": "ブロックされたユーザーは、あなたへのメッセージ送信、音声の視聴、ルームへの参加ができなくなります。",
+    "unblockButton": "解除",
+    "noBlocked": "ブロック中のユーザーはいません。",
+    "blockedDate": "ブロック日: {{date}}",
+    "spamReason": "スパム / 迷惑メッセージ",
+    "behaviorReason": "不適切な行動",
+    "unblockConfirmTitle": "ブロックを解除",
+    "unblockConfirmMessage": "{{name}} さんのブロックを解除しますか？ 再び連絡や通話ができるようになります。",
+    "cancel": "キャンセル",
+    "confirm": "解除する"
+  },
+  "moderation": {
+    "sectionTitle": "通報とアカウント管理",
+    "reportsStatusTitle": "通報の確認状況",
+    "inReviewBadge": "1件 審査中",
+    "reportsStatusDesc": "24時間以内に専門チームが確認します...",
+    "reportsModalTitle": "通報履歴",
+    "reportsModalMessage": "送信された通報は、セーフティチームにより現在調査中です。",
+    "complianceText": "Google Play および Apple App Store の安全基準を遵守しています。心身の安全を脅かす行為や不適切なコンテンツに対しては、アカウント即時停止および通報等の措置を取ります。",
+    "deleteAccountButton": "アカウントと個人データの完全削除",
+    "deleteAccountWarning": "この操作は取り消せません。すべての学習進捗、通話履歴、コインが消去されます。",
+    "deleteConfirmTitle": "アカウントを完全に削除しますか？",
+    "deleteConfirmMessage": "この操作は元に戻せません。すべての個人情報、コイン残高、チャット履歴がサーバーから完全に削除されます。",
+    "deleteConfirmAction": "完全に削除する"
+  },
+  "toasts": {
+    "unblockSuccessTitle": "ブロックを解除しました",
+    "unblockSuccessMessage": "{{name}} さんのブロックを解除しました。",
+    "privacyUpdatedTitle": "設定を保存しました",
+    "privacyUpdatedMessage": "プライバシー設定が更新されました。",
+    "antiShockEnabledTitle": "ぼかし保護を有効化しました",
+    "antiShockEnabledMessage": "通話開始時の最初の5秒間、カメラ画面がぼかされます。",
+    "accountDeletedTitle": "アカウント削除完了",
+    "accountDeletedMessage": "アカウントとすべての個人データが正常に削除されました。"
+  }
+}

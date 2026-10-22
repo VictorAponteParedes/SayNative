@@ -1,0 +1,37 @@
+{
+  "title": "スピーカーを探す",
+  "searchPlaceholder": "名前、国、興味のあるトピックで検索...",
+  "filters": {
+    "online": "オンライン中",
+    "nativeEnglish": "🇺🇸 英語ネイティブ",
+    "topRated": "⭐ 高評価"
+  },
+  "speakersAvailable": "{{count}}人のスピーカーが対応可能",
+  "sort": {
+    "mostRelevant": "おすすめ順",
+    "title": "並び替え",
+    "desc": "並び替え基準：おすすめ順、高評価順、低価格順、新着順。"
+  },
+  "card": {
+    "reviews": "({{count}}件の評価)",
+    "ratePerMin": "{{rate}}/分",
+    "native": "母国語: ",
+    "learns": "学習中: ",
+    "callNow": "今すぐ通話"
+  },
+  "help": {
+    "title": "スピーカーを探す",
+    "desc": "世界中のネイティブスピーカーを見つけましょう。言語や評価で絞り込んだり、共通の話題で検索できます。"
+  },
+  "advancedFilters": {
+    "title": "詳細フィルター",
+    "desc": "国、年齢層、通話料金、対応状況で絞り込みます。"
+  },
+  "dialog": {
+    "callTitle": "ビデオ通話",
+    "callMessage": "{{name}}さんと通話を開始します。料金: 1分あたり{{rate}}コイン。",
+    "chatTitle": "ダイレクトチャット",
+    "chatMessage": "{{name}}さんとのメッセージ画面を開きます。"
+  },
+  "empty": "条件に一致するスピーカーが見つかりませんでした。"
+}

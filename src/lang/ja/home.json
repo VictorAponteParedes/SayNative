@@ -1,0 +1,47 @@
+{
+  "header": {
+    "title": "ホーム",
+    "notificationsTitle": "お知らせ",
+    "noNotifications": "新しいお知らせはありません。",
+    "profileTitle": "プロフィール",
+    "openingProfile": "プロフィールを開いています..."
+  },
+  "userProfile": {
+    "greeting": "こんにちは、{{name}}さん 👋",
+    "subtitle": "今日も楽しく練習しましょう！",
+    "walletTitle": "コインウォレット",
+    "walletMessage": "コインパックを購入するか、リワード動画を視聴してコインを獲得しましょう。"
+  },
+  "languageFilter": {
+    "practiceLabel": "学習言語：",
+    "nativeLabel": "母国語：",
+    "selectLanguageTitle": "言語を選択",
+    "selectLanguageMessage": "練習したい言語と現在のレベル（CEFR）を選択してください。"
+  },
+  "instantPractice": {
+    "badgeLive": "LIVE オンライン",
+    "badgeRate": "{{rate}} コイン / 分",
+    "title": "インスタント会話マッチング",
+    "subtitle": "今すぐ話せるネイティブスピーカーと接続します",
+    "ctaButton": "今すぐパートナーを探す",
+    "searchingTitle": "インスタント通話",
+    "searchingMessage": "対応可能なネイティブスピーカーを探しています..."
+  },
+  "teacherAvailability": {
+    "title": "{{language}}の会話パートナーを受け付ける...",
+    "earningRate": "1分ごとに {{rate}} コイン獲得"
+  },
+  "featuredPeers": {
+    "title": "おすすめのパートナー",
+    "onlineCount": "{{count}}人 オンライン",
+    "viewAll": "すべて見る",
+    "reviews": "({{count}}件の評価)",
+    "rateLabel": "料金：",
+    "ratePerMin": "{{rate}}/分",
+    "callButton": "通話",
+    "callDialogTitle": "ビデオ通話を開始",
+    "callDialogMessage": "{{name}}さんとビデオ通話を開始しますか？ 料金: {{rate}}コイン/分。",
+    "chatDialogTitle": "チャット",
+    "chatDialogMessage": "{{name}}さんとのメッセージ画面を開きます。"
+  }
+}
