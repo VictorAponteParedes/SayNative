@@ -25,5 +25,25 @@
     "newChat": "New Chat",
     "newChatMessage": "Find a peer to start a conversation."
   },
-  "empty": "No conversations found matching your search."
+  "empty": "No conversations found matching your search.",
+  "privateChat": {
+    "online": "Online",
+    "practicing": "You are practicing {{language}}. Ask for feedback!",
+    "topic": "Topic",
+    "today": "Today",
+    "native": "Native",
+    "callRate": "Call (🪙{{rate}}/m)",
+    "translate": "Translate",
+    "translated": "Translated: ¡Hola Víctor! ¿Cómo te va con tu práctica de inglés?",
+    "transcribeTranslate": "Transcribe / Translate",
+    "transcribedText": "Transcript: Sounds great! Let's focus on daily conversational vocabulary today.",
+    "recommendedTopics": "Recommended topics for today:",
+    "typing": "{{name}} is typing",
+    "inputPlaceholder": "Type in English...",
+    "topics": {
+      "gastronomy": "Gastronomy",
+      "travelCulture": "Travel & Culture",
+      "idioms": "Idioms"
+    }
+  }
 }

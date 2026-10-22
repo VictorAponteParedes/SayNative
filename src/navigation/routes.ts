@@ -8,6 +8,7 @@ export const Routes = {
     Home: 'Home',
     Explore: 'Explore',
     Chats: 'Chats',
+    PrivateChat: 'PrivateChat',
     Profile: 'Profile',
     ActiveCall: 'ActiveCall',
     CallLobby: 'CallLobby',

@@ -25,5 +25,25 @@
     "newChat": "Nuevo Chat",
     "newChatMessage": "Buscar un compañero para iniciar una conversación."
   },
-  "empty": "No hay conversaciones que coincidan con tu búsqueda."
+  "empty": "No hay conversaciones que coincidan con tu búsqueda.",
+  "privateChat": {
+    "online": "En línea",
+    "practicing": "Estás practicando {{language}}. ¡Pide correcciones!",
+    "topic": "Tema",
+    "today": "Hoy",
+    "native": "Nativa",
+    "callRate": "Llamar (🪙{{rate}}/m)",
+    "translate": "Traducir",
+    "translated": "Traducido: ¡Hola Víctor! ¿Cómo te va con tu práctica de inglés?",
+    "transcribeTranslate": "Transcribir / Traducir",
+    "transcribedText": "Transcripción: Sounds great! Let's focus on daily conversational vocabulary today.",
+    "recommendedTopics": "Temas recomendados para hoy:",
+    "typing": "{{name}} está escribiendo",
+    "inputPlaceholder": "Escribe en inglés...",
+    "topics": {
+      "gastronomy": "Gastronomía",
+      "travelCulture": "Viajes y Cultura",
+      "idioms": "Modismos"
+    }
+  }
 }

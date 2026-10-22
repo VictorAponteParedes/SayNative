@@ -9,6 +9,8 @@ import { ChatFilterTabs } from '../../components/ChatFilterTabs';
 import { ChatItemCard } from '../../components/ChatItemCard';
 import { DailyTipCard } from '../../components/DailyTipCard';
 import { useChatsList } from '../../hooks/useChatsList';
+import { navigate } from '../../../../navigation/NavigationRef';
+import { Routes } from '../../../../navigation/routes';
 import { ChatConversation, OnlinePeer } from '../../types';
 import { styles } from './styles';
 
@@ -37,11 +39,23 @@ export const ChatsScreen: React.FC = () => {
   };
 
   const handlePeerPress = (peer: OnlinePeer) => {
-    Alert.alert('Chat directo', `Iniciando conversación con ${peer.name}.`);
+    navigate(Routes.App.PrivateChat, {
+      chatId: `peer_${peer.id}`,
+      partnerName: peer.name,
+      partnerAvatar: peer.avatarUrl,
+      partnerFlag: peer.countryFlag,
+      ratePerMinute: 10,
+    });
   };
 
   const handleChatPress = (chat: ChatConversation) => {
-    Alert.alert('Conversación', `Abriendo conversación con ${chat.name}.`);
+    navigate(Routes.App.PrivateChat, {
+      chatId: chat.id,
+      partnerName: chat.name,
+      partnerAvatar: chat.avatarUrl,
+      partnerFlag: chat.countryFlag,
+      ratePerMinute: 10,
+    });
   };
 
   const handleTipPress = () => {

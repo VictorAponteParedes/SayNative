@@ -25,5 +25,25 @@
     "newChat": "Nova Conversa",
     "newChatMessage": "Encontre um parceiro para iniciar uma conversa."
   },
-  "empty": "Nenhuma conversa encontrada correspondente à sua pesquisa."
+  "empty": "Nenhuma conversa encontrada correspondente à sua pesquisa.",
+  "privateChat": {
+    "online": "Online",
+    "practicing": "Você está praticando {{language}}. Peça correções!",
+    "topic": "Tema",
+    "today": "Hoje",
+    "native": "Nativa",
+    "callRate": "Ligar (🪙{{rate}}/m)",
+    "translate": "Traduzir",
+    "translated": "Traduzido: Oi Victor! Como vai sua prática de inglês?",
+    "transcribeTranslate": "Transcrever / Traduzir",
+    "transcribedText": "Transcrição: Sounds great! Let's focus on daily conversational vocabulary today.",
+    "recommendedTopics": "Temas recomendados para hoje:",
+    "typing": "{{name}} está digitando",
+    "inputPlaceholder": "Escreva em inglês...",
+    "topics": {
+      "gastronomy": "Gastronomia",
+      "travelCulture": "Viagens e Cultura",
+      "idioms": "Expressões"
+    }
+  }
 }

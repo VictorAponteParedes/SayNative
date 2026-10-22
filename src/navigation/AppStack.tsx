@@ -2,7 +2,7 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { HomeScreen } from '../features/home';
 import { ExploreScreen } from '../features/discovery';
-import { ChatsScreen } from '../features/chats';
+import { ChatsScreen, PrivateChatScreen } from '../features/chats';
 import { Routes } from './routes';
 import type { AppStackParamList } from './types';
 
@@ -27,6 +27,10 @@ export const AppStack: React.FC = () => {
       <Stack.Screen
         name={Routes.App.Chats as keyof AppStackParamList}
         component={ChatsScreen}
+      />
+      <Stack.Screen
+        name={Routes.App.PrivateChat as keyof AppStackParamList}
+        component={PrivateChatScreen}
       />
     </Stack.Navigator>
   );
