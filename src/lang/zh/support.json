@@ -1,0 +1,57 @@
+{
+  "header": {
+    "title": "帮助与客服支持"
+  },
+  "hero": {
+    "badge": "支持中心",
+    "title": "今天有什么可以帮您的？",
+    "subtitle": "快速查找常见解答，或直接联系人工客服团队。",
+    "searchPlaceholder": "搜索问题（例如：充值金币）...",
+    "categories": {
+      "coins": "金币相关",
+      "calls": "视频通话",
+      "languages": "语言设置",
+      "payments": "订单支付"
+    }
+  },
+  "featuredTopics": {
+    "title": "热门专题分类",
+    "count": "3 个分类",
+    "coinsPaymentsTitle": "金币与支付问题",
+    "coinsPaymentsSubtitle": "App Store、Google Play 充值与账单常见问题。",
+    "videoIssuesTitle": "视频通话常见故障",
+    "videoIssuesSubtitle": "摄像头、麦克风权限与实时连麦网络延迟解决办法。",
+    "accountLanguagesTitle": "我的账户与语言档案",
+    "accountLanguagesSubtitle": "更改语言等级、母语流利度与语伴匹配偏好。"
+  },
+  "faq": {
+    "title": "常见问题解答 (FAQ)",
+    "subtitle": "快速获取即时解答",
+    "badge": "最热门",
+    "q1": "如何通过母语辅导赚取金币？",
+    "a1": "在个人资料中开启“辅导模式”并保持在线。当有学员与你发起通话时，系统将按分钟自动结算金币收益。",
+    "q2": "为什么按分钟收取通话费用？",
+    "a2": "SayNative 采用闭环社区经济体系。按分钟计费旨在合理保障母语者的付出，并确保随叫随到的高水准练习体验。",
+    "q3": "可以将应用内金币提现为现实货币吗？",
+    "a3": "目前金币仅供 SayNative 社区内部用于学习与外教辅导。认证创作者激励与收益兑换通道即将上线。",
+    "q4": "如果通话在前几秒意外中断会扣费吗？",
+    "a4": "若通话因网络波动或设备故障在前 15 秒内中断，系统将完全免除本次通话费用，不扣除任何金币。"
+  },
+  "contact": {
+    "badge": "通常 2 小时内极速回复",
+    "title": "仍未找到所需解答？",
+    "subtitle": "我们的人工客服团队全周无休，随时准备为您解答交流中的任何疑问。",
+    "button": "向人工客服发送消息",
+    "sheetTitle": "联系人工支持",
+    "sheetSubtitle": "请详细描述您遇到的问题，我们将尽快答复",
+    "categoryLabel": "咨询问题类型",
+    "messageLabel": "详细描述",
+    "messagePlaceholder": "请详细告知发生的具体情况或需要协助的内容...",
+    "sendButton": "提交工单",
+    "sentSuccessTitle": "工单已提交",
+    "sentSuccessMessage": "您的求助已发送至支持团队，我们将在 2 小时内予以回复。"
+  },
+  "footer": {
+    "text": "SayNative Help Center v1.0.0 · 社区指南与政策条款"
+  }
+}

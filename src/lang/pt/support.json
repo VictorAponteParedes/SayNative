@@ -1,0 +1,57 @@
+{
+  "header": {
+    "title": "Ajuda e Suporte"
+  },
+  "hero": {
+    "badge": "Central de Suporte",
+    "title": "Como podemos ajudar você hoje?",
+    "subtitle": "Encontre respostas rápidas ou fale diretamente com nossa equipe.",
+    "searchPlaceholder": "Pesquise uma dúvida (ex: recarregar moedas)...",
+    "categories": {
+      "coins": "Moedas",
+      "calls": "Videochamadas",
+      "languages": "Idiomas",
+      "payments": "Pagamentos"
+    }
+  },
+  "featuredTopics": {
+    "title": "Tópicos em destaque",
+    "count": "3 categorias",
+    "coinsPaymentsTitle": "Moedas e Pagamentos",
+    "coinsPaymentsSubtitle": "Dúvidas sobre compras na App Store, Google Play e faturamento.",
+    "videoIssuesTitle": "Problemas com Videochamadas",
+    "videoIssuesSubtitle": "Permissões de câmera, microfone ou atraso no áudio ao vivo.",
+    "accountLanguagesTitle": "Minha Conta e Idiomas",
+    "accountLanguagesSubtitle": "Alteração de nível, fluência nativa e preferências de troca."
+  },
+  "faq": {
+    "title": "Perguntas Frequentes",
+    "subtitle": "Respostas rápidas e imediatas",
+    "badge": "Populares",
+    "q1": "Como ganho moedas ensinando meu idioma?",
+    "a1": "Ative o 'Modo Ensinar' no seu perfil e permaneça disponível. Quando um aluno ligar para você, você ganhará moedas automaticamente por minuto de conversa.",
+    "q2": "Por que as chamadas são cobradas por minuto?",
+    "a2": "O SayNative funciona com uma economia comunitária fechada. A tarifa remunera o tempo e a dedicação do falante nativo, garantindo alta disponibilidade.",
+    "q3": "Posso resgatar minhas moedas em dinheiro real?",
+    "a3": "No momento, as moedas são de uso exclusivo dentro do SayNative para praticar com tutores. Em breve lançaremos um programa para criadores verificados.",
+    "q4": "O que acontece se a chamada cair nos primeiros segundos?",
+    "a4": "Se uma chamada for encerrada nos primeiros 15 segundos devido a problemas técnicos ou queda de conexão, nenhuma moeda será descontada do seu saldo."
+  },
+  "contact": {
+    "badge": "Respondemos em menos de 2 horas",
+    "title": "Não encontrou o que procurava?",
+    "subtitle": "Nossa equipe humana de suporte está disponível 7 dias por semana para ajudar você em cada conversa.",
+    "button": "Enviar mensagem ao Suporte",
+    "sheetTitle": "Falar com o Suporte",
+    "sheetSubtitle": "Descreva sua dúvida e responderemos em breve",
+    "categoryLabel": "Motivo do contato",
+    "messageLabel": "Sua mensagem",
+    "messagePlaceholder": "Explique com detalhes o ocorrido ou como podemos te ajudar...",
+    "sendButton": "Enviar solicitação",
+    "sentSuccessTitle": "Mensagem enviada",
+    "sentSuccessMessage": "Sua solicitação foi enviada ao suporte. Responderemos em menos de 2 horas."
+  },
+  "footer": {
+    "text": "SayNative Help Center v1.0.0 · Guias e Diretrizes da Comunidade"
+  }
+}

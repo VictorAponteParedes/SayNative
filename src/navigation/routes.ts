@@ -17,6 +17,7 @@ export const Routes = {
     CoinsHistory: 'CoinsHistory',
     Notifications: 'Notifications',
     Security: 'Security',
+    Support: 'Support',
   },
 } as const;
 

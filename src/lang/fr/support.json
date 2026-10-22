@@ -1,0 +1,57 @@
+{
+  "header": {
+    "title": "Aide et Support"
+  },
+  "hero": {
+    "badge": "Centre d'Assistance",
+    "title": "Comment pouvons-nous vous aider ?",
+    "subtitle": "Trouvez des réponses rapides ou contactez notre équipe d'assistance.",
+    "searchPlaceholder": "Rechercher une question (ex: recharger des pièces)...",
+    "categories": {
+      "coins": "Pièces",
+      "calls": "Appels vidéo",
+      "languages": "Langues",
+      "payments": "Paiements"
+    }
+  },
+  "featuredTopics": {
+    "title": "Thèmes à la une",
+    "count": "3 catégories",
+    "coinsPaymentsTitle": "Pièces et Paiements",
+    "coinsPaymentsSubtitle": "Questions relatives aux achats App Store, Google Play et à la facturation.",
+    "videoIssuesTitle": "Problèmes d'Appel Vidéo",
+    "videoIssuesSubtitle": "Autorisations caméra/micro ou latence audio en direct.",
+    "accountLanguagesTitle": "Mon Compte et Langues",
+    "accountLanguagesSubtitle": "Changement de niveau, aisance linguistique et critères d'échange."
+  },
+  "faq": {
+    "title": "Foire Aux Questions (FAQ)",
+    "subtitle": "Réponses instantanées",
+    "badge": "Populaires",
+    "q1": "Comment gagner des pièces en enseignant ma langue ?",
+    "a1": "Activez le 'Mode Enseignement' sur votre profil. Lorsqu'un étudiant vous appelle, vous gagnez automatiquement des pièces pour chaque minute de conversation.",
+    "q2": "Pourquoi les appels sont-ils facturés à la minute ?",
+    "a2": "SayNative fonctionne sur un modèle communautaire fermé. Le tarif à la minute valorise le temps des natifs et garantit une grande disponibilité.",
+    "q3": "Puis-je convertir mes pièces en argent réel ?",
+    "a3": "Pour le moment, les pièces sont réservées aux cours et à la pratique au sein de SayNative. Un programme pour créateurs certifiés sera bientôt disponible.",
+    "q4": "Que se passe-t-il si l'appel coupe dans les premières secondes ?",
+    "a4": "Si un appel s'interrompt dans les 15 premières secondes en raison d'un souci technique, aucune pièce n'est prélevée sur votre solde."
+  },
+  "contact": {
+    "badge": "Réponse en moins de 2 heures",
+    "title": "Vous n'avez pas trouvé votre réponse ?",
+    "subtitle": "Notre équipe d'assistance humaine est disponible 7 jours sur 7 pour vous accompagner.",
+    "button": "Envoyer un message au Support",
+    "sheetTitle": "Contacter l'Assistance",
+    "sheetSubtitle": "Décrivez votre problème et nous vous répondrons dans les plus brefs délais",
+    "categoryLabel": "Motif de contact",
+    "messageLabel": "Votre message",
+    "messagePlaceholder": "Expliquez en détail ce qui s'est passé ou comment nous pouvons vous aider...",
+    "sendButton": "Envoyer la demande",
+    "sentSuccessTitle": "Message envoyé",
+    "sentSuccessMessage": "Votre demande a bien été transmise à notre assistance. Nous répondrons en moins de 2 heures."
+  },
+  "footer": {
+    "text": "SayNative Help Center v1.0.0 · Guides et Politiques communautaires"
+  }
+}

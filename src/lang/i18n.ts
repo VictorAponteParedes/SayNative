@@ -10,6 +10,7 @@ import esCoins from './es/coins.json';
 import esProfile from './es/profile.json';
 import esNotifications from './es/notifications.json';
 import esSecurity from './es/security.json';
+import esSupport from './es/support.json';
 
 // EN
 import enCommon from './en/common.json';
@@ -20,6 +21,7 @@ import enCoins from './en/coins.json';
 import enProfile from './en/profile.json';
 import enNotifications from './en/notifications.json';
 import enSecurity from './en/security.json';
+import enSupport from './en/support.json';
 
 // PT
 import ptCommon from './pt/common.json';
@@ -30,6 +32,7 @@ import ptCoins from './pt/coins.json';
 import ptProfile from './pt/profile.json';
 import ptNotifications from './pt/notifications.json';
 import ptSecurity from './pt/security.json';
+import ptSupport from './pt/support.json';
 
 // ZH (Chino Simplificado)
 import zhCommon from './zh/common.json';
@@ -40,6 +43,7 @@ import zhCoins from './zh/coins.json';
 import zhProfile from './zh/profile.json';
 import zhNotifications from './zh/notifications.json';
 import zhSecurity from './zh/security.json';
+import zhSupport from './zh/support.json';
 
 // JA (Japonés)
 import jaCommon from './ja/common.json';
@@ -50,6 +54,7 @@ import jaCoins from './ja/coins.json';
 import jaProfile from './ja/profile.json';
 import jaNotifications from './ja/notifications.json';
 import jaSecurity from './ja/security.json';
+import jaSupport from './ja/support.json';
 
 // FR (Francés)
 import frCommon from './fr/common.json';
@@ -60,6 +65,7 @@ import frCoins from './fr/coins.json';
 import frProfile from './fr/profile.json';
 import frNotifications from './fr/notifications.json';
 import frSecurity from './fr/security.json';
+import frSupport from './fr/support.json';
 
 export const defaultNS = 'common';
 
@@ -73,6 +79,7 @@ export const resources = {
     profile: esProfile,
     notifications: esNotifications,
     security: esSecurity,
+    support: esSupport,
   },
   en: {
     common: enCommon,
@@ -83,6 +90,7 @@ export const resources = {
     profile: enProfile,
     notifications: enNotifications,
     security: enSecurity,
+    support: enSupport,
   },
   pt: {
     common: ptCommon,
@@ -93,6 +101,7 @@ export const resources = {
     profile: ptProfile,
     notifications: ptNotifications,
     security: ptSecurity,
+    support: ptSupport,
   },
   zh: {
     common: zhCommon,
@@ -103,6 +112,7 @@ export const resources = {
     profile: zhProfile,
     notifications: zhNotifications,
     security: zhSecurity,
+    support: zhSupport,
   },
   ja: {
     common: jaCommon,
@@ -113,6 +123,7 @@ export const resources = {
     profile: jaProfile,
     notifications: jaNotifications,
     security: jaSecurity,
+    support: jaSupport,
   },
   fr: {
     common: frCommon,
@@ -123,6 +134,7 @@ export const resources = {
     profile: frProfile,
     notifications: frNotifications,
     security: frSecurity,
+    support: frSupport,
   },
 } as const;
 

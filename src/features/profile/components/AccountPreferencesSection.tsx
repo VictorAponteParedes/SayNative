@@ -149,12 +149,7 @@ export const AccountPreferencesSection: React.FC<
         {/* Ayuda y Soporte */}
         <TouchableOpacity
           activeOpacity={0.7}
-          onPress={() =>
-            handleSimpleAlert(
-              'account.help',
-              'Centro de ayuda SayNative y soporte 24/7.'
-            )
-          }
+          onPress={() => navigate(Routes.App.Support)}
           style={styles.menuRow}
         >
           <View style={[styles.iconCircle, { backgroundColor: colors.surfaceSubtle }]}>
