@@ -3,7 +3,7 @@ import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { MessageSquarePlus, MoreVertical } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
 import { colors, spacing } from '../../../theme';
-import { AppText } from '../../../components';
+import { AppText, AppLogo } from '../../../components';
 
 export interface ChatsHeaderProps {
   totalCount?: number;
@@ -21,6 +21,7 @@ export const ChatsHeader: React.FC<ChatsHeaderProps> = ({
   return (
     <View style={styles.container}>
       <View style={styles.titleRow}>
+        <AppLogo size={36} />
         <AppText variant="h1" style={styles.title}>
           {t('title')}
         </AppText>

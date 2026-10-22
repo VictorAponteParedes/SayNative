@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
-import { MessageSquare, Bell, User } from 'lucide-react-native';
+import { Bell, User } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
 import { colors, spacing } from '../../../theme';
-import { AppText } from '../../../components';
+import { AppText, AppLogo } from '../../../components';
 
 export interface HomeHeaderProps {
   onPressNotifications?: () => void;
@@ -19,9 +19,7 @@ export const HomeHeader: React.FC<HomeHeaderProps> = ({
   return (
     <View style={styles.container}>
       <View style={styles.leftContainer}>
-        <View style={styles.logoBadge}>
-          <MessageSquare size={20} color={colors.surface} />
-        </View>
+        <AppLogo size={36} />
         <AppText variant="h2" style={styles.title}>
           {t('header.title')}
         </AppText>

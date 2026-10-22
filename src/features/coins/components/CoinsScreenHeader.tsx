@@ -3,7 +3,7 @@ import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { ArrowLeft, User } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
 import { colors, spacing } from '../../../theme';
-import { AppText } from '../../../components';
+import { AppText, AppLogo } from '../../../components';
 import { goBack } from '../../../navigation/NavigationRef';
 
 export interface CoinsScreenHeaderProps {
@@ -25,9 +25,12 @@ export const CoinsScreenHeader: React.FC<CoinsScreenHeaderProps> = ({
         <ArrowLeft size={24} color={colors.textPrimary} />
       </TouchableOpacity>
 
-      <AppText variant="h3" style={styles.title}>
-        {t('headerTitle')}
-      </AppText>
+      <View style={styles.titleContainer}>
+        <AppLogo size={26} />
+        <AppText variant="h3" style={styles.title}>
+          {t('headerTitle')}
+        </AppText>
+      </View>
 
       <TouchableOpacity
         activeOpacity={0.7}
@@ -56,6 +59,11 @@ const styles = StyleSheet.create({
     height: 40,
     alignItems: 'flex-start',
     justifyContent: 'center',
+  },
+  titleContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.xs + 2,
   },
   title: {
     fontSize: 18,

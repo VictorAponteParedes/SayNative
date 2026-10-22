@@ -3,7 +3,7 @@ import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { ArrowLeft } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
 import { colors, spacing } from '../../../theme';
-import { AppText } from '../../../components';
+import { AppText, AppLogo } from '../../../components';
 
 export interface SupportHeaderProps {
   onBack: () => void;
@@ -27,7 +27,7 @@ export const SupportHeader: React.FC<SupportHeaderProps> = ({ onBack }) => {
         {t('header.title')}
       </AppText>
 
-      <View style={styles.placeholder} />
+      <AppLogo size={32} />
     </View>
   );
 };

@@ -3,7 +3,7 @@ import { View, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { ArrowLeft, Calendar } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
 import { colors, spacing } from '../../../../theme';
-import { AppText } from '../../../../components';
+import { AppText, AppLogo } from '../../../../components';
 import { goBack } from '../../../../navigation/NavigationRef';
 
 export interface HistoryHeaderProps {
@@ -36,9 +36,12 @@ export const HistoryHeader: React.FC<HistoryHeaderProps> = ({
         <ArrowLeft size={20} color={colors.textPrimary} />
       </TouchableOpacity>
 
-      <AppText variant="h3" style={styles.title}>
-        {t('history.headerTitle')}
-      </AppText>
+      <View style={styles.titleContainer}>
+        <AppLogo size={24} />
+        <AppText variant="h3" style={styles.title}>
+          {t('history.headerTitle')}
+        </AppText>
+      </View>
 
       <TouchableOpacity
         activeOpacity={0.7}
@@ -71,6 +74,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderWidth: 1,
     borderColor: colors.border,
+  },
+  titleContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.xs + 2,
   },
   title: {
     fontSize: 18,

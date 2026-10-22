@@ -3,7 +3,7 @@ import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { ArrowLeft, CheckCheck } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
 import { colors, spacing } from '../../../theme';
-import { AppText } from '../../../components';
+import { AppText, AppLogo } from '../../../components';
 import { goBack } from '../../../navigation/NavigationRef';
 
 export interface NotificationsHeaderProps {
@@ -27,6 +27,8 @@ export const NotificationsHeader: React.FC<NotificationsHeaderProps> = ({
         >
           <ArrowLeft size={20} color={colors.textPrimary} />
         </TouchableOpacity>
+
+        <AppLogo size={28} />
 
         <AppText variant="h2" style={styles.title}>
           {t('header.title')}

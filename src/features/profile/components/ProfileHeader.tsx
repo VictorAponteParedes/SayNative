@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity, Alert } from 'react-native';
-import { MessageSquare, Bell } from 'lucide-react-native';
+import { Bell } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
 import { colors, spacing } from '../../../theme';
-import { AppText } from '../../../components';
+import { AppText, AppLogo } from '../../../components';
 
 export interface ProfileHeaderProps {
   onPressNotifications?: () => void;
@@ -25,9 +25,7 @@ export const ProfileHeader: React.FC<ProfileHeaderProps> = ({
   return (
     <View style={styles.container}>
       <View style={styles.leftContainer}>
-        <View style={styles.logoBadge}>
-          <MessageSquare size={18} color={colors.surface} />
-        </View>
+        <AppLogo size={36} />
         <AppText variant="h2" style={styles.title}>
           {t('header.title')}
         </AppText>
