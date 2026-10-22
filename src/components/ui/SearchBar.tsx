@@ -8,7 +8,7 @@ import {
   ViewStyle,
 } from 'react-native';
 import { Search, SlidersHorizontal } from 'lucide-react-native';
-import { colors, spacing, borderRadius } from '../../theme';
+import { colors, spacing, borderRadius, fonts } from '../../theme';
 
 export interface SearchBarProps {
   value: string;
@@ -79,6 +79,7 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
+    fontFamily: fonts.regular,
     fontSize: 14,
     color: colors.textPrimary,
     paddingVertical: 0,
