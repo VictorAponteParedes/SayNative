@@ -64,5 +64,50 @@
     "purchaseTitle": "Confirm Purchase",
     "purchaseMessage": "Do you want to buy the {{title}} package for {{price}}?",
     "purchaseSuccess": "Purchase successful! {{coins}} coins have been added to your balance."
+  },
+  "history": {
+    "headerTitle": "Coin History",
+    "balanceTitle": "Current available balance",
+    "synced": "Synced",
+    "monedas": "Coins",
+    "totalEarned": "Total Earned",
+    "consumed": "Spent",
+    "filters": {
+      "all": "All",
+      "purchases": "Purchases",
+      "earned": "Earned",
+      "spent": "Spent",
+      "empty": "No transactions found in this category"
+    },
+    "sections": {
+      "today": "TODAY",
+      "thisWeek": "THIS WEEK",
+      "september2024": "SEPTEMBER 2024",
+      "movementsCount": "{{count}} movements"
+    },
+    "items": {
+      "popularPurchase": "Popular Package Purchase",
+      "appleIap": "Apple IAP ($9.99 USD) · 14:20",
+      "callSarah": "Video call with Sarah J...",
+      "callSarahSub": "Duration: 8 min (10🪙/m) · 11:05",
+      "taughtDavid": "Taught Spanish to Davi...",
+      "taughtDavidSub": "Tutoring: 12 min (+7🪙/m) · Yesterday",
+      "adReward": "Ad Reward",
+      "adRewardSub": "Rewarded video · Yesterday 16:45",
+      "callEmma": "Video call with Emma...",
+      "callEmmaSub": "Duration: 15 min · Tuesday",
+      "welcomeBonus": "Welcome Bonus Lin...",
+      "welcomeBonusSub": "Welcome gift · 15 Sep",
+      "basicPurchase": "Basic Package Purchase",
+      "googlePlay": "Google Play ($2.99 USD) · 15 Sep"
+    },
+    "support": {
+      "banner": "Questions about a charge? Contact support",
+      "accountId": "Account ID: LL-849204 · Secure transactions with SSL encryption",
+      "calendarTitle": "Filter by date",
+      "calendarMessage": "Select a date range to view your transactions.",
+      "supportTitle": "SayNative Support",
+      "supportMessage": "Our support team will review any questions regarding your transactions."
+    }
   }
 }

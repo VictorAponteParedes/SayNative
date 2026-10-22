@@ -8,10 +8,12 @@ import { useAuthStore } from '../../../store/useAuthStore';
 
 export interface UserProfileBarProps {
   onPressAddCoins?: () => void;
+  onPressCoins?: () => void;
 }
 
 export const UserProfileBar: React.FC<UserProfileBarProps> = ({
   onPressAddCoins,
+  onPressCoins,
 }) => {
   const { t } = useTranslation('home');
   const user = useAuthStore((state) => state.user);
@@ -31,7 +33,13 @@ export const UserProfileBar: React.FC<UserProfileBarProps> = ({
       </View>
 
       <View style={styles.coinsSection}>
-        <CoinBadge amount={user.coins} variant="pill" />
+        <TouchableOpacity
+          activeOpacity={0.7}
+          onPress={onPressCoins}
+          disabled={!onPressCoins}
+        >
+          <CoinBadge amount={user.coins} variant="pill" />
+        </TouchableOpacity>
         <TouchableOpacity
           activeOpacity={0.8}
           onPress={onPressAddCoins}

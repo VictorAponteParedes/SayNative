@@ -86,7 +86,10 @@ export const HomeScreen: React.FC = () => {
         />
 
         {/* Saludo, avatar y balance de monedas con botón '+' */}
-        <UserProfileBar onPressAddCoins={handleAddCoins} />
+        <UserProfileBar
+          onPressAddCoins={handleAddCoins}
+          onPressCoins={() => navigate(Routes.App.CoinsHistory)}
+        />
 
         {/* Selector de idioma a practicar y nativo */}
         <LanguageFilterBar

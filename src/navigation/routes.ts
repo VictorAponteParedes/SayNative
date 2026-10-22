@@ -13,6 +13,7 @@ export const Routes = {
     ActiveCall: 'ActiveCall',
     CallLobby: 'CallLobby',
     Coins: 'Coins',
+    CoinsHistory: 'CoinsHistory',
   },
 } as const;
 

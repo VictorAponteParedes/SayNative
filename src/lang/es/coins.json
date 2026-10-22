@@ -64,5 +64,50 @@
     "purchaseTitle": "Confirmar Compra",
     "purchaseMessage": "¿Deseas comprar el paquete {{title}} por {{price}}?",
     "purchaseSuccess": "¡Compra realizada con éxito! Se han agregado {{coins}} monedas a tu balance."
+  },
+  "history": {
+    "headerTitle": "Historial de Monedas",
+    "balanceTitle": "Saldo actual disponible",
+    "synced": "Sincronizado",
+    "monedas": "Monedas",
+    "totalEarned": "Total Ganadas",
+    "consumed": "Consumidas",
+    "filters": {
+      "all": "Todos",
+      "purchases": "Compras",
+      "earned": "Ganadas",
+      "spent": "Consumos",
+      "empty": "No hay movimientos registrados en esta categoría"
+    },
+    "sections": {
+      "today": "HOY",
+      "thisWeek": "ESTA SEMANA",
+      "september2024": "SEPTIEMBRE 2024",
+      "movementsCount": "{{count}} movimientos"
+    },
+    "items": {
+      "popularPurchase": "Compra Paquete Popular",
+      "appleIap": "Apple IAP ($9.99 USD) · 14:20",
+      "callSarah": "Videollamada con Sarah J...",
+      "callSarahSub": "Duración: 8 min (10🪙/m) · 11:05",
+      "taughtDavid": "Enseñaste Español a Davi...",
+      "taughtDavidSub": "Tutoría: 12 min (+7🪙/m) · Ayer",
+      "adReward": "Recompensa por Anuncio",
+      "adRewardSub": "Video rewarded · Ayer 16:45",
+      "callEmma": "Videollamada con Emma...",
+      "callEmmaSub": "Duración: 15 min · Martes",
+      "welcomeBonus": "Bono de Bienvenida Lin...",
+      "welcomeBonusSub": "Regalo de bienvenida · 15 Sep",
+      "basicPurchase": "Compra Paquete Básico",
+      "googlePlay": "Google Play ($2.99 USD) · 15 Sep"
+    },
+    "support": {
+      "banner": "¿Dudas sobre algún cobro? Contactar soporte",
+      "accountId": "ID de Cuenta: LL-849204 · Transacciones seguras con cifrado SSL",
+      "calendarTitle": "Filtrar por fecha",
+      "calendarMessage": "Selecciona un rango de fechas para consultar tus transacciones.",
+      "supportTitle": "Soporte SayNative",
+      "supportMessage": "Nuestro equipo de soporte revisará cualquier consulta sobre tus cobros."
+    }
   }
 }

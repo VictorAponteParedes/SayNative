@@ -64,5 +64,50 @@
     "purchaseTitle": "Confirmar Compra",
     "purchaseMessage": "Deseja comprar o pacote {{title}} por {{price}}?",
     "purchaseSuccess": "Compra concluída com sucesso! {{coins}} moedas foram adicionadas ao seu saldo."
+  },
+  "history": {
+    "headerTitle": "Histórico de Moedas",
+    "balanceTitle": "Saldo atual disponível",
+    "synced": "Sincronizado",
+    "monedas": "Moedas",
+    "totalEarned": "Total Ganhas",
+    "consumed": "Consumidas",
+    "filters": {
+      "all": "Todos",
+      "purchases": "Compras",
+      "earned": "Ganhas",
+      "spent": "Consumos",
+      "empty": "Nenhuma movimentação encontrada nesta categoria"
+    },
+    "sections": {
+      "today": "HOJE",
+      "thisWeek": "ESTA SEMANA",
+      "september2024": "SETEMBRO 2024",
+      "movementsCount": "{{count}} movimentações"
+    },
+    "items": {
+      "popularPurchase": "Compra Pacote Popular",
+      "appleIap": "Apple IAP ($9.99 USD) · 14:20",
+      "callSarah": "Videochamada com Sarah J...",
+      "callSarahSub": "Duração: 8 min (10🪙/m) · 11:05",
+      "taughtDavid": "Ensinou Espanhol para Davi...",
+      "taughtDavidSub": "Tutoria: 12 min (+7🪙/m) · Ontem",
+      "adReward": "Recompensa por Anúncio",
+      "adRewardSub": "Vídeo rewarded · Ontem 16:45",
+      "callEmma": "Videochamada com Emma...",
+      "callEmmaSub": "Duração: 15 min · Terça",
+      "welcomeBonus": "Bônus de Boas-vindas Lin...",
+      "welcomeBonusSub": "Presente de boas-vindas · 15 Set",
+      "basicPurchase": "Compra Pacote Básico",
+      "googlePlay": "Google Play ($2.99 USD) · 15 Set"
+    },
+    "support": {
+      "banner": "Dúvidas sobre alguma cobrança? Contatar suporte",
+      "accountId": "ID da Conta: LL-849204 · Transações seguras com criptografia SSL",
+      "calendarTitle": "Filtrar por data",
+      "calendarMessage": "Selecione um intervalo de datas para consultar suas transações.",
+      "supportTitle": "Suporte SayNative",
+      "supportMessage": "Nossa equipe de suporte verificará qualquer dúvida sobre suas transações."
+    }
   }
 }

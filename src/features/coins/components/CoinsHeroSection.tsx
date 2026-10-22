@@ -1,8 +1,10 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { colors, spacing } from '../../../theme';
 import { AppText } from '../../../components';
+import { navigate } from '../../../navigation/NavigationRef';
+import { Routes } from '../../../navigation/routes';
 
 export interface CoinsHeroSectionProps {
   currentCoins: number;
@@ -25,13 +27,17 @@ export const CoinsHeroSection: React.FC<CoinsHeroSectionProps> = ({
         {t('hero.title')}
       </AppText>
 
-      {/* Píldora de saldo actual */}
-      <View style={styles.balancePill}>
+      {/* Píldora de saldo actual - Clic para ver historial de transacciones */}
+      <TouchableOpacity
+        activeOpacity={0.7}
+        onPress={() => navigate(Routes.App.CoinsHistory)}
+        style={styles.balancePill}
+      >
         <AppText style={styles.coinIcon}>🪙</AppText>
         <AppText variant="bodySmall" style={styles.balanceText}>
           {t('hero.balance', { count: currentCoins })}
         </AppText>
-      </View>
+      </TouchableOpacity>
 
       {/* Explicación de la tarifa */}
       <AppText variant="caption" style={styles.rateExplanation}>

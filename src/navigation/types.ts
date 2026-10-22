@@ -21,6 +21,7 @@ export type AppStackParamList = {
     peerName?: string;
   };
   Coins?: undefined;
+  CoinsHistory?: undefined;
 };
 
 export type AuthStackParamList = {
