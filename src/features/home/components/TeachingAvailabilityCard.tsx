@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, Switch } from 'react-native';
 import { Volume2 } from 'lucide-react-native';
+import { useTranslation } from 'react-i18next';
 import { colors, spacing, borderRadius } from '../../../theme';
 import { AppText } from '../../../componentes';
 import { useAuthStore } from '../../../store/useAuthStore';
@@ -12,6 +13,7 @@ export interface TeachingAvailabilityCardProps {
 export const TeachingAvailabilityCard: React.FC<TeachingAvailabilityCardProps> = ({
   onToggleAvailability,
 }) => {
+  const { t } = useTranslation('home');
   const { isAvailableToTeach, nativeLanguage, earningRatePerMin } = useAuthStore(
     (state) => state.user
   );
@@ -32,12 +34,12 @@ export const TeachingAvailabilityCard: React.FC<TeachingAvailabilityCardProps> =
       {/* Textos centrales */}
       <View style={styles.infoContainer}>
         <AppText variant="bodyMedium" numberOfLines={1} style={styles.title}>
-          Disponible para enseñar {nativeLanguage.name}...
+          {t('teacherAvailability.title', { language: nativeLanguage.name })}
         </AppText>
         <View style={styles.earningRow}>
           <AppText style={styles.coinIcon}>🪙</AppText>
           <AppText variant="caption" style={styles.subtitle}>
-            Gana {earningRatePerMin} monedas por minuto
+            {t('teacherAvailability.earningRate', { rate: earningRatePerMin })}
           </AppText>
         </View>
       </View>

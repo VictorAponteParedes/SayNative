@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { HelpCircle } from 'lucide-react-native';
+import { useTranslation } from 'react-i18next';
 import { colors, spacing } from '../../../theme';
 import { AppText } from '../../../componentes';
 
@@ -13,11 +14,13 @@ export const ExploreHeader: React.FC<ExploreHeaderProps> = ({
   totalCount = 142,
   onPressHelp,
 }) => {
+  const { t } = useTranslation('explore');
+
   return (
     <View style={styles.container}>
       <View style={styles.titleRow}>
         <AppText variant="h2" style={styles.title}>
-          Explorar Hablantes
+          {t('title')}
         </AppText>
         <View style={styles.countBadge}>
           <AppText variant="caption" style={styles.countText}>

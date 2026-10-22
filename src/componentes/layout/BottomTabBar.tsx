@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { Home, Compass, MessageSquare, User } from 'lucide-react-native';
+import { useTranslation } from 'react-i18next';
 import { colors, spacing } from '../../theme';
 import { AppText } from '../ui/AppText';
 import { navigate } from '../../navigation/NavigationRef';
@@ -11,7 +12,7 @@ export type TabKey = 'Inicio' | 'Explorar' | 'Chats' | 'Perfil';
 
 interface TabItem {
   key: TabKey;
-  label: string;
+  labelKey: string;
   route?: keyof typeof Routes.App;
   icon: (active: boolean) => React.ReactNode;
 }
@@ -19,7 +20,7 @@ interface TabItem {
 const TABS: TabItem[] = [
   {
     key: 'Inicio',
-    label: 'Inicio',
+    labelKey: 'tabs.home',
     route: 'Home',
     icon: (active) => (
       <Home
@@ -31,7 +32,7 @@ const TABS: TabItem[] = [
   },
   {
     key: 'Explorar',
-    label: 'Explorar',
+    labelKey: 'tabs.explore',
     route: 'Explore',
     icon: (active) => (
       <Compass
@@ -43,7 +44,7 @@ const TABS: TabItem[] = [
   },
   {
     key: 'Chats',
-    label: 'Chats',
+    labelKey: 'tabs.chats',
     route: 'Chats',
     icon: (active) => (
       <MessageSquare
@@ -55,7 +56,7 @@ const TABS: TabItem[] = [
   },
   {
     key: 'Perfil',
-    label: 'Perfil',
+    labelKey: 'tabs.profile',
     route: 'Profile',
     icon: (active) => (
       <User
@@ -72,6 +73,7 @@ export interface BottomTabBarProps {
 }
 
 export const BottomTabBar: React.FC<BottomTabBarProps> = ({ activeTab }) => {
+  const { t } = useTranslation('common');
   const storeTab = useAppConfigStore((state) => state.currentTab);
   const setStoreTab = useAppConfigStore((state) => state.setCurrentTab);
   const currentTab = activeTab || storeTab;
@@ -83,7 +85,8 @@ export const BottomTabBar: React.FC<BottomTabBarProps> = ({ activeTab }) => {
     } else if (tab.route === 'Explore') {
       navigate(Routes.App.Explore);
     } else {
-      Alert.alert(tab.label, `La sección de ${tab.label} estará disponible pronto.`);
+      const label = t(tab.labelKey);
+      Alert.alert(label, `${label} estará disponible pronto.`);
     }
   };
 
@@ -91,6 +94,8 @@ export const BottomTabBar: React.FC<BottomTabBarProps> = ({ activeTab }) => {
     <View style={styles.container}>
       {TABS.map((tab) => {
         const isActive = currentTab === tab.key;
+        const translatedLabel = t(tab.labelKey);
+
         return (
           <TouchableOpacity
             key={tab.key}
@@ -107,7 +112,7 @@ export const BottomTabBar: React.FC<BottomTabBarProps> = ({ activeTab }) => {
                 isActive ? styles.activeLabel : undefined,
               ]}
             >
-              {tab.label}
+              {translatedLabel}
             </AppText>
           </TouchableOpacity>
         );

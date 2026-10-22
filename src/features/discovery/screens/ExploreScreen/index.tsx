@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, FlatList, Alert } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { SafeAreaContainer, BottomTabBar, AppText } from '../../../../componentes';
 import { HomeHeader } from '../../../home/components/HomeHeader';
 import { ExploreHeader } from '../../components/ExploreHeader';
@@ -12,6 +13,7 @@ import { SpeakerUser } from '../../types';
 import { styles } from './styles';
 
 export const ExploreScreen: React.FC = () => {
+  const { t } = useTranslation('explore');
   const {
     searchQuery,
     setSearchQuery,
@@ -31,34 +33,40 @@ export const ExploreScreen: React.FC = () => {
 
   const handleHelp = () => {
     Alert.alert(
-      'Explorar Hablantes',
-      'Aquí encuentras a hablantes nativos de todo el mundo. Puedes filtrar por idioma, calificación o buscar por temas de conversación.'
+      t('help.title'),
+      t('help.desc')
     );
   };
 
   const handleOpenFilters = () => {
     Alert.alert(
-      'Filtros Avanzados',
-      'Filtrar por país, rango de edad, tarifa por minuto y disponibilidad.'
+      t('advancedFilters.title'),
+      t('advancedFilters.desc')
     );
   };
 
   const handleSort = () => {
     Alert.alert(
-      'Ordenar Hablantes',
-      'Ordenar por: Más relevantes, Mayor puntuación, Tarifa más baja o Recientes.'
+      t('sort.title'),
+      t('sort.desc')
     );
   };
 
   const handleCallSpeaker = (speaker: SpeakerUser) => {
     Alert.alert(
-      'Videollamada Directa',
-      `Iniciando llamada con ${speaker.name}. Tarifa: ${speaker.ratePerMinute} monedas por minuto.`
+      t('dialog.callTitle'),
+      t('dialog.callMessage', {
+        name: speaker.name,
+        rate: speaker.ratePerMinute,
+      })
     );
   };
 
   const handleChatSpeaker = (speaker: SpeakerUser) => {
-    Alert.alert('Chat Directo', `Iniciando conversación escrita con ${speaker.name}.`);
+    Alert.alert(
+      t('dialog.chatTitle'),
+      t('dialog.chatMessage', { name: speaker.name })
+    );
   };
 
   const renderHeader = () => (
@@ -71,6 +79,7 @@ export const ExploreScreen: React.FC = () => {
         value={searchQuery}
         onChangeText={setSearchQuery}
         onPressFilterButton={handleOpenFilters}
+        placeholder={t('searchPlaceholder')}
       />
 
       {/* Píldoras de filtrado rápido */}
@@ -110,7 +119,7 @@ export const ExploreScreen: React.FC = () => {
         ListEmptyComponent={
           <View style={styles.emptyContainer}>
             <AppText variant="bodyLarge" style={styles.emptyText}>
-              No se encontraron hablantes disponibles con los criterios seleccionados.
+              {t('empty')}
             </AppText>
           </View>
         }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { colors, spacing } from '../../../theme';
 import { AppText } from '../../../componentes';
 import { PeerCard } from './PeerCard';
@@ -20,24 +21,26 @@ export const FeaturedPeersSection: React.FC<FeaturedPeersSectionProps> = ({
   onPressCall,
   onPressChat,
 }) => {
+  const { t } = useTranslation('home');
+
   return (
     <View style={styles.container}>
       {/* Encabezado de la sección */}
       <View style={styles.headerRow}>
         <View style={styles.titleContainer}>
           <AppText variant="h3" style={styles.title}>
-            Compañeros Destacados
+            {t('featuredPeers.title')}
           </AppText>
           <View style={styles.onlineBadge}>
             <AppText variant="caption" style={styles.onlineBadgeText}>
-              {onlineCount} en línea
+              {t('featuredPeers.onlineCount', { count: onlineCount })}
             </AppText>
           </View>
         </View>
 
         <TouchableOpacity activeOpacity={0.7} onPress={onPressViewAll}>
           <AppText variant="bodySmall" style={styles.viewAllText}>
-            Ver todos
+            {t('featuredPeers.viewAll')}
           </AppText>
         </TouchableOpacity>
       </View>

@@ -1,0 +1,47 @@
+{
+  "header": {
+    "title": "Inicio",
+    "notificationsTitle": "Notificaciones",
+    "noNotifications": "No tienes notificaciones pendientes.",
+    "profileTitle": "Perfil",
+    "openingProfile": "Abriendo perfil del usuario..."
+  },
+  "userProfile": {
+    "greeting": "Hola, {{name}} 👋",
+    "subtitle": "¡Listo para practicar hoy?",
+    "walletTitle": "Billetera de Monedas",
+    "walletMessage": "Compra paquetes de monedas o mira videos recompensados para obtener saldo."
+  },
+  "languageFilter": {
+    "practiceLabel": "Practicar:",
+    "nativeLabel": "Nativo:",
+    "selectLanguageTitle": "Seleccionar Idioma",
+    "selectLanguageMessage": "Elige el idioma que deseas practicar y tu nivel CEFR."
+  },
+  "instantPractice": {
+    "badgeLive": "EN VIVO AHORA",
+    "badgeRate": "{{rate}} monedas / min",
+    "title": "Práctica Instantánea",
+    "subtitle": "Te conectamos con un nativo disponible ahora mismo",
+    "ctaButton": "Buscar Hablante Ahora",
+    "searchingTitle": "Práctica Instantánea",
+    "searchingMessage": "Buscando hablante nativo disponible en vivo..."
+  },
+  "teacherAvailability": {
+    "title": "Disponible para enseñar {{language}}...",
+    "earningRate": "Gana {{rate}} monedas por minuto"
+  },
+  "featuredPeers": {
+    "title": "Compañeros Destacados",
+    "onlineCount": "{{count}} en línea",
+    "viewAll": "Ver todos",
+    "reviews": "({{count}} reseñas)",
+    "rateLabel": "Tarifa:",
+    "ratePerMin": "{{rate}}/min",
+    "callButton": "Llamar",
+    "callDialogTitle": "Iniciar Llamada",
+    "callDialogMessage": "¿Deseas iniciar videollamada con {{name}}? Tarifa: {{rate}} monedas/min.",
+    "chatDialogTitle": "Chat",
+    "chatDialogMessage": "Abriendo conversación directa con {{name}}."
+  }
+}

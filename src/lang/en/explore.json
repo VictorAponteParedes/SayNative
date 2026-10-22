@@ -1,0 +1,37 @@
+{
+  "title": "Explore Speakers",
+  "searchPlaceholder": "Search by name, country or topic...",
+  "filters": {
+    "online": "Online now",
+    "nativeEnglish": "🇺🇸 Native English",
+    "topRated": "⭐ Top rated"
+  },
+  "speakersAvailable": "{{count}} speakers available",
+  "sort": {
+    "mostRelevant": "Most relevant",
+    "title": "Sort Speakers",
+    "desc": "Sort by: Most relevant, Highest rated, Lowest rate or Recent."
+  },
+  "card": {
+    "reviews": "({{count}} reviews)",
+    "ratePerMin": "{{rate}}/min",
+    "native": "Native: ",
+    "learns": "Learns: ",
+    "callNow": "Call now"
+  },
+  "help": {
+    "title": "Explore Speakers",
+    "desc": "Find native speakers from around the world. Filter by language, rating or search by conversation topics."
+  },
+  "advancedFilters": {
+    "title": "Advanced Filters",
+    "desc": "Filter by country, age range, coins rate and availability."
+  },
+  "dialog": {
+    "callTitle": "Direct Video Call",
+    "callMessage": "Starting call with {{name}}. Rate: {{rate}} coins per minute.",
+    "chatTitle": "Direct Chat",
+    "chatMessage": "Starting written conversation with {{name}}."
+  },
+  "empty": "No speakers found matching your selected criteria."
+}

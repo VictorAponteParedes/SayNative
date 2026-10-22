@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Star, MessageSquare, Video, Check } from 'lucide-react-native';
+import { useTranslation } from 'react-i18next';
 import { colors, spacing, borderRadius } from '../../../theme';
 import { AppText, Avatar, Tag } from '../../../componentes';
 import { SpeakerUser } from '../types';
@@ -16,6 +17,8 @@ export const SpeakerCard: React.FC<SpeakerCardProps> = ({
   onPressCall,
   onPressChat,
 }) => {
+  const { t } = useTranslation('explore');
+
   return (
     <View style={styles.cardContainer}>
       {/* Fila superior: Avatar, Info principal, Tarifa */}
@@ -54,7 +57,7 @@ export const SpeakerCard: React.FC<SpeakerCardProps> = ({
               {speaker.rating.toFixed(1)}
             </AppText>
             <AppText variant="bodySmall" color={colors.textSecondary}>
-              ({speaker.reviewsCount} reseñas)
+              {t('card.reviews', { count: speaker.reviewsCount })}
             </AppText>
           </View>
         </View>
@@ -63,7 +66,7 @@ export const SpeakerCard: React.FC<SpeakerCardProps> = ({
         <View style={styles.rateBadge}>
           <AppText style={styles.coinIcon}>🪙</AppText>
           <AppText variant="caption" style={styles.rateText}>
-            {speaker.ratePerMinute}/min
+            {t('card.ratePerMin', { rate: speaker.ratePerMinute })}
           </AppText>
         </View>
       </View>
@@ -71,10 +74,14 @@ export const SpeakerCard: React.FC<SpeakerCardProps> = ({
       {/* Recuadro de idiomas nativo y en aprendizaje */}
       <View style={styles.languagesBox}>
         <AppText variant="caption" style={styles.languagesText}>
-          <AppText variant="caption" style={styles.languageLabel}>Nativo: </AppText>
+          <AppText variant="caption" style={styles.languageLabel}>
+            {t('card.native')}
+          </AppText>
           {speaker.nativeLanguages}
           <AppText variant="caption" color={colors.textMuted}>  ·  </AppText>
-          <AppText variant="caption" style={styles.languageLabel}>Aprende: </AppText>
+          <AppText variant="caption" style={styles.languageLabel}>
+            {t('card.learns')}
+          </AppText>
           {speaker.learningLanguages}
         </AppText>
       </View>
@@ -103,7 +110,7 @@ export const SpeakerCard: React.FC<SpeakerCardProps> = ({
         >
           <Video size={18} color={colors.surface} fill={colors.surface} />
           <AppText variant="button" style={styles.callButtonText}>
-            Llamar ahora
+            {t('card.callNow')}
           </AppText>
         </TouchableOpacity>
       </View>

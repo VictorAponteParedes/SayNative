@@ -1,0 +1,20 @@
+{
+  "tabs": {
+    "home": "Home",
+    "explore": "Explore",
+    "chats": "Chats",
+    "profile": "Profile"
+  },
+  "actions": {
+    "call": "Call",
+    "callNow": "Call now",
+    "chat": "Chat",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "viewAll": "View all"
+  },
+  "coins": {
+    "perMinute": "/min",
+    "coinsPerMinute": "coins / min"
+  }
+}

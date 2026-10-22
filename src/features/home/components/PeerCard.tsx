@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Star, MessageSquare, Video } from 'lucide-react-native';
+import { useTranslation } from 'react-i18next';
 import { colors, spacing, borderRadius } from '../../../theme';
 import { AppText, Avatar, Tag } from '../../../componentes';
 import { PeerUser } from '../types';
@@ -16,6 +17,8 @@ export const PeerCard: React.FC<PeerCardProps> = ({
   onPressCall,
   onPressChat,
 }) => {
+  const { t } = useTranslation('home');
+
   return (
     <View style={styles.card}>
       {/* Cabecera con avatar y bandera del país nativo */}
@@ -38,7 +41,7 @@ export const PeerCard: React.FC<PeerCardProps> = ({
           {peer.rating.toFixed(1)}
         </AppText>
         <AppText variant="caption" color={colors.textSecondary}>
-          ({peer.reviewsCount} reseñas)
+          {t('featuredPeers.reviews', { count: peer.reviewsCount })}
         </AppText>
       </View>
 
@@ -52,12 +55,12 @@ export const PeerCard: React.FC<PeerCardProps> = ({
       {/* Tarifa */}
       <View style={styles.rateRow}>
         <AppText variant="caption" color={colors.textSecondary}>
-          Tarifa:
+          {t('featuredPeers.rateLabel')}
         </AppText>
         <View style={styles.rateValue}>
           <AppText style={styles.coinIcon}>🪙</AppText>
           <AppText variant="caption" style={styles.rateText}>
-            {peer.ratePerMinute}/min
+            {t('featuredPeers.ratePerMin', { rate: peer.ratePerMinute })}
           </AppText>
         </View>
       </View>
@@ -79,7 +82,7 @@ export const PeerCard: React.FC<PeerCardProps> = ({
         >
           <Video size={16} color={colors.surface} fill={colors.surface} />
           <AppText variant="caption" style={styles.callButtonText}>
-            Llamar
+            {t('featuredPeers.callButton')}
           </AppText>
         </TouchableOpacity>
       </View>

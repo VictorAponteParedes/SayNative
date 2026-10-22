@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Plus } from 'lucide-react-native';
+import { useTranslation } from 'react-i18next';
 import { colors, spacing } from '../../../theme';
 import { AppText, Avatar, CoinBadge } from '../../../componentes';
 import { useAuthStore } from '../../../store/useAuthStore';
@@ -12,6 +13,7 @@ export interface UserProfileBarProps {
 export const UserProfileBar: React.FC<UserProfileBarProps> = ({
   onPressAddCoins,
 }) => {
+  const { t } = useTranslation('home');
   const user = useAuthStore((state) => state.user);
 
   return (
@@ -20,10 +22,10 @@ export const UserProfileBar: React.FC<UserProfileBarProps> = ({
         <Avatar uri={user.avatarUrl} size={48} isOnline />
         <View style={styles.textContainer}>
           <AppText variant="bodyLarge" style={styles.greetingText}>
-            Hola, {user.name} 👋
+            {t('userProfile.greeting', { name: user.name })}
           </AppText>
           <AppText variant="bodySmall" color={colors.textSecondary}>
-            ¡Listo para practicar hoy?
+            {t('userProfile.subtitle')}
           </AppText>
         </View>
       </View>

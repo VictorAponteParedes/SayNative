@@ -1,0 +1,37 @@
+{
+  "title": "Explorar Falantes",
+  "searchPlaceholder": "Pesquisar por nome, país ou tema...",
+  "filters": {
+    "online": "Ao vivo agora",
+    "nativeEnglish": "🇺🇸 Nativos em Inglês",
+    "topRated": "⭐ Melhores avaliados"
+  },
+  "speakersAvailable": "{{count}} falantes disponíveis",
+  "sort": {
+    "mostRelevant": "Mais relevantes",
+    "title": "Ordenar Falantes",
+    "desc": "Ordenar por: Mais relevantes, Maior pontuação, Menor tarifa ou Recentes."
+  },
+  "card": {
+    "reviews": "({{count}} avaliações)",
+    "ratePerMin": "{{rate}}/min",
+    "native": "Nativo: ",
+    "learns": "Aprende: ",
+    "callNow": "Ligar agora"
+  },
+  "help": {
+    "title": "Explorar Falantes",
+    "desc": "Encontre falantes nativos de todo o mundo. Filtre por idioma, avaliação ou busque por temas de conversa."
+  },
+  "advancedFilters": {
+    "title": "Filtros Avançados",
+    "desc": "Filtrar por país, faixa etária, taxa de moedas e disponibilidade."
+  },
+  "dialog": {
+    "callTitle": "Videochamada Direta",
+    "callMessage": "Iniciando chamada com {{name}}. Tarifa: {{rate}} moedas por minuto.",
+    "chatTitle": "Chat Direto",
+    "chatMessage": "Iniciando conversa direta com {{name}}."
+  },
+  "empty": "Nenhum falante encontrado com os critérios selecionados."
+}

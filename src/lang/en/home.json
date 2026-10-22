@@ -1,0 +1,47 @@
+{
+  "header": {
+    "title": "Home",
+    "notificationsTitle": "Notifications",
+    "noNotifications": "You have no pending notifications.",
+    "profileTitle": "Profile",
+    "openingProfile": "Opening user profile..."
+  },
+  "userProfile": {
+    "greeting": "Hello, {{name}} 👋",
+    "subtitle": "Ready to practice today?",
+    "walletTitle": "Coins Wallet",
+    "walletMessage": "Buy coin packages or watch rewarded videos to earn coins."
+  },
+  "languageFilter": {
+    "practiceLabel": "Practice:",
+    "nativeLabel": "Native:",
+    "selectLanguageTitle": "Select Language",
+    "selectLanguageMessage": "Choose the language you want to practice and your CEFR level."
+  },
+  "instantPractice": {
+    "badgeLive": "LIVE NOW",
+    "badgeRate": "{{rate}} coins / min",
+    "title": "Instant Practice",
+    "subtitle": "We connect you with an available native speaker right now",
+    "ctaButton": "Find Speaker Now",
+    "searchingTitle": "Instant Practice",
+    "searchingMessage": "Searching for an available native speaker live..."
+  },
+  "teacherAvailability": {
+    "title": "Available to teach {{language}}...",
+    "earningRate": "Earn {{rate}} coins per minute"
+  },
+  "featuredPeers": {
+    "title": "Featured Peers",
+    "onlineCount": "{{count}} online",
+    "viewAll": "View all",
+    "reviews": "({{count}} reviews)",
+    "rateLabel": "Rate:",
+    "ratePerMin": "{{rate}}/min",
+    "callButton": "Call",
+    "callDialogTitle": "Start Call",
+    "callDialogMessage": "Do you want to start a video call with {{name}}? Rate: {{rate}} coins/min.",
+    "chatDialogTitle": "Chat",
+    "chatDialogMessage": "Opening direct chat with {{name}}."
+  }
+}

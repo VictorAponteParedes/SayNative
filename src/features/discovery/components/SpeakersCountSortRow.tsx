@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { ChevronDown } from 'lucide-react-native';
+import { useTranslation } from 'react-i18next';
 import { colors, spacing } from '../../../theme';
 import { AppText } from '../../../componentes';
 
@@ -12,13 +13,16 @@ export interface SpeakersCountSortRowProps {
 
 export const SpeakersCountSortRow: React.FC<SpeakersCountSortRowProps> = ({
   count,
-  currentSortLabel = 'Más relevantes',
+  currentSortLabel,
   onPressSort,
 }) => {
+  const { t } = useTranslation('explore');
+  const sortLabel = currentSortLabel || t('sort.mostRelevant');
+
   return (
     <View style={styles.container}>
       <AppText variant="bodySmall" color={colors.textSecondary}>
-        {count} hablantes disponibles
+        {t('speakersAvailable', { count })}
       </AppText>
 
       <TouchableOpacity
@@ -27,7 +31,7 @@ export const SpeakersCountSortRow: React.FC<SpeakersCountSortRowProps> = ({
         style={styles.sortButton}
       >
         <AppText variant="bodySmall" style={styles.sortLabel}>
-          {currentSortLabel}
+          {sortLabel}
         </AppText>
         <ChevronDown size={14} color={colors.textPrimary} />
       </TouchableOpacity>

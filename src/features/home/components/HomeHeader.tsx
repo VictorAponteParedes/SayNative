@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { MessageSquare, Bell, User } from 'lucide-react-native';
+import { useTranslation } from 'react-i18next';
 import { colors, spacing } from '../../../theme';
 import { AppText } from '../../../componentes';
 
@@ -13,6 +14,8 @@ export const HomeHeader: React.FC<HomeHeaderProps> = ({
   onPressNotifications,
   onPressProfile,
 }) => {
+  const { t } = useTranslation('home');
+
   return (
     <View style={styles.container}>
       <View style={styles.leftContainer}>
@@ -20,7 +23,7 @@ export const HomeHeader: React.FC<HomeHeaderProps> = ({
           <MessageSquare size={20} color={colors.surface} />
         </View>
         <AppText variant="h2" style={styles.title}>
-          Inicio
+          {t('header.title')}
         </AppText>
       </View>
 

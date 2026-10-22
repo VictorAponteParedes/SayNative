@@ -1,5 +1,6 @@
 import React from 'react';
 import { ScrollView, Alert } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { SafeAreaContainer, BottomTabBar } from '../../../../componentes';
 import { HomeHeader } from '../../components/HomeHeader';
 import { UserProfileBar } from '../../components/UserProfileBar';
@@ -14,47 +15,60 @@ import { PeerUser } from '../../types';
 import { styles } from './styles';
 
 export const HomeScreen: React.FC = () => {
+  const { t } = useTranslation('home');
   const { peers, onlineCount, startInstantMatch } = useHomeFeed();
 
   const handleNotifications = () => {
-    Alert.alert('Notificaciones', 'No tienes notificaciones pendientes.');
+    Alert.alert(
+      t('header.notificationsTitle'),
+      t('header.noNotifications')
+    );
   };
 
   const handleProfile = () => {
-    Alert.alert('Perfil', 'Abriendo perfil del usuario...');
+    Alert.alert(
+      t('header.profileTitle'),
+      t('header.openingProfile')
+    );
   };
 
   const handleAddCoins = () => {
     Alert.alert(
-      'Billetera de Monedas',
-      'Compra paquetes de monedas o mira videos recompensados para obtener saldo.'
+      t('userProfile.walletTitle'),
+      t('userProfile.walletMessage')
     );
   };
 
   const handleSelectLearningLanguage = () => {
     Alert.alert(
-      'Seleccionar Idioma',
-      'Elige el idioma que deseas practicar y tu nivel CEFR.'
+      t('languageFilter.selectLanguageTitle'),
+      t('languageFilter.selectLanguageMessage')
     );
   };
 
   const handleStartSearch = () => {
     startInstantMatch();
     Alert.alert(
-      'Práctica Instantánea',
-      'Buscando hablante nativo disponible en vivo...'
+      t('instantPractice.searchingTitle'),
+      t('instantPractice.searchingMessage')
     );
   };
 
   const handleCallPeer = (peer: PeerUser) => {
     Alert.alert(
-      'Iniciar Llamada',
-      `¿Deseas iniciar videollamada con ${peer.name}? Tarifa: ${peer.ratePerMinute} monedas/min.`
+      t('featuredPeers.callDialogTitle'),
+      t('featuredPeers.callDialogMessage', {
+        name: peer.name,
+        rate: peer.ratePerMinute,
+      })
     );
   };
 
   const handleChatPeer = (peer: PeerUser) => {
-    Alert.alert('Chat', `Abriendo conversación directa con ${peer.name}.`);
+    Alert.alert(
+      t('featuredPeers.chatDialogTitle'),
+      t('featuredPeers.chatDialogMessage', { name: peer.name })
+    );
   };
 
   const handleViewAllPeers = () => {

@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Video } from 'lucide-react-native';
+import { useTranslation } from 'react-i18next';
 import { colors, spacing, borderRadius } from '../../../theme';
 import { AppText } from '../../../componentes';
 
@@ -13,6 +14,8 @@ export const InstantPracticeBanner: React.FC<InstantPracticeBannerProps> = ({
   onPressStartSearch,
   ratePerMinute = 10,
 }) => {
+  const { t } = useTranslation('home');
+
   return (
     <View style={styles.cardContainer}>
       {/* Badges superiores */}
@@ -20,14 +23,14 @@ export const InstantPracticeBanner: React.FC<InstantPracticeBannerProps> = ({
         <View style={styles.liveBadge}>
           <View style={styles.liveDot} />
           <AppText variant="caption" style={styles.liveText}>
-            EN VIVO AHORA
+            {t('instantPractice.badgeLive')}
           </AppText>
         </View>
 
         <View style={styles.rateBadge}>
           <AppText style={styles.coinIcon}>🪙</AppText>
           <AppText variant="caption" style={styles.rateText}>
-            {ratePerMinute} monedas / min
+            {t('instantPractice.badgeRate', { rate: ratePerMinute })}
           </AppText>
         </View>
       </View>
@@ -35,10 +38,10 @@ export const InstantPracticeBanner: React.FC<InstantPracticeBannerProps> = ({
       {/* Contenido principal */}
       <View style={styles.contentSection}>
         <AppText variant="h2" style={styles.title}>
-          Práctica Instantánea
+          {t('instantPractice.title')}
         </AppText>
         <AppText variant="bodySmall" style={styles.subtitle}>
-          Te conectamos con un nativo disponible ahora mismo
+          {t('instantPractice.subtitle')}
         </AppText>
       </View>
 
@@ -50,7 +53,7 @@ export const InstantPracticeBanner: React.FC<InstantPracticeBannerProps> = ({
       >
         <Video size={20} color={colors.primary} fill={colors.primary} />
         <AppText variant="button" style={styles.ctaButtonText}>
-          Buscar Hablante Ahora
+          {t('instantPractice.ctaButton')}
         </AppText>
       </TouchableOpacity>
     </View>

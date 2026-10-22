@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { ChevronDown } from 'lucide-react-native';
+import { useTranslation } from 'react-i18next';
 import { colors, spacing } from '../../../theme';
 import { AppText } from '../../../componentes';
 import { useAuthStore } from '../../../store/useAuthStore';
@@ -12,6 +13,7 @@ export interface LanguageFilterBarProps {
 export const LanguageFilterBar: React.FC<LanguageFilterBarProps> = ({
   onPressSelectLearningLanguage,
 }) => {
+  const { t } = useTranslation('home');
   const { learningLanguage, nativeLanguage } = useAuthStore(
     (state) => state.user
   );
@@ -25,7 +27,7 @@ export const LanguageFilterBar: React.FC<LanguageFilterBarProps> = ({
         style={styles.learningPill}
       >
         <AppText variant="caption" color={colors.textSecondary}>
-          Practicar:
+          {t('languageFilter.practiceLabel')}
         </AppText>
         <AppText style={styles.flag}>{learningLanguage.flag}</AppText>
         <AppText variant="bodySmall" style={styles.learningText}>
@@ -37,7 +39,7 @@ export const LanguageFilterBar: React.FC<LanguageFilterBarProps> = ({
       {/* Idioma nativo */}
       <View style={styles.nativePill}>
         <AppText variant="caption" color={colors.textSecondary}>
-          Nativo:
+          {t('languageFilter.nativeLabel')}
         </AppText>
         <AppText style={styles.flag}>{nativeLanguage.flag}</AppText>
         <AppText variant="bodySmall" style={styles.nativeText}>
@@ -72,7 +74,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#E0F2FE', // azul cielo suave
+    backgroundColor: '#E0F2FE',
     paddingHorizontal: spacing.md,
     paddingVertical: spacing.sm + 2,
     borderRadius: 24,

@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { colors, spacing } from '../../../theme';
 import { AppText } from '../../../componentes';
 import { ExploreFilterType } from '../types';
@@ -9,29 +10,25 @@ export interface FilterPillsRowProps {
   onSelectFilter: (filter: ExploreFilterType) => void;
 }
 
-interface FilterItem {
-  key: ExploreFilterType;
-  label: string;
-  hasDot?: boolean;
-}
-
-const FILTERS: FilterItem[] = [
-  { key: 'online', label: 'En línea ahora', hasDot: true },
-  { key: 'native_english', label: '🇺🇸 Nativos en Inglés' },
-  { key: 'top_rated', label: '⭐ Mejor calificados' },
-];
-
 export const FilterPillsRow: React.FC<FilterPillsRowProps> = ({
   activeFilter,
   onSelectFilter,
 }) => {
+  const { t } = useTranslation('explore');
+
+  const filters = [
+    { key: 'online' as ExploreFilterType, label: t('filters.online'), hasDot: true },
+    { key: 'native_english' as ExploreFilterType, label: t('filters.nativeEnglish') },
+    { key: 'top_rated' as ExploreFilterType, label: t('filters.topRated') },
+  ];
+
   return (
     <ScrollView
       horizontal
       showsHorizontalScrollIndicator={false}
       contentContainerStyle={styles.container}
     >
-      {FILTERS.map((item) => {
+      {filters.map((item) => {
         const isActive = activeFilter === item.key;
         return (
           <TouchableOpacity
