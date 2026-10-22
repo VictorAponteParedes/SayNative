@@ -8,11 +8,13 @@ import { InstantPracticeBanner } from '../../components/InstantPracticeBanner';
 import { TeachingAvailabilityCard } from '../../components/TeachingAvailabilityCard';
 import { FeaturedPeersSection } from '../../components/FeaturedPeersSection';
 import { useHomeFeed } from '../../hooks/useHomeFeed';
+import { useAppConfigStore } from '../../../../store/useAppConfigStore';
 import { PeerUser } from '../../types';
 import { styles } from './styles';
 
 export const HomeScreen: React.FC = () => {
   const { peers, onlineCount, startInstantMatch } = useHomeFeed();
+  const setCurrentTab = useAppConfigStore((state) => state.setCurrentTab);
 
   const handleNotifications = () => {
     Alert.alert('Notificaciones', 'No tienes notificaciones pendientes.');
@@ -56,10 +58,7 @@ export const HomeScreen: React.FC = () => {
   };
 
   const handleViewAllPeers = () => {
-    Alert.alert(
-      'Compañeros',
-      'Navegando a la pestaña Explorar con todos los usuarios en línea.'
-    );
+    setCurrentTab('Explorar');
   };
 
   return (
