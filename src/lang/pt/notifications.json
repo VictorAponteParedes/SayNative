@@ -1,0 +1,55 @@
+{
+  "header": {
+    "title": "Atividade",
+    "newBadge": "{{count}} novas",
+    "markAllRead": "Marcar lidas"
+  },
+  "filters": {
+    "all": "Todas",
+    "calls": "Chamadas",
+    "coins": "Moedas",
+    "social": "Comunidade"
+  },
+  "sections": {
+    "today": "HOJE",
+    "todayCount": "{{count}} recentes",
+    "yesterday": "ONTEM",
+    "thisWeek": "ESTA SEMANA",
+    "empty": "Nenhuma notificação nesta categoria."
+  },
+  "items": {
+    "missedCallTitle": "Chamada perdida de Sarah J.",
+    "missedCallDesc": "Tentou se conectar para prática de conversação em inglês.",
+    "missedCallAction": "Retornar chamada (🪙 10/m)",
+    "coinsEarnedTitle": "Você ganhou 42 moedas!",
+    "coinsEarnedDesc": "Pela sua sessão de tutoria de espanhol com David Smith (6 min).",
+    "coinsEarnedBadge": "+42",
+    "newMessageTitle": "Nova mensagem de Emma W.",
+    "newMessageDesc": "Emma enviou um áudio de prática de pronúncia.",
+    "newMessageAudio": "Áudio (0:45)",
+    "streakTitle": "Sequência semanal concluída",
+    "streakDesc": "Você praticou 5 dias consecutivos. Resgate seu bônus diário de 10 moedas.",
+    "streakAction": "Resgatar bônus",
+    "streakClaimed": "Bônus resgatado",
+    "tutorOnlineTitle": "Liam Davies 🇬🇧 está online",
+    "tutorOnlineDesc": "Seu tutor favorito de inglês avançado acabou de se conectar.",
+    "tutorOnlineAction": "Dar oi 👋",
+    "practiceReminderTitle": "Lembrete de prática",
+    "practiceReminderDesc": "Dedique 10 minutos hoje para manter sua fluência em inglês.",
+    "time15m": "15 min",
+    "time2h": "Há 2 horas",
+    "time4h": "4 h",
+    "time1830": "18:30",
+    "time1120": "11:20",
+    "time3d": "Há 3 d"
+  },
+  "toasts": {
+    "markedAllReadTitle": "Notificações lidas",
+    "markedAllReadMessage": "Todas as suas notificações foram marcadas como lidas.",
+    "bonusClaimedTitle": "Bônus Resgatado!",
+    "bonusClaimedMessage": "+10 moedas foram adicionadas ao seu saldo.",
+    "alreadyClaimed": "Você já resgatou este bônus.",
+    "greetingSentTitle": "Saudação enviada!",
+    "greetingSentMessage": "Você enviou uma saudação para Liam."
+  }
+}

@@ -1,6 +1,8 @@
 import React from 'react';
 import { ScrollView } from 'react-native';
 import { SafeAreaContainer, BottomTabBar } from '../../../../components';
+import { navigate } from '../../../../navigation/NavigationRef';
+import { Routes } from '../../../../navigation/routes';
 import {
   ProfileHeader,
   UserIdentityCard,
@@ -27,7 +29,7 @@ export const ProfileScreen: React.FC = () => {
 
   return (
     <SafeAreaContainer edges={['top']} style={styles.container}>
-      <ProfileHeader />
+      <ProfileHeader onPressNotifications={() => navigate(Routes.App.Notifications)} />
 
       <ScrollView
         contentContainerStyle={styles.scrollContent}

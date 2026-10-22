@@ -1,0 +1,55 @@
+{
+  "header": {
+    "title": "Activity",
+    "newBadge": "{{count}} new",
+    "markAllRead": "Mark read"
+  },
+  "filters": {
+    "all": "All",
+    "calls": "Calls",
+    "coins": "Coins",
+    "social": "Community"
+  },
+  "sections": {
+    "today": "TODAY",
+    "todayCount": "{{count}} recent",
+    "yesterday": "YESTERDAY",
+    "thisWeek": "THIS WEEK",
+    "empty": "No notifications in this category."
+  },
+  "items": {
+    "missedCallTitle": "Missed call from Sarah J.",
+    "missedCallDesc": "Tried to connect for English conversation practice.",
+    "missedCallAction": "Call back (🪙 10/m)",
+    "coinsEarnedTitle": "You earned 42 coins!",
+    "coinsEarnedDesc": "For your Spanish tutoring session with David Smith (6 min).",
+    "coinsEarnedBadge": "+42",
+    "newMessageTitle": "New message from Emma W.",
+    "newMessageDesc": "Emma sent you a pronunciation practice audio.",
+    "newMessageAudio": "Audio (0:45)",
+    "streakTitle": "Weekly streak completed",
+    "streakDesc": "You practiced 5 consecutive days. Claim your daily bonus of 10 coins.",
+    "streakAction": "Claim bonus",
+    "streakClaimed": "Bonus claimed",
+    "tutorOnlineTitle": "Liam Davies 🇬🇧 is online",
+    "tutorOnlineDesc": "Your favorite advanced English tutor just logged in.",
+    "tutorOnlineAction": "Say hello 👋",
+    "practiceReminderTitle": "Practice reminder",
+    "practiceReminderDesc": "Dedicate 10 minutes today to maintain your English fluency.",
+    "time15m": "15 min",
+    "time2h": "2 hours ago",
+    "time4h": "4 h",
+    "time1830": "18:30",
+    "time1120": "11:20",
+    "time3d": "3 d ago"
+  },
+  "toasts": {
+    "markedAllReadTitle": "Notifications read",
+    "markedAllReadMessage": "All notifications have been marked as read.",
+    "bonusClaimedTitle": "Bonus Claimed!",
+    "bonusClaimedMessage": "+10 coins have been added to your balance.",
+    "alreadyClaimed": "You already claimed this bonus.",
+    "greetingSentTitle": "Greeting sent!",
+    "greetingSentMessage": "You sent a greeting to Liam."
+  }
+}

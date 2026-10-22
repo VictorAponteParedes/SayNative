@@ -19,10 +19,7 @@ export const HomeScreen: React.FC = () => {
   const { peers, onlineCount, startInstantMatch } = useHomeFeed();
 
   const handleNotifications = () => {
-    Alert.alert(
-      t('header.notificationsTitle'),
-      t('header.noNotifications')
-    );
+    navigate(Routes.App.Notifications);
   };
 
   const handleProfile = () => {

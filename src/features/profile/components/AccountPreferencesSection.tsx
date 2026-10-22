@@ -12,6 +12,8 @@ import {
 import { useTranslation } from 'react-i18next';
 import { colors, spacing } from '../../../theme';
 import { AppText } from '../../../components';
+import { navigate } from '../../../navigation/NavigationRef';
+import { Routes } from '../../../navigation/routes';
 
 export interface AccountPreferencesSectionProps {
   onPressPersonalInfo: () => void;
@@ -60,12 +62,7 @@ export const AccountPreferencesSection: React.FC<
         {/* Notificaciones */}
         <TouchableOpacity
           activeOpacity={0.7}
-          onPress={() =>
-            handleSimpleAlert(
-              'account.notifications',
-              'Configuración de notificaciones push y avisos de llamada.'
-            )
-          }
+          onPress={() => navigate(Routes.App.Notifications)}
           style={styles.menuRow}
         >
           <View style={[styles.iconCircle, { backgroundColor: colors.surfaceSubtle }]}>

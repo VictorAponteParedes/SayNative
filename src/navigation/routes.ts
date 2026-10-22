@@ -15,6 +15,7 @@ export const Routes = {
     CallLobby: 'CallLobby',
     Coins: 'Coins',
     CoinsHistory: 'CoinsHistory',
+    Notifications: 'Notifications',
   },
 } as const;
 

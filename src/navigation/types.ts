@@ -23,6 +23,7 @@ export type AppStackParamList = {
   };
   Coins?: undefined;
   CoinsHistory?: undefined;
+  Notifications?: undefined;
 };
 
 export type AuthStackParamList = {
