@@ -1,0 +1,29 @@
+{
+  "title": "Mensagens",
+  "searchPlaceholder": "Pesquisar conversas ou parceiros...",
+  "onlineSection": {
+    "title": "Online agora",
+    "onlineCount": "{{count}} parceiros",
+    "new": "Novo"
+  },
+  "filters": {
+    "all": "Todos",
+    "unread": "Não lidos",
+    "videocalls": "Videochamadas"
+  },
+  "callTypes": {
+    "callEnded": "Videochamada finalizada · {{duration}}",
+    "missedCall": "Chamada perdida"
+  },
+  "tipCard": {
+    "title": "Conversação fluida",
+    "subtitle": "Pratique 10 minutos por dia para manter seu vocabulário afiado."
+  },
+  "options": {
+    "title": "Opções de Mensagens",
+    "markAllRead": "Marcar todas como lidas",
+    "newChat": "Nova Conversa",
+    "newChatMessage": "Encontre um parceiro para iniciar uma conversa."
+  },
+  "empty": "Nenhuma conversa encontrada correspondente à sua pesquisa."
+}

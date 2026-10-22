@@ -5,16 +5,19 @@ import { initReactI18next } from 'react-i18next';
 import esCommon from './es/common.json';
 import esHome from './es/home.json';
 import esExplore from './es/explore.json';
+import esChats from './es/chats.json';
 
 // EN
 import enCommon from './en/common.json';
 import enHome from './en/home.json';
 import enExplore from './en/explore.json';
+import enChats from './en/chats.json';
 
 // PT
 import ptCommon from './pt/common.json';
 import ptHome from './pt/home.json';
 import ptExplore from './pt/explore.json';
+import ptChats from './pt/chats.json';
 
 export const defaultNS = 'common';
 
@@ -23,16 +26,19 @@ export const resources = {
     common: esCommon,
     home: esHome,
     explore: esExplore,
+    chats: esChats,
   },
   en: {
     common: enCommon,
     home: enHome,
     explore: enExplore,
+    chats: enChats,
   },
   pt: {
     common: ptCommon,
     home: ptHome,
     explore: ptExplore,
+    chats: ptChats,
   },
 } as const;
 

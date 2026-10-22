@@ -1,0 +1,29 @@
+{
+  "title": "Messages",
+  "searchPlaceholder": "Search in chats or peers...",
+  "onlineSection": {
+    "title": "Online now",
+    "onlineCount": "{{count}} peers",
+    "new": "New"
+  },
+  "filters": {
+    "all": "All",
+    "unread": "Unread",
+    "videocalls": "Video calls"
+  },
+  "callTypes": {
+    "callEnded": "Video call ended · {{duration}}",
+    "missedCall": "Missed call"
+  },
+  "tipCard": {
+    "title": "Fluent conversation",
+    "subtitle": "Practice 10 minutes a day to keep your vocabulary sharp."
+  },
+  "options": {
+    "title": "Message Options",
+    "markAllRead": "Mark all as read",
+    "newChat": "New Chat",
+    "newChatMessage": "Find a peer to start a conversation."
+  },
+  "empty": "No conversations found matching your search."
+}

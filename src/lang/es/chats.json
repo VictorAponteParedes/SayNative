@@ -1,0 +1,29 @@
+{
+  "title": "Mensajes",
+  "searchPlaceholder": "Buscar en chats o compañeros...",
+  "onlineSection": {
+    "title": "En línea ahora",
+    "onlineCount": "{{count}} compañeros",
+    "new": "Nuevo"
+  },
+  "filters": {
+    "all": "Todos",
+    "unread": "No leídos",
+    "videocalls": "Videollamadas"
+  },
+  "callTypes": {
+    "callEnded": "Videollamada finalizada · {{duration}}",
+    "missedCall": "Llamada perdida"
+  },
+  "tipCard": {
+    "title": "Conversación fluida",
+    "subtitle": "Practica 10 minutos al día para mantener activo tu vocabulario."
+  },
+  "options": {
+    "title": "Opciones de Mensajes",
+    "markAllRead": "Marcar todos como leídos",
+    "newChat": "Nuevo Chat",
+    "newChatMessage": "Buscar un compañero para iniciar una conversación."
+  },
+  "empty": "No hay conversaciones que coincidan con tu búsqueda."
+}

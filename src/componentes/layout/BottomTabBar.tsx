@@ -14,6 +14,7 @@ interface TabItem {
   key: TabKey;
   labelKey: string;
   route?: keyof typeof Routes.App;
+  badge?: number;
   icon: (active: boolean) => React.ReactNode;
 }
 
@@ -46,6 +47,7 @@ const TABS: TabItem[] = [
     key: 'Chats',
     labelKey: 'tabs.chats',
     route: 'Chats',
+    badge: 2,
     icon: (active) => (
       <MessageSquare
         size={22}
@@ -84,6 +86,8 @@ export const BottomTabBar: React.FC<BottomTabBarProps> = ({ activeTab }) => {
       navigate(Routes.App.Home);
     } else if (tab.route === 'Explore') {
       navigate(Routes.App.Explore);
+    } else if (tab.route === 'Chats') {
+      navigate(Routes.App.Chats);
     } else {
       const label = t(tab.labelKey);
       Alert.alert(label, `${label} estará disponible pronto.`);
@@ -103,7 +107,14 @@ export const BottomTabBar: React.FC<BottomTabBarProps> = ({ activeTab }) => {
             onPress={() => handleTabPress(tab)}
             style={styles.tabItem}
           >
-            {tab.icon(isActive)}
+            <View style={styles.iconWrapper}>
+              {tab.icon(isActive)}
+              {!!tab.badge && tab.badge > 0 && (
+                <View style={styles.tabBadge}>
+                  <AppText style={styles.tabBadgeText}>{tab.badge}</AppText>
+                </View>
+              )}
+            </View>
             <AppText
               variant="caption"
               style={[
@@ -142,6 +153,25 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingVertical: 4,
     minWidth: 60,
+  },
+  iconWrapper: {
+    position: 'relative',
+  },
+  tabBadge: {
+    position: 'absolute',
+    top: -4,
+    right: -8,
+    backgroundColor: '#DC2626',
+    width: 16,
+    height: 16,
+    borderRadius: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  tabBadgeText: {
+    color: colors.textWhite,
+    fontSize: 10,
+    fontWeight: '800',
   },
   tabLabel: {
     marginTop: 4,
