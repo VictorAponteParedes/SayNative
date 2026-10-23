@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ScrollView, KeyboardAvoidingView, Platform, Alert } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { SafeAreaContainer, AppText } from '../../../../components';
@@ -8,6 +8,7 @@ import {
   SocialAuthButtons,
   RegisterForm,
 } from '../../components';
+import { LanguageSelectorBottomSheet } from '../../../profile/components/LanguageSelectorBottomSheet';
 import { useRegister } from '../../hooks/useRegister';
 import { styles } from './styles';
 import { navigate } from '../../../../navigation/NavigationRef';
@@ -15,6 +16,7 @@ import { Routes } from '../../../../navigation/routes';
 
 export const RegisterScreen: React.FC = () => {
   const { t } = useTranslation('auth');
+  const [isLanguageSheetOpen, setIsLanguageSheetOpen] = useState(false);
   const {
     control,
     handleSubmit,
@@ -38,7 +40,10 @@ export const RegisterScreen: React.FC = () => {
 
   return (
     <SafeAreaContainer edges={['top']} style={styles.container}>
-      <RegisterHeader onBack={handleBack} />
+      <RegisterHeader
+        onBack={handleBack}
+        onPressLanguage={() => setIsLanguageSheetOpen(true)}
+      />
 
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
@@ -75,6 +80,12 @@ export const RegisterScreen: React.FC = () => {
           />
         </ScrollView>
       </KeyboardAvoidingView>
+
+      {/* Selector de idioma reutilizando el BottomSheet existente */}
+      <LanguageSelectorBottomSheet
+        visible={isLanguageSheetOpen}
+        onClose={() => setIsLanguageSheetOpen(false)}
+      />
     </SafeAreaContainer>
   );
 };

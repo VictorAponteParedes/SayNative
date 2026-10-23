@@ -42,6 +42,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
   onSubmit,
   onPressLogin,
   onPressTerms,
+  errors,
   isLoading = false,
 }) => {
   const { t } = useTranslation('auth');
@@ -139,6 +140,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
           style={[
             styles.checkbox,
             acceptTerms && styles.checkboxActive,
+            Boolean(errors?.acceptTerms) && styles.checkboxError,
           ]}
         >
           {acceptTerms && (
@@ -263,6 +265,10 @@ const styles = StyleSheet.create({
   checkboxActive: {
     backgroundColor: colors.primary,
     borderColor: colors.primary,
+  },
+  checkboxError: {
+    borderColor: colors.danger,
+    backgroundColor: colors.dangerBgSubtle,
   },
   checkboxText: {
     flex: 1,

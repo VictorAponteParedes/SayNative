@@ -13,7 +13,7 @@ export interface LanguageItem {
   flag: string;
 }
 
-const AVAILABLE_LANGUAGES: LanguageItem[] = [
+export const AVAILABLE_LANGUAGES: LanguageItem[] = [
   { code: 'es', name: 'Español', nativeName: 'Spanish', flag: '🇪🇸' },
   { code: 'en', name: 'English', nativeName: 'English', flag: '🇺🇸' },
   { code: 'pt', name: 'Português', nativeName: 'Portuguese', flag: '🇧🇷' },
@@ -21,6 +21,12 @@ const AVAILABLE_LANGUAGES: LanguageItem[] = [
   { code: 'ja', name: '日本語', nativeName: 'Japanese', flag: '🇯🇵' },
   { code: 'zh', name: '中文 (简体)', nativeName: 'Chinese Simplified', flag: '🇨🇳' },
 ];
+
+export const getLanguageFlag = (langCode?: string): string => {
+  const code = (langCode?.split('-')[0] || 'es') as SupportedLanguage;
+  const match = AVAILABLE_LANGUAGES.find((lang) => lang.code === code);
+  return match ? match.flag : '🇪🇸';
+};
 
 export interface LanguageSelectorBottomSheetProps {
   visible: boolean;

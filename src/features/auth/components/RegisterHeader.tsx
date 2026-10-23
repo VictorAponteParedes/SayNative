@@ -1,20 +1,25 @@
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
-import { ChevronLeft, User } from 'lucide-react-native';
+import { ChevronLeft } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
 import { colors, spacing } from '../../../theme';
 import { AppText, AppLogo } from '../../../components';
+import { getLanguageFlag } from '../../profile/components/LanguageSelectorBottomSheet';
 
 export interface RegisterHeaderProps {
   onBack: () => void;
+  onPressLanguage?: () => void;
   onPressProfile?: () => void;
 }
 
 export const RegisterHeader: React.FC<RegisterHeaderProps> = ({
   onBack,
+  onPressLanguage,
   onPressProfile,
 }) => {
-  const { t } = useTranslation('auth');
+  const { t, i18n } = useTranslation('auth');
+  const activeFlag = getLanguageFlag(i18n.language);
+  const handleAction = onPressLanguage || onPressProfile;
 
   return (
     <View style={styles.header}>
@@ -36,10 +41,13 @@ export const RegisterHeader: React.FC<RegisterHeaderProps> = ({
 
       <TouchableOpacity
         activeOpacity={0.7}
-        onPress={onPressProfile}
-        style={styles.userCircle}
+        onPress={handleAction}
+        hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+        style={styles.flagButton}
+        accessibilityLabel="Cambiar idioma"
+        accessibilityRole="button"
       >
-        <User size={18} color={colors.white} />
+        <AppText style={styles.flagText}>{activeFlag}</AppText>
       </TouchableOpacity>
     </View>
   );
@@ -70,12 +78,23 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     color: colors.textPrimary,
   },
-  userCircle: {
-    width: 34,
-    height: 34,
-    borderRadius: 17,
-    backgroundColor: colors.primary,
+  flagButton: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    backgroundColor: colors.surface,
+    borderWidth: 1,
+    borderColor: colors.border,
     alignItems: 'center',
     justifyContent: 'center',
+    shadowColor: '#000000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.06,
+    shadowRadius: 2,
+    elevation: 1,
+  },
+  flagText: {
+    fontSize: 20,
+    textAlign: 'center',
   },
 });
