@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   View,
   StyleSheet,
-  TextInput,
   TouchableOpacity,
   ActivityIndicator,
 } from 'react-native';
@@ -11,40 +10,43 @@ import {
   Mail,
   Lock,
   RotateCcw,
-  Eye,
-  EyeOff,
-  Info,
   Check,
   ArrowRight,
 } from 'lucide-react-native';
+import {
+  Control,
+  UseFormWatch,
+  UseFormSetValue,
+  FieldErrors,
+} from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { colors, spacing } from '../../../theme';
-import { AppText } from '../../../components';
+import { AppText, ControlledInput } from '../../../components';
 import { RegisterFormData } from '../types';
 
 export interface RegisterFormProps {
-  formData: RegisterFormData;
-  onChangeField: <K extends keyof RegisterFormData>(
-    field: K,
-    value: RegisterFormData[K]
-  ) => void;
+  control: Control<RegisterFormData>;
+  watch: UseFormWatch<RegisterFormData>;
+  setValue: UseFormSetValue<RegisterFormData>;
   onSubmit: () => void;
   onPressLogin: () => void;
   onPressTerms: () => void;
+  errors?: FieldErrors<RegisterFormData>;
   isLoading?: boolean;
 }
 
 export const RegisterForm: React.FC<RegisterFormProps> = ({
-  formData,
-  onChangeField,
+  control,
+  watch,
+  setValue,
   onSubmit,
   onPressLogin,
   onPressTerms,
   isLoading = false,
 }) => {
   const { t } = useTranslation('auth');
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const acceptTerms = watch('acceptTerms');
+  const acceptPromotions = watch('acceptPromotions');
 
   return (
     <View style={styles.container}>
@@ -58,125 +60,88 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
       </View>
 
       {/* Campo: Nombre o Apodo */}
-      <View style={styles.fieldContainer}>
-        <AppText variant="bodySmall" style={styles.inputLabel}>
-          {t('register.nameLabel')}
-        </AppText>
-        <View style={styles.inputBox}>
-          <User size={18} color={colors.textSecondary} style={styles.inputIcon} />
-          <TextInput
-            value={formData.fullName}
-            onChangeText={(text) => onChangeField('fullName', text)}
-            placeholder={t('register.namePlaceholder')}
-            placeholderTextColor={colors.textMuted}
-            style={styles.textInput}
-            autoCapitalize="words"
-          />
-        </View>
-      </View>
+      <ControlledInput
+        control={control}
+        name="fullName"
+        label={t('register.nameLabel')}
+        placeholder={t('register.namePlaceholder')}
+        leftIcon={<User size={18} color={colors.textSecondary} />}
+        autoCapitalize="words"
+        rules={{
+          required: t('register.toasts.missingFieldsMessage'),
+          minLength: {
+            value: 2,
+            message: 'Mínimo 2 caracteres',
+          },
+        }}
+      />
 
       {/* Campo: Correo Electrónico */}
-      <View style={styles.fieldContainer}>
-        <AppText variant="bodySmall" style={styles.inputLabel}>
-          {t('register.emailLabel')}
-        </AppText>
-        <View style={styles.inputBox}>
-          <Mail size={18} color={colors.textSecondary} style={styles.inputIcon} />
-          <TextInput
-            value={formData.email}
-            onChangeText={(text) => onChangeField('email', text)}
-            placeholder={t('register.emailPlaceholder')}
-            placeholderTextColor={colors.textMuted}
-            style={styles.textInput}
-            keyboardType="email-address"
-            autoCapitalize="none"
-          />
-        </View>
-      </View>
+      <ControlledInput
+        control={control}
+        name="email"
+        label={t('register.emailLabel')}
+        placeholder={t('register.emailPlaceholder')}
+        leftIcon={<Mail size={18} color={colors.textSecondary} />}
+        keyboardType="email-address"
+        autoCapitalize="none"
+        rules={{
+          required: t('register.toasts.missingFieldsMessage'),
+          pattern: {
+            value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+            message: t('register.toasts.invalidEmail'),
+          },
+        }}
+      />
 
       {/* Campo: Contraseña */}
-      <View style={styles.fieldContainer}>
-        <AppText variant="bodySmall" style={styles.inputLabel}>
-          {t('register.passwordLabel')}
-        </AppText>
-        <View style={styles.inputBox}>
-          <Lock size={18} color={colors.textSecondary} style={styles.inputIcon} />
-          <TextInput
-            value={formData.password}
-            onChangeText={(text) => onChangeField('password', text)}
-            placeholder="••••••••"
-            placeholderTextColor={colors.textMuted}
-            secureTextEntry={!showPassword}
-            style={styles.textInput}
-            autoCapitalize="none"
-          />
-          <TouchableOpacity
-            activeOpacity={0.7}
-            onPress={() => setShowPassword(!showPassword)}
-            style={styles.eyeButton}
-          >
-            {showPassword ? (
-              <EyeOff size={18} color={colors.textSecondary} />
-            ) : (
-              <Eye size={18} color={colors.textSecondary} />
-            )}
-          </TouchableOpacity>
-        </View>
-        <View style={styles.hintRow}>
-          <Info size={14} color={colors.actionDark} style={styles.hintIcon} />
-          <AppText variant="caption" style={styles.hintText}>
-            {t('register.passwordHint')}
-          </AppText>
-        </View>
-      </View>
+      <ControlledInput
+        control={control}
+        name="password"
+        label={t('register.passwordLabel')}
+        placeholder="••••••••"
+        isPassword
+        leftIcon={<Lock size={18} color={colors.textSecondary} />}
+        hint={t('register.passwordHint')}
+        autoCapitalize="none"
+        rules={{
+          required: t('register.toasts.missingFieldsMessage'),
+          minLength: {
+            value: 8,
+            message: t('register.toasts.shortPassword'),
+          },
+        }}
+      />
 
       {/* Campo: Confirmar Contraseña */}
-      <View style={styles.fieldContainer}>
-        <AppText variant="bodySmall" style={styles.inputLabel}>
-          {t('register.confirmPasswordLabel')}
-        </AppText>
-        <View style={styles.inputBox}>
-          <RotateCcw
-            size={18}
-            color={colors.textSecondary}
-            style={styles.inputIcon}
-          />
-          <TextInput
-            value={formData.confirmPassword}
-            onChangeText={(text) => onChangeField('confirmPassword', text)}
-            placeholder="••••••••"
-            placeholderTextColor={colors.textMuted}
-            secureTextEntry={!showConfirmPassword}
-            style={styles.textInput}
-            autoCapitalize="none"
-          />
-          <TouchableOpacity
-            activeOpacity={0.7}
-            onPress={() => setShowConfirmPassword(!showConfirmPassword)}
-            style={styles.eyeButton}
-          >
-            {showConfirmPassword ? (
-              <EyeOff size={18} color={colors.textSecondary} />
-            ) : (
-              <Eye size={18} color={colors.textSecondary} />
-            )}
-          </TouchableOpacity>
-        </View>
-      </View>
+      <ControlledInput
+        control={control}
+        name="confirmPassword"
+        label={t('register.confirmPasswordLabel')}
+        placeholder="••••••••"
+        isPassword
+        leftIcon={<RotateCcw size={18} color={colors.textSecondary} />}
+        autoCapitalize="none"
+        rules={{
+          required: t('register.toasts.missingFieldsMessage'),
+          validate: (val) =>
+            val === watch('password') || t('register.toasts.passwordsDoNotMatch'),
+        }}
+      />
 
       {/* Checkbox: Términos y Privacidad */}
       <TouchableOpacity
         activeOpacity={0.7}
-        onPress={() => onChangeField('acceptTerms', !formData.acceptTerms)}
+        onPress={() => setValue('acceptTerms', !acceptTerms, { shouldValidate: true })}
         style={styles.checkboxRow}
       >
         <View
           style={[
             styles.checkbox,
-            formData.acceptTerms && styles.checkboxActive,
+            acceptTerms && styles.checkboxActive,
           ]}
         >
-          {formData.acceptTerms && (
+          {acceptTerms && (
             <Check size={14} color={colors.white} strokeWidth={3} />
           )}
         </View>
@@ -205,17 +170,17 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
       <TouchableOpacity
         activeOpacity={0.7}
         onPress={() =>
-          onChangeField('acceptPromotions', !formData.acceptPromotions)
+          setValue('acceptPromotions', !acceptPromotions, { shouldValidate: true })
         }
         style={styles.checkboxRow}
       >
         <View
           style={[
             styles.checkbox,
-            formData.acceptPromotions && styles.checkboxActive,
+            acceptPromotions && styles.checkboxActive,
           ]}
         >
-          {formData.acceptPromotions && (
+          {acceptPromotions && (
             <Check size={14} color={colors.white} strokeWidth={3} />
           )}
         </View>
@@ -276,56 +241,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.sm,
     color: colors.textSecondary,
     fontSize: 12,
-  },
-  fieldContainer: {
-    marginBottom: spacing.md,
-  },
-  inputLabel: {
-    fontSize: 13,
-    fontWeight: '700',
-    color: colors.textPrimary,
-    marginBottom: 6,
-  },
-  inputBox: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: colors.surface,
-    borderRadius: 16,
-    paddingHorizontal: spacing.md,
-    height: 52,
-    borderWidth: 1,
-    borderColor: colors.borderLight,
-    shadowColor: colors.shadow,
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.03,
-    shadowRadius: 4,
-    elevation: 1,
-  },
-  inputIcon: {
-    marginRight: spacing.sm,
-  },
-  textInput: {
-    flex: 1,
-    fontSize: 15,
-    color: colors.textPrimary,
-    paddingVertical: 0,
-  },
-  eyeButton: {
-    padding: spacing.xs,
-  },
-  hintRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 6,
-    paddingHorizontal: 2,
-  },
-  hintIcon: {
-    marginRight: 4,
-  },
-  hintText: {
-    fontSize: 11,
-    color: colors.textSecondary,
-    flex: 1,
   },
   checkboxRow: {
     flexDirection: 'row',
@@ -398,3 +313,5 @@ const styles = StyleSheet.create({
     fontSize: 13,
   },
 });
+
+export default RegisterForm;

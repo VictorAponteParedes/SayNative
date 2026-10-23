@@ -75,3 +75,60 @@ Se reemplaza la carpeta plana `screens/` por **`features/`**. Cada feature repre
 │       ├── discovery/            # Matching y perfiles
 │       └── profile/
 ```
+
+---
+
+## 2. Estandarización de Formularios e Inputs (React Hook Form)
+
+**Regla Mandatoria**: Todo formulario e input en la aplicación **DEBE** gestionarse mediante **React Hook Form**.
+
+### Estándares Obligatorios:
+1. **Componentes Globales Obligatorios**:
+   - Todo campo de texto en formularios debe utilizar **`ControlledInput`** (o `AppInput` si es un input no controlado/independiente fuera de formularios) ubicado en `src/components/ui/`.
+   - Prohibido el uso directo de `<TextInput>` de React Native con múltiples `useState` dispersos dentro de pantallas y formularios.
+2. **Conexión Declarativa**:
+   - Se debe conectar cada campo mediante la prop `control` de `useForm` y la prop `name`.
+   - Las reglas de validación o esquemas deben registrarse en las `rules` de cada campo o mediante resolvers.
+3. **Manejo Centralizado de Errores y Estados**:
+   - Los mensajes de error deben mostrarse automáticamente a través de `ControlledInput`, alimentados del estado del formulario (`fieldState.error?.message`).
+   - Todos los textos y mensajes de validación deben provenir de `i18n` (`t(...)`).
+4. **Ejemplo de Implementación Estándar**:
+```tsx
+import { useForm } from 'react-hook-form';
+import { ControlledInput } from '@/components';
+
+interface LoginFormData {
+  email: string;
+  password: string;
+}
+
+const LoginForm = () => {
+  const { control, handleSubmit } = useForm<LoginFormData>({
+    defaultValues: { email: '', password: '' },
+    mode: 'onTouched',
+  });
+
+  const onSubmit = (data: LoginFormData) => {
+    // Lógica de submit
+  };
+
+  return (
+    <>
+      <ControlledInput
+        control={control}
+        name="email"
+        label="Correo electrónico"
+        placeholder="tu@email.com"
+        rules={{
+          required: 'El correo es obligatorio',
+          pattern: {
+            value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+            message: 'Ingresa un correo electrónico válido',
+          },
+        }}
+      />
+    </>
+  );
+};
+```
+

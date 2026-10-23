@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useAuthStore } from '../../../store/useAuthStore';
 import { Toast } from '../../../components';
@@ -12,69 +13,30 @@ export const useRegister = () => {
   const updateUserProfile = useAuthStore((state) => state.updateUserProfile);
   const addCoins = useAuthStore((state) => state.addCoins);
 
-  const [formData, setFormData] = useState<RegisterFormData>({
-    fullName: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-    acceptTerms: false,
-    acceptPromotions: true,
+  const {
+    control,
+    handleSubmit,
+    watch,
+    setValue,
+    formState: { errors },
+  } = useForm<RegisterFormData>({
+    defaultValues: {
+      fullName: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+      acceptTerms: false,
+      acceptPromotions: true,
+    },
+    mode: 'onTouched',
   });
 
-  const handleChangeField = <K extends keyof RegisterFormData>(
-    field: K,
-    value: RegisterFormData[K]
-  ) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
-  };
-
-  const validate = (): boolean => {
-    if (!formData.fullName.trim() || !formData.email.trim() || !formData.password) {
-      Toast.warning(
-        t('register.toasts.missingFieldsTitle'),
-        t('register.toasts.missingFieldsMessage')
-      );
-      return false;
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formData.email.trim())) {
-      Toast.warning(
-        t('register.toasts.missingFieldsTitle'),
-        t('register.toasts.invalidEmail')
-      );
-      return false;
-    }
-
-    if (formData.password.length < 8) {
-      Toast.warning(
-        t('register.toasts.missingFieldsTitle'),
-        t('register.toasts.shortPassword')
-      );
-      return false;
-    }
-
-    if (formData.password !== formData.confirmPassword) {
-      Toast.warning(
-        t('register.toasts.missingFieldsTitle'),
-        t('register.toasts.passwordsDoNotMatch')
-      );
-      return false;
-    }
-
-    if (!formData.acceptTerms) {
+  const onSubmit = async (data: RegisterFormData) => {
+    if (!data.acceptTerms) {
       Toast.warning(
         t('register.toasts.missingFieldsTitle'),
         t('register.toasts.termsRequired')
       );
-      return false;
-    }
-
-    return true;
-  };
-
-  const handleSubmit = async () => {
-    if (!validate()) {
       return;
     }
 
@@ -86,8 +48,8 @@ export const useRegister = () => {
 
       // Actualizar el perfil local con el nombre, correo y acreditar el bono de 50 monedas
       updateUserProfile({
-        name: formData.fullName.trim(),
-        email: formData.email.trim().toLowerCase(),
+        name: data.fullName.trim(),
+        email: data.email.trim().toLowerCase(),
       });
       addCoins(50);
 
@@ -112,10 +74,14 @@ export const useRegister = () => {
   };
 
   return {
-    formData,
-    handleChangeField,
-    handleSubmit,
+    control,
+    handleSubmit: handleSubmit(onSubmit),
+    watch,
+    setValue,
+    errors,
     handleBack,
     isLoading,
   };
 };
+
+export default useRegister;

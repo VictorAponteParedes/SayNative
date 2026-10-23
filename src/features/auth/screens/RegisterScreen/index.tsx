@@ -16,9 +16,11 @@ import { Routes } from '../../../../navigation/routes';
 export const RegisterScreen: React.FC = () => {
   const { t } = useTranslation('auth');
   const {
-    formData,
-    handleChangeField,
+    control,
     handleSubmit,
+    watch,
+    setValue,
+    errors,
     handleBack,
     isLoading,
   } = useRegister();
@@ -62,8 +64,10 @@ export const RegisterScreen: React.FC = () => {
 
           {/* Formulario Principal de Registro con Validación */}
           <RegisterForm
-            formData={formData}
-            onChangeField={handleChangeField}
+            control={control}
+            watch={watch}
+            setValue={setValue}
+            errors={errors}
             onSubmit={handleSubmit}
             onPressLogin={handleGoToLogin}
             onPressTerms={handleTerms}
