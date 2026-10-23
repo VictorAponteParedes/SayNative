@@ -44,10 +44,16 @@ export const useProfile = () => {
             backendUser.earningRatePerMin ?? user.earningRatePerMin,
           learningCostPerMin:
             backendUser.learningCostPerMin ?? user.learningCostPerMin,
-          rating: Number(backendUser.rating) || user.rating,
+          rating:
+            backendUser.rating !== undefined && backendUser.rating !== null
+              ? Number(backendUser.rating)
+              : user.rating,
           totalCalls: backendUser.totalCalls ?? user.totalCalls,
           hoursPracticed:
-            Number(backendUser.hoursPracticed) || user.hoursPracticed,
+            backendUser.hoursPracticed !== undefined &&
+            backendUser.hoursPracticed !== null
+              ? Number(backendUser.hoursPracticed)
+              : user.hoursPracticed,
           reviewCount: backendUser.reviewCount ?? user.reviewCount,
         });
       }

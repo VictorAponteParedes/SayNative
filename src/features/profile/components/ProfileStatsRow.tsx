@@ -52,7 +52,7 @@ export const ProfileStatsRow: React.FC<ProfileStatsRowProps> = ({
           <Star size={18} color={colors.actionDark} fill={colors.actionDark} />
         </View>
         <AppText variant="h3" style={styles.statValue}>
-          {t('stats.reputationValue', { rating })}
+          {t('stats.reputationValue', { rating: Number(rating).toFixed(1) })}
         </AppText>
         <AppText variant="caption" style={styles.statLabel}>
           {t('stats.reputation')}
