@@ -20,21 +20,41 @@ export const authApi = {
    * Valida obligatoriamente que `acceptedTerms` sea true.
    */
   async register(payload: RegisterPayload): Promise<RegisteredUser> {
-    const response = await httpClient.post<BackendWrapper<RegisteredUser> | RegisteredUser>(
-      '/users',
-      payload
-    );
+    try {
+      const response = await httpClient.post<
+        BackendWrapper<{ user?: RegisteredUser } & RegisteredUser> | RegisteredUser
+      >('/auth/register', payload);
 
-    if (
-      response.data &&
-      typeof response.data === 'object' &&
-      'data' in response.data &&
-      response.data.data
-    ) {
-      return (response.data as BackendWrapper<RegisteredUser>).data;
+      if (
+        response.data &&
+        typeof response.data === 'object' &&
+        'data' in response.data &&
+        response.data.data
+      ) {
+        const d = (response.data as BackendWrapper<{ user?: RegisteredUser } & RegisteredUser>).data;
+        return d.user || (d as RegisteredUser);
+      }
+
+      const resAny = response.data as { user?: RegisteredUser } & RegisteredUser;
+      return resAny.user || resAny;
+    } catch {
+      // Fallback de compatibilidad con /users
+      const fallback = await httpClient.post<BackendWrapper<RegisteredUser> | RegisteredUser>(
+        '/users',
+        payload,
+      );
+
+      if (
+        fallback.data &&
+        typeof fallback.data === 'object' &&
+        'data' in fallback.data &&
+        fallback.data.data
+      ) {
+        return (fallback.data as BackendWrapper<RegisteredUser>).data;
+      }
+
+      return fallback.data as RegisteredUser;
     }
-
-    return response.data as RegisteredUser;
   },
 
   /**
