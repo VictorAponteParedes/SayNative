@@ -6,10 +6,17 @@ import type { AuthStackParamList } from './types';
 import { AppText, AppButton } from '../components';
 import { useAuthStore } from '../store/useAuthStore';
 import { colors } from '../theme';
+import { RegisterScreen } from '../features/auth';
 
 const Stack = createNativeStackNavigator<AuthStackParamList>();
 
-const LoginPlaceholder: React.FC = () => {
+interface LoginPlaceholderProps {
+  navigation: {
+    navigate: (route: string) => void;
+  };
+}
+
+const LoginPlaceholder: React.FC<LoginPlaceholderProps> = ({ navigation }) => {
   const setAuthenticated = useAuthStore((state) => state.setAuthenticated);
 
   return (
@@ -25,6 +32,12 @@ const LoginPlaceholder: React.FC = () => {
         onPress={() => setAuthenticated(true)}
         style={styles.button}
       />
+      <AppButton
+        title="Crear Cuenta"
+        variant="secondary"
+        onPress={() => navigation.navigate(Routes.Auth.Register)}
+        style={[styles.button, styles.registerButton]}
+      />
     </View>
   );
 };
@@ -32,14 +45,19 @@ const LoginPlaceholder: React.FC = () => {
 export const AuthStack: React.FC = () => {
   return (
     <Stack.Navigator
+      initialRouteName={Routes.Auth.Register as keyof AuthStackParamList}
       screenOptions={{
         headerShown: false,
         animation: 'slide_from_right',
       }}
     >
       <Stack.Screen
+        name={Routes.Auth.Register as keyof AuthStackParamList}
+        component={RegisterScreen}
+      />
+      <Stack.Screen
         name={Routes.Auth.Login as keyof AuthStackParamList}
-        component={LoginPlaceholder}
+        component={LoginPlaceholder as React.ComponentType}
       />
     </Stack.Navigator>
   );
@@ -64,6 +82,9 @@ const styles = StyleSheet.create({
   },
   button: {
     width: '100%',
+  },
+  registerButton: {
+    marginTop: 12,
   },
 });
 

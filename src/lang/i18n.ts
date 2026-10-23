@@ -11,6 +11,7 @@ import esProfile from './es/profile.json';
 import esNotifications from './es/notifications.json';
 import esSecurity from './es/security.json';
 import esSupport from './es/support.json';
+import esAuth from './es/auth.json';
 
 // EN
 import enCommon from './en/common.json';
@@ -22,6 +23,7 @@ import enProfile from './en/profile.json';
 import enNotifications from './en/notifications.json';
 import enSecurity from './en/security.json';
 import enSupport from './en/support.json';
+import enAuth from './en/auth.json';
 
 // PT
 import ptCommon from './pt/common.json';
@@ -33,6 +35,7 @@ import ptProfile from './pt/profile.json';
 import ptNotifications from './pt/notifications.json';
 import ptSecurity from './pt/security.json';
 import ptSupport from './pt/support.json';
+import ptAuth from './pt/auth.json';
 
 // ZH (Chino Simplificado)
 import zhCommon from './zh/common.json';
@@ -44,6 +47,7 @@ import zhProfile from './zh/profile.json';
 import zhNotifications from './zh/notifications.json';
 import zhSecurity from './zh/security.json';
 import zhSupport from './zh/support.json';
+import zhAuth from './zh/auth.json';
 
 // JA (Japonés)
 import jaCommon from './ja/common.json';
@@ -55,6 +59,7 @@ import jaProfile from './ja/profile.json';
 import jaNotifications from './ja/notifications.json';
 import jaSecurity from './ja/security.json';
 import jaSupport from './ja/support.json';
+import jaAuth from './ja/auth.json';
 
 // FR (Francés)
 import frCommon from './fr/common.json';
@@ -66,6 +71,7 @@ import frProfile from './fr/profile.json';
 import frNotifications from './fr/notifications.json';
 import frSecurity from './fr/security.json';
 import frSupport from './fr/support.json';
+import frAuth from './fr/auth.json';
 
 export const defaultNS = 'common';
 
@@ -80,6 +86,7 @@ export const resources = {
     notifications: esNotifications,
     security: esSecurity,
     support: esSupport,
+    auth: esAuth,
   },
   en: {
     common: enCommon,
@@ -91,6 +98,7 @@ export const resources = {
     notifications: enNotifications,
     security: enSecurity,
     support: enSupport,
+    auth: enAuth,
   },
   pt: {
     common: ptCommon,
@@ -102,6 +110,7 @@ export const resources = {
     notifications: ptNotifications,
     security: ptSecurity,
     support: ptSupport,
+    auth: ptAuth,
   },
   zh: {
     common: zhCommon,
@@ -113,6 +122,7 @@ export const resources = {
     notifications: zhNotifications,
     security: zhSecurity,
     support: zhSupport,
+    auth: zhAuth,
   },
   ja: {
     common: jaCommon,
@@ -124,6 +134,7 @@ export const resources = {
     notifications: jaNotifications,
     security: jaSecurity,
     support: jaSupport,
+    auth: jaAuth,
   },
   fr: {
     common: frCommon,
@@ -135,6 +146,7 @@ export const resources = {
     notifications: frNotifications,
     security: frSecurity,
     support: frSupport,
+    auth: frAuth,
   },
 } as const;
 
