@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ScrollView, Alert } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { SafeAreaContainer, BottomTabBar } from '../../../../components';
 import { HomeHeader } from '../../components/HomeHeader';
 import { UserProfileBar } from '../../components/UserProfileBar';
 import { LanguageFilterBar } from '../../components/LanguageFilterBar';
+import { PracticeLanguageBottomSheet } from '../../components/PracticeLanguageBottomSheet';
 import { InstantPracticeBanner } from '../../components/InstantPracticeBanner';
 import { TeachingAvailabilityCard } from '../../components/TeachingAvailabilityCard';
 import { FeaturedPeersSection } from '../../components/FeaturedPeersSection';
@@ -17,6 +18,7 @@ import { styles } from './styles';
 export const HomeScreen: React.FC = () => {
   const { t } = useTranslation('home');
   const { peers, onlineCount, startInstantMatch } = useHomeFeed();
+  const [isLanguageSheetOpen, setIsLanguageSheetOpen] = useState(false);
 
   const handleNotifications = () => {
     navigate(Routes.App.Notifications);
@@ -31,10 +33,7 @@ export const HomeScreen: React.FC = () => {
   };
 
   const handleSelectLearningLanguage = () => {
-    Alert.alert(
-      t('languageFilter.selectLanguageTitle'),
-      t('languageFilter.selectLanguageMessage')
-    );
+    setIsLanguageSheetOpen(true);
   };
 
   const handleStartSearch = () => {
@@ -105,6 +104,12 @@ export const HomeScreen: React.FC = () => {
           onPressChat={handleChatPeer}
         />
       </ScrollView>
+
+      {/* Selector de idioma a practicar con AppBottomSheet */}
+      <PracticeLanguageBottomSheet
+        visible={isLanguageSheetOpen}
+        onClose={() => setIsLanguageSheetOpen(false)}
+      />
 
       {/* Barra de navegación inferior */}
       <BottomTabBar activeTab="Inicio" />
