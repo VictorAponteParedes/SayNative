@@ -8,7 +8,7 @@ import {
   ViewStyle,
 } from 'react-native';
 import { Search, SlidersHorizontal } from 'lucide-react-native';
-import { colors, spacing, borderRadius, fonts } from '../../theme';
+import { colors, spacing, borderRadius, fonts } from '@/theme';
 
 export interface SearchBarProps {
   value: string;

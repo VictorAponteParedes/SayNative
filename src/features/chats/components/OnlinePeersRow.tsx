@@ -2,8 +2,8 @@ import React from 'react';
 import { View, ScrollView, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import { Plus } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
-import { colors, spacing } from '../../../theme';
-import { AppText } from '../../../components';
+import { colors, spacing } from '@/theme';
+import { AppText } from '@/components';
 import { OnlinePeer } from '../types';
 
 export interface OnlinePeersRowProps {

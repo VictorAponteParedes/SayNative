@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { useAuthStore } from '../../../store/useAuthStore';
+import { useAuthStore } from '@/store/useAuthStore';
 import { CoinPackage } from '../types';
 
 export const COIN_PACKAGES: CoinPackage[] = [

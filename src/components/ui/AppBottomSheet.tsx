@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { X } from 'lucide-react-native';
-import { colors, spacing } from '../../theme';
+import { colors, spacing } from '@/theme';
 import { AppText } from './AppText';
 
 const { height: SCREEN_HEIGHT } = Dimensions.get('window');

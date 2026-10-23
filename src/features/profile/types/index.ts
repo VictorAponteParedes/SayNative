@@ -1,4 +1,4 @@
-import { UserLanguage } from '../../../store/useAuthStore';
+import { UserLanguage } from '@/store/useAuthStore';
 
 export interface ProfileStats {
   hoursPracticed: number;

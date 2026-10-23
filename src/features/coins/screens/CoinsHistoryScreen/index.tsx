@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, ScrollView } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { SafeAreaContainer, AppText } from '../../../../components';
+import { SafeAreaContainer, AppText } from '@/components';
 import {
   HistoryHeader,
   HistoryBalanceSummaryCard,

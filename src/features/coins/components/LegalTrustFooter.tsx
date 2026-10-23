@@ -2,8 +2,8 @@ import React from 'react';
 import { View, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { ShieldCheck, Smartphone, Award } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
-import { colors, spacing } from '../../../theme';
-import { AppText } from '../../../components';
+import { colors, spacing } from '@/theme';
+import { AppText } from '@/components';
 
 export const LegalTrustFooter: React.FC = () => {
   const { t } = useTranslation('coins');

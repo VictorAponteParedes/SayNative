@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { ChevronRight, CheckCircle2 } from 'lucide-react-native';
-import { colors, spacing } from '../../../theme';
-import { AppText, AppBottomSheet, Toast } from '../../../components';
+import { colors, spacing } from '@/theme';
+import { AppText, AppBottomSheet, Toast } from '@/components';
 
 export interface TopicArticle {
   id: string;

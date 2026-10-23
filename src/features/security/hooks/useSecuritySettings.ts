@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Alert } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { Toast } from '../../../components';
-import { useAuthStore } from '../../../store/useAuthStore';
+import { Toast } from '@/components';
+import { useAuthStore } from '@/store/useAuthStore';
 import type { BlockedUser, PrivacySettings } from '../types';
 
 const INITIAL_BLOCKED_USERS: BlockedUser[] = [

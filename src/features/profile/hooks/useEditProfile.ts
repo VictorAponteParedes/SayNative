@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Alert } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { useAuthStore } from '../../../store/useAuthStore';
-import { goBack } from '../../../navigation/NavigationRef';
-import { Toast } from '../../../components';
+import { useAuthStore } from '@/store/useAuthStore';
+import { goBack } from '@/navigation/NavigationRef';
+import { Toast } from '@/components';
 
 export const useEditProfile = () => {
   const { t } = useTranslation('profile');

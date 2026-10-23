@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { goBack } from '../../../navigation/NavigationRef';
+import { goBack } from '@/navigation/NavigationRef';
 
 export const useSupport = () => {
   const [searchQuery, setSearchQuery] = useState('');

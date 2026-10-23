@@ -2,8 +2,8 @@ import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ban, UserX } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
-import { colors, spacing } from '../../../theme';
-import { AppText } from '../../../components';
+import { colors, spacing } from '@/theme';
+import { AppText } from '@/components';
 import type { BlockedUser } from '../types';
 
 export interface BlockedUsersSectionProps {

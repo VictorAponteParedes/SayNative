@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { Pencil, CheckCircle2, Mail } from 'lucide-react-native';
-import { colors, spacing } from '../../../theme';
-import { AppText } from '../../../components';
-import type { UserProfile } from '../../../store/useAuthStore';
+import { colors, spacing } from '@/theme';
+import { AppText } from '@/components';
+import type { UserProfile } from '@/store/useAuthStore';
 
 export interface UserIdentityCardProps {
   user: UserProfile;

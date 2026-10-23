@@ -2,9 +2,9 @@ import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { Check } from 'lucide-react-native';
-import { colors, spacing } from '../../../theme';
-import { AppText, AppBottomSheet, Toast } from '../../../components';
-import { SupportedLanguage, changeAppLanguage } from '../../../lang/i18n';
+import { colors, spacing } from '@/theme';
+import { AppText, AppBottomSheet, Toast } from '@/components';
+import { SupportedLanguage, changeAppLanguage } from '@/lang/i18n';
 
 export interface LanguageItem {
   code: SupportedLanguage;

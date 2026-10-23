@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import { Plus, Sparkles, Mic, Send } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
-import { colors, spacing, fonts } from '../../../../theme';
+import { colors, spacing, fonts } from '@/theme';
 
 export interface ChatInputBarProps {
   value: string;

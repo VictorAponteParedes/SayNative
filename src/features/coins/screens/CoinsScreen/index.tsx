@@ -1,7 +1,7 @@
 import React from 'react';
 import { ScrollView, Alert } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { SafeAreaContainer, Toast } from '../../../../components';
+import { SafeAreaContainer, Toast } from '@/components';
 import { CoinsScreenHeader } from '../../components/CoinsScreenHeader';
 import { CoinsHeroSection } from '../../components/CoinsHeroSection';
 import { RewardedAdCard } from '../../components/RewardedAdCard';

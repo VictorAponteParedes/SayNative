@@ -2,9 +2,9 @@ import React from 'react';
 import { View, StyleSheet, Switch } from 'react-native';
 import { Volume2 } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
-import { colors, spacing, borderRadius } from '../../../theme';
-import { AppText } from '../../../components';
-import { useAuthStore } from '../../../store/useAuthStore';
+import { colors, spacing, borderRadius } from '@/theme';
+import { AppText } from '@/components';
+import { useAuthStore } from '@/store/useAuthStore';
 
 export interface TeachingAvailabilityCardProps {
   onToggleAvailability?: (value: boolean) => void;

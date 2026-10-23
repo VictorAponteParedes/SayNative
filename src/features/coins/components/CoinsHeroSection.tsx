@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { colors, spacing } from '../../../theme';
-import { AppText } from '../../../components';
-import { navigate } from '../../../navigation/NavigationRef';
-import { Routes } from '../../../navigation/routes';
+import { colors, spacing } from '@/theme';
+import { AppText } from '@/components';
+import { navigate } from '@/navigation/NavigationRef';
+import { Routes } from '@/navigation/routes';
 
 export interface CoinsHeroSectionProps {
   currentCoins: number;

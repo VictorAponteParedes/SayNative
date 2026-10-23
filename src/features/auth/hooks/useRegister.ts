@@ -2,11 +2,11 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
-import { useAuthStore } from '../../../store/useAuthStore';
-import { Toast } from '../../../components';
+import { useAuthStore } from '@/store/useAuthStore';
+import { Toast } from '@/components';
 import { RegisterFormData } from '../types';
 import { authApi } from '../api/authApi';
-import { goBack } from '../../../navigation/NavigationRef';
+import { goBack } from '@/navigation/NavigationRef';
 
 export const useRegister = () => {
   const { t } = useTranslation('auth');

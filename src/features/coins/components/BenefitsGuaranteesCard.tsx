@@ -2,8 +2,8 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Check } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
-import { colors, spacing, borderRadius } from '../../../theme';
-import { AppText } from '../../../components';
+import { colors, spacing, borderRadius } from '@/theme';
+import { AppText } from '@/components';
 
 export const BenefitsGuaranteesCard: React.FC = () => {
   const { t } = useTranslation('coins');

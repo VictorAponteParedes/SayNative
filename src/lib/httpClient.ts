@@ -1,5 +1,5 @@
 import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
-import { API_CONFIG } from '../config/api';
+import { API_CONFIG } from '@/config/api';
 
 export const httpClient = axios.create({
   baseURL: API_CONFIG.BASE_URL,

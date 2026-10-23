@@ -10,7 +10,7 @@ import {
   TextStyle,
 } from 'react-native';
 import { Eye, EyeOff, AlertCircle, Info } from 'lucide-react-native';
-import { colors, spacing, borderRadius } from '../../theme';
+import { colors, spacing, borderRadius } from '@/theme';
 import { AppText } from './AppText';
 
 export interface AppInputProps extends Omit<TextInputProps, 'style'> {

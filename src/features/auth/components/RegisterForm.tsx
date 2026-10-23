@@ -20,8 +20,8 @@ import {
   FieldErrors,
 } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { colors, spacing } from '../../../theme';
-import { AppText, ControlledInput } from '../../../components';
+import { colors, spacing } from '@/theme';
+import { AppText, ControlledInput } from '@/components';
 import { RegisterFormData } from '../types';
 
 export interface RegisterFormProps {

@@ -8,9 +8,9 @@ import {
 } from 'react-native';
 import { ArrowLeft, Camera } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
-import { SafeAreaContainer, AppText, AppButton } from '../../../../components';
-import { colors, fonts } from '../../../../theme';
-import { goBack } from '../../../../navigation/NavigationRef';
+import { SafeAreaContainer, AppText, AppButton } from '@/components';
+import { colors, fonts } from '@/theme';
+import { goBack } from '@/navigation/NavigationRef';
 import { useEditProfile } from '../../hooks/useEditProfile';
 import { styles } from './styles';
 

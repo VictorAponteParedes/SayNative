@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import { ScrollView, KeyboardAvoidingView, Platform, Alert } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { SafeAreaContainer, AppText } from '../../../../components';
+import { SafeAreaContainer, AppText } from '@/components';
 import {
   RegisterHeader,
   BonusRewardCard,
   SocialAuthButtons,
   RegisterForm,
 } from '../../components';
-import { LanguageSelectorBottomSheet } from '../../../profile/components/LanguageSelectorBottomSheet';
+import { LanguageSelectorBottomSheet } from '@/features/profile/components/LanguageSelectorBottomSheet';
 import { useRegister } from '../../hooks/useRegister';
 import { styles } from './styles';
-import { navigate } from '../../../../navigation/NavigationRef';
-import { Routes } from '../../../../navigation/routes';
+import { Routes } from '@/navigation/routes';
+import { navigate } from '@/navigation/NavigationRef';
 
 export const RegisterScreen: React.FC = () => {
   const { t } = useTranslation('auth');

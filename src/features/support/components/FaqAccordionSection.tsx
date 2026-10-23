@@ -9,8 +9,8 @@ import {
 } from 'react-native';
 import { ChevronDown, Flame } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
-import { colors, spacing } from '../../../theme';
-import { AppText } from '../../../components';
+import { colors, spacing } from '@/theme';
+import { AppText } from '@/components';
 
 if (
   Platform.OS === 'android' &&

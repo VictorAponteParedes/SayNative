@@ -2,8 +2,8 @@ import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Star, MessageSquare, Video, Check } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
-import { colors, spacing, borderRadius } from '../../../theme';
-import { AppText, Avatar, Tag } from '../../../components';
+import { colors, spacing, borderRadius } from '@/theme';
+import { AppText, Avatar, Tag } from '@/components';
 import { SpeakerUser } from '../types';
 
 export interface SpeakerCardProps {

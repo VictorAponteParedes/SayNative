@@ -1,8 +1,8 @@
 import React from 'react';
 import { ScrollView } from 'react-native';
-import { SafeAreaContainer, BottomTabBar } from '../../../../components';
-import { navigate } from '../../../../navigation/NavigationRef';
-import { Routes } from '../../../../navigation/routes';
+import { SafeAreaContainer, BottomTabBar } from '@/components';
+import { navigate } from '@/navigation/NavigationRef';
+import { Routes } from '@/navigation/routes';
 import {
   ProfileHeader,
   UserIdentityCard,

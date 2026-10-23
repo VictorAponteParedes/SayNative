@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, StyleProp, ViewStyle } from 'react-native';
-import { colors, spacing } from '../../theme';
+import { colors, spacing } from '@/theme';
 import { AppText } from './AppText';
 
 export interface TagProps {

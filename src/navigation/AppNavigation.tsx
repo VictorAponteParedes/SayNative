@@ -2,8 +2,8 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import AppStack from './AppStack';
 import AuthStack from './AuthStack';
-import { useAuthStore } from '../store/useAuthStore';
-import { colors } from '../theme';
+import { useAuthStore } from '@/store/useAuthStore';
+import { colors } from '@/theme';
 
 export const AppNavigation: React.FC = () => {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);

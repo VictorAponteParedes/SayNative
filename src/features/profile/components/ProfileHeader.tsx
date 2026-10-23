@@ -2,8 +2,8 @@ import React from 'react';
 import { View, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { Bell } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
-import { colors, spacing } from '../../../theme';
-import { AppText, AppLogo } from '../../../components';
+import { colors, spacing } from '@/theme';
+import { AppText, AppLogo } from '@/components';
 
 export interface ProfileHeaderProps {
   onPressNotifications?: () => void;

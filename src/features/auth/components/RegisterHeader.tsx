@@ -2,9 +2,9 @@ import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { ChevronLeft } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
-import { colors, spacing } from '../../../theme';
-import { AppText, AppLogo } from '../../../components';
-import { getLanguageFlag } from '../../profile/components/LanguageSelectorBottomSheet';
+import { colors, spacing } from '@/theme';
+import { AppText, AppLogo } from '@/components';
+import { getLanguageFlag } from '@/features/profile/components/LanguageSelectorBottomSheet';
 
 export interface RegisterHeaderProps {
   onBack: () => void;

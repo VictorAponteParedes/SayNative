@@ -2,9 +2,9 @@ import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { ChevronDown } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
-import { colors, spacing } from '../../../theme';
-import { AppText } from '../../../components';
-import { useAuthStore } from '../../../store/useAuthStore';
+import { colors, spacing } from '@/theme';
+import { AppText } from '@/components';
+import { useAuthStore } from '@/store/useAuthStore';
 
 export interface LanguageFilterBarProps {
   onPressSelectLearningLanguage?: () => void;

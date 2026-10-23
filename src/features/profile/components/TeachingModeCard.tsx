@@ -2,8 +2,8 @@ import React from 'react';
 import { View, StyleSheet, Switch } from 'react-native';
 import { Banknote, Lock } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
-import { colors, spacing } from '../../../theme';
-import { AppText } from '../../../components';
+import { colors, spacing } from '@/theme';
+import { AppText } from '@/components';
 
 export interface TeachingModeCardProps {
   isAvailable: boolean;

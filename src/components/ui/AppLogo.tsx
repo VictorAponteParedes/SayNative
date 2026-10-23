@@ -7,7 +7,7 @@ import {
   ViewStyle,
   StyleSheet,
 } from 'react-native';
-import { colors } from '../../theme';
+import { colors } from '@/theme';
 
 export interface AppLogoProps {
   size?: number;

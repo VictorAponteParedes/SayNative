@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ScrollView, Alert } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { SafeAreaContainer, BottomTabBar } from '../../../../components';
+import { SafeAreaContainer, BottomTabBar } from '@/components';
 import { HomeHeader } from '../../components/HomeHeader';
 import { UserProfileBar } from '../../components/UserProfileBar';
 import { LanguageFilterBar } from '../../components/LanguageFilterBar';
@@ -10,8 +10,8 @@ import { InstantPracticeBanner } from '../../components/InstantPracticeBanner';
 import { TeachingAvailabilityCard } from '../../components/TeachingAvailabilityCard';
 import { FeaturedPeersSection } from '../../components/FeaturedPeersSection';
 import { useHomeFeed } from '../../hooks/useHomeFeed';
-import { navigate } from '../../../../navigation/NavigationRef';
-import { Routes } from '../../../../navigation/routes';
+import { navigate } from '@/navigation/NavigationRef';
+import { Routes } from '@/navigation/routes';
 import { PeerUser } from '../../types';
 import { styles } from './styles';
 

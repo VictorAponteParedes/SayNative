@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, FlatList, Alert } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { SafeAreaContainer, BottomTabBar, AppText, SearchBar } from '../../../../components';
-import { HomeHeader } from '../../../home/components/HomeHeader';
+import { SafeAreaContainer, BottomTabBar, AppText, SearchBar } from '@/components';
+import { HomeHeader } from '@/features/home/components/HomeHeader';
 import { ExploreHeader } from '../../components/ExploreHeader';
 import { FilterPillsRow } from '../../components/FilterPillsRow';
 import { SpeakersCountSortRow } from '../../components/SpeakersCountSortRow';

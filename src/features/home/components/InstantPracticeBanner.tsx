@@ -2,8 +2,8 @@ import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Video } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
-import { colors, spacing, borderRadius } from '../../../theme';
-import { AppText } from '../../../components';
+import { colors, spacing, borderRadius } from '@/theme';
+import { AppText } from '@/components';
 
 export interface InstantPracticeBannerProps {
   onPressStartSearch: () => void;

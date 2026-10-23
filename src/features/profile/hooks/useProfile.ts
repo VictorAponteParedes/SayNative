@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Alert } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { useAuthStore } from '../../../store/useAuthStore';
-import { navigate } from '../../../navigation/NavigationRef';
-import { Routes } from '../../../navigation/routes';
-import { Toast } from '../../../components';
+import { useAuthStore } from '@/store/useAuthStore';
+import { navigate } from '@/navigation/NavigationRef';
+import { Routes } from '@/navigation/routes';
+import { Toast } from '@/components';
 
 export const useProfile = () => {
   const { t } = useTranslation('profile');

@@ -8,9 +8,9 @@ import {
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Check, AlertCircle, X } from 'lucide-react-native';
-import { colors, spacing } from '../../../theme';
-import { AppText } from '../AppText';
-import { useToastStore, ToastType } from '../../../store/useToastStore';
+import { colors, spacing } from '@/theme';
+import { AppText } from '@/components/ui/AppText';
+import { useToastStore, ToastType } from '@/store/useToastStore';
 
 const { width } = Dimensions.get('window');
 

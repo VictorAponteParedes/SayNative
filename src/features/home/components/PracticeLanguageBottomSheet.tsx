@@ -2,9 +2,9 @@ import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Check } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
-import { colors, spacing } from '../../../theme';
-import { AppText, AppBottomSheet, Toast } from '../../../components';
-import { useAuthStore, UserLanguage } from '../../../store/useAuthStore';
+import { colors, spacing } from '@/theme';
+import { AppText, AppBottomSheet, Toast } from '@/components';
+import { useAuthStore, UserLanguage } from '@/store/useAuthStore';
 
 export interface PracticeLanguageBottomSheetProps {
   visible: boolean;

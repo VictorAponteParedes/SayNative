@@ -1,9 +1,9 @@
 import { useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useAuthStore } from '../../../store/useAuthStore';
-import { Toast } from '../../../components';
-import { navigate } from '../../../navigation/NavigationRef';
-import { Routes } from '../../../navigation/routes';
+import { useAuthStore } from '@/store/useAuthStore';
+import { Toast } from '@/components';
+import { navigate } from '@/navigation/NavigationRef';
+import { Routes } from '@/navigation/routes';
 import type {
   NotificationItem,
   NotificationCategory,

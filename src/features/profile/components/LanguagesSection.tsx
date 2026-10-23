@@ -2,9 +2,9 @@ import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Plus } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
-import { colors, spacing } from '../../../theme';
-import { AppText } from '../../../components';
-import type { UserProfile } from '../../../store/useAuthStore';
+import { colors, spacing } from '@/theme';
+import { AppText } from '@/components';
+import type { UserProfile } from '@/store/useAuthStore';
 
 export interface LanguagesSectionProps {
   user: UserProfile;

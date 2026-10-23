@@ -1,15 +1,15 @@
 import React from 'react';
 import { View, FlatList, Alert } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { SafeAreaContainer, BottomTabBar, AppText, SearchBar } from '../../../../components';
+import { SafeAreaContainer, BottomTabBar, AppText, SearchBar } from '@/components';
 import { ChatsHeader } from '../../components/ChatsHeader';
 import { OnlinePeersRow } from '../../components/OnlinePeersRow';
 import { ChatFilterTabs } from '../../components/ChatFilterTabs';
 import { ChatItemCard } from '../../components/ChatItemCard';
 import { DailyTipCard } from '../../components/DailyTipCard';
 import { useChatsList } from '../../hooks/useChatsList';
-import { navigate } from '../../../../navigation/NavigationRef';
-import { Routes } from '../../../../navigation/routes';
+import { navigate } from '@/navigation/NavigationRef';
+import { Routes } from '@/navigation/routes';
 import { ChatConversation, OnlinePeer } from '../../types';
 import { styles } from './styles';
 

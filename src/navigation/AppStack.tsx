@@ -1,13 +1,13 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { HomeScreen } from '../features/home';
-import { ExploreScreen } from '../features/discovery';
-import { ChatsScreen, PrivateChatScreen } from '../features/chats';
-import { CoinsScreen, CoinsHistoryScreen } from '../features/coins';
-import { ProfileScreen, EditProfileScreen } from '../features/profile';
-import { NotificationsScreen } from '../features/notifications';
-import { SecurityScreen } from '../features/security';
-import { SupportScreen } from '../features/support';
+import { HomeScreen } from '@/features/home';
+import { ExploreScreen } from '@/features/discovery';
+import { ChatsScreen, PrivateChatScreen } from '@/features/chats';
+import { CoinsScreen, CoinsHistoryScreen } from '@/features/coins';
+import { ProfileScreen, EditProfileScreen } from '@/features/profile';
+import { NotificationsScreen } from '@/features/notifications';
+import { SecurityScreen } from '@/features/security';
+import { SupportScreen } from '@/features/support';
 import { Routes } from './routes';
 import type { AppStackParamList } from './types';
 

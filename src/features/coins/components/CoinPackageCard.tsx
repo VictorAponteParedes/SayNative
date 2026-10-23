@@ -2,8 +2,8 @@ import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Zap, CheckCircle2 } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
-import { colors, spacing, borderRadius } from '../../../theme';
-import { AppText } from '../../../components';
+import { colors, spacing, borderRadius } from '@/theme';
+import { AppText } from '@/components';
 import { CoinPackage } from '../types';
 
 export interface CoinPackageCardProps {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { ViewStyle, StyleSheet, StatusBar, Platform } from 'react-native';
 import { SafeAreaView, Edge } from 'react-native-safe-area-context';
-import { colors } from '../../theme';
+import { colors } from '@/theme';
 
 export interface SafeAreaContainerProps {
   children: React.ReactNode;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
-import { spacing } from '../../../theme';
+import { spacing } from '@/theme';
 import { CoinPackageCard } from './CoinPackageCard';
 import { CoinPackage } from '../types';
 

@@ -2,11 +2,11 @@ import React from 'react';
 import { View, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { Home, Compass, MessageSquare, User } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
-import { colors, spacing } from '../../theme';
-import { AppText } from '../ui/AppText';
-import { navigate } from '../../navigation/NavigationRef';
-import { Routes } from '../../navigation/routes';
-import { useAppConfigStore } from '../../store/useAppConfigStore';
+import { colors, spacing } from '@/theme';
+import { AppText } from '@/components/ui/AppText';
+import { Routes } from '@/navigation/routes';
+import { useAppConfigStore } from '@/store/useAppConfigStore';
+import { navigate } from '@/navigation/NavigationRef';
 
 export type TabKey = 'Inicio' | 'Explorar' | 'Chats' | 'Perfil';
 

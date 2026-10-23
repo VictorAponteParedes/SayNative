@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { Video, PhoneMissed, CheckCheck, Phone } from 'lucide-react-native';
-import { colors, spacing, borderRadius } from '../../../theme';
-import { AppText } from '../../../components';
+import { colors, spacing, borderRadius } from '@/theme';
+import { AppText } from '@/components';
 import { ChatConversation } from '../types';
 
 export interface ChatItemCardProps {

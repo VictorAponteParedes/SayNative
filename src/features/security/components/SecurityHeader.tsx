@@ -2,9 +2,9 @@ import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { ArrowLeft, Shield } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
-import { colors, spacing } from '../../../theme';
-import { AppText } from '../../../components';
-import { goBack } from '../../../navigation/NavigationRef';
+import { colors, spacing } from '@/theme';
+import { AppText } from '@/components';
+import { goBack } from '@/navigation/NavigationRef';
 
 export const SecurityHeader: React.FC = () => {
   const { t } = useTranslation('security');
