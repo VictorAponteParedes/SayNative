@@ -1,5 +1,10 @@
 import { httpClient } from '@/lib/httpClient';
-import { RegisterPayload, RegisteredUser } from '../types';
+import {
+  RegisterPayload,
+  RegisteredUser,
+  LoginPayload,
+  LoginResponse,
+} from '../types';
 
 interface BackendWrapper<T> {
   success: boolean;
@@ -30,6 +35,27 @@ export const authApi = {
     }
 
     return response.data as RegisteredUser;
+  },
+
+  /**
+   * Inicia sesión en SayNative a través del backend NestJS (/auth/login).
+   */
+  async login(payload: LoginPayload): Promise<LoginResponse> {
+    const response = await httpClient.post<BackendWrapper<LoginResponse> | LoginResponse>(
+      '/auth/login',
+      payload
+    );
+
+    if (
+      response.data &&
+      typeof response.data === 'object' &&
+      'data' in response.data &&
+      response.data.data
+    ) {
+      return (response.data as BackendWrapper<LoginResponse>).data;
+    }
+
+    return response.data as LoginResponse;
   },
 };
 

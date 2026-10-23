@@ -11,8 +11,7 @@ import { goBack } from '@/navigation/NavigationRef';
 export const useRegister = () => {
   const { t } = useTranslation('auth');
   const [isLoading, setIsLoading] = useState(false);
-  const setAuthenticated = useAuthStore((state) => state.setAuthenticated);
-  const updateUserProfile = useAuthStore((state) => state.updateUserProfile);
+  const setUserFromBackend = useAuthStore((state) => state.setUserFromBackend);
   const addCoins = useAuthStore((state) => state.addCoins);
 
   const {
@@ -59,21 +58,11 @@ export const useRegister = () => {
         learningLanguageCode: 'en',
       });
 
-      // Actualizar el perfil local con el usuario real registrado
-      updateUserProfile({
-        id: createdUser.id,
-        name: createdUser.fullName,
-        email: createdUser.email,
-        countryCode: createdUser.countryCode || 'ES',
-        countryFlag: createdUser.countryFlag || '🇪🇸',
-        isVerified: createdUser.isVerified,
-      });
+      // Poblar el store global directamente con el usuario creado en la base de datos
+      setUserFromBackend(createdUser);
 
       // Acreditar el bono de +50 monedas de bienvenida
       addCoins(50);
-
-      // Iniciar sesión en la app
-      setAuthenticated(true);
 
       setTimeout(() => {
         Toast.success(

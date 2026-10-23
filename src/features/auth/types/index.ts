@@ -7,6 +7,28 @@ export interface RegisterFormData {
   acceptPromotions: boolean;
 }
 
+export interface LoginFormData {
+  email: string;
+  password: string;
+}
+
+export interface LoginPayload {
+  email: string;
+  password: string;
+}
+
+export interface LoginResponse {
+  accessToken?: string;
+  refreshToken?: string;
+  token?: string;
+  user?: RegisteredUser;
+  id?: string;
+  email?: string;
+  fullName?: string;
+  name?: string;
+  [key: string]: unknown;
+}
+
 export interface RegisterPayload {
   email: string;
   password: string;
