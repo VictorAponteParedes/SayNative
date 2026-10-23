@@ -9,6 +9,9 @@ import { Toast } from '@/components';
 import { profileApi } from '../api/profileApi';
 import { EditProfileFormData } from '../types';
 
+const isValidUuid = (id: string): boolean =>
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id);
+
 export const useEditProfile = () => {
   const { t } = useTranslation('profile');
   const user = useAuthStore(state => state.user);
@@ -36,7 +39,11 @@ export const useEditProfile = () => {
 
   const fetchProfile = useCallback(
     async (showLoadingIndicator = true) => {
-      if (!user.id) return;
+      if (!user.id || !isValidUuid(user.id)) {
+        setIsFetching(false);
+        setIsRefreshing(false);
+        return;
+      }
 
       if (showLoadingIndicator) {
         setIsFetching(true);
@@ -120,29 +127,19 @@ export const useEditProfile = () => {
 
     try {
       // 1. Guardar en Backend NestJS
-      let updatedBackendUser;
-      try {
-        updatedBackendUser = await profileApi.updateProfile(user.id, {
-          fullName: data.fullName.trim(),
-          email: data.email.trim().toLowerCase(),
-          phone: data.phone.trim(),
-          bio: data.bio.trim(),
-        });
-      } catch (apiError: unknown) {
-        if (__DEV__) {
-          console.log(
-            '[useEditProfile] Backend patch error, updating local store:',
-            apiError,
-          );
-        }
-      }
-
-      // 2. Persistir siempre en el estado global de Zustand
-      updateUserProfile({
-        name: updatedBackendUser?.fullName || data.fullName.trim(),
-        email: updatedBackendUser?.email || data.email.trim().toLowerCase(),
+      const updatedBackendUser = await profileApi.updateProfile(user.id, {
+        fullName: data.fullName.trim(),
+        email: data.email.trim().toLowerCase(),
         phone: data.phone.trim(),
         bio: data.bio.trim(),
+      });
+
+      // 2. Persistir en el estado global de Zustand
+      updateUserProfile({
+        name: updatedBackendUser.fullName || data.fullName.trim(),
+        email: updatedBackendUser.email || data.email.trim().toLowerCase(),
+        phone: updatedBackendUser.phone ?? data.phone.trim(),
+        bio: updatedBackendUser.bio ?? data.bio.trim(),
         avatarUrl,
       });
 

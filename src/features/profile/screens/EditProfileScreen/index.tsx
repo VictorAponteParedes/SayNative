@@ -29,13 +29,16 @@ export const EditProfileScreen: React.FC = () => {
     handleChangePhoto,
   } = useEditProfile();
 
-  const renderVerifiedBadge = () => (
-    <View style={styles.verifiedBadge}>
-      <AppText variant="caption" style={styles.verifiedText}>
-        ✓ {t('user.verified')}
-      </AppText>
-    </View>
-  );
+  const renderVerifiedBadge = () => {
+    if (!user.isVerified) return null;
+    return (
+      <View style={styles.verifiedBadge}>
+        <AppText variant="caption" style={styles.verifiedText}>
+          ✓ {t('user.verified')}
+        </AppText>
+      </View>
+    );
+  };
 
   return (
     <SafeAreaContainer edges={['top', 'bottom']} style={styles.container}>

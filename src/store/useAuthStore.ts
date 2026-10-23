@@ -19,6 +19,7 @@ export interface UserProfile {
   countryCode?: string;
   countryFlag?: string;
   isVerified?: boolean;
+  acceptedTerms?: boolean;
   coins: number;
   nativeLanguage: UserLanguage;
   learningLanguage: UserLanguage;
@@ -47,16 +48,17 @@ interface AuthState {
 export const useAuthStore = create<AuthState>((set) => ({
   isAuthenticated: true,
   user: {
-    id: 'LL-849204',
+    id: 'f28083a9-9f35-488b-857a-0d127eb5ef7d',
     name: 'Victor Aponte',
-    email: 'victor.aponte@saynative.com',
-    phone: '+34 612 345 678',
-    bio: 'Apasionado por la tecnología y la música. Aprendiendo inglés con ganas de viajar ✈️',
+    email: 'vaponte520@gmail.com',
+    phone: '',
+    bio: '',
     avatarUrl:
       'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
     countryCode: 'ES',
     countryFlag: '🇪🇸',
-    isVerified: true,
+    isVerified: false,
+    acceptedTerms: true,
     coins: 150,
     nativeLanguage: {
       code: 'es',
