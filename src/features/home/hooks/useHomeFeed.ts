@@ -1,5 +1,20 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
+import httpClient from '@/lib/httpClient';
+import { useAuthStore } from '@/store/useAuthStore';
+import { ApiResponse } from '@/types';
 import { PeerUser } from '../types';
+
+interface BackendUserItem {
+  id: string;
+  fullName?: string;
+  avatar?: { url?: string } | null;
+  countryFlag?: string | null;
+  rating?: number;
+  reviewCount?: number;
+  learningCostPerMin?: number;
+  earningRatePerMin?: number;
+  isAvailableToTeach?: boolean;
+}
 
 const INITIAL_PEERS: PeerUser[] = [
   {
@@ -28,29 +43,54 @@ const INITIAL_PEERS: PeerUser[] = [
     tags: ['Tecnología', 'Música'],
     ratePerMinute: 10,
   },
-  {
-    id: 'peer_3',
-    name: 'Emma',
-    age: 26,
-    avatarUrl:
-      'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=300&q=80',
-    isOnline: true,
-    countryFlag: '🇬🇧',
-    rating: 4.8,
-    reviewsCount: 76,
-    tags: ['Arte', 'Literatura'],
-    ratePerMinute: 10,
-  },
 ];
 
 export const useHomeFeed = () => {
+  const currentUserId = useAuthStore((s) => s.user.id);
   const [peers, setPeers] = useState<PeerUser[]>(INITIAL_PEERS);
-  const [onlineCount] = useState<number>(3);
+  const [onlineCount, setOnlineCount] = useState<number>(3);
   const [isSearchingInstant, setIsSearchingInstant] = useState<boolean>(false);
+
+  useEffect(() => {
+    const fetchPeers = async () => {
+      try {
+        const response = await httpClient.get<ApiResponse<BackendUserItem[]> | BackendUserItem[]>('/users', {
+          headers: currentUserId ? { 'x-user-id': currentUserId } : {},
+        });
+
+        const rawData = (response.data && 'data' in response.data) ? response.data.data : response.data;
+
+        if (Array.isArray(rawData) && rawData.length > 0) {
+          const mappedPeers: PeerUser[] = rawData
+            .filter((u) => u.id !== currentUserId)
+            .map((u) => ({
+              id: u.id,
+              name: u.fullName || 'Compañero',
+              age: 25,
+              avatarUrl: u.avatar?.url || '',
+              isOnline: true,
+              countryFlag: u.countryFlag || '🌐',
+              rating: Number(u.rating) || 5.0,
+              reviewsCount: u.reviewCount || 0,
+              tags: ['Conversación', 'Práctica'],
+              ratePerMinute: u.learningCostPerMin || 10,
+            }));
+
+          if (mappedPeers.length > 0) {
+            setPeers(mappedPeers);
+            setOnlineCount(mappedPeers.length);
+          }
+        }
+      } catch {
+        // Fallback a INITIAL_PEERS si el backend no responde
+      }
+    };
+
+    fetchPeers();
+  }, [currentUserId]);
 
   const startInstantMatch = useCallback(() => {
     setIsSearchingInstant(true);
-    // Simulación de búsqueda instantánea
     setTimeout(() => {
       setIsSearchingInstant(false);
     }, 1500);
@@ -63,3 +103,5 @@ export const useHomeFeed = () => {
     startInstantMatch,
   };
 };
+
+export default useHomeFeed;

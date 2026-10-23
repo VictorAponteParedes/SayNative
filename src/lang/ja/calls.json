@@ -1,0 +1,57 @@
+{
+  "lobby": {
+    "title": "待機室",
+    "subtitle": "1対1の練習セッションの準備をしましょう",
+    "connecting": "通話に接続中...",
+    "ringing": "{{name}} を呼び出しています...",
+    "incoming": "{{name}} から着信中",
+    "rate": "料金: 毎分 {{rate}} コイン",
+    "balanceWarning": "約 {{minutes}} 分間の練習が可能です",
+    "cameraPreview": "カメラプレビュー",
+    "cameraOff": "カメラオフ",
+    "micOff": "マイクミュート",
+    "startCall": "通話を開始",
+    "acceptCall": "ビデオ通話に出る",
+    "rejectCall": "拒否",
+    "cancelCall": "キャンセル",
+    "waitingPeer": "{{name}} の応答を待っています...",
+    "audioCheck": "音声と映像を確認中..."
+  },
+  "active": {
+    "connecting": "P2P接続を確立中...",
+    "reconnecting": "相手と再接続中...",
+    "live": "通話中",
+    "ratePerMin": "🪙 {{rate}}/分",
+    "spent": "消費: {{coins}} 🪙",
+    "earned": "獲得: {{coins}} 🪙",
+    "endCall": "通話を終了",
+    "muteMic": "ミュート",
+    "unmuteMic": "ミュート解除",
+    "stopVideo": "映像停止",
+    "startVideo": "映像再開",
+    "flipCamera": "カメラ切替",
+    "networkQuality": {
+      "excellent": "接続良好",
+      "good": "接続安定",
+      "poor": "電波弱"
+    }
+  },
+  "summary": {
+    "title": "通話終了",
+    "duration": "練習時間",
+    "totalMinutes": "{{minutes}}分 {{seconds}}秒",
+    "coinsUsed": "使用したコイン総数",
+    "coinsEarned": "獲得したコイン総数",
+    "ratePartner": "{{name}} の評価をお願いします",
+    "backHome": "ホームに戻る"
+  },
+  "errors": {
+    "permissionDenied": "通話を開始するにはカメラとマイクの許可が必要です。",
+    "userBusy": "相手は現在他の通話中です。",
+    "insufficientCoins": "通話を開始するためのコインが不足しています。",
+    "peerDisconnected": "{{name}} が通話から退出しました。",
+    "connectionFailed": "ピアツーピア直接接続を確立できませんでした。",
+    "callRejected": "{{name}} が通話を拒否しました。",
+    "callTimeout": "応答がありませんでした。"
+  }
+}

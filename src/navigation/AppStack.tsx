@@ -8,6 +8,7 @@ import { ProfileScreen, EditProfileScreen } from '@/features/profile';
 import { NotificationsScreen } from '@/features/notifications';
 import { SecurityScreen } from '@/features/security';
 import { SupportScreen } from '@/features/support';
+import { LobbyScreen, ActiveCallScreen } from '@/features/videocalls';
 import { Routes } from './routes';
 import type { AppStackParamList } from './types';
 
@@ -64,6 +65,14 @@ export const AppStack: React.FC = () => {
       <Stack.Screen
         name={Routes.App.Support as keyof AppStackParamList}
         component={SupportScreen}
+      />
+      <Stack.Screen
+        name={Routes.App.CallLobby as keyof AppStackParamList}
+        component={LobbyScreen}
+      />
+      <Stack.Screen
+        name={Routes.App.ActiveCall as keyof AppStackParamList}
+        component={ActiveCallScreen}
       />
     </Stack.Navigator>
   );

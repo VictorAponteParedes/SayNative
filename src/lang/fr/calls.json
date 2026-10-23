@@ -1,0 +1,57 @@
+{
+  "lobby": {
+    "title": "Salle d'attente",
+    "subtitle": "Préparez-vous pour votre session de pratique 1 à 1",
+    "connecting": "Connexion de l'appel...",
+    "ringing": "Appel de {{name}}...",
+    "incoming": "{{name}} vous appelle",
+    "rate": "Tarif: {{rate}} pièces / min",
+    "balanceWarning": "Pièces suffisantes pour ~{{minutes}} min de pratique",
+    "cameraPreview": "Aperçu de la caméra",
+    "cameraOff": "Caméra désactivée",
+    "micOff": "Microphone désactivé",
+    "startCall": "Démarrer l'appel",
+    "acceptCall": "Accepter l'appel vidéo",
+    "rejectCall": "Refuser",
+    "cancelCall": "Annuler",
+    "waitingPeer": "En attente que {{name}} accepte...",
+    "audioCheck": "Vérification de l'audio et de la vidéo..."
+  },
+  "active": {
+    "connecting": "Établissement de la connexion P2P...",
+    "reconnecting": "Reconnexion avec votre partenaire...",
+    "live": "En direct",
+    "ratePerMin": "🪙 {{rate}}/min",
+    "spent": "Dépensées: {{coins}} 🪙",
+    "earned": "Gagnées: {{coins}} 🪙",
+    "endCall": "Terminer l'appel",
+    "muteMic": "Couper",
+    "unmuteMic": "Activer micro",
+    "stopVideo": "Arrêter vidéo",
+    "startVideo": "Activer vidéo",
+    "flipCamera": "Inverser",
+    "networkQuality": {
+      "excellent": "Connexion excellente",
+      "good": "Connexion stable",
+      "poor": "Signal faible"
+    }
+  },
+  "summary": {
+    "title": "Appel terminé",
+    "duration": "Durée de la pratique",
+    "totalMinutes": "{{minutes}} minutes et {{seconds}} secondes",
+    "coinsUsed": "Total des pièces utilisées",
+    "coinsEarned": "Total des pièces gagnées",
+    "ratePartner": "Évaluez votre expérience avec {{name}}",
+    "backHome": "Retour à l'accueil"
+  },
+  "errors": {
+    "permissionDenied": "Les autorisations de caméra et de microphone sont requises.",
+    "userBusy": "L'utilisateur est actuellement en ligne dans un autre appel.",
+    "insufficientCoins": "Vous n'avez pas assez de pièces pour démarrer cet appel.",
+    "peerDisconnected": "{{name}} s'est déconnecté.",
+    "connectionFailed": "Impossible d'établir la connexion directe avec le partenaire.",
+    "callRejected": "{{name}} a refusé l'appel.",
+    "callTimeout": "Pas de réponse à l'appel."
+  }
+}

@@ -9,6 +9,8 @@ import { SpeakersCountSortRow } from '../../components/SpeakersCountSortRow';
 import { SpeakerCard } from '../../components/SpeakerCard';
 import { useExploreSpeakers } from '../../hooks/useExploreSpeakers';
 import { SpeakerUser } from '../../types';
+import { navigate } from '@/navigation/NavigationRef';
+import { Routes } from '@/navigation/routes';
 import { styles } from './styles';
 
 export const ExploreScreen: React.FC = () => {
@@ -43,13 +45,13 @@ export const ExploreScreen: React.FC = () => {
   };
 
   const handleCallSpeaker = (speaker: SpeakerUser) => {
-    Alert.alert(
-      t('dialog.callTitle'),
-      t('dialog.callMessage', {
-        name: speaker.name,
-        rate: speaker.ratePerMinute,
-      })
-    );
+    navigate(Routes.App.CallLobby, {
+      peerId: speaker.id,
+      peerName: speaker.name,
+      peerAvatar: speaker.avatarUrl,
+      peerFlag: speaker.countryFlag,
+      ratePerMinute: speaker.ratePerMinute,
+    });
   };
 
   const handleChatSpeaker = (speaker: SpeakerUser) => {

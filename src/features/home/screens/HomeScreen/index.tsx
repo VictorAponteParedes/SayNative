@@ -38,20 +38,31 @@ export const HomeScreen: React.FC = () => {
 
   const handleStartSearch = () => {
     startInstantMatch();
-    Alert.alert(
-      t('instantPractice.searchingTitle'),
-      t('instantPractice.searchingMessage')
-    );
+    if (peers && peers.length > 0) {
+      const selected = peers[0];
+      navigate(Routes.App.CallLobby, {
+        peerId: selected.id,
+        peerName: selected.name,
+        peerAvatar: selected.avatarUrl,
+        peerFlag: selected.countryFlag,
+        ratePerMinute: selected.ratePerMinute,
+      });
+    } else {
+      Alert.alert(
+        t('instantPractice.searchingTitle'),
+        t('instantPractice.searchingMessage')
+      );
+    }
   };
 
   const handleCallPeer = (peer: PeerUser) => {
-    Alert.alert(
-      t('featuredPeers.callDialogTitle'),
-      t('featuredPeers.callDialogMessage', {
-        name: peer.name,
-        rate: peer.ratePerMinute,
-      })
-    );
+    navigate(Routes.App.CallLobby, {
+      peerId: peer.id,
+      peerName: peer.name,
+      peerAvatar: peer.avatarUrl,
+      peerFlag: peer.countryFlag,
+      ratePerMinute: peer.ratePerMinute,
+    });
   };
 
   const handleChatPeer = (peer: PeerUser) => {

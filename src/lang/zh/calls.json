@@ -1,0 +1,57 @@
+{
+  "lobby": {
+    "title": "等候室",
+    "subtitle": "准备好开始一对一练习会话",
+    "connecting": "正在连接通话...",
+    "ringing": "正在呼叫 {{name}}...",
+    "incoming": "{{name}} 正在给您拨打电话",
+    "rate": "费率：{{rate}} 硬币 / 分钟",
+    "balanceWarning": "硬币充足，约可练习 {{minutes}} 分钟",
+    "cameraPreview": "摄像头预览",
+    "cameraOff": "摄像头已关闭",
+    "micOff": "麦克风已静音",
+    "startCall": "发起呼叫",
+    "acceptCall": "接听视频通话",
+    "rejectCall": "拒绝",
+    "cancelCall": "取消",
+    "waitingPeer": "等待 {{name}} 接听...",
+    "audioCheck": "正在检测音频与视频..."
+  },
+  "active": {
+    "connecting": "正在建立P2P连接...",
+    "reconnecting": "正在重新连接同伴...",
+    "live": "通话中",
+    "ratePerMin": "🪙 {{rate}}/分钟",
+    "spent": "已消费: {{coins}} 🪙",
+    "earned": "已获得: {{coins}} 🪙",
+    "endCall": "挂断通话",
+    "muteMic": "静音",
+    "unmuteMic": "取消静音",
+    "stopVideo": "关闭视频",
+    "startVideo": "开启视频",
+    "flipCamera": "翻转镜头",
+    "networkQuality": {
+      "excellent": "网络极佳",
+      "good": "网络稳定",
+      "poor": "信号微弱"
+    }
+  },
+  "summary": {
+    "title": "通话结束",
+    "duration": "练习时长",
+    "totalMinutes": "{{minutes}} 分钟 {{seconds}} 秒",
+    "coinsUsed": "总计消耗硬币",
+    "coinsEarned": "总计获得硬币",
+    "ratePartner": "评价您与 {{name}} 的体验",
+    "backHome": "返回首页"
+  },
+  "errors": {
+    "permissionDenied": "发起视频通话需要摄像头和麦克风权限。",
+    "userBusy": "对方正在通话中。",
+    "insufficientCoins": "您的硬币不足以开始通话。",
+    "peerDisconnected": "{{name}} 已离开通话。",
+    "connectionFailed": "无法与同伴建立点对点直连。",
+    "callRejected": "{{name}} 拒绝了通话。",
+    "callTimeout": "通话无应答。"
+  }
+}

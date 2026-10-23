@@ -58,7 +58,9 @@
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>NSCameraUsageDescription</key>
-	<string>SayNative necesita acceso a la cámara para tomar fotos de perfil o selfies.</string>
+	<string>SayNative necesita acceso a la cámara para realizar videollamadas y fotos de perfil.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>SayNative necesita acceso al micrófono para hablar durante las llamadas de práctica.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>SayNative necesita acceso a tu galería para elegir tu foto de perfil.</string>
 	<key>UIRequiredDeviceCapabilities</key>

@@ -16,6 +16,8 @@ import { RecommendedTopicsRow } from '../../components/private/RecommendedTopics
 import { TypingIndicator } from '../../components/private/TypingIndicator';
 import { ChatInputBar } from '../../components/private/ChatInputBar';
 import { usePrivateChat } from '../../hooks/usePrivateChat';
+import { navigate } from '@/navigation/NavigationRef';
+import { Routes } from '@/navigation/routes';
 import { styles } from './styles';
 
 export interface PrivateChatScreenProps {
@@ -46,13 +48,13 @@ export const PrivateChatScreen: React.FC<PrivateChatScreenProps> = ({ route }) =
   } = usePrivateChat();
 
   const handleCall = () => {
-    Alert.alert(
-      t('privateChat.alerts.callTitle'),
-      t('privateChat.alerts.callMessage', {
-        name: partnerName,
-        rate: ratePerMinute,
-      })
-    );
+    navigate(Routes.App.CallLobby, {
+      peerId: route?.params?.chatId || 'partner-chat-1',
+      peerName: partnerName,
+      peerAvatar: route?.params?.partnerAvatar,
+      peerFlag: partnerFlag,
+      ratePerMinute,
+    });
   };
 
   const handleOptions = () => {

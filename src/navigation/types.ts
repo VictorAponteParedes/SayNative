@@ -12,6 +12,7 @@ export type AppStackParamList = {
   Profile: undefined;
   EditProfile?: undefined;
   ActiveCall?: {
+    callId?: string;
     peerId: string;
     peerName: string;
     peerAvatar?: string;
@@ -20,6 +21,10 @@ export type AppStackParamList = {
   CallLobby?: {
     peerId: string;
     peerName?: string;
+    peerAvatar?: string;
+    peerFlag?: string;
+    ratePerMinute?: number;
+    isIncoming?: boolean;
   };
   Coins?: undefined;
   CoinsHistory?: undefined;

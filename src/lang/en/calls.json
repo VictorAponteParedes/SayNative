@@ -1,0 +1,57 @@
+{
+  "lobby": {
+    "title": "Waiting Room",
+    "subtitle": "Get ready for your 1-on-1 practice session",
+    "connecting": "Connecting call...",
+    "ringing": "Calling {{name}}...",
+    "incoming": "{{name}} is calling you",
+    "rate": "Rate: {{rate}} coins / min",
+    "balanceWarning": "Coins sufficient for ~{{minutes}} min of practice",
+    "cameraPreview": "Camera preview",
+    "cameraOff": "Camera off",
+    "micOff": "Microphone muted",
+    "startCall": "Start Call",
+    "acceptCall": "Accept Video Call",
+    "rejectCall": "Decline",
+    "cancelCall": "Cancel",
+    "waitingPeer": "Waiting for {{name}} to accept...",
+    "audioCheck": "Testing audio and video..."
+  },
+  "active": {
+    "connecting": "Establishing P2P connection...",
+    "reconnecting": "Reconnecting with your partner...",
+    "live": "Live",
+    "ratePerMin": "🪙 {{rate}}/min",
+    "spent": "Spent: {{coins}} 🪙",
+    "earned": "Earned: {{coins}} 🪙",
+    "endCall": "End Call",
+    "muteMic": "Mute",
+    "unmuteMic": "Unmute",
+    "stopVideo": "Pause Video",
+    "startVideo": "Start Video",
+    "flipCamera": "Flip",
+    "networkQuality": {
+      "excellent": "Excellent connection",
+      "good": "Stable connection",
+      "poor": "Weak signal"
+    }
+  },
+  "summary": {
+    "title": "Call Ended",
+    "duration": "Practice Duration",
+    "totalMinutes": "{{minutes}} minutes and {{seconds}} seconds",
+    "coinsUsed": "Total coins used",
+    "coinsEarned": "Total coins earned",
+    "ratePartner": "Rate your experience with {{name}}",
+    "backHome": "Back to Home"
+  },
+  "errors": {
+    "permissionDenied": "Camera and microphone permissions are required to start the video call.",
+    "userBusy": "The user is currently on another call.",
+    "insufficientCoins": "You do not have enough coins to start this call.",
+    "peerDisconnected": "{{name}} disconnected from the call.",
+    "connectionFailed": "Unable to establish direct peer-to-peer connection.",
+    "callRejected": "{{name}} declined the call.",
+    "callTimeout": "No response to the call."
+  }
+}
