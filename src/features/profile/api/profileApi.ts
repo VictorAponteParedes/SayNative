@@ -14,6 +14,7 @@ export interface UserBackendResponse {
   id: string;
   email: string;
   fullName: string;
+  coins?: number;
   phone?: string | null;
   bio?: string | null;
   avatarId?: string | null;

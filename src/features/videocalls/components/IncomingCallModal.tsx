@@ -14,24 +14,32 @@ import { IncomingCallPayload } from '../types';
 export const IncomingCallModal: React.FC = () => {
   const { t } = useTranslation('calls');
   const user = useAuthStore((s) => s.user);
+  const userId = user.id;
   const isAuthenticated = useAuthStore((s) => s.isAuthenticated);
   const initCallSession = useCallSessionStore((s) => s.initCallSession);
 
   const [incomingCall, setIncomingCall] = useState<IncomingCallPayload | null>(null);
 
   useEffect(() => {
-    if (!isAuthenticated || !user.id) return;
+    if (!isAuthenticated || !userId) return;
 
     const socket = getSocket();
     if (!socket.connected) {
       socket.connect();
     }
 
-    // Registrar al usuario con el servidor
-    socket.emit('call:register-user', { userId: user.id });
+    const register = () => {
+      socket.emit('call:register-user', { userId });
+    };
+
+    register();
+    socket.on('connect', register);
 
     // Escuchar llamada entrante
     socket.on('call:incoming', (payload: IncomingCallPayload) => {
+      if (__DEV__) {
+        console.log('[IncomingCallModal] ¡Llamada entrante recibida!', payload);
+      }
       setIncomingCall(payload);
     });
 
@@ -45,11 +53,12 @@ export const IncomingCallModal: React.FC = () => {
     });
 
     return () => {
+      socket.off('connect', register);
       socket.off('call:incoming');
       socket.off('call:ended');
       socket.off('call:rejected');
     };
-  }, [isAuthenticated, user.id]);
+  }, [isAuthenticated, userId]);
 
   if (!incomingCall) return null;
 
@@ -131,28 +140,32 @@ export const IncomingCallModal: React.FC = () => {
           {/* Botones de acción (Aceptar / Rechazar) */}
           <View style={styles.buttonsRow}>
             {/* Rechazar */}
-            <TouchableOpacity
-              activeOpacity={0.8}
-              onPress={handleReject}
-              style={[styles.actionButton, styles.rejectButton]}
-            >
-              <PhoneOff size={28} color={colors.white} />
-              <AppText variant="caption" color={colors.white} style={styles.buttonLabel}>
+            <View style={styles.actionColumn}>
+              <TouchableOpacity
+                activeOpacity={0.8}
+                onPress={handleReject}
+                style={[styles.circularButton, styles.rejectButton]}
+              >
+                <PhoneOff size={30} color={colors.white} />
+              </TouchableOpacity>
+              <AppText variant="bodySmall" color={colors.white} style={styles.buttonLabel}>
                 {t('lobby.rejectCall')}
               </AppText>
-            </TouchableOpacity>
+            </View>
 
             {/* Aceptar */}
-            <TouchableOpacity
-              activeOpacity={0.8}
-              onPress={handleAccept}
-              style={[styles.actionButton, styles.acceptButton]}
-            >
-              <Video size={28} color={colors.white} />
-              <AppText variant="caption" color={colors.white} style={styles.buttonLabel}>
+            <View style={styles.actionColumn}>
+              <TouchableOpacity
+                activeOpacity={0.8}
+                onPress={handleAccept}
+                style={[styles.circularButton, styles.acceptButton]}
+              >
+                <Video size={30} color={colors.white} />
+              </TouchableOpacity>
+              <AppText variant="bodySmall" color={colors.white} style={styles.buttonLabel}>
                 {t('lobby.acceptCall')}
               </AppText>
-            </TouchableOpacity>
+            </View>
           </View>
         </View>
       </View>
@@ -212,27 +225,41 @@ const styles = StyleSheet.create({
   buttonsRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     width: '100%',
+    maxWidth: 300,
     marginTop: spacing.xl,
-    paddingHorizontal: spacing.md,
+    paddingHorizontal: spacing.sm,
   },
-  actionButton: {
+  actionColumn: {
     alignItems: 'center',
     justifyContent: 'center',
-    width: 90,
-    height: 90,
-    borderRadius: 45,
+    width: 120,
+  },
+  circularButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 72,
+    height: 72,
+    borderRadius: 36,
+    elevation: 6,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
   },
   rejectButton: {
     backgroundColor: colors.danger,
+    shadowColor: colors.danger,
   },
   acceptButton: {
-    backgroundColor: '#16A34A', // Verde llamativo
+    backgroundColor: '#16A34A',
+    shadowColor: '#16A34A',
   },
   buttonLabel: {
-    marginTop: 6,
+    marginTop: 10,
     fontWeight: '600',
+    textAlign: 'center',
   },
 });
 

@@ -54,6 +54,14 @@ export const useWebRTC = ({
       localStreamRef.current = stream;
       setLocalStream(stream);
       setPermissions(true, true);
+
+      // Si la conexión peer ya existe, adjuntar tracks locales
+      if (peerConnectionRef.current) {
+        stream.getTracks().forEach((track) => {
+          peerConnectionRef.current?.addTrack(track, stream);
+        });
+      }
+
       return stream;
     } catch {
       setPermissions(false, false);
@@ -88,9 +96,23 @@ export const useWebRTC = ({
 
     // Recepción del stream remoto
     pc.ontrack = (event) => {
-      const trackEvent = event as unknown as RTCPeerTrackEvent;
+      const trackEvent = event as unknown as { streams?: MediaStream[]; track?: any };
       if (trackEvent.streams && trackEvent.streams[0]) {
         setRemoteStream(trackEvent.streams[0]);
+      } else if (trackEvent.track) {
+        const inboundStream = new MediaStream();
+        inboundStream.addTrack(trackEvent.track);
+        setRemoteStream(inboundStream);
+      }
+    };
+
+    // Soporte para onaddstream de react-native-webrtc
+    const pcWithLegacy = pc as unknown as {
+      onaddstream?: (ev: { stream: MediaStream }) => void;
+    };
+    pcWithLegacy.onaddstream = (event) => {
+      if (event && event.stream) {
+        setRemoteStream(event.stream);
       }
     };
 

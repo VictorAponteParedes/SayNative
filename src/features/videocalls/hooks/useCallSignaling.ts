@@ -22,6 +22,7 @@ export interface UseCallSignalingHandlers {
 
 export const useCallSignaling = (handlers?: UseCallSignalingHandlers) => {
   const socketRef = useRef<Socket | null>(null);
+  const handlersRef = useRef(handlers);
   const user = useAuthStore((s) => s.user);
   const currentUserId = user.id;
   const {
@@ -30,6 +31,10 @@ export const useCallSignaling = (handlers?: UseCallSignalingHandlers) => {
     setCallId,
     resetCallSession,
   } = useCallSessionStore();
+
+  useEffect(() => {
+    handlersRef.current = handlers;
+  });
 
   useEffect(() => {
     const socket = getSocket();
@@ -53,7 +58,7 @@ export const useCallSignaling = (handlers?: UseCallSignalingHandlers) => {
     // Escuchar aceptación
     socket.on('call:accepted', (_data: { callId: string }) => {
       setCallStatus('connected');
-      handlers?.onCallAccepted?.();
+      handlersRef.current?.onCallAccepted?.();
     });
 
     // Escuchar llamada entrante
@@ -65,33 +70,33 @@ export const useCallSignaling = (handlers?: UseCallSignalingHandlers) => {
     // Escuchar señalización SDP (oferta o respuesta)
     socket.on('call:signal', async (payload: { callId: string; signal: SignalData }) => {
       if (payload.signal.type === 'offer') {
-        await handlers?.onIncomingOffer?.(payload.signal.sdp);
+        await handlersRef.current?.onIncomingOffer?.(payload.signal.sdp);
       } else if (payload.signal.type === 'answer') {
-        await handlers?.onIncomingAnswer?.(payload.signal.sdp);
+        await handlersRef.current?.onIncomingAnswer?.(payload.signal.sdp);
       }
     });
 
     // Escuchar candidato ICE remoto
     socket.on('call:ice-candidate', async (payload: { callId: string; candidate: IceCandidateData }) => {
-      await handlers?.onRemoteIceCandidate?.(payload.candidate);
+      await handlersRef.current?.onRemoteIceCandidate?.(payload.candidate);
     });
 
     // Escuchar usuario ocupado
     socket.on('call:busy', () => {
       setCallStatus('busy');
-      handlers?.onPeerBusy?.();
+      handlersRef.current?.onPeerBusy?.();
     });
 
     // Escuchar rechazo
     socket.on('call:rejected', (data: { reason?: string }) => {
       setCallStatus('rejected');
-      handlers?.onCallRejected?.(data?.reason);
+      handlersRef.current?.onCallRejected?.(data?.reason);
     });
 
     // Escuchar finalización de llamada
     socket.on('call:ended', (payload: CallEndedPayload) => {
       setCallStatus('ended');
-      handlers?.onCallEnded?.(payload);
+      handlersRef.current?.onCallEnded?.(payload);
     });
 
     return () => {
@@ -104,7 +109,7 @@ export const useCallSignaling = (handlers?: UseCallSignalingHandlers) => {
       socket.off('call:rejected');
       socket.off('call:ended');
     };
-  }, [currentUserId, handlers, setCallId, setCallStatus]);
+  }, [currentUserId, setCallId, setCallStatus]);
 
   // Emisores de señalización
   const initiateCall = useCallback(

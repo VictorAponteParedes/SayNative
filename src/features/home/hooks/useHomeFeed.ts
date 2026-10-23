@@ -46,7 +46,8 @@ const INITIAL_PEERS: PeerUser[] = [
 ];
 
 export const useHomeFeed = () => {
-  const currentUserId = useAuthStore((s) => s.user.id);
+  const currentUserId = useAuthStore(s => s.user.id);
+  const updateUserProfile = useAuthStore(s => s.updateUserProfile);
   const [peers, setPeers] = useState<PeerUser[]>(INITIAL_PEERS);
   const [onlineCount, setOnlineCount] = useState<number>(3);
   const [isSearchingInstant, setIsSearchingInstant] = useState<boolean>(false);
@@ -54,16 +55,39 @@ export const useHomeFeed = () => {
   useEffect(() => {
     const fetchPeers = async () => {
       try {
-        const response = await httpClient.get<ApiResponse<BackendUserItem[]> | BackendUserItem[]>('/users', {
+        // Sincronizar saldo actual de monedas desde el backend
+        if (currentUserId) {
+          try {
+            const meRes = await httpClient.get<
+              ApiResponse<BackendUserItem & { coins?: number }>
+            >('/users/me', {
+              headers: { 'x-user-id': currentUserId },
+            });
+            const meData =
+              meRes.data && 'data' in meRes.data ? meRes.data.data : meRes.data;
+            if (meData && meData.coins !== undefined) {
+              updateUserProfile({ coins: Number(meData.coins) });
+            }
+          } catch {
+            // Error de sincronización ignorado
+          }
+        }
+
+        const response = await httpClient.get<
+          ApiResponse<BackendUserItem[]> | BackendUserItem[]
+        >('/users', {
           headers: currentUserId ? { 'x-user-id': currentUserId } : {},
         });
 
-        const rawData = (response.data && 'data' in response.data) ? response.data.data : response.data;
+        const rawData =
+          response.data && 'data' in response.data
+            ? response.data.data
+            : response.data;
 
         if (Array.isArray(rawData) && rawData.length > 0) {
           const mappedPeers: PeerUser[] = rawData
-            .filter((u) => u.id !== currentUserId)
-            .map((u) => ({
+            .filter(u => u.id !== currentUserId)
+            .map(u => ({
               id: u.id,
               name: u.fullName || 'Compañero',
               age: 25,

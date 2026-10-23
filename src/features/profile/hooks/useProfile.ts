@@ -37,6 +37,7 @@ export const useProfile = () => {
       const backendUser = await profileApi.getProfile(user.id);
       if (backendUser) {
         updateUserProfile({
+          coins: backendUser.coins !== undefined ? Number(backendUser.coins) : user.coins,
           name: backendUser.fullName || user.name,
           email: backendUser.email || user.email,
           phone: backendUser.phone ?? user.phone,

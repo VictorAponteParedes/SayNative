@@ -26,7 +26,9 @@ export const getSocket = (options?: SocketConnectionOptions): Socket => {
 
   const socketUrl = getSocketUrl();
   const namespace = options?.namespace || '/calls';
-  const fullUrl = `${socketUrl}${namespace.startsWith('/') ? namespace : `/${namespace}`}`;
+  const fullUrl = `${socketUrl}${
+    namespace.startsWith('/') ? namespace : `/${namespace}`
+  }`;
 
   if (!socketInstance) {
     socketInstance = io(fullUrl, {
@@ -37,7 +39,7 @@ export const getSocket = (options?: SocketConnectionOptions): Socket => {
       reconnectionDelayMax: 5000,
       timeout: 10000,
       transports: ['websocket', 'polling'],
-      auth: (cb) => {
+      auth: cb => {
         cb({
           token: options?.token || '',
         });
@@ -45,14 +47,18 @@ export const getSocket = (options?: SocketConnectionOptions): Socket => {
     });
 
     socketInstance.on('connect', () => {
-      // Conexión establecida
+      const authUser = require('@/store/useAuthStore').useAuthStore.getState()
+        .user;
+      if (authUser && authUser.id) {
+        socketInstance?.emit('call:register-user', { userId: authUser.id });
+      }
     });
 
-    socketInstance.on('disconnect', (_reason) => {
+    socketInstance.on('disconnect', _reason => {
       // Conexión terminada
     });
 
-    socketInstance.on('connect_error', (_error) => {
+    socketInstance.on('connect_error', _error => {
       // Error de conexión
     });
   }
