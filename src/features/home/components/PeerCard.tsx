@@ -23,7 +23,7 @@ export const PeerCard: React.FC<PeerCardProps> = ({
     <View style={styles.card}>
       {/* Cabecera con avatar y bandera del país nativo */}
       <View style={styles.topRow}>
-        <Avatar uri={peer.avatarUrl} size={50} isOnline={peer.isOnline} />
+        <Avatar uri={peer.avatarUrl} name={peer.name} size={50} isOnline={peer.isOnline} />
         {peer.countryFlag ? (
           <AppText style={styles.flagText}>{peer.countryFlag}</AppText>
         ) : null}

@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { ArrowLeft, Camera } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
-import { SafeAreaContainer, AppText, AppButton, ControlledInput } from '@/components';
+import { SafeAreaContainer, AppText, AppButton, ControlledInput, Avatar } from '@/components';
 import { colors } from '@/theme';
 import { goBack } from '@/navigation/NavigationRef';
 import { ChangePhotoBottomSheet } from '../../components';
@@ -83,7 +83,7 @@ export const EditProfileScreen: React.FC = () => {
         >
           {/* Sección de Foto de Perfil */}
           <View style={styles.avatarSection}>
-            <Image source={{ uri: avatarUrl }} style={styles.avatarImage} />
+            <Avatar uri={avatarUrl} name={user.name} size={92} />
             <TouchableOpacity
               activeOpacity={0.7}
               onPress={handleOpenPhotoSheet}

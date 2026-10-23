@@ -21,10 +21,10 @@ export const UserProfileBar: React.FC<UserProfileBarProps> = ({
   return (
     <View style={styles.container}>
       <View style={styles.userSection}>
-        <Avatar uri={user.avatarUrl} size={48} isOnline />
+        <Avatar uri={user.avatarUrl} name={user.name} size={48} isOnline />
         <View style={styles.textContainer}>
           <AppText variant="bodyLarge" style={styles.greetingText}>
-            {t('userProfile.greeting', { name: user.name })}
+            {t('userProfile.greeting', { name: user.name || 'Compañero' })}
           </AppText>
           <AppText variant="bodySmall" color={colors.textSecondary}>
             {t('userProfile.subtitle')}

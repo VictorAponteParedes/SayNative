@@ -24,7 +24,7 @@ const INITIAL_BLOCKED_USERS: BlockedUser[] = [
 
 export const useSecuritySettings = () => {
   const { t } = useTranslation('security');
-  const setAuthenticated = useAuthStore((state) => state.setAuthenticated);
+  const logout = useAuthStore((state) => state.logout);
 
   const [privacy, setPrivacy] = useState<PrivacySettings>({
     hideAge: true,
@@ -100,7 +100,7 @@ export const useSecuritySettings = () => {
               t('toasts.accountDeletedMessage')
             );
             setTimeout(() => {
-              setAuthenticated(false);
+              logout();
             }, 1000);
           },
         },

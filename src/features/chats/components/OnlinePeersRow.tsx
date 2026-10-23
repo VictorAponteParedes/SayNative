@@ -3,7 +3,7 @@ import { View, ScrollView, TouchableOpacity, Image, StyleSheet } from 'react-nat
 import { Plus } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
 import { colors, spacing } from '@/theme';
-import { AppText } from '@/components';
+import { AppText, Avatar } from '@/components';
 import { OnlinePeer } from '../types';
 
 export interface OnlinePeersRowProps {
@@ -66,13 +66,13 @@ export const OnlinePeersRow: React.FC<OnlinePeersRowProps> = ({
             style={styles.peerItem}
           >
             <View style={styles.avatarContainer}>
-              <Image source={{ uri: peer.avatarUrl }} style={styles.avatarImage} />
-              {/* Punto verde online */}
-              <View style={styles.statusDot} />
-              {/* Bandera del país */}
-              <View style={styles.flagBadge}>
-                <AppText style={styles.flagText}>{peer.countryFlag}</AppText>
-              </View>
+              <Avatar
+                uri={peer.avatarUrl}
+                name={peer.name}
+                size={52}
+                isOnline
+                flag={peer.countryFlag}
+              />
             </View>
             <AppText variant="caption" style={styles.peerName} numberOfLines={1}>
               {peer.name}

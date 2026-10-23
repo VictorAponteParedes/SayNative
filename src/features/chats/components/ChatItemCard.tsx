@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { Video, PhoneMissed, CheckCheck, Phone } from 'lucide-react-native';
 import { colors, spacing, borderRadius } from '@/theme';
-import { AppText } from '@/components';
+import { AppText, Avatar } from '@/components';
 import { ChatConversation } from '../types';
 
 export interface ChatItemCardProps {
@@ -22,13 +22,13 @@ export const ChatItemCard: React.FC<ChatItemCardProps> = ({ chat, onPress }) => 
     >
       {/* Avatar con status y bandera */}
       <View style={styles.avatarWrapper}>
-        <Image source={{ uri: chat.avatarUrl }} style={styles.avatarImage} />
-        {chat.isOnline && <View style={styles.onlineDot} />}
-        {chat.countryFlag ? (
-          <View style={styles.flagBadge}>
-            <AppText style={styles.flagText}>{chat.countryFlag}</AppText>
-          </View>
-        ) : null}
+        <Avatar
+          uri={chat.avatarUrl}
+          name={chat.name}
+          size={54}
+          isOnline={chat.isOnline}
+          flag={chat.countryFlag}
+        />
       </View>
 
       {/* Información del chat */}

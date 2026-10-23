@@ -1,37 +1,77 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Image, StyleSheet, StyleProp, ViewStyle, Text } from 'react-native';
 import { colors } from '@/theme';
 
 export interface AvatarProps {
-  uri: string;
+  uri?: string | null;
+  name?: string;
   size?: number;
   isOnline?: boolean;
   flag?: string;
   style?: StyleProp<ViewStyle>;
 }
 
+export const getInitials = (name?: string): string => {
+  if (!name || !name.trim()) return '?';
+  const parts = name.trim().split(/\s+/).filter(Boolean);
+  if (parts.length === 1) {
+    return parts[0].substring(0, 2).toUpperCase();
+  }
+  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+};
+
 export const Avatar: React.FC<AvatarProps> = ({
   uri,
+  name,
   size = 48,
   isOnline = false,
   flag,
   style,
 }) => {
+  const [hasError, setHasError] = useState(false);
   const indicatorSize = Math.max(10, Math.round(size * 0.25));
+  const initials = getInitials(name);
+  const hasValidUri = Boolean(uri && uri.trim() && !hasError);
 
   return (
     <View style={[{ width: size, height: size }, style]}>
-      <Image
-        source={{ uri }}
-        style={[
-          styles.image,
-          {
-            width: size,
-            height: size,
-            borderRadius: size / 2,
-          },
-        ]}
-      />
+      {hasValidUri ? (
+        <Image
+          source={{ uri: uri! }}
+          onError={() => setHasError(true)}
+          style={[
+            styles.image,
+            {
+              width: size,
+              height: size,
+              borderRadius: size / 2,
+            },
+          ]}
+        />
+      ) : (
+        <View
+          style={[
+            styles.initialsContainer,
+            {
+              width: size,
+              height: size,
+              borderRadius: size / 2,
+            },
+          ]}
+        >
+          <Text
+            style={[
+              styles.initialsText,
+              {
+                fontSize: Math.max(12, Math.round(size * 0.38)),
+              },
+            ]}
+          >
+            {initials}
+          </Text>
+        </View>
+      )}
+
       {isOnline && (
         <View
           style={[
@@ -47,6 +87,7 @@ export const Avatar: React.FC<AvatarProps> = ({
           ]}
         />
       )}
+
       {flag && (
         <View style={styles.flagContainer}>
           <Text style={styles.flagText}>{flag}</Text>
@@ -59,6 +100,16 @@ export const Avatar: React.FC<AvatarProps> = ({
 const styles = StyleSheet.create({
   image: {
     backgroundColor: colors.borderLight,
+  },
+  initialsContainer: {
+    backgroundColor: colors.primaryLight,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  initialsText: {
+    color: colors.white,
+    fontWeight: '700',
+    letterSpacing: 0.5,
   },
   onlineBadge: {
     position: 'absolute',

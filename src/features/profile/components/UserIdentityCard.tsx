@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { Pencil, CheckCircle2, Mail } from 'lucide-react-native';
 import { colors, spacing } from '@/theme';
-import { AppText } from '@/components';
+import { AppText, Avatar } from '@/components';
 import type { UserProfile } from '@/store/useAuthStore';
 
 export interface UserIdentityCardProps {
@@ -20,7 +20,7 @@ export const UserIdentityCard: React.FC<UserIdentityCardProps> = ({
     <View style={styles.container}>
       {/* Avatar con botón de editar foto */}
       <View style={styles.avatarWrapper}>
-        <Image source={{ uri: user.avatarUrl }} style={styles.avatarImage} />
+        <Avatar uri={user.avatarUrl} name={user.name} size={92} />
         <TouchableOpacity
           activeOpacity={0.8}
           onPress={onPressChangePhoto || onPressEdit}

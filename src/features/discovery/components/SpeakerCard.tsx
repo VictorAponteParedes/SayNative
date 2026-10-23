@@ -26,6 +26,7 @@ export const SpeakerCard: React.FC<SpeakerCardProps> = ({
         <View style={styles.avatarWrapper}>
           <Avatar
             uri={speaker.avatarUrl}
+            name={speaker.name}
             size={56}
             isOnline={speaker.isOnline}
             flag={speaker.countryFlag}

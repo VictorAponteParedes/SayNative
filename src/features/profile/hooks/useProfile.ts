@@ -5,7 +5,11 @@ import { navigate } from '@/navigation/NavigationRef';
 import { Routes } from '@/navigation/routes';
 import { Toast } from '@/components';
 import { profileApi } from '../api/profileApi';
-import { pickImageFromGallery, takeSelfieWithCamera } from '../utils/photoPicker';
+import {
+  pickImageFromGallery,
+  takeSelfieWithCamera,
+} from '../utils/photoPicker';
+import { Alert } from 'react-native';
 
 const isValidUuid = (id: string): boolean =>
   /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id);
