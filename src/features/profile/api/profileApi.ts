@@ -85,6 +85,34 @@ export const profileApi = {
 
     return response.data as UserBackendResponse;
   },
+
+  async toggleTeachingMode(
+    userId: string,
+    isAvailable: boolean,
+  ): Promise<UserBackendResponse> {
+    const response = await httpClient.patch<
+      ApiResponseWrapper<UserBackendResponse> | UserBackendResponse
+    >(
+      '/users/me/teaching-mode',
+      { isAvailable },
+      {
+        headers: {
+          'x-user-id': userId,
+        },
+      },
+    );
+
+    if (
+      response.data &&
+      typeof response.data === 'object' &&
+      'data' in response.data &&
+      response.data.data
+    ) {
+      return (response.data as ApiResponseWrapper<UserBackendResponse>).data;
+    }
+
+    return response.data as UserBackendResponse;
+  },
 };
 
 export default profileApi;

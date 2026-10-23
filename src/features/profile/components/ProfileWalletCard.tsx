@@ -74,7 +74,7 @@ export const ProfileWalletCard: React.FC<ProfileWalletCardProps> = ({
         >
           <Play size={16} color={colors.coinDark} fill={colors.coinDark} style={styles.actionIcon} />
           <AppText variant="button" style={styles.adButtonText}>
-            {t('wallet.freeAdButton')}
+            {t('wallet.freeAdButton', { count: 5 })}
           </AppText>
         </TouchableOpacity>
       </View>

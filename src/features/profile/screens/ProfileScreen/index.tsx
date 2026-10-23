@@ -1,8 +1,9 @@
 import React from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, RefreshControl } from 'react-native';
 import { SafeAreaContainer, BottomTabBar } from '@/components';
 import { navigate } from '@/navigation/NavigationRef';
 import { Routes } from '@/navigation/routes';
+import { colors } from '@/theme';
 import {
   ProfileHeader,
   UserIdentityCard,
@@ -13,21 +14,26 @@ import {
   AccountPreferencesSection,
   LanguageSelectorBottomSheet,
 } from '../../components';
+import { PracticeLanguageBottomSheet } from '@/features/home/components/PracticeLanguageBottomSheet';
 import { useProfile } from '../../hooks/useProfile';
 import { styles } from './styles';
 
 export const ProfileScreen: React.FC = () => {
   const {
     user,
+    isRefreshing,
+    onRefresh,
     isLanguageSheetOpen,
     handleOpenLanguageSheet,
     handleCloseLanguageSheet,
+    isPracticeSheetOpen,
+    handleOpenPracticeSheet,
+    handleClosePracticeSheet,
     handleEditProfile,
     handleGoToCoins,
     handleGoToHistory,
     handleWatchRewardedAd,
     handleToggleTeachingMode,
-    handleAddLanguage,
     handleLogout,
   } = useProfile();
 
@@ -38,6 +44,14 @@ export const ProfileScreen: React.FC = () => {
       <ScrollView
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl
+            refreshing={isRefreshing}
+            onRefresh={onRefresh}
+            tintColor={colors.primary}
+            colors={[colors.primary]}
+          />
+        }
       >
         {/* Identidad del Usuario: Avatar con lápiz, Nombre, Bandera, Correo y Bio */}
         <UserIdentityCard user={user} onPressEdit={handleEditProfile} />
@@ -60,16 +74,16 @@ export const ProfileScreen: React.FC = () => {
         {/* Sección Mis Idiomas (Nativo y en aprendizaje con barra de progreso) */}
         <LanguagesSection
           user={user}
-          onPressAddLanguage={handleAddLanguage}
-          onPressEditLanguages={handleEditProfile}
+          onPressAddLanguage={handleOpenPracticeSheet}
+          onPressEditLanguages={handleOpenPracticeSheet}
         />
 
-        {/* Sección Modo Enseñar con Toggle y Tarifa fija */}
+        {/* Sección Modo Enseñar con Toggle persistente y Tarifa fija */}
         <TeachingModeCard
           isAvailable={user.isAvailableToTeach}
           onToggle={handleToggleTeachingMode}
           ratePerMin={user.earningRatePerMin}
-          languageName={user.nativeLanguage.name}
+          languageName={user.nativeLanguage?.name || 'Español'}
         />
 
         {/* Cuenta y Preferencias (con acceso a Datos Personales, Idioma, Soporte, Cerrar Sesión) */}
@@ -80,7 +94,13 @@ export const ProfileScreen: React.FC = () => {
         />
       </ScrollView>
 
-      {/* Selector de idioma con AppBottomSheet */}
+      {/* Selector de idioma de práctica con AppBottomSheet */}
+      <PracticeLanguageBottomSheet
+        visible={isPracticeSheetOpen}
+        onClose={handleClosePracticeSheet}
+      />
+
+      {/* Selector de idioma de la app con AppBottomSheet */}
       <LanguageSelectorBottomSheet
         visible={isLanguageSheetOpen}
         onClose={handleCloseLanguageSheet}
