@@ -1,5 +1,6 @@
 import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
 import { API_CONFIG } from '@/config/api';
+import i18n from '@/lang/i18n';
 
 export const httpClient = axios.create({
   baseURL: API_CONFIG.BASE_URL,
@@ -12,7 +13,9 @@ export const httpClient = axios.create({
 
 httpClient.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
-    // Si en el futuro se necesita inyectar Authorization Bearer token, se agrega aquí
+    if (i18n.language) {
+      config.headers['Accept-Language'] = i18n.language;
+    }
     return config;
   },
   (error: AxiosError) => {
