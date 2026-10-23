@@ -6,6 +6,7 @@
       "@components": ["./src/components"],
       "@components/*": ["./src/components/*"],
       "@features/*": ["./src/features/*"],
+      "@navigation": ["./src/navigation"],
       "@navigation/*": ["./src/navigation/*"],
       "@theme": ["./src/theme"],
       "@theme/*": ["./src/theme/*"],

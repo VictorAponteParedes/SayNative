@@ -11,8 +11,7 @@ import {
 import { LanguageSelectorBottomSheet } from '@/features/profile/components/LanguageSelectorBottomSheet';
 import { useRegister } from '../../hooks/useRegister';
 import { styles } from './styles';
-import { Routes } from '@/navigation/routes';
-import { navigate } from '@/navigation/NavigationRef';
+import { Routes, navigate } from '@/navigation';
 
 export const RegisterScreen: React.FC = () => {
   const { t } = useTranslation('auth');
