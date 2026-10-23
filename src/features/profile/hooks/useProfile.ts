@@ -1,11 +1,11 @@
 import { useState, useEffect, useCallback } from 'react';
-import { Alert } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { useAuthStore } from '@/store/useAuthStore';
 import { navigate } from '@/navigation/NavigationRef';
 import { Routes } from '@/navigation/routes';
 import { Toast } from '@/components';
 import { profileApi } from '../api/profileApi';
+import { pickImageFromGallery, takeSelfieWithCamera } from '../utils/photoPicker';
 
 const isValidUuid = (id: string): boolean =>
   /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id);
@@ -21,6 +21,7 @@ export const useProfile = () => {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [isLanguageSheetOpen, setIsLanguageSheetOpen] = useState(false);
   const [isPracticeSheetOpen, setIsPracticeSheetOpen] = useState(false);
+  const [isPhotoSheetOpen, setIsPhotoSheetOpen] = useState(false);
 
   const fetchProfile = useCallback(async () => {
     if (!user.id || !isValidUuid(user.id)) {
@@ -106,6 +107,36 @@ export const useProfile = () => {
     setIsPracticeSheetOpen(false);
   };
 
+  const handleOpenPhotoSheet = () => {
+    setIsPhotoSheetOpen(true);
+  };
+
+  const handleClosePhotoSheet = () => {
+    setIsPhotoSheetOpen(false);
+  };
+
+  const handleChooseFromGallery = async () => {
+    const uri = await pickImageFromGallery();
+    if (uri) {
+      updateUserProfile({ avatarUrl: uri });
+      Toast.success(
+        t('changePhotoSheet.photoUpdatedTitle'),
+        t('changePhotoSheet.photoUpdatedMessage'),
+      );
+    }
+  };
+
+  const handleTakeSelfie = async () => {
+    const uri = await takeSelfieWithCamera();
+    if (uri) {
+      updateUserProfile({ avatarUrl: uri });
+      Toast.success(
+        t('changePhotoSheet.photoUpdatedTitle'),
+        t('changePhotoSheet.photoUpdatedMessage'),
+      );
+    }
+  };
+
   const handleEditProfile = () => {
     navigate(Routes.App.EditProfile);
   };
@@ -182,6 +213,11 @@ export const useProfile = () => {
     isPracticeSheetOpen,
     handleOpenPracticeSheet,
     handleClosePracticeSheet,
+    isPhotoSheetOpen,
+    handleOpenPhotoSheet,
+    handleClosePhotoSheet,
+    handleChooseFromGallery,
+    handleTakeSelfie,
     handleEditProfile,
     handleGoToCoins,
     handleGoToHistory,

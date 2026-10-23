@@ -13,6 +13,7 @@ import {
   TeachingModeCard,
   AccountPreferencesSection,
   LanguageSelectorBottomSheet,
+  ChangePhotoBottomSheet,
 } from '../../components';
 import { PracticeLanguageBottomSheet } from '@/features/home/components/PracticeLanguageBottomSheet';
 import { useProfile } from '../../hooks/useProfile';
@@ -29,6 +30,11 @@ export const ProfileScreen: React.FC = () => {
     isPracticeSheetOpen,
     handleOpenPracticeSheet,
     handleClosePracticeSheet,
+    isPhotoSheetOpen,
+    handleOpenPhotoSheet,
+    handleClosePhotoSheet,
+    handleChooseFromGallery,
+    handleTakeSelfie,
     handleEditProfile,
     handleGoToCoins,
     handleGoToHistory,
@@ -54,7 +60,11 @@ export const ProfileScreen: React.FC = () => {
         }
       >
         {/* Identidad del Usuario: Avatar con lápiz, Nombre, Bandera, Correo y Bio */}
-        <UserIdentityCard user={user} onPressEdit={handleEditProfile} />
+        <UserIdentityCard
+          user={user}
+          onPressEdit={handleEditProfile}
+          onPressChangePhoto={handleOpenPhotoSheet}
+        />
 
         {/* Billetera Virtual: Saldo, botón Recargar y botón +5 gratis */}
         <ProfileWalletCard
@@ -104,6 +114,14 @@ export const ProfileScreen: React.FC = () => {
       <LanguageSelectorBottomSheet
         visible={isLanguageSheetOpen}
         onClose={handleCloseLanguageSheet}
+      />
+
+      {/* Selector interactivo para cambiar foto de perfil */}
+      <ChangePhotoBottomSheet
+        visible={isPhotoSheetOpen}
+        onClose={handleClosePhotoSheet}
+        onChooseFromGallery={handleChooseFromGallery}
+        onTakeSelfie={handleTakeSelfie}
       />
 
       {/* Barra de navegación inferior */}

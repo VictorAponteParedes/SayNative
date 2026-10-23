@@ -13,6 +13,7 @@ import { useTranslation } from 'react-i18next';
 import { SafeAreaContainer, AppText, AppButton, ControlledInput } from '@/components';
 import { colors } from '@/theme';
 import { goBack } from '@/navigation/NavigationRef';
+import { ChangePhotoBottomSheet } from '../../components';
 import { useEditProfile } from '../../hooks/useEditProfile';
 import { styles } from './styles';
 
@@ -26,7 +27,11 @@ export const EditProfileScreen: React.FC = () => {
     isRefreshing,
     onRefresh,
     avatarUrl,
-    handleChangePhoto,
+    isPhotoSheetOpen,
+    handleOpenPhotoSheet,
+    handleClosePhotoSheet,
+    handleChooseFromGallery,
+    handleTakeSelfie,
   } = useEditProfile();
 
   const renderVerifiedBadge = () => {
@@ -81,7 +86,7 @@ export const EditProfileScreen: React.FC = () => {
             <Image source={{ uri: avatarUrl }} style={styles.avatarImage} />
             <TouchableOpacity
               activeOpacity={0.7}
-              onPress={handleChangePhoto}
+              onPress={handleOpenPhotoSheet}
               style={styles.changePhotoButton}
             >
               <Camera size={14} color={colors.primary} style={styles.cameraIcon} />
@@ -188,6 +193,13 @@ export const EditProfileScreen: React.FC = () => {
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
+
+      <ChangePhotoBottomSheet
+        visible={isPhotoSheetOpen}
+        onClose={handleClosePhotoSheet}
+        onChooseFromGallery={handleChooseFromGallery}
+        onTakeSelfie={handleTakeSelfie}
+      />
     </SafeAreaContainer>
   );
 };

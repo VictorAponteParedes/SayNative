@@ -1,5 +1,4 @@
 import { useState, useEffect, useCallback } from 'react';
-import { Alert } from 'react-native';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
@@ -8,6 +7,7 @@ import { goBack } from '@/navigation/NavigationRef';
 import { Toast } from '@/components';
 import { profileApi } from '../api/profileApi';
 import { EditProfileFormData } from '../types';
+import { pickImageFromGallery, takeSelfieWithCamera } from '../utils/photoPicker';
 
 const isValidUuid = (id: string): boolean =>
   /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id);
@@ -20,6 +20,7 @@ export const useEditProfile = () => {
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
   const [isSaving, setIsSaving] = useState<boolean>(false);
+  const [isPhotoSheetOpen, setIsPhotoSheetOpen] = useState<boolean>(false);
   const [avatarUrl, setAvatarUrl] = useState<string>(user.avatarUrl);
 
   const {
@@ -100,23 +101,36 @@ export const useEditProfile = () => {
     fetchProfile(false);
   }, [fetchProfile]);
 
-  const handleChangePhoto = () => {
-    Alert.alert(
-      t('editProfile.changePhoto'),
-      'Selecciona una nueva foto de perfil de tu galería.',
-      [
-        { text: t('account.cancel'), style: 'cancel' },
-        {
-          text: 'Elegir Foto',
-          onPress: () => {
-            const newAvatar =
-              'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80';
-            setAvatarUrl(newAvatar);
-            updateUserProfile({ avatarUrl: newAvatar });
-          },
-        },
-      ],
-    );
+  const handleOpenPhotoSheet = () => {
+    setIsPhotoSheetOpen(true);
+  };
+
+  const handleClosePhotoSheet = () => {
+    setIsPhotoSheetOpen(false);
+  };
+
+  const handleChooseFromGallery = async () => {
+    const uri = await pickImageFromGallery();
+    if (uri) {
+      setAvatarUrl(uri);
+      updateUserProfile({ avatarUrl: uri });
+      Toast.success(
+        t('changePhotoSheet.photoUpdatedTitle'),
+        t('changePhotoSheet.photoUpdatedMessage'),
+      );
+    }
+  };
+
+  const handleTakeSelfie = async () => {
+    const uri = await takeSelfieWithCamera();
+    if (uri) {
+      setAvatarUrl(uri);
+      updateUserProfile({ avatarUrl: uri });
+      Toast.success(
+        t('changePhotoSheet.photoUpdatedTitle'),
+        t('changePhotoSheet.photoUpdatedMessage'),
+      );
+    }
   };
 
   /**
@@ -181,7 +195,11 @@ export const useEditProfile = () => {
     onRefresh,
     isSaving,
     avatarUrl,
-    handleChangePhoto,
+    isPhotoSheetOpen,
+    handleOpenPhotoSheet,
+    handleClosePhotoSheet,
+    handleChooseFromGallery,
+    handleTakeSelfie,
   };
 };
 

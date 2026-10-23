@@ -93,5 +93,21 @@
     "teachingEnabledMessage": "生徒からの通話リクエストを受け取れるようになりました。",
     "teachingDisabledTitle": "レッスン受付停止",
     "teachingDisabledMessage": "通話リクエストの受信を一時停止しました。"
+  },
+  "changePhotoSheet": {
+    "title": "プロフィール写真",
+    "subtitle": "プロフィール写真をどのように変更しますか？",
+    "chooseGallery": "ギャラリーから選択",
+    "chooseGallerySubtitle": "デバイスに保存されている画像を選択",
+    "takeSelfie": "セルフィーを撮る",
+    "takeSelfieSubtitle": "カメラを使用して新しい写真を撮影",
+    "cancel": "キャンセル",
+    "photoUpdatedTitle": "写真を更新しました",
+    "photoUpdatedMessage": "プロフィール写真が正常に保存されました。",
+    "permissionDeniedTitle": "カメラへのアクセスが拒否されました",
+    "permissionDeniedMessage": "プロフィール写真を撮影するには、カメラへのアクセス許可が必要です。",
+    "cameraUnavailableTitle": "カメラが利用できません",
+    "cameraUnavailableMessage": "このデバイスで利用可能なカメラが見つかりませんでした。",
+    "errorSelectingImage": "画像を選択できませんでした。もう一度お試しください。"
   }
 }

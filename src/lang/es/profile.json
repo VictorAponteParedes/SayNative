@@ -93,5 +93,21 @@
     "teachingEnabledMessage": "Ahora estás visible para recibir llamadas de estudiantes.",
     "teachingDisabledTitle": "Modo Enseñar pausado",
     "teachingDisabledMessage": "Ya no recibirás solicitudes de videollamada por el momento."
+  },
+  "changePhotoSheet": {
+    "title": "Foto de Perfil",
+    "subtitle": "¿Cómo deseas actualizar tu foto de perfil?",
+    "chooseGallery": "Elegir de la galería",
+    "chooseGallerySubtitle": "Selecciona una imagen guardada en tu dispositivo",
+    "takeSelfie": "Tomarse una selfie",
+    "takeSelfieSubtitle": "Usa tu cámara para capturar una nueva foto",
+    "cancel": "Cancelar",
+    "photoUpdatedTitle": "Foto de perfil actualizada",
+    "photoUpdatedMessage": "Tu foto de perfil se ha guardado exitosamente.",
+    "permissionDeniedTitle": "Permiso de cámara denegado",
+    "permissionDeniedMessage": "SayNative necesita acceso a tu cámara para que puedas tomarte una foto de perfil.",
+    "cameraUnavailableTitle": "Cámara no disponible",
+    "cameraUnavailableMessage": "No se detectó una cámara disponible en este dispositivo.",
+    "errorSelectingImage": "No se pudo seleccionar la imagen. Intenta nuevamente."
   }
 }

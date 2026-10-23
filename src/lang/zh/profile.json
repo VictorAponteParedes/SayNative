@@ -93,5 +93,21 @@
     "teachingEnabledMessage": "语伴现在可以向你发起母语练习通话。",
     "teachingDisabledTitle": "辅导模式已暂停",
     "teachingDisabledMessage": "你将暂时不会收到来自语伴的通话邀请。"
+  },
+  "changePhotoSheet": {
+    "title": "个人资料照片",
+    "subtitle": "您想如何更新个人资料照片？",
+    "chooseGallery": "从相册选择",
+    "chooseGallerySubtitle": "从您的设备选择一张照片",
+    "takeSelfie": "拍一张自拍",
+    "takeSelfieSubtitle": "使用相机拍摄一张新照片",
+    "cancel": "取消",
+    "photoUpdatedTitle": "照片已更新",
+    "photoUpdatedMessage": "您的个人资料照片已成功保存。",
+    "permissionDeniedTitle": "相机权限被拒绝",
+    "permissionDeniedMessage": "SayNative需要相机权限来拍摄个人资料照片。",
+    "cameraUnavailableTitle": "相机不可用",
+    "cameraUnavailableMessage": "此设备上未检测到可用相机。",
+    "errorSelectingImage": "无法选择图片，请重试。"
   }
 }

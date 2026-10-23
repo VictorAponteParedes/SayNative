@@ -6,3 +6,4 @@ export * from './LanguagesSection';
 export * from './TeachingModeCard';
 export * from './AccountPreferencesSection';
 export * from './LanguageSelectorBottomSheet';
+export * from './ChangePhotoBottomSheet';

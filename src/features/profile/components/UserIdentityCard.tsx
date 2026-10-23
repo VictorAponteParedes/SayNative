@@ -8,20 +8,22 @@ import type { UserProfile } from '@/store/useAuthStore';
 export interface UserIdentityCardProps {
   user: UserProfile;
   onPressEdit: () => void;
+  onPressChangePhoto?: () => void;
 }
 
 export const UserIdentityCard: React.FC<UserIdentityCardProps> = ({
   user,
   onPressEdit,
+  onPressChangePhoto,
 }) => {
   return (
     <View style={styles.container}>
-      {/* Avatar con botón de editar */}
+      {/* Avatar con botón de editar foto */}
       <View style={styles.avatarWrapper}>
         <Image source={{ uri: user.avatarUrl }} style={styles.avatarImage} />
         <TouchableOpacity
           activeOpacity={0.8}
-          onPress={onPressEdit}
+          onPress={onPressChangePhoto || onPressEdit}
           style={styles.editBadgeButton}
         >
           <Pencil size={15} color={colors.surface} strokeWidth={2.5} />

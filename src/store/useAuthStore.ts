@@ -45,7 +45,7 @@ interface AuthState {
   deductCoins: (amount: number) => void;
 }
 
-export const useAuthStore = create<AuthState>((set) => ({
+export const useAuthStore = create<AuthState>(set => ({
   isAuthenticated: true,
   user: {
     id: 'f28083a9-9f35-488b-857a-0d127eb5ef7d',
@@ -92,25 +92,25 @@ export const useAuthStore = create<AuthState>((set) => ({
     reviewCount: 0,
     memberSince: 'Octubre 2024',
   },
-  setAuthenticated: (status) => set({ isAuthenticated: status }),
-  setAvailableToTeach: (available) =>
-    set((state) => ({
+  setAuthenticated: status => set({ isAuthenticated: status }),
+  setAvailableToTeach: available =>
+    set(state => ({
       user: { ...state.user, isAvailableToTeach: available },
     })),
-  updateLearningLanguage: (language) =>
-    set((state) => ({
+  updateLearningLanguage: language =>
+    set(state => ({
       user: { ...state.user, learningLanguage: language },
     })),
-  updateUserProfile: (data) =>
-    set((state) => ({
+  updateUserProfile: data =>
+    set(state => ({
       user: { ...state.user, ...data },
     })),
-  addCoins: (amount) =>
-    set((state) => ({
+  addCoins: amount =>
+    set(state => ({
       user: { ...state.user, coins: state.user.coins + amount },
     })),
-  deductCoins: (amount) =>
-    set((state) => ({
+  deductCoins: amount =>
+    set(state => ({
       user: { ...state.user, coins: Math.max(0, state.user.coins - amount) },
     })),
 }));
