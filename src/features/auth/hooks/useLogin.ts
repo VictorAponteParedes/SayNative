@@ -8,6 +8,7 @@ import { goBack, navigate } from '@/navigation/NavigationRef';
 import { Routes } from '@/navigation/routes';
 import { LoginFormData, RegisteredUser } from '../types';
 import { authApi } from '../api/authApi';
+import { profileApi } from '@/features/profile/api/profileApi';
 
 export const useLogin = () => {
   const { t } = useTranslation('auth');
@@ -65,6 +66,30 @@ export const useLogin = () => {
         } else if (error.message === 'Network Error') {
           errorMessage =
             'No se pudo conectar con el servidor. Verifica que el backend esté ejecutándose.';
+        }
+      }
+
+      // Si el backend aún no implementa el endpoint POST /auth/login (retorna 404),
+      // cargamos los datos reales del usuario desde GET /users/me para permitir probar la app
+      if (axios.isAxiosError(error) && error.response?.status === 404) {
+        try {
+          const defaultUserId = 'f28083a9-9f35-488b-857a-0d127eb5ef7d';
+          const backendProfile = await profileApi.getProfile(defaultUserId);
+          if (backendProfile) {
+            setUserFromBackend({
+              ...backendProfile,
+              email: data.email.trim().toLowerCase() || backendProfile.email,
+            });
+            Toast.success(
+              t('login.toasts.successTitle'),
+              'Iniciando con tu usuario del backend.',
+            );
+            return;
+          }
+        } catch (fetchErr) {
+          if (__DEV__) {
+            console.log('[useLogin] Fallback fetch error:', fetchErr);
+          }
         }
       }
 
