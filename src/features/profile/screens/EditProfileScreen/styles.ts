@@ -107,6 +107,15 @@ export const styles = StyleSheet.create({
     minHeight: 80,
     textAlignVertical: 'top',
   },
+  textAreaContainer: {
+    height: 96,
+    alignItems: 'flex-start',
+    paddingTop: spacing.xs,
+  },
+  textAreaInput: {
+    height: 84,
+    textAlignVertical: 'top',
+  },
   readOnlyCard: {
     backgroundColor: colors.surfaceSubtle,
     borderRadius: 14,

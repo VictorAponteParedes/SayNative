@@ -7,13 +7,13 @@ export interface ProfileStats {
 }
 
 export interface EditProfileFormData {
-  name: string;
+  fullName: string;
   email: string;
   phone: string;
   bio: string;
-  avatarUrl: string;
-  countryCode: string;
-  countryFlag: string;
+  avatarUrl?: string;
+  countryCode?: string;
+  countryFlag?: string;
 }
 
 export interface UserLanguageProgress extends UserLanguage {

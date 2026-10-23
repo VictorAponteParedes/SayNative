@@ -15,6 +15,7 @@ import { AppText } from './AppText';
 
 export interface AppInputProps extends Omit<TextInputProps, 'style'> {
   label?: string;
+  labelRight?: React.ReactNode;
   error?: string;
   hint?: string;
   leftIcon?: React.ReactNode;
@@ -31,6 +32,7 @@ export interface AppInputProps extends Omit<TextInputProps, 'style'> {
 
 export const AppInput: React.FC<AppInputProps> = ({
   label,
+  labelRight,
   error,
   hint,
   leftIcon,
@@ -67,10 +69,17 @@ export const AppInput: React.FC<AppInputProps> = ({
 
   return (
     <View style={[styles.container, containerStyle]}>
-      {label ? (
-        <AppText variant="bodySmall" style={[styles.label, labelStyle]}>
-          {label}
-        </AppText>
+      {label || labelRight ? (
+        <View style={styles.labelRow}>
+          {label ? (
+            <AppText variant="bodySmall" style={[styles.label, labelStyle]}>
+              {label}
+            </AppText>
+          ) : (
+            <View />
+          )}
+          {labelRight}
+        </View>
       ) : null}
 
       <View
@@ -140,11 +149,16 @@ const styles = StyleSheet.create({
   container: {
     marginBottom: spacing.md,
   },
+  labelRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 6,
+  },
   label: {
     fontSize: 13,
     fontWeight: '700',
     color: colors.textPrimary,
-    marginBottom: 6,
   },
   inputBox: {
     flexDirection: 'row',

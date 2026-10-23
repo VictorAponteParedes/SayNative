@@ -2,14 +2,16 @@ import React from 'react';
 import {
   View,
   ScrollView,
-  TextInput,
   TouchableOpacity,
   Image,
+  RefreshControl,
+  KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
 import { ArrowLeft, Camera } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
-import { SafeAreaContainer, AppText, AppButton } from '@/components';
-import { colors, fonts } from '@/theme';
+import { SafeAreaContainer, AppText, AppButton, ControlledInput } from '@/components';
+import { colors } from '@/theme';
 import { goBack } from '@/navigation/NavigationRef';
 import { useEditProfile } from '../../hooks/useEditProfile';
 import { styles } from './styles';
@@ -18,18 +20,22 @@ export const EditProfileScreen: React.FC = () => {
   const { t } = useTranslation('profile');
   const {
     user,
-    name,
-    setName,
-    email,
-    setEmail,
-    phone,
-    setPhone,
-    bio,
-    setBio,
+    control,
+    handleSubmit,
+    isSaving,
+    isRefreshing,
+    onRefresh,
     avatarUrl,
     handleChangePhoto,
-    handleSave,
   } = useEditProfile();
+
+  const renderVerifiedBadge = () => (
+    <View style={styles.verifiedBadge}>
+      <AppText variant="caption" style={styles.verifiedText}>
+        ✓ {t('user.verified')}
+      </AppText>
+    </View>
+  );
 
   return (
     <SafeAreaContainer edges={['top', 'bottom']} style={styles.container}>
@@ -39,6 +45,7 @@ export const EditProfileScreen: React.FC = () => {
           activeOpacity={0.7}
           onPress={goBack}
           style={styles.backButton}
+          hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
         >
           <ArrowLeft size={20} color={colors.textPrimary} />
         </TouchableOpacity>
@@ -50,132 +57,134 @@ export const EditProfileScreen: React.FC = () => {
         <View style={styles.headerPlaceholder} />
       </View>
 
-      <ScrollView
-        contentContainerStyle={styles.scrollContent}
-        showsVerticalScrollIndicator={false}
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+        style={{ flex: 1 }}
       >
-        {/* Sección de Foto de Perfil */}
-        <View style={styles.avatarSection}>
-          <Image source={{ uri: avatarUrl }} style={styles.avatarImage} />
-          <TouchableOpacity
-            activeOpacity={0.7}
-            onPress={handleChangePhoto}
-            style={styles.changePhotoButton}
-          >
-            <Camera size={14} color={colors.primary} style={styles.cameraIcon} />
-            <AppText variant="caption" style={styles.changePhotoText}>
-              {t('editProfile.changePhoto')}
-            </AppText>
-          </TouchableOpacity>
-        </View>
+        <ScrollView
+          contentContainerStyle={styles.scrollContent}
+          showsVerticalScrollIndicator={false}
+          refreshControl={
+            <RefreshControl
+              refreshing={isRefreshing}
+              onRefresh={onRefresh}
+              tintColor={colors.primary}
+              colors={[colors.primary]}
+            />
+          }
+        >
+          {/* Sección de Foto de Perfil */}
+          <View style={styles.avatarSection}>
+            <Image source={{ uri: avatarUrl }} style={styles.avatarImage} />
+            <TouchableOpacity
+              activeOpacity={0.7}
+              onPress={handleChangePhoto}
+              style={styles.changePhotoButton}
+            >
+              <Camera size={14} color={colors.primary} style={styles.cameraIcon} />
+              <AppText variant="caption" style={styles.changePhotoText}>
+                {t('editProfile.changePhoto')}
+              </AppText>
+            </TouchableOpacity>
+          </View>
 
-        {/* Campo: Nombre Completo */}
-        <View style={styles.formGroup}>
-          <AppText variant="bodySmall" style={styles.fieldLabel}>
-            {t('editProfile.fullName')}
-          </AppText>
-          <TextInput
-            value={name}
-            onChangeText={setName}
+          {/* Campo: Nombre Completo con React Hook Form */}
+          <ControlledInput
+            control={control}
+            name="fullName"
+            label={t('editProfile.fullName')}
             placeholder={t('editProfile.fullNamePlaceholder')}
-            placeholderTextColor={colors.textMuted}
-            style={[styles.input, { fontFamily: fonts.regular }]}
+            autoCapitalize="words"
+            rules={{
+              required: 'El nombre es obligatorio',
+              minLength: {
+                value: 2,
+                message: 'El nombre debe tener al menos 2 caracteres',
+              },
+            }}
           />
-        </View>
 
-        {/* Campo: Correo Electrónico con badge verificado */}
-        <View style={styles.formGroup}>
-          <View style={styles.labelRow}>
-            <AppText variant="bodySmall" style={styles.fieldLabel}>
-              {t('editProfile.email')}
-            </AppText>
-            <View style={styles.verifiedBadge}>
-              <AppText variant="caption" style={styles.verifiedText}>
-                ✓ {t('user.verified')}
+          {/* Campo: Correo Electrónico con badge de verificado */}
+          <ControlledInput
+            control={control}
+            name="email"
+            label={t('editProfile.email')}
+            labelRight={renderVerifiedBadge()}
+            placeholder={t('editProfile.emailPlaceholder')}
+            keyboardType="email-address"
+            autoCapitalize="none"
+            rules={{
+              required: 'El correo electrónico es obligatorio',
+              pattern: {
+                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                message: 'Ingresa un correo válido',
+              },
+            }}
+          />
+
+          {/* Campo: Teléfono Móvil */}
+          <ControlledInput
+            control={control}
+            name="phone"
+            label={t('editProfile.phone')}
+            placeholder={t('editProfile.phonePlaceholder')}
+            keyboardType="phone-pad"
+          />
+
+          {/* Campo: Biografía */}
+          <ControlledInput
+            control={control}
+            name="bio"
+            label={t('editProfile.bio')}
+            placeholder={t('user.bioPlaceholder')}
+            multiline
+            numberOfLines={3}
+            inputContainerStyle={styles.textAreaContainer}
+            inputStyle={styles.textAreaInput}
+          />
+
+          {/* Ficha de Información de Cuenta (Solo Lectura) */}
+          <View style={styles.readOnlyCard}>
+            <View style={styles.readOnlyRow}>
+              <AppText variant="caption" style={styles.readOnlyLabel}>
+                {t('editProfile.userId')}
+              </AppText>
+              <AppText variant="caption" style={styles.readOnlyValue}>
+                {user.id}
+              </AppText>
+            </View>
+
+            <View style={styles.readOnlyRow}>
+              <AppText variant="caption" style={styles.readOnlyLabel}>
+                {t('editProfile.nativeLanguage')}
+              </AppText>
+              <AppText variant="caption" style={styles.readOnlyValue}>
+                {user.nativeLanguage?.name} {user.nativeLanguage?.flag}
+              </AppText>
+            </View>
+
+            <View style={styles.readOnlyRow}>
+              <AppText variant="caption" style={styles.readOnlyLabel}>
+                {t('editProfile.memberSince')}
+              </AppText>
+              <AppText variant="caption" style={styles.readOnlyValue}>
+                {user.memberSince || 'Octubre 2024'}
               </AppText>
             </View>
           </View>
-          <TextInput
-            value={email}
-            onChangeText={setEmail}
-            keyboardType="email-address"
-            autoCapitalize="none"
-            placeholder={t('editProfile.emailPlaceholder')}
-            placeholderTextColor={colors.textMuted}
-            style={[styles.input, { fontFamily: fonts.regular }]}
-          />
-        </View>
 
-        {/* Campo: Teléfono Móvil */}
-        <View style={styles.formGroup}>
-          <AppText variant="bodySmall" style={styles.fieldLabel}>
-            {t('editProfile.phone')}
-          </AppText>
-          <TextInput
-            value={phone}
-            onChangeText={setPhone}
-            keyboardType="phone-pad"
-            placeholder={t('editProfile.phonePlaceholder')}
-            placeholderTextColor={colors.textMuted}
-            style={[styles.input, { fontFamily: fonts.regular }]}
-          />
-        </View>
-
-        {/* Campo: Biografía */}
-        <View style={styles.formGroup}>
-          <AppText variant="bodySmall" style={styles.fieldLabel}>
-            {t('editProfile.bio')}
-          </AppText>
-          <TextInput
-            value={bio}
-            onChangeText={setBio}
-            multiline
-            numberOfLines={3}
-            placeholder={t('user.bioPlaceholder')}
-            placeholderTextColor={colors.textMuted}
-            style={[styles.input, styles.textArea, { fontFamily: fonts.regular }]}
-          />
-        </View>
-
-        {/* Ficha de Información de Cuenta (Solo Lectura) */}
-        <View style={styles.readOnlyCard}>
-          <View style={styles.readOnlyRow}>
-            <AppText variant="caption" style={styles.readOnlyLabel}>
-              {t('editProfile.userId')}
-            </AppText>
-            <AppText variant="caption" style={styles.readOnlyValue}>
-              {user.id}
-            </AppText>
+          {/* Botón Guardar Cambios con estado de carga */}
+          <View style={styles.saveButtonContainer}>
+            <AppButton
+              title={t('editProfile.save')}
+              onPress={handleSubmit}
+              loading={isSaving}
+              disabled={isSaving}
+              variant="primary"
+            />
           </View>
-
-          <View style={styles.readOnlyRow}>
-            <AppText variant="caption" style={styles.readOnlyLabel}>
-              {t('editProfile.nativeLanguage')}
-            </AppText>
-            <AppText variant="caption" style={styles.readOnlyValue}>
-              {user.nativeLanguage.name} {user.nativeLanguage.flag}
-            </AppText>
-          </View>
-
-          <View style={styles.readOnlyRow}>
-            <AppText variant="caption" style={styles.readOnlyLabel}>
-              {t('editProfile.memberSince')}
-            </AppText>
-            <AppText variant="caption" style={styles.readOnlyValue}>
-              {user.memberSince || '2024'}
-            </AppText>
-          </View>
-        </View>
-
-        {/* Botón Guardar Cambios */}
-        <View style={styles.saveButtonContainer}>
-          <AppButton
-            title={t('editProfile.save')}
-            onPress={handleSave}
-            variant="primary"
-          />
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </KeyboardAvoidingView>
     </SafeAreaContainer>
   );
 };
