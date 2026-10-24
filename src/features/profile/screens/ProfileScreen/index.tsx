@@ -22,6 +22,7 @@ import { styles } from './styles';
 export const ProfileScreen: React.FC = () => {
   const {
     user,
+    coins,
     isRefreshing,
     onRefresh,
     isLanguageSheetOpen,
@@ -68,7 +69,7 @@ export const ProfileScreen: React.FC = () => {
 
         {/* Billetera Virtual: Saldo, botón Recargar y botón +5 gratis */}
         <ProfileWalletCard
-          coins={user.coins}
+          coins={coins}
           onPressRecharge={handleGoToCoins}
           onPressHistory={handleGoToHistory}
           onPressRewardedAd={handleWatchRewardedAd}

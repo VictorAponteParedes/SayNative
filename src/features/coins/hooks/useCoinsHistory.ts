@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { useAuthStore } from '@/store/useAuthStore';
+import { useCoinsStore } from '../store/useCoinsStore';
 import type {
   CoinTransaction,
   TransactionFilter,
@@ -74,23 +74,24 @@ const MOCK_TRANSACTIONS: CoinTransaction[] = [
 
 export const useCoinsHistory = () => {
   const [activeFilter, setActiveFilter] = useState<TransactionFilter>('all');
-  const user = useAuthStore((state) => state.user);
-  const currentBalance = user?.coins ?? 150;
+  const currentBalance = useCoinsStore((state) => state.coins);
+  const totalEarned = useCoinsStore((state) => state.totalEarned);
+  const totalConsumed = useCoinsStore((state) => state.totalSpent);
+  const storeTransactions = useCoinsStore((state) => state.transactions);
 
-  const totalEarned = 1200;
-  const totalConsumed = 1050;
+  const allTransactions = storeTransactions.length > 0 ? storeTransactions : MOCK_TRANSACTIONS;
 
   const filteredTransactions = useMemo(() => {
     if (activeFilter === 'all') {
-      return MOCK_TRANSACTIONS;
+      return allTransactions;
     }
-    return MOCK_TRANSACTIONS.filter((item) => {
+    return allTransactions.filter((item) => {
       if (activeFilter === 'purchases') return item.type === 'purchase';
       if (activeFilter === 'earned') return item.type === 'earned';
       if (activeFilter === 'spent') return item.type === 'spent';
       return true;
     });
-  }, [activeFilter]);
+  }, [activeFilter, allTransactions]);
 
   const sections = useMemo<TransactionSectionGroup[]>(() => {
     const sectionKeys: ('today' | 'thisWeek' | 'september2024')[] = [

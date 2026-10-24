@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { useAuthStore } from '@/store/useAuthStore';
+import { useCoinsStore } from '../store/useCoinsStore';
 import { CoinPackage } from '../types';
 
 export const COIN_PACKAGES: CoinPackage[] = [
@@ -46,24 +46,21 @@ export const COIN_PACKAGES: CoinPackage[] = [
 ];
 
 export const useCoinPackages = () => {
-  const addCoins = useAuthStore((state) => state.addCoins);
-  const currentCoins = useAuthStore((state) => state.user.coins);
-  const [adsAvailable, setAdsAvailable] = useState<number>(3);
-  const [totalAds] = useState<number>(3);
-
-  const watchRewardedAd = useCallback((): boolean => {
-    if (adsAvailable <= 0) return false;
-    setAdsAvailable((prev) => Math.max(0, prev - 1));
-    addCoins(5);
-    return true;
-  }, [adsAvailable, addCoins]);
+  const currentCoins = useCoinsStore((state) => state.coins);
+  const adsAvailable = useCoinsStore((state) => state.adsRemaining);
+  const totalAds = useCoinsStore((state) => state.totalAdsPerDay);
+  const watchRewardedAd = useCoinsStore((state) => state.watchRewardedAd);
+  const chargeCoins = useCoinsStore((state) => state.chargeCoins);
 
   const purchasePackage = useCallback(
     (pkg: CoinPackage) => {
       const numericCoins = parseInt(pkg.coinsCount.replace(/,/g, ''), 10) || 0;
-      addCoins(numericCoins);
+      chargeCoins(numericCoins, {
+        titleKey: pkg.titleKey,
+        subtitleKey: pkg.price,
+      });
     },
-    [addCoins]
+    [chargeCoins]
   );
 
   return {

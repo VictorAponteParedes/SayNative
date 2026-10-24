@@ -56,7 +56,10 @@ export const useCallSignaling = (handlers?: UseCallSignalingHandlers) => {
     });
 
     // Escuchar aceptación
-    socket.on('call:accepted', (_data: { callId: string }) => {
+    socket.on('call:accepted', (data: { callId?: string }) => {
+      if (data?.callId) {
+        setCallId(data.callId);
+      }
       setCallStatus('connected');
       handlersRef.current?.onCallAccepted?.();
     });
@@ -68,7 +71,12 @@ export const useCallSignaling = (handlers?: UseCallSignalingHandlers) => {
     });
 
     // Escuchar señalización SDP (oferta o respuesta)
-    socket.on('call:signal', async (payload: { callId: string; signal: SignalData }) => {
+    socket.on('call:signal', async (payload: { callId: string; signal: SignalData; senderId?: string }) => {
+      // Ignorar señales reflejadas emitidas por el propio cliente
+      if (payload.senderId && payload.senderId === currentUserId) {
+        return;
+      }
+
       if (payload.signal.type === 'offer') {
         await handlersRef.current?.onIncomingOffer?.(payload.signal.sdp);
       } else if (payload.signal.type === 'answer') {
@@ -77,7 +85,12 @@ export const useCallSignaling = (handlers?: UseCallSignalingHandlers) => {
     });
 
     // Escuchar candidato ICE remoto
-    socket.on('call:ice-candidate', async (payload: { callId: string; candidate: IceCandidateData }) => {
+    socket.on('call:ice-candidate', async (payload: { callId: string; candidate: IceCandidateData; senderId?: string }) => {
+      // Ignorar candidatos ICE propios
+      if (payload.senderId && payload.senderId === currentUserId) {
+        return;
+      }
+
       await handlersRef.current?.onRemoteIceCandidate?.(payload.candidate);
     });
 
@@ -147,17 +160,25 @@ export const useCallSignaling = (handlers?: UseCallSignalingHandlers) => {
   const sendSignal = useCallback(
     (signal: SignalData) => {
       const activeCallId = useCallSessionStore.getState().currentCall?.callId || currentCall?.callId || 'default-call';
-      socketRef.current?.emit('call:signal', { callId: activeCallId, signal });
+      socketRef.current?.emit('call:signal', {
+        callId: activeCallId,
+        signal,
+        senderId: currentUserId,
+      });
     },
-    [currentCall?.callId]
+    [currentCall?.callId, currentUserId]
   );
 
   const sendIceCandidate = useCallback(
     (candidate: IceCandidateData) => {
       const activeCallId = useCallSessionStore.getState().currentCall?.callId || currentCall?.callId || 'default-call';
-      socketRef.current?.emit('call:ice-candidate', { callId: activeCallId, candidate });
+      socketRef.current?.emit('call:ice-candidate', {
+        callId: activeCallId,
+        candidate,
+        senderId: currentUserId,
+      });
     },
-    [currentCall?.callId]
+    [currentCall?.callId, currentUserId]
   );
 
   const endCall = useCallback(

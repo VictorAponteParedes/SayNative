@@ -1,6 +1,7 @@
 import { useState, useCallback, useEffect } from 'react';
 import httpClient from '@/lib/httpClient';
 import { useAuthStore } from '@/store/useAuthStore';
+import { useCoinsStore } from '@/features/coins';
 import { ApiResponse } from '@/types';
 import { PeerUser } from '../types';
 
@@ -66,7 +67,7 @@ export const useHomeFeed = () => {
             const meData =
               meRes.data && 'data' in meRes.data ? meRes.data.data : meRes.data;
             if (meData && meData.coins !== undefined) {
-              updateUserProfile({ coins: Number(meData.coins) });
+              useCoinsStore.getState().setCoins(Number(meData.coins));
             }
           } catch {
             // Error de sincronización ignorado

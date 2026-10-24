@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useAuthStore } from '@/store/useAuthStore';
+import { useCoinsStore } from '@/features/coins';
 import { Toast } from '@/components';
 import { navigate } from '@/navigation/NavigationRef';
 import { Routes } from '@/navigation/routes';
@@ -88,7 +88,7 @@ const INITIAL_NOTIFICATIONS: NotificationItem[] = [
 
 export const useNotifications = () => {
   const { t } = useTranslation('notifications');
-  const addCoins = useAuthStore((state) => state.addCoins);
+  const claimStreakBonus = useCoinsStore((state) => state.claimStreakBonus);
 
   const [notifications, setNotifications] =
     useState<NotificationItem[]>(INITIAL_NOTIFICATIONS);
@@ -139,7 +139,7 @@ export const useNotifications = () => {
         );
         return;
       }
-      addCoins(10);
+      claimStreakBonus();
       setNotifications((prev) =>
         prev.map((n) =>
           n.id === item.id ? { ...n, isClaimed: true, isRead: true } : n

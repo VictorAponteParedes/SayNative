@@ -2,7 +2,7 @@ import React, { useEffect, useCallback, useRef } from 'react';
 import { View, Alert } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { goBack } from '@/navigation/NavigationRef';
-import { useAuthStore } from '@/store/useAuthStore';
+import { useCoinsStore } from '@/features/coins';
 import { useCallSessionStore } from '../../store/useCallSessionStore';
 import { useWebRTC } from '../../hooks/useWebRTC';
 import { useCallSignaling } from '../../hooks/useCallSignaling';
@@ -31,13 +31,14 @@ export interface ActiveCallScreenProps {
 
 export const ActiveCallScreen: React.FC<ActiveCallScreenProps> = ({ route }) => {
   const { t } = useTranslation('calls');
-  const deductCoins = useAuthStore((s) => s.deductCoins);
-  const addCoins = useAuthStore((s) => s.addCoins);
+  const spendCoins = useCoinsStore((s) => s.spendCoins);
+  const rewardCoins = useCoinsStore((s) => s.rewardCoins);
 
   const {
     currentCall,
     localStream,
     remoteStream,
+    remoteStreamVersion,
     toggleAudioMute,
     toggleVideoMute,
     toggleCameraFacing,
@@ -63,6 +64,8 @@ export const ActiveCallScreen: React.FC<ActiveCallScreenProps> = ({ route }) => 
   });
 
   const sendSignalRef = useRef<(signal: SignalData) => void>(() => {});
+  // Se marca true únicamente si este dispositivo emitió 'call:initiate'
+  const isCallerRef = useRef(false);
   const sendIceCandidateRef = useRef<(candidate: IceCandidateData) => void>(() => {});
   const webRtcRef = useRef<{
     createOffer: () => Promise<SignalData | null>;
@@ -86,8 +89,11 @@ export const ActiveCallScreen: React.FC<ActiveCallScreenProps> = ({ route }) => 
     onCallAccepted: async () => {
       setCallStatus('connected');
       startTimer();
-      // Si somos quien llama, generamos la oferta SDP
-      await webRtcRef.current.createOffer();
+      // Solo quien inició la llamada genera la oferta SDP (evita glare si el
+      // backend emite 'call:accepted' a ambos participantes)
+      if (isCallerRef.current) {
+        await webRtcRef.current.createOffer();
+      }
     },
     onIncomingOffer: async (sdp) => {
       setCallStatus('connected');
@@ -106,9 +112,16 @@ export const ActiveCallScreen: React.FC<ActiveCallScreenProps> = ({ route }) => 
       stopTimer();
       cleanup();
       if (!isTeacher) {
-        deductCoins(payload.coinsCharged);
+        spendCoins(payload.coinsCharged, {
+          titleKey: 'items.callEmma',
+          subtitleKey: 'items.callEmmaSub',
+        });
       } else {
-        addCoins(payload.coinsCharged);
+        rewardCoins(payload.coinsCharged, {
+          titleKey: 'items.taughtDavid',
+          subtitleKey: 'items.taughtDavidSub',
+          iconType: 'tutor',
+        });
       }
       resetCallSession();
       Alert.alert(
@@ -175,6 +188,7 @@ export const ActiveCallScreen: React.FC<ActiveCallScreenProps> = ({ route }) => 
     const setupCall = async () => {
       await startLocalMedia();
       if (currentCall?.peer?.id && currentCall.status === 'calling') {
+        isCallerRef.current = true;
         initiateCall(currentCall.peer.id, ratePerMinute);
       }
     };
@@ -203,24 +217,31 @@ export const ActiveCallScreen: React.FC<ActiveCallScreenProps> = ({ route }) => 
     cleanup();
 
     if (!isTeacher) {
-      deductCoins(coinsCount);
+      spendCoins(coinsCount, {
+        titleKey: 'items.callCompleted',
+        subtitleKey: 'items.callSarahSub',
+      });
     } else {
-      addCoins(coinsCount);
+      rewardCoins(coinsCount, {
+        titleKey: 'items.taughtDavid',
+        subtitleKey: 'items.taughtDavidSub',
+        iconType: 'tutor',
+      });
     }
 
     setCallStatus('ended');
     resetCallSession();
     goBack();
   }, [
-    addCoins,
     cleanup,
     coinsCount,
-    deductCoins,
     isTeacher,
     resetCallSession,
+    rewardCoins,
     seconds,
     setCallStatus,
     signalEndCall,
+    spendCoins,
     stopTimer,
   ]);
 
@@ -229,6 +250,7 @@ export const ActiveCallScreen: React.FC<ActiveCallScreenProps> = ({ route }) => 
       {/* Visualización de Streams de Video (Fondo remoto + PIP local) */}
       <VideoStreamView
         remoteStream={remoteStream}
+        remoteStreamVersion={remoteStreamVersion}
         localStream={localStream}
         remoteUserName={peerName}
         remoteUserAvatar={peerAvatar}

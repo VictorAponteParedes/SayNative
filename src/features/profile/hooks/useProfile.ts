@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAuthStore } from '@/store/useAuthStore';
+import { useCoinsStore } from '@/features/coins';
 import { navigate } from '@/navigation/NavigationRef';
 import { Routes } from '@/navigation/routes';
 import { Toast } from '@/components';
@@ -19,8 +20,10 @@ export const useProfile = () => {
   const user = useAuthStore(state => state.user);
   const setAvailableToTeach = useAuthStore(state => state.setAvailableToTeach);
   const updateUserProfile = useAuthStore(state => state.updateUserProfile);
-  const addCoins = useAuthStore(state => state.addCoins);
   const setAuthenticated = useAuthStore(state => state.setAuthenticated);
+  const coins = useCoinsStore(state => state.coins);
+  const watchRewardedAd = useCoinsStore(state => state.watchRewardedAd);
+  const setCoins = useCoinsStore(state => state.setCoins);
 
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [isLanguageSheetOpen, setIsLanguageSheetOpen] = useState(false);
@@ -36,8 +39,10 @@ export const useProfile = () => {
     try {
       const backendUser = await profileApi.getProfile(user.id);
       if (backendUser) {
+        if (backendUser.coins !== undefined) {
+          setCoins(Number(backendUser.coins));
+        }
         updateUserProfile({
-          coins: backendUser.coins !== undefined ? Number(backendUser.coins) : user.coins,
           name: backendUser.fullName || user.name,
           email: backendUser.email || user.email,
           phone: backendUser.phone ?? user.phone,
@@ -155,11 +160,18 @@ export const useProfile = () => {
   };
 
   const handleWatchRewardedAd = () => {
-    addCoins(5);
-    Toast.success(
-      t('toasts.rewardEarnedTitle'),
-      t('toasts.rewardEarnedMessage'),
-    );
+    const success = watchRewardedAd();
+    if (success) {
+      Toast.success(
+        t('toasts.rewardEarnedTitle'),
+        t('toasts.rewardEarnedMessage'),
+      );
+    } else {
+      Toast.warning(
+        'Límite de anuncios alcanzado',
+        'Has visto todos los anuncios disponibles por el día de hoy.'
+      );
+    }
   };
 
   const handleToggleTeachingMode = async (value: boolean) => {
@@ -210,6 +222,7 @@ export const useProfile = () => {
 
   return {
     user,
+    coins,
     isRefreshing,
     onRefresh,
     isLanguageSheetOpen,

@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import { useAuthStore } from '@/store/useAuthStore';
+import { useCoinsStore } from '@/features/coins';
 import { Toast } from '@/components';
 import { RegisterFormData } from '../types';
 import { authApi } from '../api/authApi';
@@ -13,7 +14,7 @@ export const useRegister = () => {
   const [isLoading, setIsLoading] = useState(false);
   const setUserFromBackend = useAuthStore((state) => state.setUserFromBackend);
   const setTokens = useAuthStore((state) => state.setTokens);
-  const addCoins = useAuthStore((state) => state.addCoins);
+  const claimWelcomeBonus = useCoinsStore((state) => state.claimWelcomeBonus);
 
   const {
     control,
@@ -67,8 +68,8 @@ export const useRegister = () => {
         setTokens({ token: regToken });
       }
 
-      // Acreditar el bono de +50 monedas de bienvenida
-      addCoins(50);
+      // Acreditar el bono de +50 monedas de bienvenida en el store de monedas
+      claimWelcomeBonus();
 
       setTimeout(() => {
         Toast.success(

@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { colors, spacing } from '@/theme';
 import { AppText, Avatar, CoinBadge } from '@/components';
 import { useAuthStore } from '@/store/useAuthStore';
+import { useCoinsStore } from '@/features/coins';
 
 export interface UserProfileBarProps {
   onPressAddCoins?: () => void;
@@ -17,6 +18,7 @@ export const UserProfileBar: React.FC<UserProfileBarProps> = ({
 }) => {
   const { t } = useTranslation('home');
   const user = useAuthStore((state) => state.user);
+  const coins = useCoinsStore((state) => state.coins);
 
   return (
     <View style={styles.container}>
@@ -38,7 +40,7 @@ export const UserProfileBar: React.FC<UserProfileBarProps> = ({
           onPress={onPressCoins}
           disabled={!onPressCoins}
         >
-          <CoinBadge amount={user.coins} variant="pill" />
+          <CoinBadge amount={coins} variant="pill" />
         </TouchableOpacity>
         <TouchableOpacity
           activeOpacity={0.8}

@@ -10,6 +10,7 @@ interface CallSessionState {
   currentCall: CallSession | null;
   localStream: unknown | null;
   remoteStream: unknown | null;
+  remoteStreamVersion: number;
   hasCameraPermission: boolean;
   hasMicrophonePermission: boolean;
 
@@ -39,11 +40,12 @@ export const useCallSessionStore = create<CallSessionState>((set) => ({
   currentCall: null,
   localStream: null,
   remoteStream: null,
+  remoteStreamVersion: 0,
   hasCameraPermission: false,
   hasMicrophonePermission: false,
 
   initCallSession: (peer, initialStatus = 'idle', callId = '') =>
-    set({
+    set((state) => ({
       currentCall: {
         callId,
         peer,
@@ -57,9 +59,9 @@ export const useCallSessionStore = create<CallSessionState>((set) => ({
         isFrontCamera: true,
         networkQuality: 'unknown',
       },
-      localStream: null,
+      localStream: state.localStream,
       remoteStream: null,
-    }),
+    })),
 
   setCallId: (callId) =>
     set((state) => ({
@@ -97,7 +99,13 @@ export const useCallSessionStore = create<CallSessionState>((set) => ({
 
   setLocalStream: (stream) => set({ localStream: stream }),
 
-  setRemoteStream: (stream) => set({ remoteStream: stream }),
+  // Se incrementa la versión para forzar re-render aunque el objeto stream sea el mismo
+  // (ej. cuando llega la pista de video después de la de audio en iOS)
+  setRemoteStream: (stream) =>
+    set((state) => ({
+      remoteStream: stream,
+      remoteStreamVersion: state.remoteStreamVersion + 1,
+    })),
 
   toggleAudioMute: () =>
     set((state) => {

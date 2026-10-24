@@ -8,6 +8,7 @@ import { colors } from '@/theme';
 import { navigate, goBack } from '@/navigation/NavigationRef';
 import { Routes } from '@/navigation/routes';
 import { useAuthStore } from '@/store/useAuthStore';
+import { useCoinsStore } from '@/features/coins';
 import { useCallSessionStore } from '../../store/useCallSessionStore';
 import { useWebRTC } from '../../hooks/useWebRTC';
 import { styles } from './styles';
@@ -28,6 +29,7 @@ export interface LobbyScreenProps {
 export const LobbyScreen: React.FC<LobbyScreenProps> = ({ route }) => {
   const { t } = useTranslation('calls');
   const user = useAuthStore((s) => s.user);
+  const coins = useCoinsStore((s) => s.coins);
 
   const peerId = route?.params?.peerId || 'peer-demo-1';
   const peerName = route?.params?.peerName || 'Sarah Jenkins';
@@ -47,7 +49,7 @@ export const LobbyScreen: React.FC<LobbyScreenProps> = ({ route }) => {
     startLocalMedia();
   }, [startLocalMedia]);
 
-  const availableMinutes = ratePerMinute > 0 ? Math.floor(user.coins / ratePerMinute) : 99;
+  const availableMinutes = ratePerMinute > 0 ? Math.floor(coins / ratePerMinute) : 99;
 
   const handleToggleMic = () => {
     toggleAudio();
@@ -61,7 +63,7 @@ export const LobbyScreen: React.FC<LobbyScreenProps> = ({ route }) => {
 
   const handleStartCall = () => {
     // En desarrollo permitimos probar llamadas aunque el saldo sea 0
-    if (!__DEV__ && user.coins < ratePerMinute && !isIncoming) {
+    if (!__DEV__ && coins < ratePerMinute && !isIncoming) {
       Alert.alert(
         t('errors.insufficientCoins'),
         t('lobby.balanceWarning', { minutes: 0 })
