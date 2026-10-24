@@ -31,7 +31,12 @@ export const PeerCard: React.FC<PeerCardProps> = ({
 
       {/* Nombre y edad */}
       <AppText variant="bodyLarge" style={styles.nameText} numberOfLines={1}>
-        {peer.name} <AppText variant="bodyMedium" color={colors.textSecondary}>{peer.age}</AppText>
+        {peer.name}{' '}
+        {peer.age !== undefined && peer.age !== null ? (
+          <AppText variant="bodyMedium" color={colors.textSecondary}>
+            {peer.age}
+          </AppText>
+        ) : null}
       </AppText>
 
       {/* Rating */}

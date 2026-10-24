@@ -5,6 +5,7 @@ export interface UpdateProfilePayload {
   email?: string;
   phone?: string;
   bio?: string;
+  birthDate?: string;
   countryCode?: string;
   countryFlag?: string;
   isAvailableToTeach?: boolean;
@@ -14,6 +15,7 @@ export interface UserBackendResponse {
   id: string;
   email: string;
   fullName: string;
+  birthDate?: string | Date | null;
   coins?: number;
   phone?: string | null;
   bio?: string | null;

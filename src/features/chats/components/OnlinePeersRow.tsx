@@ -1,25 +1,34 @@
 import React from 'react';
-import { View, ScrollView, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import { View, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
 import { Plus } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
 import { colors, spacing } from '@/theme';
 import { AppText, Avatar } from '@/components';
 import { OnlinePeer } from '../types';
+import { OnlinePeersSkeleton } from './OnlinePeersSkeleton';
 
 export interface OnlinePeersRowProps {
   peers: OnlinePeer[];
   onlineCount?: number;
+  isLoading?: boolean;
   onPressNewPeer?: () => void;
   onPressPeer?: (peer: OnlinePeer) => void;
 }
 
 export const OnlinePeersRow: React.FC<OnlinePeersRowProps> = ({
   peers,
-  onlineCount = 12,
+  onlineCount,
+  isLoading = false,
   onPressNewPeer,
   onPressPeer,
 }) => {
   const { t } = useTranslation('chats');
+
+  if (isLoading) {
+    return <OnlinePeersSkeleton />;
+  }
+
+  const effectiveCount = onlineCount !== undefined ? onlineCount : peers.length;
 
   return (
     <View style={styles.container}>
@@ -33,7 +42,7 @@ export const OnlinePeersRow: React.FC<OnlinePeersRowProps> = ({
         </View>
 
         <AppText variant="caption" style={styles.onlineCountText}>
-          {t('onlineSection.onlineCount', { count: onlineCount })}
+          {t('onlineSection.onlineCount', { count: effectiveCount })}
         </AppText>
       </View>
 
@@ -57,7 +66,7 @@ export const OnlinePeersRow: React.FC<OnlinePeersRowProps> = ({
           </AppText>
         </TouchableOpacity>
 
-        {/* Avatares de compañeros conectados */}
+        {/* Avatares de compañeros conectados reales */}
         {peers.map((peer) => (
           <TouchableOpacity
             key={peer.id}
@@ -70,7 +79,7 @@ export const OnlinePeersRow: React.FC<OnlinePeersRowProps> = ({
                 uri={peer.avatarUrl}
                 name={peer.name}
                 size={52}
-                isOnline
+                isOnline={peer.isOnline}
                 flag={peer.countryFlag}
               />
             </View>
@@ -142,31 +151,6 @@ const styles = StyleSheet.create({
     marginBottom: 6,
     position: 'relative',
   },
-  avatarImage: {
-    width: 52,
-    height: 52,
-    borderRadius: 26,
-    backgroundColor: colors.borderLight,
-  },
-  statusDot: {
-    position: 'absolute',
-    top: 0,
-    right: 0,
-    width: 14,
-    height: 14,
-    borderRadius: 7,
-    backgroundColor: colors.online,
-    borderWidth: 2,
-    borderColor: colors.surface,
-  },
-  flagBadge: {
-    position: 'absolute',
-    bottom: -2,
-    left: -2,
-  },
-  flagText: {
-    fontSize: 14,
-  },
   peerName: {
     color: colors.textPrimary,
     fontWeight: '600',
@@ -174,3 +158,5 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
+
+export default OnlinePeersRow;

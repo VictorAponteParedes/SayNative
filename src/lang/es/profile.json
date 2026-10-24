@@ -72,6 +72,8 @@
     "emailPlaceholder": "tu@correo.com",
     "phone": "Teléfono móvil",
     "phonePlaceholder": "+34 600 000 000",
+    "birthDate": "Fecha de nacimiento",
+    "birthDatePlaceholder": "YYYY-MM-DD (ej: 1998-05-20)",
     "bio": "Biografía",
     "country": "País de residencia",
     "nativeLanguage": "Idioma Nativo",

@@ -34,6 +34,7 @@ export const useEditProfile = () => {
       email: user.email || '',
       phone: user.phone || '',
       bio: user.bio || '',
+      birthDate: user.birthDate ? String(user.birthDate).split('T')[0] : '',
     },
     mode: 'onTouched',
   });
@@ -59,6 +60,9 @@ export const useEditProfile = () => {
             email: backendUser.email || user.email,
             phone: backendUser.phone || '',
             bio: backendUser.bio || '',
+            birthDate: backendUser.birthDate
+              ? String(backendUser.birthDate).split('T')[0]
+              : '',
           });
 
           updateUserProfile({
@@ -66,6 +70,9 @@ export const useEditProfile = () => {
             email: backendUser.email,
             phone: backendUser.phone || undefined,
             bio: backendUser.bio || undefined,
+            birthDate: backendUser.birthDate
+              ? String(backendUser.birthDate).split('T')[0]
+              : null,
             countryCode: backendUser.countryCode || user.countryCode,
             countryFlag: backendUser.countryFlag || user.countryFlag,
             isVerified: backendUser.isVerified,
@@ -146,6 +153,7 @@ export const useEditProfile = () => {
         email: data.email.trim().toLowerCase(),
         phone: data.phone.trim(),
         bio: data.bio.trim(),
+        birthDate: data.birthDate?.trim() || undefined,
       });
 
       // 2. Persistir en el estado global de Zustand
@@ -154,6 +162,7 @@ export const useEditProfile = () => {
         email: updatedBackendUser.email || data.email.trim().toLowerCase(),
         phone: updatedBackendUser.phone ?? data.phone.trim(),
         bio: updatedBackendUser.bio ?? data.bio.trim(),
+        birthDate: data.birthDate?.trim() || null,
         avatarUrl,
       });
 

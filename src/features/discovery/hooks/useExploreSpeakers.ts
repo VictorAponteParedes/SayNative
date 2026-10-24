@@ -2,6 +2,7 @@ import { useState, useMemo, useCallback, useEffect } from 'react';
 import httpClient from '@/lib/httpClient';
 import { useAuthStore } from '@/store/useAuthStore';
 import { ApiResponse } from '@/types';
+import { calculateAge } from '@/utils/calculateAge';
 import {
   SpeakerUser,
   BackendUserItem,
@@ -10,13 +11,13 @@ import {
 } from '../types';
 
 const mapBackendUserToSpeaker = (u: BackendUserItem): SpeakerUser => {
-  const nativeLangs = u.userLanguages?.filter(l => l.isNative) || [];
-  const learningLangs = u.userLanguages?.filter(l => !l.isNative) || [];
+  const nativeLangs = u.userLanguages?.filter((l) => l.isNative) || [];
+  const learningLangs = u.userLanguages?.filter((l) => !l.isNative) || [];
 
   const nativeStr =
     nativeLangs.length > 0
       ? nativeLangs
-          .map(l => `${u.countryFlag || '🌐'} ${l.languageCode.toUpperCase()}`)
+          .map((l) => `${u.countryFlag || '🌐'} ${l.languageCode.toUpperCase()}`)
           .join(', ')
       : `${u.countryFlag || '🇺🇸'} Inglés`;
 
@@ -24,10 +25,10 @@ const mapBackendUserToSpeaker = (u: BackendUserItem): SpeakerUser => {
     learningLangs.length > 0
       ? learningLangs
           .map(
-            l =>
+            (l) =>
               `🇪🇸 ${l.languageCode.toUpperCase()} (${
                 l.proficiencyLevel || 'B1'
-              })`,
+              })`
           )
           .join(', ')
       : '🇪🇸 Español (Intermedio)';
@@ -37,15 +38,17 @@ const mapBackendUserToSpeaker = (u: BackendUserItem): SpeakerUser => {
     u.bio && u.bio.length > 0
       ? u.bio
           .split(',')
-          .map(t => t.trim())
+          .map((t) => t.trim())
           .filter(Boolean)
           .slice(0, 3)
       : defaultTags;
 
+  const realAge = calculateAge(u.birthDate);
+
   return {
     id: u.id,
     name: u.fullName || 'Compañero',
-    age: 26,
+    age: realAge,
     avatarUrl: u.avatar?.url || '',
     countryFlag: u.countryFlag || '🌐',
     isOnline: true,

@@ -11,6 +11,7 @@ export interface EditProfileFormData {
   email: string;
   phone: string;
   bio: string;
+  birthDate?: string;
   avatarUrl?: string;
   countryCode?: string;
   countryFlag?: string;

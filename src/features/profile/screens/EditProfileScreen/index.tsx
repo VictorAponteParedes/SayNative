@@ -139,6 +139,22 @@ export const EditProfileScreen: React.FC = () => {
             keyboardType="phone-pad"
           />
 
+          {/* Campo: Fecha de Nacimiento (YYYY-MM-DD) */}
+          <ControlledInput
+            control={control}
+            name="birthDate"
+            label={t('editProfile.birthDate', { defaultValue: 'Fecha de nacimiento' })}
+            placeholder={t('editProfile.birthDatePlaceholder', {
+              defaultValue: 'YYYY-MM-DD (ej: 1998-05-20)',
+            })}
+            rules={{
+              pattern: {
+                value: /^\d{4}-\d{2}-\d{2}$/,
+                message: 'Usa el formato YYYY-MM-DD (ej: 1998-05-20)',
+              },
+            }}
+          />
+
           {/* Campo: Biografía */}
           <ControlledInput
             control={control}

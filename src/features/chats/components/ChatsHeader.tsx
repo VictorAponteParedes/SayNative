@@ -3,16 +3,18 @@ import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { MessageSquarePlus, MoreVertical } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
 import { colors, spacing } from '@/theme';
-import { AppText, AppLogo } from '@/components';
+import { AppText, AppLogo, Skeleton } from '@/components';
 
 export interface ChatsHeaderProps {
   totalCount?: number;
+  isLoading?: boolean;
   onPressNewChat?: () => void;
   onPressOptions?: () => void;
 }
 
 export const ChatsHeader: React.FC<ChatsHeaderProps> = ({
-  totalCount = 4,
+  totalCount = 0,
+  isLoading = false,
   onPressNewChat,
   onPressOptions,
 }) => {
@@ -26,9 +28,13 @@ export const ChatsHeader: React.FC<ChatsHeaderProps> = ({
           {t('title')}
         </AppText>
         <View style={styles.badge}>
-          <AppText variant="caption" style={styles.badgeText}>
-            {totalCount}
-          </AppText>
+          {isLoading ? (
+            <Skeleton width={18} height={18} variant="circle" />
+          ) : (
+            <AppText variant="caption" style={styles.badgeText}>
+              {totalCount}
+            </AppText>
+          )}
         </View>
       </View>
 
@@ -99,3 +105,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+export default ChatsHeader;

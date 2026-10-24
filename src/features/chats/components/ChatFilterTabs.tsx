@@ -3,13 +3,14 @@ import { View, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
 import { Video } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
 import { colors, spacing } from '@/theme';
-import { AppText } from '@/components';
+import { AppText, Skeleton } from '@/components';
 import { ChatFilterType } from '../types';
 
 export interface ChatFilterTabsProps {
   activeFilter: ChatFilterType;
   totalCount: number;
   unreadCount: number;
+  isLoading?: boolean;
   onSelectFilter: (filter: ChatFilterType) => void;
 }
 
@@ -17,6 +18,7 @@ export const ChatFilterTabs: React.FC<ChatFilterTabsProps> = ({
   activeFilter,
   totalCount,
   unreadCount,
+  isLoading = false,
   onSelectFilter,
 }) => {
   const { t } = useTranslation('chats');
@@ -51,15 +53,19 @@ export const ChatFilterTabs: React.FC<ChatFilterTabsProps> = ({
             activeFilter === 'all' ? styles.activeBadge : styles.inactiveBadge,
           ]}
         >
-          <AppText
-            variant="caption"
-            style={[
-              styles.badgeText,
-              activeFilter === 'all' ? styles.activeBadgeText : styles.inactiveBadgeText,
-            ]}
-          >
-            {totalCount}
-          </AppText>
+          {isLoading ? (
+            <Skeleton width={14} height={14} variant="circle" />
+          ) : (
+            <AppText
+              variant="caption"
+              style={[
+                styles.badgeText,
+                activeFilter === 'all' ? styles.activeBadgeText : styles.inactiveBadgeText,
+              ]}
+            >
+              {totalCount}
+            </AppText>
+          )}
         </View>
       </TouchableOpacity>
 
@@ -150,9 +156,10 @@ const styles = StyleSheet.create({
     color: colors.textPrimary,
   },
   countBadge: {
-    width: 20,
+    minWidth: 20,
     height: 20,
     borderRadius: 10,
+    paddingHorizontal: 4,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -174,9 +181,10 @@ const styles = StyleSheet.create({
   },
   unreadRedBadge: {
     backgroundColor: colors.dangerDark,
-    width: 20,
+    minWidth: 20,
     height: 20,
     borderRadius: 10,
+    paddingHorizontal: 4,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -186,3 +194,5 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 });
+
+export default ChatFilterTabs;

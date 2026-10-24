@@ -1,7 +1,7 @@
 export interface SpeakerUser {
   id: string;
   name: string;
-  age: number;
+  age?: number | null;
   avatarUrl: string;
   countryFlag: string;
   isOnline: boolean;
@@ -18,6 +18,7 @@ export interface SpeakerUser {
 export interface BackendUserItem {
   id: string;
   fullName?: string;
+  birthDate?: string | Date | null;
   avatar?: { url?: string } | null;
   countryFlag?: string | null;
   countryCode?: string | null;

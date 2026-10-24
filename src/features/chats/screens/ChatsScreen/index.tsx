@@ -1,16 +1,19 @@
 import React from 'react';
-import { View, FlatList, Alert } from 'react-native';
+import { View, FlatList, Alert, RefreshControl } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { SafeAreaContainer, BottomTabBar, AppText, SearchBar } from '@/components';
 import { ChatsHeader } from '../../components/ChatsHeader';
 import { OnlinePeersRow } from '../../components/OnlinePeersRow';
+import { OnlinePeersSkeleton } from '../../components/OnlinePeersSkeleton';
 import { ChatFilterTabs } from '../../components/ChatFilterTabs';
 import { ChatItemCard } from '../../components/ChatItemCard';
+import { ChatItemCardSkeleton } from '../../components/ChatItemCardSkeleton';
 import { DailyTipCard } from '../../components/DailyTipCard';
 import { useChatsList } from '../../hooks/useChatsList';
 import { navigate } from '@/navigation/NavigationRef';
 import { Routes } from '@/navigation/routes';
 import { ChatConversation, OnlinePeer } from '../../types';
+import { colors } from '@/theme';
 import { styles } from './styles';
 
 export const ChatsScreen: React.FC = () => {
@@ -22,7 +25,11 @@ export const ChatsScreen: React.FC = () => {
     setActiveFilter,
     onlinePeers,
     chats,
+    totalCount,
     totalUnread,
+    isLoading,
+    isRefreshing,
+    onRefresh,
   } = useChatsList();
 
   const handleNewChat = () => {
@@ -39,11 +46,11 @@ export const ChatsScreen: React.FC = () => {
 
   const handlePeerPress = (peer: OnlinePeer) => {
     navigate(Routes.App.PrivateChat, {
-      chatId: `peer_${peer.id}`,
+      chatId: peer.id,
       partnerName: peer.name,
       partnerAvatar: peer.avatarUrl,
       partnerFlag: peer.countryFlag,
-      ratePerMinute: 10,
+      ratePerMinute: peer.ratePerMinute || 10,
     });
   };
 
@@ -53,7 +60,7 @@ export const ChatsScreen: React.FC = () => {
       partnerName: chat.name,
       partnerAvatar: chat.avatarUrl,
       partnerFlag: chat.countryFlag,
-      ratePerMinute: 10,
+      ratePerMinute: chat.ratePerMinute || 10,
     });
   };
 
@@ -68,7 +75,7 @@ export const ChatsScreen: React.FC = () => {
     <View>
       {/* Cabecera superior con título Mensajes, badge y botones */}
       <ChatsHeader
-        totalCount={chats.length}
+        totalCount={totalCount}
         onPressNewChat={handleNewChat}
         onPressOptions={handleOptions}
       />
@@ -84,7 +91,7 @@ export const ChatsScreen: React.FC = () => {
       {/* Fila horizontal con compañeros en línea y botón nuevo */}
       <OnlinePeersRow
         peers={onlinePeers}
-        onlineCount={12}
+        onlineCount={onlinePeers.length}
         onPressNewPeer={handleNewChat}
         onPressPeer={handlePeerPress}
       />
@@ -92,8 +99,33 @@ export const ChatsScreen: React.FC = () => {
       {/* Píldoras de filtrado: Todos, No leídos, Videollamadas */}
       <ChatFilterTabs
         activeFilter={activeFilter}
-        totalCount={chats.length}
+        totalCount={totalCount}
         unreadCount={totalUnread}
+        onSelectFilter={setActiveFilter}
+      />
+    </View>
+  );
+
+  const renderSkeletonHeader = () => (
+    <View>
+      <ChatsHeader
+        totalCount={0}
+        isLoading={true}
+        onPressNewChat={handleNewChat}
+        onPressOptions={handleOptions}
+      />
+      <SearchBar
+        value={searchQuery}
+        onChangeText={setSearchQuery}
+        onPressFilter={handleFilterSearch}
+        placeholder={t('searchPlaceholder')}
+      />
+      <OnlinePeersSkeleton />
+      <ChatFilterTabs
+        activeFilter={activeFilter}
+        totalCount={0}
+        unreadCount={0}
+        isLoading={true}
         onSelectFilter={setActiveFilter}
       />
     </View>
@@ -101,27 +133,48 @@ export const ChatsScreen: React.FC = () => {
 
   return (
     <SafeAreaContainer>
-      <FlatList
-        data={chats}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <ChatItemCard chat={item} onPress={handleChatPress} />
-        )}
-        ListHeaderComponent={renderHeader}
-        ListFooterComponent={<DailyTipCard onPress={handleTipPress} />}
-        ListEmptyComponent={
-          <View style={styles.emptyContainer}>
-            <AppText variant="bodyLarge" style={styles.emptyText}>
-              {t('empty')}
-            </AppText>
-          </View>
-        }
-        contentContainerStyle={styles.listContent}
-        showsVerticalScrollIndicator={false}
-      />
+      {isLoading ? (
+        <FlatList
+          data={[1, 2, 3, 4, 5]}
+          keyExtractor={(item) => `skel_chat_${item}`}
+          renderItem={() => <ChatItemCardSkeleton />}
+          ListHeaderComponent={renderSkeletonHeader}
+          contentContainerStyle={styles.listContent}
+          showsVerticalScrollIndicator={false}
+        />
+      ) : (
+        <FlatList
+          data={chats}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <ChatItemCard chat={item} onPress={handleChatPress} />
+          )}
+          ListHeaderComponent={renderHeader}
+          ListFooterComponent={chats.length > 0 ? <DailyTipCard onPress={handleTipPress} /> : undefined}
+          ListEmptyComponent={
+            <View style={styles.emptyContainer}>
+              <AppText variant="bodyLarge" style={styles.emptyText}>
+                {t('empty')}
+              </AppText>
+            </View>
+          }
+          refreshControl={
+            <RefreshControl
+              refreshing={isRefreshing}
+              onRefresh={onRefresh}
+              colors={[colors.primary]}
+              tintColor={colors.primary}
+            />
+          }
+          contentContainerStyle={styles.listContent}
+          showsVerticalScrollIndicator={false}
+        />
+      )}
 
       {/* Barra de navegación inferior */}
       <BottomTabBar activeTab="Chats" />
     </SafeAreaContainer>
   );
 };
+
+export default ChatsScreen;

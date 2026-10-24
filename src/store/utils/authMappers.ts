@@ -56,6 +56,10 @@ export const mapBackendUserToUserProfile = (
     email: backendUser.email || currentUser.email,
     phone: backendUser.phone ?? currentUser.phone,
     bio: backendUser.bio ?? currentUser.bio,
+    birthDate:
+      backendUser.birthDate !== undefined
+        ? (backendUser.birthDate ? String(backendUser.birthDate) : null)
+        : currentUser.birthDate,
     avatarUrl:
       backendUser.avatar?.url ||
       backendUser.avatarUrl ||

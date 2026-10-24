@@ -13,6 +13,7 @@ export interface UserProfile {
   email: string;
   phone?: string;
   bio?: string;
+  birthDate?: string | null;
   avatarUrl: string;
   countryCode: string;
   countryFlag: string;
@@ -38,6 +39,7 @@ export interface BackendUserPayload {
   name?: string;
   phone?: string | null;
   bio?: string | null;
+  birthDate?: string | Date | null;
   avatar?: { url?: string } | null;
   avatarUrl?: string | null;
   avatarId?: string | null;

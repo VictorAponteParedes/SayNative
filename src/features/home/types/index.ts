@@ -1,7 +1,7 @@
 export interface PeerUser {
   id: string;
   name: string;
-  age: number;
+  age?: number | null;
   avatarUrl: string;
   isOnline: boolean;
   countryFlag: string;

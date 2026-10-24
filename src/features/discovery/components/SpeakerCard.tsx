@@ -36,7 +36,8 @@ export const SpeakerCard: React.FC<SpeakerCardProps> = ({
         <View style={styles.mainInfo}>
           <View style={styles.nameRow}>
             <AppText variant="h3" style={styles.nameText}>
-              {speaker.name}, {speaker.age}
+              {speaker.name}
+              {speaker.age !== undefined && speaker.age !== null ? `, ${speaker.age}` : ''}
             </AppText>
             {speaker.isVerified && (
               <View style={styles.verifiedBadge}>

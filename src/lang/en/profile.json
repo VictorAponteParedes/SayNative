@@ -72,6 +72,8 @@
     "emailPlaceholder": "your@email.com",
     "phone": "Mobile Phone",
     "phonePlaceholder": "+1 555 000 0000",
+    "birthDate": "Date of Birth",
+    "birthDatePlaceholder": "YYYY-MM-DD (e.g. 1998-05-20)",
     "bio": "Bio",
     "country": "Country of Residence",
     "nativeLanguage": "Native Language",

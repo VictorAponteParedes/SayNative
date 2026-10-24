@@ -2,12 +2,14 @@ import { useState, useCallback, useEffect } from 'react';
 import httpClient from '@/lib/httpClient';
 import { useAuthStore } from '@/store/useAuthStore';
 import { useCoinsStore } from '@/features/coins';
+import { calculateAge } from '@/utils/calculateAge';
 import { ApiResponse } from '@/types';
 import { PeerUser } from '../types';
 
 interface BackendUserItem {
   id: string;
   fullName?: string;
+  birthDate?: string | Date | null;
   avatar?: { url?: string } | null;
   countryFlag?: string | null;
   rating?: number;
@@ -62,7 +64,7 @@ export const useHomeFeed = () => {
           .map(u => ({
             id: u.id,
             name: u.fullName || 'Compañero',
-            age: 25,
+            age: calculateAge(u.birthDate),
             avatarUrl: u.avatar?.url || '',
             isOnline: true,
             countryFlag: u.countryFlag || '🌐',
