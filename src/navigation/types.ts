@@ -20,12 +20,13 @@ export type AppStackParamList = {
     ratePerMinute?: number;
   };
   CallLobby?: {
-    peerId: string;
+    peerId?: string;
     peerName?: string;
     peerAvatar?: string;
     peerFlag?: string;
     ratePerMinute?: number;
     isIncoming?: boolean;
+    isInstantMatch?: boolean;
   };
   Coins?: undefined;
   CoinsHistory?: undefined;

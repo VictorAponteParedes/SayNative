@@ -47,16 +47,23 @@ export const HomeScreen: React.FC = () => {
   };
 
   const handleStartSearch = () => {
-    startInstantMatch();
-    if (peers && peers.length > 0) {
-      const selected = peers[0];
-      handleCallPeer(selected);
-    } else {
+    const userCoins = useCoinsStore.getState().coins;
+    if (!__DEV__ && userCoins < 10) {
       Alert.alert(
-        t('instantPractice.searchingTitle'),
-        t('instantPractice.searchingMessage')
+        t('errors.insufficientCoins', { defaultValue: 'Monedas insuficientes' }),
+        t('lobby.balanceWarning', {
+          minutes: 0,
+          defaultValue: 'No tienes monedas suficientes para iniciar una sesión de práctica.',
+        })
       );
+      return;
     }
+
+    startInstantMatch();
+    navigate(Routes.App.CallLobby, {
+      isInstantMatch: true,
+      ratePerMinute: 10,
+    });
   };
 
   const handleCallPeer = (peer: PeerUser) => {

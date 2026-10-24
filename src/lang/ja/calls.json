@@ -15,7 +15,13 @@
     "rejectCall": "拒否",
     "cancelCall": "キャンセル",
     "waitingPeer": "{{name}} の応答を待っています...",
-    "audioCheck": "音声と映像を確認中..."
+    "audioCheck": "音声と映像を確認中...",
+    "waitingTitle": "相手を待っています...",
+    "firstConnectsMessage": "最初に接続した人と通話が始まります。",
+    "searchingPartner": "利用可能なネイティブスピーカーを検索中...",
+    "partnerFound": "パートナーが見つかりました！接続中...",
+    "leaveLobby": "待機室を退出",
+    "cancelSearch": "検索をキャンセル"
   },
   "active": {
     "connecting": "P2P接続を確立中...",

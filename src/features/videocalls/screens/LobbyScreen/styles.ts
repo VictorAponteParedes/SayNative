@@ -24,7 +24,7 @@ export const styles = StyleSheet.create({
   },
   cameraPreviewCard: {
     marginHorizontal: spacing.md,
-    height: 300,
+    height: 260,
     borderRadius: borderRadius.lg,
     overflow: 'hidden',
     backgroundColor: '#1E293B',
@@ -74,26 +74,74 @@ export const styles = StyleSheet.create({
   },
   infoSection: {
     flex: 1,
-    paddingHorizontal: spacing.md,
-    paddingTop: spacing.lg,
+    paddingHorizontal: spacing.lg,
+    paddingTop: spacing.md,
     alignItems: 'center',
+    justifyContent: 'center',
   },
-  peerAvatarContainer: {
-    marginBottom: spacing.xs,
+  radarContainer: {
+    width: 100,
+    height: 100,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: spacing.md,
+    position: 'relative',
   },
-  peerName: {
+  radarCircle: {
+    position: 'absolute',
+    width: 90,
+    height: 90,
+    borderRadius: 45,
+    backgroundColor: 'rgba(59, 130, 246, 0.25)',
+    borderWidth: 1.5,
+    borderColor: 'rgba(59, 130, 246, 0.5)',
+  },
+  radarCenterIcon: {
+    width: 58,
+    height: 58,
+    borderRadius: 29,
+    backgroundColor: colors.primary,
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 4,
+    shadowColor: colors.primary,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.35,
+    shadowRadius: 8,
+  },
+  waitingTitle: {
     fontWeight: '700',
     color: colors.white,
-    marginTop: spacing.xs,
+    textAlign: 'center',
+    marginBottom: 6,
   },
-  peerRateRow: {
+  waitingSubtitle: {
+    color: 'rgba(255, 255, 255, 0.75)',
+    textAlign: 'center',
+    lineHeight: 20,
+    paddingHorizontal: spacing.md,
+    marginBottom: spacing.md,
+  },
+  statusBadge: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 6,
-    marginTop: 6,
+    gap: 8,
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.xs + 2,
+    borderRadius: borderRadius.full,
+    backgroundColor: 'rgba(255, 255, 255, 0.08)',
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.15)',
   },
-  rateText: {
-    color: colors.coin,
+  statusDot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: colors.online,
+  },
+  statusText: {
+    color: colors.white,
+    fontSize: 13,
     fontWeight: '600',
   },
   warningCard: {
@@ -109,11 +157,11 @@ export const styles = StyleSheet.create({
     borderColor: 'rgba(245, 158, 11, 0.3)',
   },
   actionSection: {
-    paddingHorizontal: spacing.md,
+    paddingHorizontal: spacing.lg,
     paddingBottom: spacing.xl,
     gap: spacing.sm,
   },
-  startButton: {
+  cancelButton: {
     width: '100%',
   },
 });

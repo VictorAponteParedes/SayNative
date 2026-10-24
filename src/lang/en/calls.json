@@ -15,7 +15,13 @@
     "rejectCall": "Decline",
     "cancelCall": "Cancel",
     "waitingPeer": "Waiting for {{name}} to accept...",
-    "audioCheck": "Testing audio and video..."
+    "audioCheck": "Testing audio and video...",
+    "waitingTitle": "Waiting for someone...",
+    "firstConnectsMessage": "The first person to connect will speak with you.",
+    "searchingPartner": "Searching for available native speakers...",
+    "partnerFound": "Partner found! Connecting...",
+    "leaveLobby": "Leave waiting room",
+    "cancelSearch": "Cancel search"
   },
   "active": {
     "connecting": "Establishing P2P connection...",

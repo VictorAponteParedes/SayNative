@@ -15,7 +15,13 @@
     "rejectCall": "拒绝",
     "cancelCall": "取消",
     "waitingPeer": "等待 {{name}} 接听...",
-    "audioCheck": "正在检测音频与视频..."
+    "audioCheck": "正在检测音频与视频...",
+    "waitingTitle": "正在等待他人加入...",
+    "firstConnectsMessage": "最先连接的人将与您通话。",
+    "searchingPartner": "正在寻找在线母语伙伴...",
+    "partnerFound": "已找到伙伴！正在连接...",
+    "leaveLobby": "离开等候室",
+    "cancelSearch": "取消搜索"
   },
   "active": {
     "connecting": "正在建立P2P连接...",

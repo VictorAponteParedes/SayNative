@@ -40,6 +40,15 @@ export const IncomingCallModal: React.FC = () => {
       if (__DEV__) {
         console.log('[IncomingCallModal] ¡Llamada entrante recibida!', payload);
       }
+      const currentCall = useCallSessionStore.getState().currentCall;
+      if (
+        currentCall &&
+        (currentCall.status === 'connected' ||
+          currentCall.status === 'calling' ||
+          (currentCall.status === 'incoming' && currentCall.peer?.id === payload.caller?.id))
+      ) {
+        return;
+      }
       setIncomingCall(payload);
     });
 

@@ -15,7 +15,13 @@
     "rejectCall": "Rechazar",
     "cancelCall": "Cancelar",
     "waitingPeer": "Esperando que {{name}} acepte...",
-    "audioCheck": "Comprobando audio y video..."
+    "audioCheck": "Comprobando audio y video...",
+    "waitingTitle": "Esperando a alguien...",
+    "firstConnectsMessage": "El primero que se conecte hablará contigo.",
+    "searchingPartner": "Buscando compañeros nativos disponibles...",
+    "partnerFound": "¡Compañero encontrado! Conectando...",
+    "leaveLobby": "Salir de la sala de espera",
+    "cancelSearch": "Cancelar búsqueda"
   },
   "active": {
     "connecting": "Estableciendo conexión P2P...",

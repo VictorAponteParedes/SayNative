@@ -1,14 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import { View, TouchableOpacity, Alert } from 'react-native';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
+import { View, TouchableOpacity, Alert, Animated, Easing } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { ArrowLeft, Mic, MicOff, Video, VideoOff, SwitchCamera, AlertCircle } from 'lucide-react-native';
+import {
+  ArrowLeft,
+  Mic,
+  MicOff,
+  Video,
+  VideoOff,
+  SwitchCamera,
+  Radio,
+  Sparkles,
+  AlertCircle,
+} from 'lucide-react-native';
 import { RTCView, MediaStream } from 'react-native-webrtc';
-import { SafeAreaContainer, AppText, AppButton, Avatar } from '@/components';
+import { SafeAreaContainer, AppText, AppButton } from '@/components';
 import { colors } from '@/theme';
 import { navigate, goBack } from '@/navigation/NavigationRef';
 import { Routes } from '@/navigation/routes';
 import { useAuthStore } from '@/store/useAuthStore';
 import { useCoinsStore } from '@/features/coins';
+import { getSocket } from '@/lib/socketClient';
+import { IncomingCallPayload } from '../../types';
 import { useCallSessionStore } from '../../store/useCallSessionStore';
 import { useWebRTC } from '../../hooks/useWebRTC';
 import { styles } from './styles';
@@ -22,6 +34,7 @@ export interface LobbyScreenProps {
       peerFlag?: string;
       ratePerMinute?: number;
       isIncoming?: boolean;
+      isInstantMatch?: boolean;
     };
   };
 }
@@ -31,25 +44,252 @@ export const LobbyScreen: React.FC<LobbyScreenProps> = ({ route }) => {
   const user = useAuthStore((s) => s.user);
   const coins = useCoinsStore((s) => s.coins);
 
-  const peerId = route?.params?.peerId || 'peer-demo-1';
-  const peerName = route?.params?.peerName || 'Sarah Jenkins';
-  const peerAvatar = route?.params?.peerAvatar || '';
-  const peerFlag = route?.params?.peerFlag || '🇺🇸';
+  const initialPeerId = route?.params?.peerId;
+  const initialPeerName = route?.params?.peerName;
+  const initialPeerAvatar = route?.params?.peerAvatar;
+  const initialPeerFlag = route?.params?.peerFlag;
   const ratePerMinute = route?.params?.ratePerMinute || 10;
-  const isIncoming = route?.params?.isIncoming || false;
+  const isInstantMatch = route?.params?.isInstantMatch ?? !initialPeerId;
 
   const [isMicMuted, setIsMicMuted] = useState(false);
   const [isVideoDisabled, setIsVideoDisabled] = useState(false);
+  const [statusMessage, setStatusMessage] = useState<string>(
+    t('lobby.waitingTitle', { defaultValue: 'Esperando a alguien...' })
+  );
+  const [isMatchingFound, setIsMatchingFound] = useState(false);
+
+  const radarPulseAnim = useRef(new Animated.Value(0)).current;
+  const matchingTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const { initCallSession, localStream } = useCallSessionStore();
-  const { startLocalMedia, switchCamera, toggleAudio, toggleVideo } = useWebRTC();
+  const { startLocalMedia, switchCamera, toggleAudio, toggleVideo, cleanup } = useWebRTC();
 
+  // Animación continua del radar
   useEffect(() => {
-    // Inicializar medios locales para preview
+    const animation = Animated.loop(
+      Animated.sequence([
+        Animated.timing(radarPulseAnim, {
+          toValue: 1,
+          duration: 1800,
+          easing: Easing.out(Easing.ease),
+          useNativeDriver: true,
+        }),
+        Animated.timing(radarPulseAnim, {
+          toValue: 0,
+          duration: 0,
+          useNativeDriver: true,
+        }),
+      ])
+    );
+    animation.start();
+
+    return () => {
+      animation.stop();
+    };
+  }, [radarPulseAnim]);
+
+  // Inicializar preview de medios locales
+  useEffect(() => {
     startLocalMedia();
   }, [startLocalMedia]);
 
-  const availableMinutes = ratePerMinute > 0 ? Math.floor(coins / ratePerMinute) : 99;
+  const handleConnectWithPeer = useCallback(
+    (matchedPeer: {
+      id: string;
+      name: string;
+      avatarUrl?: string;
+      countryFlag?: string;
+      ratePerMinute: number;
+    }) => {
+      setIsMatchingFound(true);
+      setStatusMessage(
+        t('lobby.partnerFound', { defaultValue: '¡Compañero encontrado! Conectando...' })
+      );
+
+      matchingTimeoutRef.current = setTimeout(() => {
+        initCallSession(
+          {
+            id: matchedPeer.id,
+            name: matchedPeer.name,
+            avatarUrl: matchedPeer.avatarUrl,
+            countryFlag: matchedPeer.countryFlag,
+            role: 'caller',
+            ratePerMinute: matchedPeer.ratePerMinute,
+          },
+          'calling'
+        );
+
+        navigate(Routes.App.ActiveCall, {
+          peerId: matchedPeer.id,
+          peerName: matchedPeer.name,
+          peerAvatar: matchedPeer.avatarUrl,
+          peerFlag: matchedPeer.countryFlag,
+          ratePerMinute: matchedPeer.ratePerMinute,
+        });
+      }, 1400);
+    },
+    [initCallSession, t]
+  );
+
+  // Proceso de emparejamiento en tiempo real vía WebSockets
+  useEffect(() => {
+    const socket = getSocket();
+    if (!socket.connected) {
+      socket.connect();
+    }
+
+    if (user.id) {
+      socket.emit('call:register-user', { userId: user.id });
+    }
+
+    // Si vino con un compañero específico (ej. llamada directa)
+    if (initialPeerId && !isInstantMatch) {
+      handleConnectWithPeer({
+        id: initialPeerId,
+        name: initialPeerName || 'Compañero',
+        avatarUrl: initialPeerAvatar,
+        countryFlag: initialPeerFlag,
+        ratePerMinute,
+      });
+      return;
+    }
+
+    // Unirse a la sala de espera real
+    setStatusMessage(
+      t('lobby.waitingTitle', { defaultValue: 'Esperando a alguien...' })
+    );
+
+    socket.emit('call:lobby:join', {
+      userId: user.id,
+      name: user.name,
+      avatarUrl: user.avatarUrl,
+      countryFlag: user.countryFlag,
+      ratePerMinute,
+    });
+
+    socket.on('call:lobby:waiting', () => {
+      setStatusMessage(
+        t('lobby.waitingTitle', { defaultValue: 'Esperando a alguien...' })
+      );
+    });
+
+    // Evento emitido por el servidor cuando usuario A y B coinciden en la sala
+    socket.on(
+      'call:lobby:matched',
+      (payload: {
+        peer: {
+          id: string;
+          name: string;
+          avatarUrl?: string;
+          countryFlag?: string;
+          ratePerMinute: number;
+        };
+        role: 'caller' | 'callee';
+      }) => {
+        setIsMatchingFound(true);
+        setStatusMessage(
+          t('lobby.partnerFound', { defaultValue: '¡Compañero encontrado! Conectando...' })
+        );
+
+        if (payload.role === 'caller') {
+          matchingTimeoutRef.current = setTimeout(() => {
+            initCallSession(
+              {
+                id: payload.peer.id,
+                name: payload.peer.name,
+                avatarUrl: payload.peer.avatarUrl,
+                countryFlag: payload.peer.countryFlag,
+                role: 'caller',
+                ratePerMinute: payload.peer.ratePerMinute || 10,
+              },
+              'calling'
+            );
+
+            navigate(Routes.App.ActiveCall, {
+              peerId: payload.peer.id,
+              peerName: payload.peer.name,
+              peerAvatar: payload.peer.avatarUrl,
+              peerFlag: payload.peer.countryFlag,
+              ratePerMinute: payload.peer.ratePerMinute || 10,
+            });
+          }, 1200);
+        } else {
+          // Callee: registrar al compañero entrante y esperar su señal para auto-conectar
+          initCallSession(
+            {
+              id: payload.peer.id,
+              name: payload.peer.name,
+              avatarUrl: payload.peer.avatarUrl,
+              countryFlag: payload.peer.countryFlag,
+              role: 'callee',
+              ratePerMinute: payload.peer.ratePerMinute || 10,
+            },
+            'incoming'
+          );
+        }
+      }
+    );
+
+    // Si llega la llamada iniciada por el compañero emparejado en la sala
+    socket.on('call:incoming', (payload: IncomingCallPayload) => {
+      setIsMatchingFound(true);
+      setStatusMessage(
+        t('lobby.partnerFound', { defaultValue: '¡Compañero encontrado! Conectando...' })
+      );
+
+      // Auto-aceptar la llamada entrante generada por la sala
+      socket.emit('call:accept', {
+        callId: payload.callId,
+        userId: user.id,
+      });
+
+      initCallSession(
+        {
+          id: payload.caller?.id || 'caller',
+          name: payload.caller?.name || 'Compañero',
+          avatarUrl: payload.caller?.avatarUrl,
+          role: 'callee',
+          ratePerMinute: payload.caller?.ratePerMinute || 10,
+        },
+        'connected',
+        payload.callId
+      );
+
+      matchingTimeoutRef.current = setTimeout(() => {
+        navigate(Routes.App.ActiveCall, {
+          callId: payload.callId,
+          peerId: payload.caller?.id,
+          peerName: payload.caller?.name || 'Compañero',
+          peerAvatar: payload.caller?.avatarUrl,
+          ratePerMinute: payload.caller?.ratePerMinute || 10,
+        });
+      }, 600);
+    });
+
+    return () => {
+      socket.emit('call:lobby:leave', { userId: user.id });
+      socket.off('call:lobby:waiting');
+      socket.off('call:lobby:matched');
+      socket.off('call:incoming');
+      if (matchingTimeoutRef.current) {
+        clearTimeout(matchingTimeoutRef.current);
+      }
+    };
+  }, [
+    handleConnectWithPeer,
+    initialPeerAvatar,
+    initialPeerFlag,
+    initialPeerId,
+    initialPeerName,
+    initCallSession,
+    isInstantMatch,
+    ratePerMinute,
+    t,
+    user.avatarUrl,
+    user.countryFlag,
+    user.id,
+    user.name,
+  ]);
 
   const handleToggleMic = () => {
     toggleAudio();
@@ -61,51 +301,44 @@ export const LobbyScreen: React.FC<LobbyScreenProps> = ({ route }) => {
     setIsVideoDisabled((prev) => !prev);
   };
 
-  const handleStartCall = () => {
-    // En desarrollo permitimos probar llamadas aunque el saldo sea 0
-    if (!__DEV__ && coins < ratePerMinute && !isIncoming) {
-      Alert.alert(
-        t('errors.insufficientCoins'),
-        t('lobby.balanceWarning', { minutes: 0 })
-      );
-      return;
-    }
-
-    initCallSession(
-      {
-        id: peerId,
-        name: peerName,
-        avatarUrl: peerAvatar,
-        countryFlag: peerFlag,
-        role: isIncoming ? 'callee' : 'caller',
-        ratePerMinute,
-      },
-      isIncoming ? 'connected' : 'calling'
-    );
-
-    navigate(Routes.App.ActiveCall, {
-      peerId,
-      peerName,
-      peerAvatar,
-      ratePerMinute,
-    });
-  };
-
   const handleBack = () => {
+    const socket = getSocket();
+    if (user.id) {
+      socket.emit('call:lobby:leave', { userId: user.id });
+    }
+    if (matchingTimeoutRef.current) {
+      clearTimeout(matchingTimeoutRef.current);
+    }
+    cleanup();
     goBack();
   };
 
+  const availableMinutes = ratePerMinute > 0 ? Math.floor(coins / ratePerMinute) : 99;
   const localMedia = localStream as MediaStream | null;
+
+  const radarScale = radarPulseAnim.interpolate({
+    inputRange: [0, 1],
+    outputRange: [1, 2.2],
+  });
+
+  const radarOpacity = radarPulseAnim.interpolate({
+    inputRange: [0, 0.6, 1],
+    outputRange: [0.7, 0.35, 0],
+  });
 
   return (
     <SafeAreaContainer style={styles.container}>
       {/* Cabecera */}
       <View style={styles.headerRow}>
-        <TouchableOpacity activeOpacity={0.8} onPress={handleBack} style={styles.backButton}>
+        <TouchableOpacity
+          activeOpacity={0.8}
+          onPress={handleBack}
+          style={styles.backButton}
+        >
           <ArrowLeft size={22} color={colors.white} />
         </TouchableOpacity>
         <AppText variant="h3" color={colors.white}>
-          {t('lobby.title')}
+          {t('lobby.title', { defaultValue: 'Sala de espera' })}
         </AppText>
         <View style={{ width: 42 }} />
       </View>
@@ -121,8 +354,12 @@ export const LobbyScreen: React.FC<LobbyScreenProps> = ({ route }) => {
           />
         ) : (
           <View style={{ alignItems: 'center' }}>
-            <VideoOff size={42} color={colors.textSecondary} />
-            <AppText variant="caption" color={colors.textSecondary} style={{ marginTop: 8 }}>
+            <VideoOff size={38} color={colors.textSecondary} />
+            <AppText
+              variant="caption"
+              color={colors.textSecondary}
+              style={{ marginTop: 8 }}
+            >
               {t('lobby.cameraOff')}
             </AppText>
           </View>
@@ -141,17 +378,31 @@ export const LobbyScreen: React.FC<LobbyScreenProps> = ({ route }) => {
           <TouchableOpacity
             activeOpacity={0.8}
             onPress={handleToggleMic}
-            style={[styles.previewControlButton, isMicMuted && styles.previewControlButtonActive]}
+            style={[
+              styles.previewControlButton,
+              isMicMuted && styles.previewControlButtonActive,
+            ]}
           >
-            {isMicMuted ? <MicOff size={20} color={colors.white} /> : <Mic size={20} color={colors.white} />}
+            {isMicMuted ? (
+              <MicOff size={20} color={colors.white} />
+            ) : (
+              <Mic size={20} color={colors.white} />
+            )}
           </TouchableOpacity>
 
           <TouchableOpacity
             activeOpacity={0.8}
             onPress={handleToggleVideo}
-            style={[styles.previewControlButton, isVideoDisabled && styles.previewControlButtonActive]}
+            style={[
+              styles.previewControlButton,
+              isVideoDisabled && styles.previewControlButtonActive,
+            ]}
           >
-            {isVideoDisabled ? <VideoOff size={20} color={colors.white} /> : <Video size={20} color={colors.white} />}
+            {isVideoDisabled ? (
+              <VideoOff size={20} color={colors.white} />
+            ) : (
+              <Video size={20} color={colors.white} />
+            )}
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -164,19 +415,42 @@ export const LobbyScreen: React.FC<LobbyScreenProps> = ({ route }) => {
         </View>
       </View>
 
-      {/* Información del Compañero */}
+      {/* Sección Informativa y Radar de Espera */}
       <View style={styles.infoSection}>
-        <View style={styles.peerAvatarContainer}>
-          <Avatar uri={peerAvatar} name={peerName} size={84} />
+        {/* Radar animado */}
+        <View style={styles.radarContainer}>
+          <Animated.View
+            style={[
+              styles.radarCircle,
+              {
+                transform: [{ scale: radarScale }],
+                opacity: radarOpacity,
+              },
+            ]}
+          />
+          <View style={styles.radarCenterIcon}>
+            {isMatchingFound ? (
+              <Sparkles size={26} color={colors.white} />
+            ) : (
+              <Radio size={26} color={colors.white} />
+            )}
+          </View>
         </View>
-        <AppText variant="h2" style={styles.peerName}>
-          {peerName} {peerFlag}
+
+        <AppText variant="h2" style={styles.waitingTitle}>
+          {t('lobby.waitingTitle', { defaultValue: 'Esperando a alguien...' })}
         </AppText>
 
-        <View style={styles.peerRateRow}>
-          <AppText style={styles.rateText}>
-            {t('lobby.rate', { rate: ratePerMinute })}
-          </AppText>
+        <AppText variant="bodySmall" style={styles.waitingSubtitle}>
+          {t('lobby.firstConnectsMessage', {
+            defaultValue: 'El primero que se conecte hablará contigo.',
+          })}
+        </AppText>
+
+        {/* Estado actual */}
+        <View style={styles.statusBadge}>
+          <View style={styles.statusDot} />
+          <AppText style={styles.statusText}>{statusMessage}</AppText>
         </View>
 
         {/* Advertencia de saldo/tiempo disponible */}
@@ -188,18 +462,15 @@ export const LobbyScreen: React.FC<LobbyScreenProps> = ({ route }) => {
         </View>
       </View>
 
-      {/* Botones de Acción */}
+      {/* Botón de Acción Único: Cancelar y Salir */}
       <View style={styles.actionSection}>
         <AppButton
-          title={isIncoming ? t('lobby.acceptCall') : t('lobby.startCall')}
-          onPress={handleStartCall}
-          style={styles.startButton}
-        />
-        <AppButton
-          title={t('lobby.cancelCall')}
+          title={t('lobby.leaveLobby', {
+            defaultValue: 'Salir de la sala de espera',
+          })}
           variant="secondary"
           onPress={handleBack}
-          style={styles.startButton}
+          style={styles.cancelButton}
         />
       </View>
     </SafeAreaContainer>
