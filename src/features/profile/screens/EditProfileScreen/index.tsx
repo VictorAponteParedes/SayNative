@@ -10,7 +10,14 @@ import {
 } from 'react-native';
 import { ArrowLeft, Camera } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
-import { SafeAreaContainer, AppText, AppButton, ControlledInput, Avatar } from '@/components';
+import {
+  SafeAreaContainer,
+  AppText,
+  AppButton,
+  ControlledInput,
+  ControlledDateInput,
+  Avatar,
+} from '@/components';
 import { colors } from '@/theme';
 import { goBack } from '@/navigation/NavigationRef';
 import { ChangePhotoBottomSheet } from '../../components';
@@ -139,20 +146,14 @@ export const EditProfileScreen: React.FC = () => {
             keyboardType="phone-pad"
           />
 
-          {/* Campo: Fecha de Nacimiento (YYYY-MM-DD) */}
-          <ControlledInput
+          {/* Campo: Fecha de Nacimiento con Calendario Modal */}
+          <ControlledDateInput
             control={control}
             name="birthDate"
             label={t('editProfile.birthDate', { defaultValue: 'Fecha de nacimiento' })}
             placeholder={t('editProfile.birthDatePlaceholder', {
-              defaultValue: 'YYYY-MM-DD (ej: 1998-05-20)',
+              defaultValue: 'Seleccionar fecha de nacimiento',
             })}
-            rules={{
-              pattern: {
-                value: /^\d{4}-\d{2}-\d{2}$/,
-                message: 'Usa el formato YYYY-MM-DD (ej: 1998-05-20)',
-              },
-            }}
           />
 
           {/* Campo: Biografía */}
