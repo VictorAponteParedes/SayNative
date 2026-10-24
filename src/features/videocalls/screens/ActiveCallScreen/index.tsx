@@ -185,16 +185,32 @@ export const ActiveCallScreen: React.FC<ActiveCallScreenProps> = ({ route }) => 
       useCallSessionStore.getState().setCallId(route.params.callId);
     }
 
+    const targetPeerId = route?.params?.peerId || currentCall?.peer?.id;
+    if (targetPeerId && (!currentCall || currentCall.status === 'idle')) {
+      useCallSessionStore.getState().initCallSession(
+        {
+          id: targetPeerId,
+          name: peerName,
+          avatarUrl: peerAvatar,
+          role: 'caller',
+          ratePerMinute,
+        },
+        'calling'
+      );
+    }
+
     const setupCall = async () => {
       await startLocalMedia();
-      if (currentCall?.peer?.id && currentCall.status === 'calling') {
+      const peerIdToCall = currentCall?.peer?.id || route?.params?.peerId;
+      const isCallingStatus = (currentCall?.status || 'calling') === 'calling';
+      if (peerIdToCall && isCallingStatus && !isCallerRef.current) {
         isCallerRef.current = true;
-        initiateCall(currentCall.peer.id, ratePerMinute);
+        initiateCall(peerIdToCall, ratePerMinute);
       }
     };
 
     setupCall();
-  }, [currentCall?.peer?.id, currentCall?.status, initiateCall, ratePerMinute, startLocalMedia]);
+  }, [currentCall?.peer?.id, currentCall?.status, initiateCall, peerAvatar, peerName, ratePerMinute, route?.params?.callId, route?.params?.peerId, startLocalMedia]);
 
   const handleToggleAudio = () => {
     toggleAudio();

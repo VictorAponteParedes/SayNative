@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useCoinsStore } from '@/features/coins';
+import { useCallSessionStore } from '@/features/videocalls';
 import { Toast } from '@/components';
 import { navigate } from '@/navigation/NavigationRef';
 import { Routes } from '@/navigation/routes';
@@ -150,9 +151,21 @@ export const useNotifications = () => {
         t('toasts.bonusClaimedMessage')
       );
     } else if (item.actionType === 'call') {
-      navigate(Routes.App.CallLobby, {
-        peerId: 'sarah_1',
-        peerName: item.partnerName || 'Sarah J.',
+      const peerId = 'sarah_1';
+      const peerName = item.partnerName || 'Sarah J.';
+      useCallSessionStore.getState().initCallSession(
+        {
+          id: peerId,
+          name: peerName,
+          role: 'caller',
+          ratePerMinute: 10,
+        },
+        'calling'
+      );
+      navigate(Routes.App.ActiveCall, {
+        peerId,
+        peerName,
+        ratePerMinute: 10,
       });
     } else if (item.actionType === 'sayHello') {
       Toast.success(

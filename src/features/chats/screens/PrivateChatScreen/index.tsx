@@ -18,6 +18,7 @@ import { ChatInputBar } from '../../components/private/ChatInputBar';
 import { usePrivateChat } from '../../hooks/usePrivateChat';
 import { navigate } from '@/navigation/NavigationRef';
 import { Routes } from '@/navigation/routes';
+import { useCallSessionStore } from '@/features/videocalls';
 import { styles } from './styles';
 
 export interface PrivateChatScreenProps {
@@ -48,8 +49,22 @@ export const PrivateChatScreen: React.FC<PrivateChatScreenProps> = ({ route }) =
   } = usePrivateChat();
 
   const handleCall = () => {
-    navigate(Routes.App.CallLobby, {
-      peerId: route?.params?.chatId || 'partner-chat-1',
+    const peerId = route?.params?.chatId || 'partner-chat-1';
+
+    useCallSessionStore.getState().initCallSession(
+      {
+        id: peerId,
+        name: partnerName,
+        avatarUrl: route?.params?.partnerAvatar,
+        countryFlag: partnerFlag,
+        role: 'caller',
+        ratePerMinute,
+      },
+      'calling'
+    );
+
+    navigate(Routes.App.ActiveCall, {
+      peerId,
       peerName: partnerName,
       peerAvatar: route?.params?.partnerAvatar,
       peerFlag: partnerFlag,

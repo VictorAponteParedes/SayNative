@@ -14,6 +14,8 @@ import { useHomeFeed } from '../../hooks/useHomeFeed';
 import { navigate } from '@/navigation/NavigationRef';
 import { Routes } from '@/navigation/routes';
 import { PeerUser } from '../../types';
+import { useCallSessionStore } from '@/features/videocalls';
+import { useCoinsStore } from '@/features/coins';
 import { styles } from './styles';
 
 export const HomeScreen: React.FC = () => {
@@ -48,13 +50,7 @@ export const HomeScreen: React.FC = () => {
     startInstantMatch();
     if (peers && peers.length > 0) {
       const selected = peers[0];
-      navigate(Routes.App.CallLobby, {
-        peerId: selected.id,
-        peerName: selected.name,
-        peerAvatar: selected.avatarUrl,
-        peerFlag: selected.countryFlag,
-        ratePerMinute: selected.ratePerMinute,
-      });
+      handleCallPeer(selected);
     } else {
       Alert.alert(
         t('instantPractice.searchingTitle'),
@@ -64,7 +60,33 @@ export const HomeScreen: React.FC = () => {
   };
 
   const handleCallPeer = (peer: PeerUser) => {
-    navigate(Routes.App.CallLobby, {
+    const userCoins = useCoinsStore.getState().coins;
+    if (!__DEV__ && userCoins < peer.ratePerMinute) {
+      Alert.alert(
+        t('errors.insufficientCoins', { defaultValue: 'Monedas insuficientes' }),
+        t('lobby.balanceWarning', {
+          minutes: 0,
+          defaultValue: 'No tienes monedas suficientes para iniciar esta llamada.',
+        })
+      );
+      return;
+    }
+
+    // Inicializar sesión directamente en estado 'calling'
+    useCallSessionStore.getState().initCallSession(
+      {
+        id: peer.id,
+        name: peer.name,
+        avatarUrl: peer.avatarUrl,
+        countryFlag: peer.countryFlag,
+        role: 'caller',
+        ratePerMinute: peer.ratePerMinute,
+      },
+      'calling'
+    );
+
+    // Navegar directamente a la llamada activa
+    navigate(Routes.App.ActiveCall, {
       peerId: peer.id,
       peerName: peer.name,
       peerAvatar: peer.avatarUrl,

@@ -9,6 +9,8 @@ import { SpeakersCountSortRow } from '../../components/SpeakersCountSortRow';
 import { SpeakerCard } from '../../components/SpeakerCard';
 import { useExploreSpeakers } from '../../hooks/useExploreSpeakers';
 import { SpeakerUser } from '../../types';
+import { useCallSessionStore } from '@/features/videocalls';
+import { useCoinsStore } from '@/features/coins';
 import { navigate } from '@/navigation/NavigationRef';
 import { Routes } from '@/navigation/routes';
 import { styles } from './styles';
@@ -45,7 +47,28 @@ export const ExploreScreen: React.FC = () => {
   };
 
   const handleCallSpeaker = (speaker: SpeakerUser) => {
-    navigate(Routes.App.CallLobby, {
+    const userCoins = useCoinsStore.getState().coins;
+    if (!__DEV__ && userCoins < speaker.ratePerMinute) {
+      Alert.alert(
+        'Monedas insuficientes',
+        'No tienes monedas suficientes para iniciar esta llamada.'
+      );
+      return;
+    }
+
+    useCallSessionStore.getState().initCallSession(
+      {
+        id: speaker.id,
+        name: speaker.name,
+        avatarUrl: speaker.avatarUrl,
+        countryFlag: speaker.countryFlag,
+        role: 'caller',
+        ratePerMinute: speaker.ratePerMinute,
+      },
+      'calling'
+    );
+
+    navigate(Routes.App.ActiveCall, {
       peerId: speaker.id,
       peerName: speaker.name,
       peerAvatar: speaker.avatarUrl,
