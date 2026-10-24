@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { ScrollView, Alert } from 'react-native';
+import { ScrollView, Alert, RefreshControl } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import { colors } from '@/theme';
 import { SafeAreaContainer, BottomTabBar } from '@/components';
 import { HomeHeader } from '../../components/HomeHeader';
 import { UserProfileBar } from '../../components/UserProfileBar';
@@ -17,7 +18,14 @@ import { styles } from './styles';
 
 export const HomeScreen: React.FC = () => {
   const { t } = useTranslation('home');
-  const { peers, onlineCount, startInstantMatch } = useHomeFeed();
+  const {
+    peers,
+    onlineCount,
+    isLoading,
+    isRefreshing,
+    onRefresh,
+    startInstantMatch,
+  } = useHomeFeed();
   const [isLanguageSheetOpen, setIsLanguageSheetOpen] = useState(false);
 
   const handleNotifications = () => {
@@ -82,6 +90,14 @@ export const HomeScreen: React.FC = () => {
         style={styles.container}
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl
+            refreshing={isRefreshing}
+            onRefresh={onRefresh}
+            colors={[colors.primary]}
+            tintColor={colors.primary}
+          />
+        }
       >
         {/* Cabecera superior: Logo, título Inicio, Notificaciones y Perfil */}
         <HomeHeader
@@ -109,6 +125,7 @@ export const HomeScreen: React.FC = () => {
         {/* Sección de Compañeros Destacados */}
         <FeaturedPeersSection
           peers={peers}
+          isLoading={isLoading}
           onlineCount={onlineCount}
           onPressViewAll={handleViewAllPeers}
           onPressCall={handleCallPeer}

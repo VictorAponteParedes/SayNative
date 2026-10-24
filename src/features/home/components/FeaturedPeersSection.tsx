@@ -1,13 +1,15 @@
 import React from 'react';
 import { View, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { colors, spacing } from '@/theme';
-import { AppText } from '@/components';
+import { colors, spacing, borderRadius } from '@/theme';
+import { AppText, Skeleton } from '@/components';
 import { PeerCard } from './PeerCard';
+import { PeerCardSkeleton } from './PeerCardSkeleton';
 import { PeerUser } from '../types';
 
 export interface FeaturedPeersSectionProps {
   peers: PeerUser[];
+  isLoading?: boolean;
   onlineCount?: number;
   onPressViewAll: () => void;
   onPressCall: (peer: PeerUser) => void;
@@ -16,7 +18,8 @@ export interface FeaturedPeersSectionProps {
 
 export const FeaturedPeersSection: React.FC<FeaturedPeersSectionProps> = ({
   peers,
-  onlineCount = 3,
+  isLoading = false,
+  onlineCount = 0,
   onPressViewAll,
   onPressCall,
   onPressChat,
@@ -31,11 +34,15 @@ export const FeaturedPeersSection: React.FC<FeaturedPeersSectionProps> = ({
           <AppText variant="h3" style={styles.title}>
             {t('featuredPeers.title')}
           </AppText>
-          <View style={styles.onlineBadge}>
-            <AppText variant="caption" style={styles.onlineBadgeText}>
-              {t('featuredPeers.onlineCount', { count: onlineCount })}
-            </AppText>
-          </View>
+          {isLoading ? (
+            <Skeleton width={52} height={20} borderRadius={borderRadius.full} />
+          ) : (
+            <View style={styles.onlineBadge}>
+              <AppText variant="caption" style={styles.onlineBadgeText}>
+                {t('featuredPeers.onlineCount', { count: onlineCount })}
+              </AppText>
+            </View>
+          )}
         </View>
 
         <TouchableOpacity activeOpacity={0.7} onPress={onPressViewAll}>
@@ -45,20 +52,36 @@ export const FeaturedPeersSection: React.FC<FeaturedPeersSectionProps> = ({
         </TouchableOpacity>
       </View>
 
-      {/* Lista horizontal de tarjetas */}
+      {/* Lista horizontal de tarjetas o skeletons */}
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.scrollContent}
       >
-        {peers.map((peer) => (
-          <PeerCard
-            key={peer.id}
-            peer={peer}
-            onPressCall={onPressCall}
-            onPressChat={onPressChat}
-          />
-        ))}
+        {isLoading ? (
+          <>
+            <PeerCardSkeleton />
+            <PeerCardSkeleton />
+            <PeerCardSkeleton />
+          </>
+        ) : peers.length > 0 ? (
+          peers.map((peer) => (
+            <PeerCard
+              key={peer.id}
+              peer={peer}
+              onPressCall={onPressCall}
+              onPressChat={onPressChat}
+            />
+          ))
+        ) : (
+          <View style={styles.emptyContainer}>
+            <AppText variant="bodySmall" color={colors.textSecondary}>
+              {t('featuredPeers.noPeersOnline', {
+                defaultValue: 'No hay compañeros conectados en este momento.',
+              })}
+            </AppText>
+          </View>
+        )}
       </ScrollView>
     </View>
   );
@@ -105,5 +128,11 @@ const styles = StyleSheet.create({
     paddingLeft: spacing.lg,
     paddingRight: spacing.sm,
     paddingBottom: spacing.sm,
+  },
+  emptyContainer: {
+    paddingVertical: spacing.lg,
+    paddingHorizontal: spacing.sm,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });

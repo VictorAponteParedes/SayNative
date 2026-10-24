@@ -11,5 +11,6 @@ export * from './ui/StatusBadge';
 export * from './ui/Toast';
 export * from './ui/AppBottomSheet';
 export * from './ui/AppLogo';
+export * from './ui/Skeleton';
 export * from './layout/SafeAreaContainer';
 export * from './layout/BottomTabBar';

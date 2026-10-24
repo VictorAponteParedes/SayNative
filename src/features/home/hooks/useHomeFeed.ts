@@ -17,102 +17,85 @@ interface BackendUserItem {
   isAvailableToTeach?: boolean;
 }
 
-const INITIAL_PEERS: PeerUser[] = [
-  {
-    id: 'peer_1',
-    name: 'Sarah',
-    age: 24,
-    avatarUrl:
-      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300&q=80',
-    isOnline: true,
-    countryFlag: '🇺🇸',
-    rating: 4.9,
-    reviewsCount: 128,
-    tags: ['Cine', 'Viajes'],
-    ratePerMinute: 10,
-  },
-  {
-    id: 'peer_2',
-    name: 'David',
-    age: 28,
-    avatarUrl:
-      'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80',
-    isOnline: true,
-    countryFlag: '',
-    rating: 5.0,
-    reviewsCount: 94,
-    tags: ['Tecnología', 'Música'],
-    ratePerMinute: 10,
-  },
-];
-
 export const useHomeFeed = () => {
   const currentUserId = useAuthStore(s => s.user.id);
-  const updateUserProfile = useAuthStore(s => s.updateUserProfile);
-  const [peers, setPeers] = useState<PeerUser[]>(INITIAL_PEERS);
-  const [onlineCount, setOnlineCount] = useState<number>(3);
+  const [peers, setPeers] = useState<PeerUser[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isRefreshing, setIsRefreshing] = useState<boolean>(false);
+  const [onlineCount, setOnlineCount] = useState<number>(0);
   const [isSearchingInstant, setIsSearchingInstant] = useState<boolean>(false);
 
-  useEffect(() => {
-    const fetchPeers = async () => {
-      try {
-        // Sincronizar saldo actual de monedas desde el backend
-        if (currentUserId) {
-          try {
-            const meRes = await httpClient.get<
-              ApiResponse<BackendUserItem & { coins?: number }>
-            >('/users/me', {
-              headers: { 'x-user-id': currentUserId },
-            });
-            const meData =
-              meRes.data && 'data' in meRes.data ? meRes.data.data : meRes.data;
-            if (meData && meData.coins !== undefined) {
-              useCoinsStore.getState().setCoins(Number(meData.coins));
-            }
-          } catch {
-            // Error de sincronización ignorado
+  const fetchPeers = useCallback(async () => {
+    try {
+      // Sincronizar saldo actual de monedas desde el backend
+      if (currentUserId) {
+        try {
+          const meRes = await httpClient.get<
+            ApiResponse<BackendUserItem & { coins?: number }>
+          >('/users/me', {
+            headers: { 'x-user-id': currentUserId },
+          });
+          const meData =
+            meRes.data && 'data' in meRes.data ? meRes.data.data : meRes.data;
+          if (meData && meData.coins !== undefined) {
+            useCoinsStore.getState().setCoins(Number(meData.coins));
           }
+        } catch {
+          // Error de sincronización ignorado
         }
-
-        const response = await httpClient.get<
-          ApiResponse<BackendUserItem[]> | BackendUserItem[]
-        >('/users', {
-          headers: currentUserId ? { 'x-user-id': currentUserId } : {},
-        });
-
-        const rawData =
-          response.data && 'data' in response.data
-            ? response.data.data
-            : response.data;
-
-        if (Array.isArray(rawData) && rawData.length > 0) {
-          const mappedPeers: PeerUser[] = rawData
-            .filter(u => u.id !== currentUserId)
-            .map(u => ({
-              id: u.id,
-              name: u.fullName || 'Compañero',
-              age: 25,
-              avatarUrl: u.avatar?.url || '',
-              isOnline: true,
-              countryFlag: u.countryFlag || '🌐',
-              rating: Number(u.rating) || 5.0,
-              reviewsCount: u.reviewCount || 0,
-              tags: ['Conversación', 'Práctica'],
-              ratePerMinute: u.learningCostPerMin || 10,
-            }));
-
-          if (mappedPeers.length > 0) {
-            setPeers(mappedPeers);
-            setOnlineCount(mappedPeers.length);
-          }
-        }
-      } catch {
-        // Fallback a INITIAL_PEERS si el backend no responde
       }
-    };
 
-    fetchPeers();
+      const response = await httpClient.get<
+        ApiResponse<BackendUserItem[]> | BackendUserItem[]
+      >('/users', {
+        headers: currentUserId ? { 'x-user-id': currentUserId } : {},
+      });
+
+      const rawData =
+        response.data && 'data' in response.data
+          ? response.data.data
+          : response.data;
+
+      if (Array.isArray(rawData) && rawData.length > 0) {
+        const mappedPeers: PeerUser[] = rawData
+          .filter(u => u.id !== currentUserId)
+          .map(u => ({
+            id: u.id,
+            name: u.fullName || 'Compañero',
+            age: 25,
+            avatarUrl: u.avatar?.url || '',
+            isOnline: true,
+            countryFlag: u.countryFlag || '🌐',
+            rating: Number(u.rating) || 5.0,
+            reviewsCount: u.reviewCount || 0,
+            tags: ['Conversación', 'Práctica'],
+            ratePerMinute: u.learningCostPerMin || 10,
+          }));
+
+        setPeers(mappedPeers);
+        setOnlineCount(mappedPeers.length);
+      } else {
+        setPeers([]);
+        setOnlineCount(0);
+      }
+    } catch {
+      // Si el backend no responde, dejamos la lista vacía
+      setPeers([]);
+      setOnlineCount(0);
+    } finally {
+      setIsLoading(false);
+      setIsRefreshing(false);
+    }
   }, [currentUserId]);
+
+  useEffect(() => {
+    fetchPeers();
+  }, [fetchPeers]);
+
+  const onRefresh = useCallback(async () => {
+    setIsRefreshing(true);
+    await fetchPeers();
+  }, [fetchPeers]);
 
   const startInstantMatch = useCallback(() => {
     setIsSearchingInstant(true);
@@ -123,6 +106,9 @@ export const useHomeFeed = () => {
 
   return {
     peers,
+    isLoading,
+    isRefreshing,
+    onRefresh,
     onlineCount,
     isSearchingInstant,
     startInstantMatch,
