@@ -5,8 +5,8 @@ export const API_CONFIG = {
   // En iOS Simulator localhost mapea a la máquina host
   BASE_URL:
     Platform.OS === 'android'
-      ? 'http://192.168.47.37:3000/api/v1'
-      : 'http://192.168.47.37:3000/api/v1',
+      ? 'http://192.168.0.16:3000/api/v1'
+      : 'http://192.168.0.16:3000/api/v1',
   TIMEOUT: 15000,
 } as const;
 

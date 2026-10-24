@@ -29,6 +29,15 @@ export const useWebRTC = ({
 }: UseWebRTCProps = {}) => {
   const peerConnectionRef = useRef<RTCPeerConnection | null>(null);
   const localStreamRef = useRef<MediaStream | null>(null);
+  const iceCandidatesQueueRef = useRef<IceCandidateData[]>([]);
+
+  const onLocalCandidateRef = useRef(onLocalCandidate);
+  const onNegotiationNeededRef = useRef(onNegotiationNeeded);
+
+  useEffect(() => {
+    onLocalCandidateRef.current = onLocalCandidate;
+    onNegotiationNeededRef.current = onNegotiationNeeded;
+  });
 
   const {
     currentCall,
@@ -37,6 +46,19 @@ export const useWebRTC = ({
     setPermissions,
     setNetworkQuality,
   } = useCallSessionStore();
+
+  const drainCandidateQueue = async (pc: RTCPeerConnection) => {
+    while (iceCandidatesQueueRef.current.length > 0) {
+      const candidateData = iceCandidatesQueueRef.current.shift();
+      if (candidateData) {
+        try {
+          await pc.addIceCandidate(new RTCIceCandidate(candidateData));
+        } catch {
+          // ignore
+        }
+      }
+    }
+  };
 
   /**
    * Inicializa la captura de cámara y micrófono local
@@ -85,8 +107,8 @@ export const useWebRTC = ({
     // Envío de candidatos ICE locales
     pc.onicecandidate = (event) => {
       const iceEvent = event as unknown as RTCPeerIceEvent;
-      if (iceEvent.candidate && onLocalCandidate) {
-        onLocalCandidate({
+      if (iceEvent.candidate && onLocalCandidateRef.current) {
+        onLocalCandidateRef.current({
           candidate: iceEvent.candidate.candidate,
           sdpMid: iceEvent.candidate.sdpMid ?? null,
           sdpMLineIndex: iceEvent.candidate.sdpMLineIndex ?? null,
@@ -163,15 +185,15 @@ export const useWebRTC = ({
         sdp: offer.sdp,
       };
 
-      if (onNegotiationNeeded) {
-        onNegotiationNeeded(signal);
+      if (onNegotiationNeededRef.current) {
+        onNegotiationNeededRef.current(signal);
       }
 
       return signal;
     } catch {
       return null;
     }
-  }, [initPeerConnection, onNegotiationNeeded]);
+  }, [initPeerConnection]);
 
   /**
    * Maneja la oferta entrante y genera una respuesta SDP
@@ -186,6 +208,9 @@ export const useWebRTC = ({
         });
         await pc.setRemoteDescription(description);
 
+        // Desencolar candidatos ICE recibidos antes de la oferta
+        await drainCandidateQueue(pc);
+
         const answer = await pc.createAnswer();
         await pc.setLocalDescription(answer);
 
@@ -194,8 +219,8 @@ export const useWebRTC = ({
           sdp: answer.sdp,
         };
 
-        if (onNegotiationNeeded) {
-          onNegotiationNeeded(signal);
+        if (onNegotiationNeededRef.current) {
+          onNegotiationNeededRef.current(signal);
         }
 
         return signal;
@@ -203,7 +228,7 @@ export const useWebRTC = ({
         return null;
       }
     },
-    [initPeerConnection, onNegotiationNeeded]
+    [initPeerConnection]
   );
 
   /**
@@ -211,12 +236,16 @@ export const useWebRTC = ({
    */
   const handleIncomingAnswer = useCallback(async (sdp: string): Promise<void> => {
     try {
-      if (!peerConnectionRef.current) return;
+      const pc = peerConnectionRef.current;
+      if (!pc) return;
       const description = new RTCSessionDescription({
         type: 'answer',
         sdp,
       });
-      await peerConnectionRef.current.setRemoteDescription(description);
+      await pc.setRemoteDescription(description);
+
+      // Desencolar candidatos ICE recibidos antes de la respuesta
+      await drainCandidateQueue(pc);
     } catch {
       // Error al aplicar SDP remoto
     }
@@ -228,9 +257,13 @@ export const useWebRTC = ({
   const addRemoteIceCandidate = useCallback(
     async (candidateData: IceCandidateData): Promise<void> => {
       try {
-        if (!peerConnectionRef.current) return;
+        const pc = peerConnectionRef.current;
+        if (!pc || !pc.remoteDescription) {
+          iceCandidatesQueueRef.current.push(candidateData);
+          return;
+        }
         const candidate = new RTCIceCandidate(candidateData);
-        await peerConnectionRef.current.addIceCandidate(candidate);
+        await pc.addIceCandidate(candidate);
       } catch {
         // Error al agregar candidato
       }

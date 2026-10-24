@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback, useRef } from 'react';
 import { View, Alert } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { goBack } from '@/navigation/NavigationRef';
@@ -7,6 +7,7 @@ import { useCallSessionStore } from '../../store/useCallSessionStore';
 import { useWebRTC } from '../../hooks/useWebRTC';
 import { useCallSignaling } from '../../hooks/useCallSignaling';
 import { useCallTimer } from '../../hooks/useCallTimer';
+import { SignalData, IceCandidateData } from '../../types';
 import {
   VideoStreamView,
   CallControls,
@@ -61,24 +62,18 @@ export const ActiveCallScreen: React.FC<ActiveCallScreenProps> = ({ route }) => 
     isTeacher,
   });
 
-  // Hook de WebRTC
-  const {
-    startLocalMedia,
-    createOffer,
-    handleIncomingOffer,
-    handleIncomingAnswer,
-    addRemoteIceCandidate,
-    toggleAudio,
-    toggleVideo,
-    switchCamera,
-    cleanup,
-  } = useWebRTC({
-    onLocalCandidate: (candidate) => {
-      sendIceCandidate(candidate);
-    },
-    onNegotiationNeeded: (signal) => {
-      sendSignal(signal);
-    },
+  const sendSignalRef = useRef<(signal: SignalData) => void>(() => {});
+  const sendIceCandidateRef = useRef<(candidate: IceCandidateData) => void>(() => {});
+  const webRtcRef = useRef<{
+    createOffer: () => Promise<SignalData | null>;
+    handleIncomingOffer: (sdp: string) => Promise<SignalData | null>;
+    handleIncomingAnswer: (sdp: string) => Promise<void>;
+    addRemoteIceCandidate: (candidate: IceCandidateData) => Promise<void>;
+  }>({
+    createOffer: async () => null,
+    handleIncomingOffer: async () => null,
+    handleIncomingAnswer: async () => {},
+    addRemoteIceCandidate: async () => {},
   });
 
   // Hook de Señalización Socket.IO
@@ -92,20 +87,20 @@ export const ActiveCallScreen: React.FC<ActiveCallScreenProps> = ({ route }) => 
       setCallStatus('connected');
       startTimer();
       // Si somos quien llama, generamos la oferta SDP
-      await createOffer();
+      await webRtcRef.current.createOffer();
     },
     onIncomingOffer: async (sdp) => {
       setCallStatus('connected');
       startTimer();
-      await handleIncomingOffer(sdp);
+      await webRtcRef.current.handleIncomingOffer(sdp);
     },
     onIncomingAnswer: async (sdp) => {
-      await handleIncomingAnswer(sdp);
+      await webRtcRef.current.handleIncomingAnswer(sdp);
       setCallStatus('connected');
       startTimer();
     },
     onRemoteIceCandidate: async (candidate) => {
-      await addRemoteIceCandidate(candidate);
+      await webRtcRef.current.addRemoteIceCandidate(candidate);
     },
     onCallEnded: (payload) => {
       stopTimer();
@@ -140,6 +135,36 @@ export const ActiveCallScreen: React.FC<ActiveCallScreenProps> = ({ route }) => 
       ]);
     },
   });
+
+  sendSignalRef.current = sendSignal;
+  sendIceCandidateRef.current = sendIceCandidate;
+
+  // Hook de WebRTC
+  const {
+    startLocalMedia,
+    createOffer,
+    handleIncomingOffer,
+    handleIncomingAnswer,
+    addRemoteIceCandidate,
+    toggleAudio,
+    toggleVideo,
+    switchCamera,
+    cleanup,
+  } = useWebRTC({
+    onLocalCandidate: (candidate) => {
+      sendIceCandidateRef.current(candidate);
+    },
+    onNegotiationNeeded: (signal) => {
+      sendSignalRef.current(signal);
+    },
+  });
+
+  webRtcRef.current = {
+    createOffer,
+    handleIncomingOffer,
+    handleIncomingAnswer,
+    addRemoteIceCandidate,
+  };
 
   // Inicio de llamada al montar
   useEffect(() => {
