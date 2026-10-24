@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, FlatList, Alert } from 'react-native';
+import { View, FlatList, Alert, RefreshControl } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { SafeAreaContainer, BottomTabBar, AppText, SearchBar } from '@/components';
 import { HomeHeader } from '@/features/home/components/HomeHeader';
@@ -7,10 +7,12 @@ import { ExploreHeader } from '../../components/ExploreHeader';
 import { FilterPillsRow } from '../../components/FilterPillsRow';
 import { SpeakersCountSortRow } from '../../components/SpeakersCountSortRow';
 import { SpeakerCard } from '../../components/SpeakerCard';
+import { SpeakerCardSkeleton } from '../../components/SpeakerCardSkeleton';
 import { useExploreSpeakers } from '../../hooks/useExploreSpeakers';
-import { SpeakerUser } from '../../types';
+import { SpeakerUser, ExploreSortType } from '../../types';
 import { useCallSessionStore } from '@/features/videocalls';
 import { useCoinsStore } from '@/features/coins';
+import { colors } from '@/theme';
 import { navigate } from '@/navigation/NavigationRef';
 import { Routes } from '@/navigation/routes';
 import { styles } from './styles';
@@ -22,16 +24,21 @@ export const ExploreScreen: React.FC = () => {
     setSearchQuery,
     activeFilter,
     setActiveFilter,
+    currentSort,
+    setCurrentSort,
     speakers,
     totalAvailable,
+    isLoading,
+    isRefreshing,
+    onRefresh,
   } = useExploreSpeakers();
 
   const handleNotifications = () => {
-    Alert.alert('Notificaciones', 'No tienes notificaciones pendientes.');
+    navigate(Routes.App.Notifications);
   };
 
   const handleProfile = () => {
-    Alert.alert('Perfil', 'Abriendo perfil de usuario...');
+    navigate(Routes.App.Profile);
   };
 
   const handleHelp = () => {
@@ -42,8 +49,40 @@ export const ExploreScreen: React.FC = () => {
     Alert.alert(t('advancedFilters.title'), t('advancedFilters.desc'));
   };
 
+  const sortLabels: Record<ExploreSortType, string> = {
+    relevant: t('sort.mostRelevant', { defaultValue: 'Más relevantes' }),
+    rating: t('sort.topRated', { defaultValue: 'Mejor calificados' }),
+    price_low: t('sort.priceLow', { defaultValue: 'Precio: menor a mayor' }),
+    price_high: t('sort.priceHigh', { defaultValue: 'Precio: mayor a menor' }),
+  };
+
   const handleSort = () => {
-    Alert.alert(t('sort.title'), t('sort.desc'));
+    Alert.alert(
+      t('sort.title', { defaultValue: 'Ordenar por' }),
+      '',
+      [
+        {
+          text: sortLabels.relevant,
+          onPress: () => setCurrentSort('relevant'),
+        },
+        {
+          text: sortLabels.rating,
+          onPress: () => setCurrentSort('rating'),
+        },
+        {
+          text: sortLabels.price_low,
+          onPress: () => setCurrentSort('price_low'),
+        },
+        {
+          text: sortLabels.price_high,
+          onPress: () => setCurrentSort('price_high'),
+        },
+        {
+          text: t('cancel', { defaultValue: 'Cancelar' }),
+          style: 'cancel',
+        },
+      ]
+    );
   };
 
   const handleCallSpeaker = (speaker: SpeakerUser) => {
@@ -78,10 +117,13 @@ export const ExploreScreen: React.FC = () => {
   };
 
   const handleChatSpeaker = (speaker: SpeakerUser) => {
-    Alert.alert(
-      t('dialog.chatTitle'),
-      t('dialog.chatMessage', { name: speaker.name })
-    );
+    navigate(Routes.App.PrivateChat, {
+      chatId: speaker.id,
+      partnerName: speaker.name,
+      partnerAvatar: speaker.avatarUrl,
+      partnerFlag: speaker.countryFlag,
+      ratePerMinute: speaker.ratePerMinute,
+    });
   };
 
   const renderHeader = () => (
@@ -106,6 +148,7 @@ export const ExploreScreen: React.FC = () => {
       {/* Fila con conteo de resultados y ordenamiento */}
       <SpeakersCountSortRow
         count={totalAvailable}
+        currentSortLabel={sortLabels[currentSort]}
         onPressSort={handleSort}
       />
     </View>
@@ -119,31 +162,52 @@ export const ExploreScreen: React.FC = () => {
         onPressProfile={handleProfile}
       />
 
-      {/* Lista vertical de hablantes */}
-      <FlatList
-        data={speakers}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <SpeakerCard
-            speaker={item}
-            onPressCall={handleCallSpeaker}
-            onPressChat={handleChatSpeaker}
-          />
-        )}
-        ListHeaderComponent={renderHeader}
-        ListEmptyComponent={
-          <View style={styles.emptyContainer}>
-            <AppText variant="bodyLarge" style={styles.emptyText}>
-              {t('empty')}
-            </AppText>
-          </View>
-        }
-        contentContainerStyle={styles.listContent}
-        showsVerticalScrollIndicator={false}
-      />
+      {/* Lista vertical de hablantes o Skeletons */}
+      {isLoading ? (
+        <FlatList
+          data={[1, 2, 3, 4]}
+          keyExtractor={(item) => `skeleton_${item}`}
+          renderItem={() => <SpeakerCardSkeleton />}
+          ListHeaderComponent={renderHeader}
+          contentContainerStyle={styles.listContent}
+          showsVerticalScrollIndicator={false}
+        />
+      ) : (
+        <FlatList
+          data={speakers}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <SpeakerCard
+              speaker={item}
+              onPressCall={handleCallSpeaker}
+              onPressChat={handleChatSpeaker}
+            />
+          )}
+          ListHeaderComponent={renderHeader}
+          ListEmptyComponent={
+            <View style={styles.emptyContainer}>
+              <AppText variant="bodyLarge" style={styles.emptyText}>
+                {t('empty')}
+              </AppText>
+            </View>
+          }
+          refreshControl={
+            <RefreshControl
+              refreshing={isRefreshing}
+              onRefresh={onRefresh}
+              colors={[colors.primary]}
+              tintColor={colors.primary}
+            />
+          }
+          contentContainerStyle={styles.listContent}
+          showsVerticalScrollIndicator={false}
+        />
+      )}
 
       {/* Barra de navegación inferior */}
       <BottomTabBar activeTab="Explorar" />
     </SafeAreaContainer>
   );
 };
+
+export default ExploreScreen;

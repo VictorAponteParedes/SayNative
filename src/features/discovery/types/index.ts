@@ -15,5 +15,26 @@ export interface SpeakerUser {
   tags: string[];
 }
 
+export interface BackendUserItem {
+  id: string;
+  fullName?: string;
+  avatar?: { url?: string } | null;
+  countryFlag?: string | null;
+  countryCode?: string | null;
+  isVerified?: boolean;
+  isAvailableToTeach?: boolean;
+  earningRatePerMin?: number;
+  learningCostPerMin?: number;
+  coins?: number;
+  rating?: number;
+  reviewCount?: number;
+  bio?: string | null;
+  userLanguages?: {
+    languageCode: string;
+    proficiencyLevel: string;
+    isNative: boolean;
+  }[];
+}
+
 export type ExploreFilterType = 'online' | 'native_english' | 'top_rated';
 export type ExploreSortType = 'relevant' | 'rating' | 'price_low' | 'price_high';
