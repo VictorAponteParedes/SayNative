@@ -40,8 +40,10 @@ export const getSocket = (options?: SocketConnectionOptions): Socket => {
       timeout: 10000,
       transports: ['websocket', 'polling'],
       auth: cb => {
+        const storedToken =
+          require('@/store/useAuthStore').useAuthStore.getState().token;
         cb({
-          token: options?.token || '',
+          token: options?.token || storedToken || '',
         });
       },
     });

@@ -12,6 +12,7 @@ export const useRegister = () => {
   const { t } = useTranslation('auth');
   const [isLoading, setIsLoading] = useState(false);
   const setUserFromBackend = useAuthStore((state) => state.setUserFromBackend);
+  const setTokens = useAuthStore((state) => state.setTokens);
   const addCoins = useAuthStore((state) => state.addCoins);
 
   const {
@@ -60,6 +61,11 @@ export const useRegister = () => {
 
       // Poblar el store global directamente con el usuario creado en la base de datos
       setUserFromBackend(createdUser);
+
+      const regToken = createdUser.accessToken || createdUser.token;
+      if (regToken) {
+        setTokens({ token: regToken });
+      }
 
       // Acreditar el bono de +50 monedas de bienvenida
       addCoins(50);

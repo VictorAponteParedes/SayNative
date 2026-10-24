@@ -56,6 +56,9 @@ export interface RegisteredUser {
   id: string;
   email: string;
   fullName: string;
+  accessToken?: string;
+  token?: string;
+  refreshToken?: string;
   phone?: string | null;
   bio?: string | null;
   countryCode?: string | null;

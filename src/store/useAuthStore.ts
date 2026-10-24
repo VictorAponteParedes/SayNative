@@ -1,4 +1,6 @@
 import { create } from 'zustand';
+import { persist, createJSONStorage } from 'zustand/middleware';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export interface UserLanguage {
   code: string;
@@ -117,8 +119,12 @@ export const EMPTY_USER: UserProfile = {
 
 interface AuthState {
   isAuthenticated: boolean;
+  token: string | null;
+  refreshToken: string | null;
   user: UserProfile;
+  isHydrated: boolean;
   setAuthenticated: (status: boolean) => void;
+  setTokens: (tokens: { token?: string | null; refreshToken?: string | null }) => void;
   setUser: (userData: Partial<UserProfile>) => void;
   setUserFromBackend: (backendUser: BackendUserPayload) => void;
   setAvailableToTeach: (available: boolean) => void;
@@ -127,117 +133,147 @@ interface AuthState {
   addCoins: (amount: number) => void;
   deductCoins: (amount: number) => void;
   logout: () => void;
+  setHydrated: (status: boolean) => void;
 }
 
-export const useAuthStore = create<AuthState>((set) => ({
-  isAuthenticated: false,
-  user: EMPTY_USER,
-  setAuthenticated: (status) => set({ isAuthenticated: status }),
-  setUser: (userData) =>
-    set((state) => ({
-      user: { ...state.user, ...userData },
-      isAuthenticated: true,
-    })),
-  setUserFromBackend: (backendUser) =>
-    set((state) => {
-      let nativeLang = state.user.nativeLanguage;
-      let learningLang = state.user.learningLanguage;
-      const learningList: UserLanguage[] = [];
-
-      if (backendUser.userLanguages && backendUser.userLanguages.length > 0) {
-        for (const ul of backendUser.userLanguages) {
-          const mapped: UserLanguage = {
-            code: ul.languageCode,
-            name: ul.languageName,
-            flag: ul.flagEmoji || '🌐',
-            level: ul.cefrLevel || undefined,
-            targetLevel: ul.targetLevel || undefined,
-            progressPercentage: ul.progressPercentage ?? 0,
-          };
-          if (ul.type === 'NATIVE') {
-            nativeLang = mapped;
-          } else {
-            learningList.push(mapped);
-          }
-        }
-        if (learningList.length > 0) {
-          learningLang = learningList[0];
-        }
-      }
-
-      const formattedMemberSince = backendUser.createdAt
-        ? new Date(backendUser.createdAt).toLocaleDateString('es-ES', {
-            year: 'numeric',
-            month: 'long',
-          })
-        : state.user.memberSince || 'Reciente';
-
-      return {
-        isAuthenticated: true,
-        user: {
-          ...state.user,
-          id: backendUser.id,
-          name: backendUser.fullName || backendUser.name || state.user.name,
-          email: backendUser.email || state.user.email,
-          phone: backendUser.phone ?? state.user.phone,
-          bio: backendUser.bio ?? state.user.bio,
-          avatarUrl:
-            backendUser.avatar?.url ||
-            backendUser.avatarUrl ||
-            state.user.avatarUrl ||
-            '',
-          countryCode: backendUser.countryCode || state.user.countryCode,
-          countryFlag: backendUser.countryFlag || state.user.countryFlag,
-          isVerified: backendUser.isVerified ?? state.user.isVerified,
-          isAvailableToTeach:
-            backendUser.isAvailableToTeach ?? state.user.isAvailableToTeach,
-          earningRatePerMin:
-            backendUser.earningRatePerMin ?? state.user.earningRatePerMin,
-          learningCostPerMin:
-            backendUser.learningCostPerMin ?? state.user.learningCostPerMin,
-          rating:
-            backendUser.rating !== undefined
-              ? Number(backendUser.rating)
-              : state.user.rating,
-          totalCalls: backendUser.totalCalls ?? state.user.totalCalls,
-          hoursPracticed:
-            backendUser.hoursPracticed !== undefined
-              ? Number(backendUser.hoursPracticed)
-              : state.user.hoursPracticed,
-          reviewCount: backendUser.reviewCount ?? state.user.reviewCount,
-          acceptedTerms: backendUser.acceptedTerms ?? state.user.acceptedTerms,
-          coins: backendUser.coins !== undefined ? backendUser.coins : state.user.coins,
-          nativeLanguage: nativeLang,
-          learningLanguage: learningLang,
-          learningLanguagesList:
-            learningList.length > 0 ? learningList : state.user.learningLanguagesList,
-          memberSince: formattedMemberSince,
-        },
-      };
-    }),
-  setAvailableToTeach: (available) =>
-    set((state) => ({
-      user: { ...state.user, isAvailableToTeach: available },
-    })),
-  updateLearningLanguage: (language) =>
-    set((state) => ({
-      user: { ...state.user, learningLanguage: language },
-    })),
-  updateUserProfile: (data) =>
-    set((state) => ({
-      user: { ...state.user, ...data },
-    })),
-  addCoins: (amount) =>
-    set((state) => ({
-      user: { ...state.user, coins: state.user.coins + amount },
-    })),
-  deductCoins: (amount) =>
-    set((state) => ({
-      user: { ...state.user, coins: Math.max(0, state.user.coins - amount) },
-    })),
-  logout: () =>
-    set({
+export const useAuthStore = create<AuthState>()(
+  persist(
+    (set) => ({
       isAuthenticated: false,
+      token: null,
+      refreshToken: null,
       user: EMPTY_USER,
+      isHydrated: false,
+      setHydrated: (status) => set({ isHydrated: status }),
+      setTokens: ({ token, refreshToken }) =>
+        set((state) => ({
+          token: token !== undefined ? token : state.token,
+          refreshToken:
+            refreshToken !== undefined ? refreshToken : state.refreshToken,
+        })),
+      setAuthenticated: (status) => set({ isAuthenticated: status }),
+      setUser: (userData) =>
+        set((state) => ({
+          user: { ...state.user, ...userData },
+          isAuthenticated: true,
+        })),
+      setUserFromBackend: (backendUser) =>
+        set((state) => {
+          let nativeLang = state.user.nativeLanguage;
+          let learningLang = state.user.learningLanguage;
+          const learningList: UserLanguage[] = [];
+
+          if (backendUser.userLanguages && backendUser.userLanguages.length > 0) {
+            for (const ul of backendUser.userLanguages) {
+              const mapped: UserLanguage = {
+                code: ul.languageCode,
+                name: ul.languageName,
+                flag: ul.flagEmoji || '🌐',
+                level: ul.cefrLevel || undefined,
+                targetLevel: ul.targetLevel || undefined,
+                progressPercentage: ul.progressPercentage ?? 0,
+              };
+              if (ul.type === 'NATIVE') {
+                nativeLang = mapped;
+              } else {
+                learningList.push(mapped);
+              }
+            }
+            if (learningList.length > 0) {
+              learningLang = learningList[0];
+            }
+          }
+
+          const formattedMemberSince = backendUser.createdAt
+            ? new Date(backendUser.createdAt).toLocaleDateString('es-ES', {
+                year: 'numeric',
+                month: 'long',
+              })
+            : state.user.memberSince || 'Reciente';
+
+          return {
+            isAuthenticated: true,
+            user: {
+              ...state.user,
+              id: backendUser.id,
+              name: backendUser.fullName || backendUser.name || state.user.name,
+              email: backendUser.email || state.user.email,
+              phone: backendUser.phone ?? state.user.phone,
+              bio: backendUser.bio ?? state.user.bio,
+              avatarUrl:
+                backendUser.avatar?.url ||
+                backendUser.avatarUrl ||
+                state.user.avatarUrl ||
+                '',
+              countryCode: backendUser.countryCode || state.user.countryCode,
+              countryFlag: backendUser.countryFlag || state.user.countryFlag,
+              isVerified: backendUser.isVerified ?? state.user.isVerified,
+              isAvailableToTeach:
+                backendUser.isAvailableToTeach ?? state.user.isAvailableToTeach,
+              earningRatePerMin:
+                backendUser.earningRatePerMin ?? state.user.earningRatePerMin,
+              learningCostPerMin:
+                backendUser.learningCostPerMin ?? state.user.learningCostPerMin,
+              rating:
+                backendUser.rating !== undefined
+                  ? Number(backendUser.rating)
+                  : state.user.rating,
+              totalCalls: backendUser.totalCalls ?? state.user.totalCalls,
+              hoursPracticed:
+                backendUser.hoursPracticed !== undefined
+                  ? Number(backendUser.hoursPracticed)
+                  : state.user.hoursPracticed,
+              reviewCount: backendUser.reviewCount ?? state.user.reviewCount,
+              acceptedTerms: backendUser.acceptedTerms ?? state.user.acceptedTerms,
+              coins: backendUser.coins !== undefined ? backendUser.coins : state.user.coins,
+              nativeLanguage: nativeLang,
+              learningLanguage: learningLang,
+              learningLanguagesList:
+                learningList.length > 0 ? learningList : state.user.learningLanguagesList,
+              memberSince: formattedMemberSince,
+            },
+          };
+        }),
+      setAvailableToTeach: (available) =>
+        set((state) => ({
+          user: { ...state.user, isAvailableToTeach: available },
+        })),
+      updateLearningLanguage: (language) =>
+        set((state) => ({
+          user: { ...state.user, learningLanguage: language },
+        })),
+      updateUserProfile: (data) =>
+        set((state) => ({
+          user: { ...state.user, ...data },
+        })),
+      addCoins: (amount) =>
+        set((state) => ({
+          user: { ...state.user, coins: state.user.coins + amount },
+        })),
+      deductCoins: (amount) =>
+        set((state) => ({
+          user: { ...state.user, coins: Math.max(0, state.user.coins - amount) },
+        })),
+      logout: () =>
+        set({
+          isAuthenticated: false,
+          token: null,
+          refreshToken: null,
+          user: EMPTY_USER,
+        }),
     }),
-}));
+    {
+      name: 'saynative-auth-storage',
+      storage: createJSONStorage(() => AsyncStorage),
+      partialize: (state) => ({
+        isAuthenticated: state.isAuthenticated,
+        token: state.token,
+        refreshToken: state.refreshToken,
+        user: state.user,
+      }),
+      onRehydrateStorage: () => (state) => {
+        state?.setHydrated(true);
+      },
+    }
+  )
+);

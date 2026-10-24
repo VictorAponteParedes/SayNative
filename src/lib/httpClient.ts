@@ -1,6 +1,7 @@
 import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
 import { API_CONFIG } from '@/config/api';
 import i18n from '@/lang/i18n';
+import { useAuthStore } from '@/store/useAuthStore';
 
 export const httpClient = axios.create({
   baseURL: API_CONFIG.BASE_URL,
@@ -16,6 +17,12 @@ httpClient.interceptors.request.use(
     if (i18n.language) {
       config.headers['Accept-Language'] = i18n.language;
     }
+
+    const token = useAuthStore.getState().token;
+    if (token && !config.headers.Authorization) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+
     return config;
   },
   (error: AxiosError) => {

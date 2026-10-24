@@ -16,6 +16,7 @@ export const useLogin = () => {
   const setUserFromBackend = useAuthStore(state => state.setUserFromBackend);
   const setUser = useAuthStore(state => state.setUser);
   const setAuthenticated = useAuthStore(state => state.setAuthenticated);
+  const setTokens = useAuthStore(state => state.setTokens);
 
   const {
     control,
@@ -37,6 +38,14 @@ export const useLogin = () => {
         email: data.email.trim().toLowerCase(),
         password: data.password,
       });
+
+      const authToken = response.accessToken || response.token;
+      if (authToken || response.refreshToken) {
+        setTokens({
+          token: authToken || null,
+          refreshToken: response.refreshToken || null,
+        });
+      }
 
       if (response.user) {
         setUserFromBackend(response.user);
