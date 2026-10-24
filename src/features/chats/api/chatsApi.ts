@@ -1,5 +1,6 @@
 import httpClient from '@/lib/httpClient';
 import { ApiResponse } from '@/types';
+import { resolveAvatarUrl } from '@/utils/resolveAvatarUrl';
 import { ChatConversation, OnlinePeer, BackendUserItem } from '../types';
 
 export const chatsApi = {
@@ -57,7 +58,7 @@ export const chatsApi = {
       return {
         id: u.id,
         name: u.fullName || 'Compañero',
-        avatarUrl: u.avatar?.url || '',
+        avatarUrl: resolveAvatarUrl(u.avatar?.url || ''),
         countryFlag: u.countryFlag || '🌐',
         isOnline: true,
         badge: isTeacher ? 'Super Tutor' : undefined,
@@ -100,7 +101,7 @@ export const chatsApi = {
       return {
         id: u.id,
         name: firstName,
-        avatarUrl: u.avatar?.url || '',
+        avatarUrl: resolveAvatarUrl(u.avatar?.url || ''),
         countryFlag: u.countryFlag || '🌐',
         isOnline: true,
         ratePerMinute: Number(u.learningCostPerMin) || 10,

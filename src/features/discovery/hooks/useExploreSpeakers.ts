@@ -3,6 +3,7 @@ import httpClient from '@/lib/httpClient';
 import { useAuthStore } from '@/store/useAuthStore';
 import { ApiResponse } from '@/types';
 import { calculateAge } from '@/utils/calculateAge';
+import { resolveAvatarUrl } from '@/utils/resolveAvatarUrl';
 import {
   SpeakerUser,
   BackendUserItem,
@@ -49,7 +50,7 @@ const mapBackendUserToSpeaker = (u: BackendUserItem): SpeakerUser => {
     id: u.id,
     name: u.fullName || 'Compañero',
     age: realAge,
-    avatarUrl: u.avatar?.url || '',
+    avatarUrl: resolveAvatarUrl(u.avatar?.url || ''),
     countryFlag: u.countryFlag || '🌐',
     isOnline: true,
     isVerified: Boolean(u.isVerified),

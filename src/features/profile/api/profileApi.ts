@@ -1,3 +1,4 @@
+import { Platform } from 'react-native';
 import { httpClient } from '@/lib/httpClient';
 
 export interface UpdateProfilePayload {
@@ -20,6 +21,11 @@ export interface UserBackendResponse {
   phone?: string | null;
   bio?: string | null;
   avatarId?: string | null;
+  avatar?: {
+    id: string;
+    url: string;
+    fileName?: string;
+  } | null;
   countryCode?: string | null;
   countryFlag?: string | null;
   isVerified: boolean;
@@ -87,6 +93,91 @@ export const profileApi = {
     }
 
     return response.data as UserBackendResponse;
+  },
+
+  async uploadAvatar(
+    userId: string,
+    imageUri: string,
+  ): Promise<UserBackendResponse> {
+    const formData = new FormData();
+    const cleanUri =
+      Platform.OS === 'ios' ? imageUri.replace('file://', '') : imageUri;
+    const filename = cleanUri.split('/').pop() || `avatar_${Date.now()}.jpg`;
+    const extension = filename.split('.').pop()?.toLowerCase();
+    const mimeType =
+      extension === 'png'
+        ? 'image/png'
+        : extension === 'webp'
+        ? 'image/webp'
+        : 'image/jpeg';
+
+    formData.append('file', {
+      uri: imageUri,
+      name: filename,
+      type: mimeType,
+    } as unknown as Blob);
+
+    try {
+      const response = await httpClient.post<
+        ApiResponseWrapper<UserBackendResponse> | UserBackendResponse
+      >('/users/me/avatar', formData, {
+        headers: {
+          'x-user-id': userId,
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      if (
+        response.data &&
+        typeof response.data === 'object' &&
+        'data' in response.data &&
+        response.data.data
+      ) {
+        return (response.data as ApiResponseWrapper<UserBackendResponse>).data;
+      }
+
+      return response.data as UserBackendResponse;
+    } catch {
+      const fileRes = await httpClient.post<
+        | ApiResponseWrapper<{ id: string; url: string }>
+        | { id: string; url: string }
+      >('/files/upload', formData, {
+        headers: {
+          'x-user-id': userId,
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      const fileData =
+        fileRes.data &&
+        typeof fileRes.data === 'object' &&
+        'data' in fileRes.data
+          ? fileRes.data.data
+          : fileRes.data;
+
+      if (fileData?.id) {
+        const linkRes = await httpClient.post<
+          ApiResponseWrapper<UserBackendResponse> | UserBackendResponse
+        >(`/users/me/avatar/${fileData.id}`, null, {
+          headers: {
+            'x-user-id': userId,
+          },
+        });
+
+        if (
+          linkRes.data &&
+          typeof linkRes.data === 'object' &&
+          'data' in linkRes.data &&
+          linkRes.data.data
+        ) {
+          return (linkRes.data as ApiResponseWrapper<UserBackendResponse>).data;
+        }
+
+        return linkRes.data as UserBackendResponse;
+      }
+
+      throw new Error('No se pudo subir la imagen del avatar');
+    }
   },
 
   async toggleTeachingMode(

@@ -8,6 +8,7 @@ import { Toast } from '@/components';
 import { profileApi } from '../api/profileApi';
 import { EditProfileFormData } from '../types';
 import { pickImageFromGallery, takeSelfieWithCamera } from '../utils/photoPicker';
+import { resolveAvatarUrl } from '@/utils/resolveAvatarUrl';
 
 const isValidUuid = (id: string): boolean =>
   /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id);
@@ -65,6 +66,12 @@ export const useEditProfile = () => {
               : '',
           });
 
+          if (backendUser.avatar?.url) {
+            const resolved = resolveAvatarUrl(backendUser.avatar.url);
+            setAvatarUrl(resolved);
+            updateUserProfile({ avatarUrl: resolved });
+          }
+
           updateUserProfile({
             name: backendUser.fullName,
             email: backendUser.email,
@@ -120,6 +127,25 @@ export const useEditProfile = () => {
     const uri = await pickImageFromGallery();
     if (uri) {
       setAvatarUrl(uri);
+      if (user.id && isValidUuid(user.id)) {
+        try {
+          const res = await profileApi.uploadAvatar(user.id, uri);
+          if (res.avatar?.url) {
+            const resolved = resolveAvatarUrl(res.avatar.url);
+            setAvatarUrl(resolved);
+            updateUserProfile({ avatarUrl: resolved });
+            Toast.success(
+              t('changePhotoSheet.photoUpdatedTitle'),
+              t('changePhotoSheet.photoUpdatedMessage'),
+            );
+            return;
+          }
+        } catch (uploadError) {
+          if (__DEV__) {
+            console.log('[useEditProfile] Error al subir avatar inmediato:', uploadError);
+          }
+        }
+      }
       updateUserProfile({ avatarUrl: uri });
       Toast.success(
         t('changePhotoSheet.photoUpdatedTitle'),
@@ -132,6 +158,25 @@ export const useEditProfile = () => {
     const uri = await takeSelfieWithCamera();
     if (uri) {
       setAvatarUrl(uri);
+      if (user.id && isValidUuid(user.id)) {
+        try {
+          const res = await profileApi.uploadAvatar(user.id, uri);
+          if (res.avatar?.url) {
+            const resolved = resolveAvatarUrl(res.avatar.url);
+            setAvatarUrl(resolved);
+            updateUserProfile({ avatarUrl: resolved });
+            Toast.success(
+              t('changePhotoSheet.photoUpdatedTitle'),
+              t('changePhotoSheet.photoUpdatedMessage'),
+            );
+            return;
+          }
+        } catch (uploadError) {
+          if (__DEV__) {
+            console.log('[useEditProfile] Error al subir selfie inmediato:', uploadError);
+          }
+        }
+      }
       updateUserProfile({ avatarUrl: uri });
       Toast.success(
         t('changePhotoSheet.photoUpdatedTitle'),
@@ -147,6 +192,26 @@ export const useEditProfile = () => {
     setIsSaving(true);
 
     try {
+      let finalAvatarUrl = avatarUrl;
+      if (
+        user.id &&
+        isValidUuid(user.id) &&
+        avatarUrl &&
+        (avatarUrl.startsWith('file://') || avatarUrl.startsWith('content://'))
+      ) {
+        try {
+          const uploadRes = await profileApi.uploadAvatar(user.id, avatarUrl);
+          if (uploadRes.avatar?.url) {
+            finalAvatarUrl = resolveAvatarUrl(uploadRes.avatar.url);
+            setAvatarUrl(finalAvatarUrl);
+          }
+        } catch (err) {
+          if (__DEV__) {
+            console.log('[useEditProfile] Error al subir avatar en onSubmit:', err);
+          }
+        }
+      }
+
       // 1. Guardar en Backend NestJS
       const updatedBackendUser = await profileApi.updateProfile(user.id, {
         fullName: data.fullName.trim(),
@@ -163,7 +228,7 @@ export const useEditProfile = () => {
         phone: updatedBackendUser.phone ?? data.phone.trim(),
         bio: updatedBackendUser.bio ?? data.bio.trim(),
         birthDate: data.birthDate?.trim() || null,
-        avatarUrl,
+        avatarUrl: finalAvatarUrl,
       });
 
       // 3. Resetear el estado del formulario con los nuevos valores guardados

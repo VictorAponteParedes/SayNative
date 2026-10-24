@@ -3,6 +3,7 @@ import httpClient from '@/lib/httpClient';
 import { useAuthStore } from '@/store/useAuthStore';
 import { useCoinsStore } from '@/features/coins';
 import { calculateAge } from '@/utils/calculateAge';
+import { resolveAvatarUrl } from '@/utils/resolveAvatarUrl';
 import { ApiResponse } from '@/types';
 import { PeerUser } from '../types';
 
@@ -65,7 +66,7 @@ export const useHomeFeed = () => {
             id: u.id,
             name: u.fullName || 'Compañero',
             age: calculateAge(u.birthDate),
-            avatarUrl: u.avatar?.url || '',
+            avatarUrl: resolveAvatarUrl(u.avatar?.url || ''),
             isOnline: true,
             countryFlag: u.countryFlag || '🌐',
             rating: Number(u.rating) || 5.0,

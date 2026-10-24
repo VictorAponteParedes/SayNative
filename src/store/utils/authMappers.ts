@@ -1,4 +1,5 @@
 import { BackendUserPayload, UserLanguage, UserProfile } from '../types/auth.types';
+import { resolveAvatarUrl } from '@/utils/resolveAvatarUrl';
 
 export const formatMemberSince = (
   createdAt?: string,
@@ -60,11 +61,11 @@ export const mapBackendUserToUserProfile = (
       backendUser.birthDate !== undefined
         ? (backendUser.birthDate ? String(backendUser.birthDate) : null)
         : currentUser.birthDate,
-    avatarUrl:
+    avatarUrl: resolveAvatarUrl(
       backendUser.avatar?.url ||
       backendUser.avatarUrl ||
-      currentUser.avatarUrl ||
-      '',
+      currentUser.avatarUrl
+    ),
     countryCode: backendUser.countryCode || currentUser.countryCode,
     countryFlag: backendUser.countryFlag || currentUser.countryFlag,
     isVerified: backendUser.isVerified ?? currentUser.isVerified,

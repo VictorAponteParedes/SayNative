@@ -11,6 +11,7 @@ import {
   takeSelfieWithCamera,
 } from '../utils/photoPicker';
 import { Alert } from 'react-native';
+import { resolveAvatarUrl } from '@/utils/resolveAvatarUrl';
 
 const isValidUuid = (id: string): boolean =>
   /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id);
@@ -45,6 +46,7 @@ export const useProfile = () => {
         updateUserProfile({
           name: backendUser.fullName || user.name,
           email: backendUser.email || user.email,
+          avatarUrl: resolveAvatarUrl(backendUser.avatar?.url) || user.avatarUrl,
           phone: backendUser.phone ?? user.phone,
           bio: backendUser.bio ?? user.bio,
           countryCode: backendUser.countryCode || user.countryCode,
@@ -129,6 +131,24 @@ export const useProfile = () => {
     const uri = await pickImageFromGallery();
     if (uri) {
       updateUserProfile({ avatarUrl: uri });
+      if (user.id && isValidUuid(user.id)) {
+        try {
+          const res = await profileApi.uploadAvatar(user.id, uri);
+          if (res.avatar?.url) {
+            const resolved = resolveAvatarUrl(res.avatar.url);
+            updateUserProfile({ avatarUrl: resolved });
+            Toast.success(
+              t('changePhotoSheet.photoUpdatedTitle'),
+              t('changePhotoSheet.photoUpdatedMessage'),
+            );
+            return;
+          }
+        } catch (uploadError) {
+          if (__DEV__) {
+            console.log('[useProfile] Error al subir avatar inmediato:', uploadError);
+          }
+        }
+      }
       Toast.success(
         t('changePhotoSheet.photoUpdatedTitle'),
         t('changePhotoSheet.photoUpdatedMessage'),
@@ -140,6 +160,24 @@ export const useProfile = () => {
     const uri = await takeSelfieWithCamera();
     if (uri) {
       updateUserProfile({ avatarUrl: uri });
+      if (user.id && isValidUuid(user.id)) {
+        try {
+          const res = await profileApi.uploadAvatar(user.id, uri);
+          if (res.avatar?.url) {
+            const resolved = resolveAvatarUrl(res.avatar.url);
+            updateUserProfile({ avatarUrl: resolved });
+            Toast.success(
+              t('changePhotoSheet.photoUpdatedTitle'),
+              t('changePhotoSheet.photoUpdatedMessage'),
+            );
+            return;
+          }
+        } catch (uploadError) {
+          if (__DEV__) {
+            console.log('[useProfile] Error al subir selfie inmediato:', uploadError);
+          }
+        }
+      }
       Toast.success(
         t('changePhotoSheet.photoUpdatedTitle'),
         t('changePhotoSheet.photoUpdatedMessage'),
