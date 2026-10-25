@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Image, StyleSheet, StyleProp, ViewStyle, Text } from 'react-native';
 import { colors } from '@/theme';
+import { resolveAvatarUrl } from '@/utils/resolveAvatarUrl';
 
 export interface AvatarProps {
   uri?: string | null;
@@ -29,15 +30,21 @@ export const Avatar: React.FC<AvatarProps> = ({
   style,
 }) => {
   const [hasError, setHasError] = useState(false);
+
+  useEffect(() => {
+    setHasError(false);
+  }, [uri]);
+
   const indicatorSize = Math.max(10, Math.round(size * 0.25));
   const initials = getInitials(name);
-  const hasValidUri = Boolean(uri && uri.trim() && !hasError);
+  const resolvedUri = resolveAvatarUrl(uri);
+  const hasValidUri = Boolean(resolvedUri && resolvedUri.trim() && !hasError);
 
   return (
     <View style={[{ width: size, height: size }, style]}>
       {hasValidUri ? (
         <Image
-          source={{ uri: uri! }}
+          source={{ uri: resolvedUri }}
           onError={() => setHasError(true)}
           style={[
             styles.image,
@@ -125,3 +132,5 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 });
+
+export default Avatar;

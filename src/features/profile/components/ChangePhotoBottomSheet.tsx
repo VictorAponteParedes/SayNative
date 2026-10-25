@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Camera, Image as ImageIcon, ChevronRight } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
@@ -19,25 +19,37 @@ export const ChangePhotoBottomSheet: React.FC<ChangePhotoBottomSheetProps> = ({
   onTakeSelfie,
 }) => {
   const { t } = useTranslation('profile');
+  const [pendingAction, setPendingAction] = useState<'gallery' | 'camera' | null>(null);
 
   const handleChooseFromGallery = () => {
+    setPendingAction('gallery');
     onClose();
-    setTimeout(() => {
-      onChooseFromGallery();
-    }, 250);
   };
 
   const handleTakeSelfie = () => {
+    setPendingAction('camera');
     onClose();
-    setTimeout(() => {
-      onTakeSelfie();
-    }, 250);
+  };
+
+  const handleDismiss = () => {
+    if (pendingAction === 'gallery') {
+      setPendingAction(null);
+      setTimeout(() => {
+        onChooseFromGallery();
+      }, 120);
+    } else if (pendingAction === 'camera') {
+      setPendingAction(null);
+      setTimeout(() => {
+        onTakeSelfie();
+      }, 120);
+    }
   };
 
   return (
     <AppBottomSheet
       visible={visible}
       onClose={onClose}
+      onDismiss={handleDismiss}
       title={t('changePhotoSheet.title')}
       subtitle={t('changePhotoSheet.subtitle')}
     >

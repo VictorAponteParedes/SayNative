@@ -21,6 +21,7 @@ const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 export interface AppBottomSheetProps {
   visible: boolean;
   onClose: () => void;
+  onDismiss?: () => void;
   title?: string;
   subtitle?: string;
   showCloseButton?: boolean;
@@ -31,6 +32,7 @@ export interface AppBottomSheetProps {
 export const AppBottomSheet: React.FC<AppBottomSheetProps> = ({
   visible,
   onClose,
+  onDismiss,
   title,
   subtitle,
   showCloseButton = true,
@@ -75,9 +77,12 @@ export const AppBottomSheet: React.FC<AppBottomSheetProps> = ({
         }),
       ]).start(() => {
         setModalVisible(false);
+        if (Platform.OS !== 'ios') {
+          onDismiss?.();
+        }
       });
     }
-  }, [visible, modalVisible, backdropOpacity, translateY]);
+  }, [visible, modalVisible, backdropOpacity, translateY, onDismiss]);
 
   const handleClose = () => {
     Animated.parallel([
@@ -94,6 +99,9 @@ export const AppBottomSheet: React.FC<AppBottomSheetProps> = ({
     ]).start(() => {
       setModalVisible(false);
       onClose();
+      if (Platform.OS !== 'ios') {
+        onDismiss?.();
+      }
     });
   };
 
@@ -134,6 +142,7 @@ export const AppBottomSheet: React.FC<AppBottomSheetProps> = ({
       visible={modalVisible}
       animationType="none"
       onRequestClose={handleClose}
+      onDismiss={onDismiss}
       statusBarTranslucent
     >
       <KeyboardAvoidingView

@@ -3,18 +3,23 @@ import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Bell, User } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
 import { colors, spacing } from '@/theme';
-import { AppText, AppLogo } from '@/components';
+import { AppText, AppLogo, Avatar } from '@/components';
+import { useAuthStore } from '@/store/useAuthStore';
 
 export interface HomeHeaderProps {
   onPressNotifications?: () => void;
   onPressProfile?: () => void;
+  avatarUrl?: string;
 }
 
 export const HomeHeader: React.FC<HomeHeaderProps> = ({
   onPressNotifications,
   onPressProfile,
+  avatarUrl,
 }) => {
   const { t } = useTranslation('home');
+  const user = useAuthStore((s) => s.user);
+  const currentAvatarUrl = avatarUrl || user?.avatarUrl;
 
   return (
     <View style={styles.container}>
@@ -39,7 +44,11 @@ export const HomeHeader: React.FC<HomeHeaderProps> = ({
           onPress={onPressProfile}
           style={styles.avatarButton}
         >
-          <User size={18} color={colors.surface} />
+          {currentAvatarUrl ? (
+            <Avatar uri={currentAvatarUrl} name={user?.name} size={36} />
+          ) : (
+            <User size={18} color={colors.surface} />
+          )}
         </TouchableOpacity>
       </View>
     </View>
@@ -91,5 +100,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.primary,
     alignItems: 'center',
     justifyContent: 'center',
+    overflow: 'hidden',
   },
 });
+
+export default HomeHeader;

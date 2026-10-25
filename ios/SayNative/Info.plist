@@ -63,6 +63,8 @@
 	<string>SayNative necesita acceso al micrófono para hablar durante las llamadas de práctica.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>SayNative necesita acceso a tu galería para elegir tu foto de perfil.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>SayNative necesita acceso para guardar fotos en tu galería.</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>arm64</string>

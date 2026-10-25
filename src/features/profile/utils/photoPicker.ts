@@ -119,6 +119,7 @@ export const pickImageFromGallery = async (): Promise<string | null> => {
     maxWidth: 1200,
     maxHeight: 1200,
     includeBase64: false,
+    presentationStyle: 'fullScreen',
   };
 
   try {
@@ -164,6 +165,7 @@ export const takeSelfieWithCamera = async (): Promise<string | null> => {
     maxHeight: 1200,
     saveToPhotos: false,
     includeBase64: false,
+    presentationStyle: 'fullScreen',
   };
 
   try {
