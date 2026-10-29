@@ -67,10 +67,14 @@ export const TransactionItemCard: React.FC<TransactionItemCardProps> = ({
 
       <View style={styles.textContainer}>
         <AppText variant="body" numberOfLines={1} style={styles.title}>
-          {t(`history.${transaction.titleKey}`)}
+          {transaction.titleKey?.startsWith('items.')
+            ? t(`history.${transaction.titleKey}`)
+            : transaction.titleKey}
         </AppText>
         <AppText variant="caption" numberOfLines={1} style={styles.subtitle}>
-          {t(`history.${transaction.subtitleKey}`)}
+          {transaction.subtitleKey?.startsWith('items.')
+            ? t(`history.${transaction.subtitleKey}`)
+            : transaction.subtitleKey}
         </AppText>
       </View>
 

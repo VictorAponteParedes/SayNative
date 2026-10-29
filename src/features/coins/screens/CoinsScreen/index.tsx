@@ -30,7 +30,7 @@ export const CoinsScreen: React.FC = () => {
     navigate(Routes.App.Profile);
   };
 
-  const handleWatchAd = () => {
+  const handleWatchAd = async () => {
     if (adsAvailable <= 0) {
       Toast.warning(
         t('toasts.adLimitTitle'),
@@ -39,7 +39,7 @@ export const CoinsScreen: React.FC = () => {
       return;
     }
 
-    const success = watchRewardedAd();
+    const success = await watchRewardedAd();
     if (success) {
       Toast.success(
         t('toasts.rewardEarnedTitle'),
@@ -57,8 +57,8 @@ export const CoinsScreen: React.FC = () => {
       }),
       cancelText: t('actions.cancel', { defaultValue: 'Cancelar' }),
       confirmText: t('packages.buy', { defaultValue: 'Comprar' }),
-      onConfirm: () => {
-        purchasePackage(pkg);
+      onConfirm: async () => {
+        await purchasePackage(pkg);
         Toast.success(
           t('toasts.purchaseSuccessTitle'),
           t('dialog.purchaseSuccess', { coins: pkg.coinsCount })
