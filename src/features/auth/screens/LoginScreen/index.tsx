@@ -1,17 +1,14 @@
 import React, { useState } from 'react';
 import {
+  View,
   ScrollView,
   KeyboardAvoidingView,
   Platform,
   Alert,
+  StatusBar,
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { SafeAreaContainer, AppText } from '@/components';
-import {
-  LoginHeader,
-  SocialAuthButtons,
-  LoginForm,
-} from '../../components';
+import { LoginHeader, LoginForm } from '../../components';
 import { LanguageSelectorBottomSheet } from '@/features/profile/components/LanguageSelectorBottomSheet';
 import { useLogin } from '../../hooks/useLogin';
 import { styles } from './styles';
@@ -23,7 +20,6 @@ export const LoginScreen: React.FC = () => {
     control,
     handleSubmit,
     isLoading,
-    handleBack,
     handleGoToRegister,
   } = useLogin();
 
@@ -34,11 +30,19 @@ export const LoginScreen: React.FC = () => {
     );
   };
 
+  const handleAppleAuth = () => {
+    Alert.alert('Apple', 'Inicio de sesión con Apple próximamente.');
+  };
+
+  const handleGoogleAuth = () => {
+    Alert.alert('Google', 'Inicio de sesión con Google próximamente.');
+  };
+
   return (
-    <SafeAreaContainer edges={['top']} style={styles.container}>
-      <LoginHeader
-        onBack={handleBack}
-        onPressLanguage={() => setIsLanguageSheetOpen(true)}
+    <View style={styles.container}>
+      <StatusBar
+        barStyle="light-content"
+        {...(Platform.OS === 'android' ? { backgroundColor: 'transparent', translucent: true } : {})}
       />
 
       <KeyboardAvoidingView
@@ -49,26 +53,23 @@ export const LoginScreen: React.FC = () => {
           contentContainerStyle={styles.scrollContent}
           showsVerticalScrollIndicator={false}
           keyboardShouldPersistTaps="handled"
+          bounces={false}
         >
-          {/* Título y Subtítulo de Bienvenida */}
-          <AppText variant="h1" style={styles.title}>
-            {t('login.title')}
-          </AppText>
-          <AppText variant="bodySmall" style={styles.subtitle}>
-            {t('login.subtitle')}
-          </AppText>
-
-          {/* Botones de Autenticación Social (Apple & Google) */}
-          <SocialAuthButtons />
-
-          {/* Formulario Principal de Login con React Hook Form */}
-          <LoginForm
-            control={control}
-            onSubmit={handleSubmit}
-            onPressRegister={handleGoToRegister}
-            onPressForgotPassword={handleForgotPassword}
-            isLoading={isLoading}
+          <LoginHeader
+            onPressLanguage={() => setIsLanguageSheetOpen(true)}
           />
+          <View style={styles.sheetCard}>
+            <View style={styles.handleBar} />
+            <LoginForm
+              control={control}
+              onSubmit={handleSubmit}
+              onPressRegister={handleGoToRegister}
+              onPressForgotPassword={handleForgotPassword}
+              onPressApple={handleAppleAuth}
+              onPressGoogle={handleGoogleAuth}
+              isLoading={isLoading}
+            />
+          </View>
         </ScrollView>
       </KeyboardAvoidingView>
 
@@ -77,7 +78,7 @@ export const LoginScreen: React.FC = () => {
         visible={isLanguageSheetOpen}
         onClose={() => setIsLanguageSheetOpen(false)}
       />
-    </SafeAreaContainer>
+    </View>
   );
 };
 

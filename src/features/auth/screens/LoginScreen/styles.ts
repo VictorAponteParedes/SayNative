@@ -1,29 +1,40 @@
 import { StyleSheet } from 'react-native';
-import { colors, spacing } from '@/theme';
+import { colors } from '@/theme';
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.background,
+    backgroundColor: '#0F172A',
   },
   keyboardWrapper: {
     flex: 1,
   },
   scrollContent: {
-    paddingHorizontal: spacing.lg,
-    paddingTop: spacing.xs,
+    flexGrow: 1,
+    backgroundColor: colors.white,
   },
-  title: {
-    fontSize: 26,
-    fontWeight: '800',
-    color: colors.textPrimary,
-    marginTop: spacing.md,
+  sheetCard: {
+    marginTop: -26,
+    backgroundColor: colors.white,
+    borderTopLeftRadius: 28,
+    borderTopRightRadius: 28,
+    paddingHorizontal: 24,
+    paddingTop: 12,
+    paddingBottom: 36,
+    shadowColor: '#000000',
+    shadowOffset: { width: 0, height: -4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 12,
+    elevation: 8,
   },
-  subtitle: {
-    fontSize: 14,
-    color: colors.textSecondary,
-    marginTop: 4,
-    lineHeight: 20,
-    marginBottom: spacing.lg,
+  handleBar: {
+    width: 44,
+    height: 4,
+    borderRadius: 2,
+    backgroundColor: '#CBD5E1',
+    alignSelf: 'center',
+    marginBottom: 16,
   },
 });
+
+export default styles;
