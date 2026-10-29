@@ -7,7 +7,7 @@ import {
   TextStyle,
   ActivityIndicator,
 } from 'react-native';
-import { colors, spacing, borderRadius } from '@/theme';
+import { colors, spacing, borderRadius, fonts } from '@/theme';
 import { AppText } from './AppText';
 
 export interface AppButtonProps {
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     borderRadius: borderRadius.md,
   },
   text: {
+    fontFamily: fonts.bold,
     fontSize: 14,
-    fontWeight: '700',
   },
 });

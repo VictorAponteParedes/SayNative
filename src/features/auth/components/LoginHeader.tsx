@@ -8,7 +8,7 @@ import {
 import { ChevronLeft, ChevronDown } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { colors, spacing, borderRadius } from '@/theme';
+import { colors, spacing, borderRadius, fonts } from '@/theme';
 import { AppText, AppLogo } from '@/components';
 import { getLanguageFlag } from '@/features/profile/components/LanguageSelectorBottomSheet';
 
@@ -131,8 +131,8 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   languageCodeText: {
+    fontFamily: fonts.bold,
     fontSize: 13,
-    fontWeight: '700',
     color: colors.white,
   },
   heroCenterContent: {
@@ -157,15 +157,15 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   heroBrandTitle: {
+    fontFamily: fonts.extraBold,
     fontSize: 23,
-    fontWeight: '800',
     color: colors.white,
     marginTop: spacing.sm,
     letterSpacing: 0.3,
   },
   heroBrandSubtitle: {
+    fontFamily: fonts.medium,
     fontSize: 14,
-    fontWeight: '500',
     color: colors.white,
     opacity: 0.92,
     marginTop: spacing.xs,

@@ -14,7 +14,7 @@ import {
 } from 'lucide-react-native';
 import { Control } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { colors, spacing, borderRadius } from '@/theme';
+import { colors, spacing, borderRadius, fonts } from '@/theme';
 import { AppText, ControlledInput } from '@/components';
 import { ForgotPasswordFormData } from '../types';
 
@@ -163,13 +163,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   cardTitle: {
+    fontFamily: fonts.extraBold,
     fontSize: 22,
-    fontWeight: '800',
     color: colors.textPrimary,
     textAlign: 'center',
     marginBottom: spacing.xs + 2,
   },
   cardSubtitle: {
+    fontFamily: fonts.regular,
     fontSize: 14,
     color: colors.textSecondary,
     textAlign: 'center',
@@ -181,8 +182,8 @@ const styles = StyleSheet.create({
     marginBottom: spacing.md,
   },
   inputLabel: {
+    fontFamily: fonts.bold,
     fontSize: 12,
-    fontWeight: '700',
     color: colors.textTag,
     letterSpacing: 0.6,
     marginBottom: spacing.xs + 2,
@@ -211,10 +212,10 @@ const styles = StyleSheet.create({
     flexShrink: 0,
   },
   spamNoticeText: {
+    fontFamily: fonts.medium,
     flex: 1,
     fontSize: 13,
     color: colors.primary,
-    fontWeight: '500',
     lineHeight: 18,
   },
   submitButton: {
@@ -239,9 +240,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   submitButtonText: {
+    fontFamily: fonts.bold,
     color: colors.white,
     fontSize: 16,
-    fontWeight: '700',
   },
   sendIcon: {
     marginLeft: spacing.sm,
@@ -257,8 +258,8 @@ const styles = StyleSheet.create({
     marginRight: spacing.xs + 2,
   },
   smsRecoveryText: {
+    fontFamily: fonts.bold,
     fontSize: 13.5,
-    fontWeight: '700',
     color: colors.textPrimary,
   },
   footerRow: {
@@ -269,13 +270,13 @@ const styles = StyleSheet.create({
     paddingBottom: spacing.xxl,
   },
   footerText: {
+    fontFamily: fonts.regular,
     color: colors.textSecondary,
     fontSize: 14,
-    fontWeight: '400',
   },
   loginLinkText: {
+    fontFamily: fonts.bold,
     color: colors.primary,
-    fontWeight: '700',
     fontSize: 14,
   },
 });

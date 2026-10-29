@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import { Send } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
-import { colors, spacing } from '@/theme';
+import { colors, spacing, fonts } from '@/theme';
 import { AppText, AppBottomSheet, Toast } from '@/components';
 
 export interface ContactSupportBottomSheetProps {
@@ -156,6 +156,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   textArea: {
+    fontFamily: fonts.regular,
     backgroundColor: colors.surfaceSubtle,
     borderRadius: 16,
     padding: spacing.md,

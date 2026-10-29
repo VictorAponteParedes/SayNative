@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 import { useTranslation } from 'react-i18next';
-import { colors, spacing, borderRadius } from '@/theme';
+import { colors, spacing, borderRadius, fonts } from '@/theme';
 import { AppText } from '@/components';
 
 export interface SocialAuthButtonsProps {
@@ -95,8 +95,8 @@ const styles = StyleSheet.create({
     gap: spacing.sm,
   },
   buttonText: {
+    fontFamily: fonts.bold,
     fontSize: 15,
-    fontWeight: '700',
     color: colors.textPrimary,
   },
 });

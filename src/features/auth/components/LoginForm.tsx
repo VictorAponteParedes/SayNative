@@ -8,7 +8,7 @@ import {
 import { Mail, Lock, ArrowRight } from 'lucide-react-native';
 import { Control } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { colors, spacing, borderRadius } from '@/theme';
+import { colors, spacing, borderRadius, fonts } from '@/theme';
 import { AppText, ControlledInput } from '@/components';
 import { SocialAuthButtons } from './SocialAuthButtons';
 import { LoginFormData } from '../types';
@@ -187,8 +187,8 @@ const styles = StyleSheet.create({
     paddingVertical: spacing.xs,
   },
   tabTextActive: {
+    fontFamily: fonts.extraBold,
     fontSize: 18,
-    fontWeight: '800',
     color: colors.primary,
   },
   activeTabIndicator: {
@@ -203,16 +203,16 @@ const styles = StyleSheet.create({
     paddingVertical: spacing.xs,
   },
   tabTextInactive: {
+    fontFamily: fonts.semiBold,
     fontSize: 18,
-    fontWeight: '600',
     color: colors.textSecondary,
   },
   inputFieldContainer: {
     marginBottom: spacing.md,
   },
   inputLabel: {
+    fontFamily: fonts.bold,
     fontSize: 12,
-    fontWeight: '700',
     color: colors.textTag,
     letterSpacing: 0.6,
     marginBottom: spacing.xs + 2,
@@ -232,8 +232,8 @@ const styles = StyleSheet.create({
     paddingVertical: spacing.xs,
   },
   forgotPasswordText: {
+    fontFamily: fonts.bold,
     color: colors.primary,
-    fontWeight: '700',
     fontSize: 14,
   },
   submitButton: {
@@ -258,9 +258,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   submitButtonText: {
+    fontFamily: fonts.bold,
     color: colors.white,
     fontSize: 16,
-    fontWeight: '700',
   },
   arrowIcon: {
     marginLeft: spacing.sm,
@@ -276,10 +276,10 @@ const styles = StyleSheet.create({
     backgroundColor: colors.border,
   },
   dividerText: {
+    fontFamily: fonts.medium,
     paddingHorizontal: spacing.md,
     color: colors.textSecondary,
     fontSize: 13,
-    fontWeight: '500',
   },
   footerRow: {
     flexDirection: 'row',
@@ -289,13 +289,13 @@ const styles = StyleSheet.create({
     paddingBottom: spacing.xxl,
   },
   footerText: {
+    fontFamily: fonts.regular,
     color: colors.textSecondary,
     fontSize: 14,
-    fontWeight: '400',
   },
   registerLinkText: {
+    fontFamily: fonts.bold,
     color: colors.primary,
-    fontWeight: '700',
     fontSize: 14,
   },
 });

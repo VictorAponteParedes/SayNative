@@ -156,8 +156,8 @@ const styles = StyleSheet.create({
     marginBottom: 6,
   },
   label: {
+    fontFamily: fonts.bold,
     fontSize: 13,
-    fontWeight: '700',
     color: colors.textPrimary,
   },
   inputBox: {
@@ -223,12 +223,14 @@ const styles = StyleSheet.create({
     marginRight: 4,
   },
   errorText: {
+    fontFamily: fonts.medium,
     color: colors.danger,
     fontSize: 12,
     fontWeight: '500',
     flex: 1,
   },
   hintText: {
+    fontFamily: fonts.regular,
     color: colors.textSecondary,
     fontSize: 11,
     flex: 1,

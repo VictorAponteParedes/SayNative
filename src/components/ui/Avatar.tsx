@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { View, Image, StyleSheet, StyleProp, ViewStyle, Text } from 'react-native';
-import { colors } from '@/theme';
+import { View, Image, StyleSheet, StyleProp, ViewStyle } from 'react-native';
+import { colors, fonts } from '@/theme';
+import { AppText } from './AppText';
 import { resolveAvatarUrl } from '@/utils/resolveAvatarUrl';
 
 export interface AvatarProps {
@@ -66,7 +67,7 @@ export const Avatar: React.FC<AvatarProps> = ({
             },
           ]}
         >
-          <Text
+          <AppText
             style={[
               styles.initialsText,
               {
@@ -75,7 +76,7 @@ export const Avatar: React.FC<AvatarProps> = ({
             ]}
           >
             {initials}
-          </Text>
+          </AppText>
         </View>
       )}
 
@@ -97,7 +98,7 @@ export const Avatar: React.FC<AvatarProps> = ({
 
       {flag && (
         <View style={styles.flagContainer}>
-          <Text style={styles.flagText}>{flag}</Text>
+          <AppText style={styles.flagText}>{flag}</AppText>
         </View>
       )}
     </View>
@@ -114,8 +115,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   initialsText: {
+    fontFamily: fonts.bold,
     color: colors.white,
-    fontWeight: '700',
     letterSpacing: 0.5,
   },
   onlineBadge: {

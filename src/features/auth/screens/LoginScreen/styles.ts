@@ -1,10 +1,10 @@
 import { StyleSheet } from 'react-native';
-import { colors } from '@/theme';
+import { colors, spacing, borderRadius } from '@/theme';
 
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0F172A',
+    backgroundColor: colors.textPrimary,
   },
   keyboardWrapper: {
     flex: 1,
@@ -16,12 +16,12 @@ export const styles = StyleSheet.create({
   sheetCard: {
     marginTop: -26,
     backgroundColor: colors.white,
-    borderTopLeftRadius: 28,
-    borderTopRightRadius: 28,
-    paddingHorizontal: 24,
-    paddingTop: 12,
-    paddingBottom: 36,
-    shadowColor: '#000000',
+    borderTopLeftRadius: borderRadius.xl + 8,
+    borderTopRightRadius: borderRadius.xl + 8,
+    paddingHorizontal: spacing.xxl,
+    paddingTop: spacing.md,
+    paddingBottom: spacing.xxxl + 8,
+    shadowColor: colors.shadow,
     shadowOffset: { width: 0, height: -4 },
     shadowOpacity: 0.1,
     shadowRadius: 12,
@@ -30,10 +30,10 @@ export const styles = StyleSheet.create({
   handleBar: {
     width: 44,
     height: 4,
-    borderRadius: 2,
-    backgroundColor: '#CBD5E1',
+    borderRadius: borderRadius.xs,
+    backgroundColor: colors.borderDark,
     alignSelf: 'center',
-    marginBottom: 16,
+    marginBottom: spacing.md,
   },
 });
 

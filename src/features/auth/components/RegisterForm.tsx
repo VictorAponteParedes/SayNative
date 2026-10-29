@@ -20,7 +20,7 @@ import {
   FieldErrors,
 } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { colors, spacing, borderRadius } from '@/theme';
+import { colors, spacing, borderRadius, fonts } from '@/theme';
 import { AppText, ControlledInput } from '@/components';
 import { BonusRewardCard } from './BonusRewardCard';
 import { SocialAuthButtons } from './SocialAuthButtons';
@@ -255,8 +255,8 @@ const styles = StyleSheet.create({
     paddingVertical: spacing.xs,
   },
   tabTextActive: {
+    fontFamily: fonts.extraBold,
     fontSize: 18,
-    fontWeight: '800',
     color: colors.primary,
   },
   activeTabIndicator: {
@@ -271,8 +271,8 @@ const styles = StyleSheet.create({
     paddingVertical: spacing.xs,
   },
   tabTextInactive: {
+    fontFamily: fonts.semiBold,
     fontSize: 18,
-    fontWeight: '600',
     color: colors.textSecondary,
   },
   inputFieldContainer: {
@@ -282,8 +282,8 @@ const styles = StyleSheet.create({
     marginBottom: spacing.xs,
   },
   inputLabel: {
+    fontFamily: fonts.bold,
     fontSize: 12,
-    fontWeight: '700',
     color: colors.textTag,
     letterSpacing: 0.6,
     marginBottom: spacing.xs + 2,
@@ -306,9 +306,9 @@ const styles = StyleSheet.create({
     marginRight: spacing.xs,
   },
   passwordHintText: {
+    fontFamily: fonts.medium,
     fontSize: 12,
     color: colors.textSecondary,
-    fontWeight: '500',
   },
   checkboxRow: {
     flexDirection: 'row',
@@ -336,14 +336,15 @@ const styles = StyleSheet.create({
     backgroundColor: colors.dangerBgSubtle,
   },
   checkboxText: {
+    fontFamily: fonts.regular,
     flex: 1,
     fontSize: 13,
     color: colors.textSecondary,
     lineHeight: 18,
   },
   linkText: {
+    fontFamily: fonts.bold,
     color: colors.primary,
-    fontWeight: '700',
     fontSize: 13,
   },
   submitButton: {
@@ -368,9 +369,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   submitButtonText: {
+    fontFamily: fonts.bold,
     color: colors.white,
     fontSize: 16,
-    fontWeight: '700',
   },
   arrowIcon: {
     marginLeft: spacing.sm,
@@ -386,10 +387,10 @@ const styles = StyleSheet.create({
     backgroundColor: colors.border,
   },
   dividerText: {
+    fontFamily: fonts.medium,
     paddingHorizontal: spacing.md,
     color: colors.textSecondary,
     fontSize: 13,
-    fontWeight: '500',
   },
   footerRow: {
     flexDirection: 'row',
@@ -399,13 +400,13 @@ const styles = StyleSheet.create({
     paddingBottom: spacing.xxl,
   },
   footerText: {
+    fontFamily: fonts.regular,
     color: colors.textSecondary,
     fontSize: 14,
-    fontWeight: '400',
   },
   loginLinkText: {
+    fontFamily: fonts.bold,
     color: colors.primary,
-    fontWeight: '700',
     fontSize: 14,
   },
 });

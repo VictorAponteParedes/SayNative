@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { colors, spacing, borderRadius } from '@/theme';
+import { colors, spacing, borderRadius, fonts } from '@/theme';
 import { AppText } from '@/components';
 
 export const BonusRewardCard: React.FC = () => {
@@ -53,15 +53,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   badgeTitle: {
+    fontFamily: fonts.extraBold,
     fontSize: 12,
-    fontWeight: '800',
     color: colors.textPrimary,
     lineHeight: 15,
   },
   bonusDescription: {
+    fontFamily: fonts.semiBold,
     flex: 1,
     fontSize: 12,
-    fontWeight: '600',
     color: colors.textDarkRed,
     textAlign: 'right',
     marginLeft: spacing.sm,
