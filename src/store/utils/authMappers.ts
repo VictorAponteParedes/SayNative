@@ -74,26 +74,47 @@ export const mapBackendUserToUserProfile = (
     countryFlag: backendUser.countryFlag || currentUser.countryFlag,
     isVerified: backendUser.isVerified ?? currentUser.isVerified,
     isAvailableToTeach:
-      backendUser.isAvailableToTeach ?? currentUser.isAvailableToTeach,
+      backendUser.settings?.isAvailableToTeach ??
+      backendUser.isAvailableToTeach ??
+      currentUser.isAvailableToTeach,
     earningRatePerMin:
-      backendUser.earningRatePerMin ?? currentUser.earningRatePerMin,
+      backendUser.settings?.earningRatePerMin ??
+      backendUser.earningRatePerMin ??
+      currentUser.earningRatePerMin,
     learningCostPerMin:
-      backendUser.learningCostPerMin ?? currentUser.learningCostPerMin,
+      backendUser.settings?.learningCostPerMin ??
+      backendUser.learningCostPerMin ??
+      currentUser.learningCostPerMin,
     rating:
-      backendUser.rating !== undefined
+      backendUser.stats?.rating !== undefined
+        ? Number(backendUser.stats.rating)
+        : backendUser.rating !== undefined
         ? Number(backendUser.rating)
         : currentUser.rating,
-    totalCalls: backendUser.totalCalls ?? currentUser.totalCalls,
+    totalCalls:
+      backendUser.stats?.totalCalls ??
+      backendUser.totalCalls ??
+      currentUser.totalCalls,
     hoursPracticed:
-      backendUser.hoursPracticed !== undefined
+      backendUser.stats?.hoursPracticed !== undefined
+        ? Number(backendUser.stats.hoursPracticed)
+        : backendUser.hoursPracticed !== undefined
         ? Number(backendUser.hoursPracticed)
         : currentUser.hoursPracticed,
-    reviewCount: backendUser.reviewCount ?? currentUser.reviewCount,
+    reviewCount:
+      backendUser.stats?.reviewCount ??
+      backendUser.reviewCount ??
+      currentUser.reviewCount,
     coins:
-      backendUser.coins !== undefined
+      backendUser.wallet?.balance !== undefined
+        ? Number(backendUser.wallet.balance)
+        : backendUser.coins !== undefined
         ? Number(backendUser.coins)
         : currentUser.coins ?? 0,
-    acceptedTerms: backendUser.acceptedTerms ?? currentUser.acceptedTerms,
+    acceptedTerms:
+      backendUser.settings?.acceptedTerms ??
+      backendUser.acceptedTerms ??
+      currentUser.acceptedTerms,
     nativeLanguage: nativeLang,
     learningLanguage: learningLang,
     learningLanguagesList:

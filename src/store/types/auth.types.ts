@@ -48,6 +48,24 @@ export interface BackendUserPayload {
   countryCode?: string | null;
   countryFlag?: string | null;
   isVerified?: boolean;
+  settings?: {
+    isAvailableToTeach?: boolean;
+    earningRatePerMin?: number;
+    learningCostPerMin?: number;
+    acceptedTerms?: boolean;
+    termsAcceptedAt?: string | null;
+    acceptedPromotions?: boolean;
+  };
+  stats?: {
+    rating?: number | string;
+    totalCalls?: number;
+    hoursPracticed?: number | string;
+    reviewCount?: number;
+  };
+  wallet?: {
+    id?: string;
+    balance?: number;
+  };
   isAvailableToTeach?: boolean;
   earningRatePerMin?: number;
   learningCostPerMin?: number;
