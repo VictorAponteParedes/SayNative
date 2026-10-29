@@ -8,7 +8,7 @@ import {
 import { ChevronLeft, ChevronDown } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { colors, spacing } from '@/theme';
+import { colors, spacing, borderRadius } from '@/theme';
 import { AppText, AppLogo } from '@/components';
 import { getLanguageFlag } from '@/features/profile/components/LanguageSelectorBottomSheet';
 
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
   },
   overlay: {
     ...StyleSheet.absoluteFill,
-    backgroundColor: 'rgba(15, 23, 42, 0.42)',
+    backgroundColor: colors.overlay,
   },
   topBar: {
     flexDirection: 'row',
@@ -99,10 +99,10 @@ const styles = StyleSheet.create({
   backButton: {
     width: 38,
     height: 38,
-    borderRadius: 19,
-    backgroundColor: 'rgba(0, 0, 0, 0.35)',
+    borderRadius: borderRadius.full,
+    backgroundColor: colors.overlay,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.25)',
+    borderColor: colors.borderHighlight,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -114,13 +114,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.45)',
+    backgroundColor: colors.overlay,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.25)',
-    borderRadius: 20,
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    gap: 6,
+    borderColor: colors.borderHighlight,
+    borderRadius: borderRadius.full,
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.xs + 2,
+    gap: spacing.xs + 2,
     shadowColor: colors.shadow,
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.15,
@@ -143,11 +143,11 @@ const styles = StyleSheet.create({
   logoBadgeContainer: {
     width: 72,
     height: 72,
-    borderRadius: 36,
+    borderRadius: borderRadius.full,
     backgroundColor: colors.white,
     alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: '#000000',
+    shadowColor: colors.shadow,
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.2,
     shadowRadius: 8,
@@ -157,14 +157,15 @@ const styles = StyleSheet.create({
     fontSize: 26,
     fontWeight: '800',
     color: colors.white,
-    marginTop: 10,
+    marginTop: spacing.sm,
     letterSpacing: 0.3,
   },
   heroBrandSubtitle: {
     fontSize: 14,
     fontWeight: '500',
-    color: 'rgba(255, 255, 255, 0.92)',
-    marginTop: 4,
+    color: colors.white,
+    opacity: 0.92,
+    marginTop: spacing.xs,
     textAlign: 'center',
   },
 });

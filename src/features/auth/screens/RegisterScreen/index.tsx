@@ -1,20 +1,19 @@
 import React, { useState } from 'react';
-import { ScrollView, KeyboardAvoidingView, Platform, Alert } from 'react-native';
-import { useTranslation } from 'react-i18next';
-import { SafeAreaContainer, AppText } from '@/components';
 import {
-  RegisterHeader,
-  BonusRewardCard,
-  SocialAuthButtons,
-  RegisterForm,
-} from '../../components';
+  View,
+  ScrollView,
+  KeyboardAvoidingView,
+  Platform,
+  Alert,
+  StatusBar,
+} from 'react-native';
+import { RegisterHeader, RegisterForm } from '../../components';
 import { LanguageSelectorBottomSheet } from '@/features/profile/components/LanguageSelectorBottomSheet';
 import { useRegister } from '../../hooks/useRegister';
 import { styles } from './styles';
 import { Routes, navigate } from '@/navigation';
 
 export const RegisterScreen: React.FC = () => {
-  const { t } = useTranslation('auth');
   const [isLanguageSheetOpen, setIsLanguageSheetOpen] = useState(false);
   const {
     control,
@@ -37,55 +36,64 @@ export const RegisterScreen: React.FC = () => {
     navigate(Routes.Auth.Login);
   };
 
+  const handleAppleAuth = () => {
+    Alert.alert('Apple', 'Registro con Apple próximamente.');
+  };
+
+  const handleGoogleAuth = () => {
+    Alert.alert('Google', 'Registro con Google próximamente.');
+  };
+
   return (
-    <SafeAreaContainer edges={['top']} style={styles.container}>
-      <RegisterHeader
-        onBack={handleBack}
-        onPressLanguage={() => setIsLanguageSheetOpen(true)}
+    <View style={styles.container}>
+      <StatusBar
+        barStyle="light-content"
+        {...(Platform.OS === 'android' ? { backgroundColor: 'transparent', translucent: true } : {})}
       />
 
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-        style={{ flex: 1 }}
+        style={styles.keyboardWrapper}
       >
         <ScrollView
           contentContainerStyle={styles.scrollContent}
           showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps="handled"
+          bounces={false}
         >
-          {/* Título y Subtítulo */}
-          <AppText variant="h1" style={styles.title}>
-            {t('register.title')}
-          </AppText>
-          <AppText variant="bodySmall" style={styles.subtitle}>
-            {t('register.subtitle')}
-          </AppText>
-
-          {/* Tarjeta de Bono Exclusivo (+50 monedas gratis) */}
-          <BonusRewardCard />
-
-          {/* Botones de Registro Social (Apple & Google) */}
-          <SocialAuthButtons />
-
-          {/* Formulario Principal de Registro con Validación */}
-          <RegisterForm
-            control={control}
-            watch={watch}
-            setValue={setValue}
-            errors={errors}
-            onSubmit={handleSubmit}
-            onPressLogin={handleGoToLogin}
-            onPressTerms={handleTerms}
-            isLoading={isLoading}
+          {/* Header con imagen de fondo, icono morado, SayNative y selector de idioma */}
+          <RegisterHeader
+            onBack={handleBack}
+            onPressLanguage={() => setIsLanguageSheetOpen(true)}
           />
+
+          {/* Tarjeta BottomSheet blanca scrollable superpuesta */}
+          <View style={styles.sheetCard}>
+            <View style={styles.handleBar} />
+
+            {/* Formulario de Registro con Tabs, React Hook Form y Botones Sociales */}
+            <RegisterForm
+              control={control}
+              watch={watch}
+              setValue={setValue}
+              errors={errors}
+              onSubmit={handleSubmit}
+              onPressLogin={handleGoToLogin}
+              onPressTerms={handleTerms}
+              onPressApple={handleAppleAuth}
+              onPressGoogle={handleGoogleAuth}
+              isLoading={isLoading}
+            />
+          </View>
         </ScrollView>
       </KeyboardAvoidingView>
 
-      {/* Selector de idioma reutilizando el BottomSheet existente */}
+      {/* Selector de idioma */}
       <LanguageSelectorBottomSheet
         visible={isLanguageSheetOpen}
         onClose={() => setIsLanguageSheetOpen(false)}
       />
-    </SafeAreaContainer>
+    </View>
   );
 };
 

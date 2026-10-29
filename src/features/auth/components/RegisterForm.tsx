@@ -9,9 +9,9 @@ import {
   User,
   Mail,
   Lock,
-  RotateCcw,
   Check,
   ArrowRight,
+  Info,
 } from 'lucide-react-native';
 import {
   Control,
@@ -20,8 +20,10 @@ import {
   FieldErrors,
 } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { colors, spacing } from '@/theme';
+import { colors, spacing, borderRadius } from '@/theme';
 import { AppText, ControlledInput } from '@/components';
+import { BonusRewardCard } from './BonusRewardCard';
+import { SocialAuthButtons } from './SocialAuthButtons';
 import { RegisterFormData } from '../types';
 
 export interface RegisterFormProps {
@@ -31,6 +33,8 @@ export interface RegisterFormProps {
   onSubmit: () => void;
   onPressLogin: () => void;
   onPressTerms: () => void;
+  onPressApple?: () => void;
+  onPressGoogle?: () => void;
   errors?: FieldErrors<RegisterFormData>;
   isLoading?: boolean;
 }
@@ -42,32 +46,53 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
   onSubmit,
   onPressLogin,
   onPressTerms,
+  onPressApple,
+  onPressGoogle,
   errors,
   isLoading = false,
 }) => {
   const { t } = useTranslation('auth');
   const acceptTerms = watch('acceptTerms');
-  const acceptPromotions = watch('acceptPromotions');
 
   return (
     <View style={styles.container}>
-      {/* Separador "o regístrate con tu correo" */}
-      <View style={styles.dividerRow}>
-        <View style={styles.dividerLine} />
-        <AppText variant="caption" style={styles.dividerText}>
-          {t('register.orDivider')}
-        </AppText>
-        <View style={styles.dividerLine} />
+      {/* Pestañas: Iniciar Sesión (inactiva) | Registrarse (activa) */}
+      <View style={styles.tabsRow}>
+        <TouchableOpacity
+          activeOpacity={0.7}
+          onPress={onPressLogin}
+          style={styles.tabItemInactive}
+          accessibilityRole="button"
+        >
+          <AppText style={styles.tabTextInactive}>
+            {t('login.tabLogin', 'Iniciar Sesión')}
+          </AppText>
+        </TouchableOpacity>
+
+        <View style={styles.tabItemActive}>
+          <AppText style={styles.tabTextActive}>
+            {t('login.tabRegister', 'Registrarse')}
+          </AppText>
+          <View style={styles.activeTabIndicator} />
+        </View>
       </View>
 
-      {/* Campo: Nombre o Apodo */}
+      {/* Tarjeta compacta del Bono de Bienvenida (+50 monedas) */}
+      <BonusRewardCard />
+
+      {/* Campo: NOMBRE O APODO */}
       <ControlledInput
         control={control}
         name="fullName"
-        label={t('register.nameLabel')}
-        placeholder={t('register.namePlaceholder')}
-        leftIcon={<User size={18} color={colors.textSecondary} />}
+        label={t('register.nameLabel', 'NOMBRE O APODO')}
+        placeholder={t('register.namePlaceholder', 'Ej. Victor Aponte')}
+        leftIcon={<User size={20} color={colors.primaryLight} />}
         autoCapitalize="words"
+        autoCorrect={false}
+        containerStyle={styles.inputFieldContainer}
+        inputContainerStyle={styles.inputBox}
+        labelStyle={styles.inputLabel}
+        placeholderTextColor={colors.textMuted}
         rules={{
           required: t('register.toasts.missingFieldsMessage'),
           minLength: {
@@ -77,15 +102,20 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
         }}
       />
 
-      {/* Campo: Correo Electrónico */}
+      {/* Campo: CORREO ELECTRÓNICO */}
       <ControlledInput
         control={control}
         name="email"
-        label={t('register.emailLabel')}
-        placeholder={t('register.emailPlaceholder')}
-        leftIcon={<Mail size={18} color={colors.textSecondary} />}
+        label={t('register.emailLabel', 'CORREO ELECTRÓNICO')}
+        placeholder={t('register.emailPlaceholder', 'tu@email.com')}
+        leftIcon={<Mail size={20} color={colors.primaryLight} />}
         keyboardType="email-address"
         autoCapitalize="none"
+        autoCorrect={false}
+        containerStyle={styles.inputFieldContainer}
+        inputContainerStyle={styles.inputBox}
+        labelStyle={styles.inputLabel}
+        placeholderTextColor={colors.textMuted}
         rules={{
           required: t('register.toasts.missingFieldsMessage'),
           pattern: {
@@ -95,16 +125,20 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
         }}
       />
 
-      {/* Campo: Contraseña */}
+      {/* Campo: CONTRASEÑA */}
       <ControlledInput
         control={control}
         name="password"
-        label={t('register.passwordLabel')}
-        placeholder="••••••••"
+        label={t('register.passwordLabel', 'CONTRASEÑA')}
+        placeholder={t('register.passwordPlaceholder', '••••••••')}
         isPassword
-        leftIcon={<Lock size={18} color={colors.textSecondary} />}
-        hint={t('register.passwordHint')}
+        leftIcon={<Lock size={20} color={colors.primaryLight} />}
         autoCapitalize="none"
+        autoCorrect={false}
+        containerStyle={styles.passwordContainer}
+        inputContainerStyle={styles.inputBox}
+        labelStyle={styles.inputLabel}
+        placeholderTextColor={colors.textMuted}
         rules={{
           required: t('register.toasts.missingFieldsMessage'),
           minLength: {
@@ -114,27 +148,21 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
         }}
       />
 
-      {/* Campo: Confirmar Contraseña */}
-      <ControlledInput
-        control={control}
-        name="confirmPassword"
-        label={t('register.confirmPasswordLabel')}
-        placeholder="••••••••"
-        isPassword
-        leftIcon={<RotateCcw size={18} color={colors.textSecondary} />}
-        autoCapitalize="none"
-        rules={{
-          required: t('register.toasts.missingFieldsMessage'),
-          validate: (val) =>
-            val === watch('password') || t('register.toasts.passwordsDoNotMatch'),
-        }}
-      />
+      {/* Indicador de contraseña mínima */}
+      <View style={styles.passwordHintRow}>
+        <Info size={14} color={colors.textSecondary} style={styles.infoIcon} />
+        <AppText style={styles.passwordHintText}>
+          {t('register.passwordHint', 'Mínimo 8 caracteres')}
+        </AppText>
+      </View>
 
-      {/* Checkbox: Términos y Privacidad */}
+      {/* Checkbox: Términos de Servicio y Privacidad */}
       <TouchableOpacity
-        activeOpacity={0.7}
+        activeOpacity={0.75}
         onPress={() => setValue('acceptTerms', !acceptTerms, { shouldValidate: true })}
         style={styles.checkboxRow}
+        accessibilityRole="checkbox"
+        accessibilityState={{ checked: acceptTerms }}
       >
         <View
           style={[
@@ -147,77 +175,63 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
             <Check size={14} color={colors.white} strokeWidth={3} />
           )}
         </View>
-        <AppText variant="caption" style={styles.checkboxText}>
+        <AppText style={styles.checkboxText}>
           Acepto los{' '}
-          <AppText
-            variant="caption"
-            style={styles.linkText}
-            onPress={onPressTerms}
-          >
+          <AppText style={styles.linkText} onPress={onPressTerms}>
             Términos de Servicio
           </AppText>{' '}
-          y la{' '}
-          <AppText
-            variant="caption"
-            style={styles.linkText}
-            onPress={onPressTerms}
-          >
-            Política de Privacidad
+          y{' '}
+          <AppText style={styles.linkText} onPress={onPressTerms}>
+            Privacidad
           </AppText>
-          .
         </AppText>
       </TouchableOpacity>
-
-      {/* Checkbox: Promociones */}
       <TouchableOpacity
-        activeOpacity={0.7}
-        onPress={() =>
-          setValue('acceptPromotions', !acceptPromotions, { shouldValidate: true })
-        }
-        style={styles.checkboxRow}
-      >
-        <View
-          style={[
-            styles.checkbox,
-            acceptPromotions && styles.checkboxActive,
-          ]}
-        >
-          {acceptPromotions && (
-            <Check size={14} color={colors.white} strokeWidth={3} />
-          )}
-        </View>
-        <AppText variant="caption" style={styles.checkboxText}>
-          {t('register.promotionsAccept')}
-        </AppText>
-      </TouchableOpacity>
-
-      {/* Botón Principal: Crear Cuenta y Reclamar Monedas */}
-      <TouchableOpacity
-        activeOpacity={0.85}
+        activeOpacity={0.88}
         onPress={onSubmit}
         disabled={isLoading}
-        style={styles.submitButton}
+        style={[styles.submitButton, isLoading && styles.submitButtonDisabled]}
+        accessibilityRole="button"
       >
         {isLoading ? (
           <ActivityIndicator color={colors.white} />
         ) : (
-          <>
-            <AppText variant="button" style={styles.submitButtonText}>
-              {t('register.submitButton')}
+          <View style={styles.submitButtonContent}>
+            <AppText style={styles.submitButtonText}>
+              {t('register.submitButton', 'Crear Cuenta')}
             </AppText>
-            <ArrowRight size={18} color={colors.white} style={styles.arrowIcon} />
-          </>
+            <ArrowRight size={19} color={colors.white} style={styles.arrowIcon} />
+          </View>
         )}
       </TouchableOpacity>
 
-      {/* Pie de Pantalla: Iniciar Sesión */}
-      <View style={styles.footerRow}>
-        <AppText variant="bodySmall" style={styles.footerText}>
-          {t('register.alreadyHaveAccount')}{' '}
+      {/* Separador "o regístrate con" */}
+      <View style={styles.dividerRow}>
+        <View style={styles.dividerLine} />
+        <AppText style={styles.dividerText}>
+          {t('register.orDivider', 'o regístrate con')}
         </AppText>
-        <TouchableOpacity activeOpacity={0.7} onPress={onPressLogin}>
-          <AppText variant="bodySmall" style={styles.loginLinkText}>
-            {t('register.loginLink')}
+        <View style={styles.dividerLine} />
+      </View>
+
+      {/* Botones de Registro Social (Google & Apple) */}
+      <SocialAuthButtons
+        onPressApple={onPressApple}
+        onPressGoogle={onPressGoogle}
+      />
+
+      {/* Pie de pantalla: ¿Ya tienes cuenta? Inicia sesión */}
+      <View style={styles.footerRow}>
+        <AppText style={styles.footerText}>
+          {t('register.alreadyHaveAccount', '¿Ya tienes cuenta?')}{' '}
+        </AppText>
+        <TouchableOpacity
+          activeOpacity={0.7}
+          onPress={onPressLogin}
+          accessibilityRole="button"
+        >
+          <AppText style={styles.loginLinkText}>
+            {t('register.loginLink', 'Inicia sesión')}
           </AppText>
         </TouchableOpacity>
       </View>
@@ -227,40 +241,91 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: spacing.xs,
+    paddingTop: spacing.xs,
   },
-  dividerRow: {
+  tabsRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: spacing.md,
+    justifyContent: 'space-around',
+    marginBottom: spacing.md,
+    paddingTop: spacing.xs,
   },
-  dividerLine: {
-    flex: 1,
-    height: 1,
-    backgroundColor: colors.borderLight,
+  tabItemActive: {
+    alignItems: 'center',
+    paddingVertical: spacing.xs,
   },
-  dividerText: {
-    paddingHorizontal: spacing.sm,
+  tabTextActive: {
+    fontSize: 18,
+    fontWeight: '800',
+    color: colors.primary,
+  },
+  activeTabIndicator: {
+    height: 3,
+    width: 84,
+    borderRadius: borderRadius.xs,
+    backgroundColor: colors.primary,
+    marginTop: spacing.xs + 2,
+  },
+  tabItemInactive: {
+    alignItems: 'center',
+    paddingVertical: spacing.xs,
+  },
+  tabTextInactive: {
+    fontSize: 18,
+    fontWeight: '600',
     color: colors.textSecondary,
+  },
+  inputFieldContainer: {
+    marginBottom: spacing.md,
+  },
+  passwordContainer: {
+    marginBottom: spacing.xs,
+  },
+  inputLabel: {
     fontSize: 12,
+    fontWeight: '700',
+    color: colors.textTag,
+    letterSpacing: 0.6,
+    marginBottom: spacing.xs + 2,
+  },
+  inputBox: {
+    height: 54,
+    borderRadius: borderRadius.md,
+    borderWidth: 1,
+    borderColor: colors.borderHighlight,
+    backgroundColor: colors.surfaceHighlight,
+    paddingHorizontal: spacing.md - 2,
+  },
+  passwordHintRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: spacing.xs,
+    marginBottom: spacing.md,
+  },
+  infoIcon: {
+    marginRight: spacing.xs,
+  },
+  passwordHintText: {
+    fontSize: 12,
+    color: colors.textSecondary,
+    fontWeight: '500',
   },
   checkboxRow: {
     flexDirection: 'row',
-    alignItems: 'flex-start',
-    marginBottom: spacing.sm + 2,
-    paddingHorizontal: 2,
+    alignItems: 'center',
+    marginBottom: spacing.lg,
+    paddingHorizontal: spacing.xs / 2,
   },
   checkbox: {
     width: 20,
     height: 20,
-    borderRadius: 6,
+    borderRadius: borderRadius.xs + 2,
     borderWidth: 1.5,
     borderColor: colors.borderDark,
     backgroundColor: colors.surface,
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: spacing.sm,
-    marginTop: 1,
   },
   checkboxActive: {
     backgroundColor: colors.primary,
@@ -272,51 +337,76 @@ const styles = StyleSheet.create({
   },
   checkboxText: {
     flex: 1,
-    fontSize: 12,
+    fontSize: 13,
     color: colors.textSecondary,
     lineHeight: 18,
   },
   linkText: {
     color: colors.primary,
     fontWeight: '700',
+    fontSize: 13,
   },
   submitButton: {
-    flexDirection: 'row',
+    height: 54,
+    borderRadius: borderRadius.md,
+    backgroundColor: colors.primary,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: colors.primary,
-    borderRadius: 16,
-    paddingVertical: 16,
-    marginTop: spacing.md,
     shadowColor: colors.primary,
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
     shadowRadius: 10,
     elevation: 4,
+    marginBottom: spacing.md,
   },
-  submitButtonText: {
-    color: colors.white,
-    fontSize: 15,
-    fontWeight: '800',
+  submitButtonDisabled: {
+    opacity: 0.7,
   },
-  arrowIcon: {
-    marginLeft: spacing.xs,
-  },
-  footerRow: {
+  submitButtonContent: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: spacing.lg,
-    paddingBottom: spacing.xl,
+  },
+  submitButtonText: {
+    color: colors.white,
+    fontSize: 16,
+    fontWeight: '700',
+  },
+  arrowIcon: {
+    marginLeft: spacing.sm,
+  },
+  dividerRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: spacing.lg,
+  },
+  dividerLine: {
+    flex: 1,
+    height: 1,
+    backgroundColor: colors.border,
+  },
+  dividerText: {
+    paddingHorizontal: spacing.md,
+    color: colors.textSecondary,
+    fontSize: 13,
+    fontWeight: '500',
+  },
+  footerRow: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: spacing.xxl,
+    paddingBottom: spacing.xxl,
   },
   footerText: {
     color: colors.textSecondary,
-    fontSize: 13,
+    fontSize: 14,
+    fontWeight: '400',
   },
   loginLinkText: {
     color: colors.primary,
-    fontWeight: '800',
-    fontSize: 13,
+    fontWeight: '700',
+    fontSize: 14,
   },
 });
 

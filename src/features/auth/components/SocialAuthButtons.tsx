@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 import { useTranslation } from 'react-i18next';
-import { colors, spacing } from '@/theme';
+import { colors, spacing, borderRadius } from '@/theme';
 import { AppText } from '@/components';
 
 export interface SocialAuthButtonsProps {
@@ -88,16 +88,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#F0F4FF',
-    borderRadius: 14,
+    backgroundColor: colors.surfaceHighlight,
+    borderRadius: borderRadius.md,
     borderWidth: 1,
-    borderColor: '#E0E7FF',
+    borderColor: colors.borderHighlight,
     gap: spacing.sm,
   },
   buttonText: {
     fontSize: 15,
     fontWeight: '700',
-    color: '#1E293B',
+    color: colors.textPrimary,
   },
 });
 

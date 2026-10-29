@@ -8,7 +8,7 @@ import {
 import { Mail, Lock, ArrowRight } from 'lucide-react-native';
 import { Control } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { colors, spacing } from '@/theme';
+import { colors, spacing, borderRadius } from '@/theme';
 import { AppText, ControlledInput } from '@/components';
 import { SocialAuthButtons } from './SocialAuthButtons';
 import { LoginFormData } from '../types';
@@ -63,14 +63,14 @@ export const LoginForm: React.FC<LoginFormProps> = ({
         name="email"
         label={t('login.emailLabel', 'CORREO ELECTRÓNICO')}
         placeholder={t('login.emailPlaceholder', 'tu@email.com')}
-        leftIcon={<Mail size={20} color="#4F46E5" />}
+        leftIcon={<Mail size={20} color={colors.primaryLight} />}
         keyboardType="email-address"
         autoCapitalize="none"
         autoCorrect={false}
         containerStyle={styles.inputFieldContainer}
         inputContainerStyle={styles.inputBox}
         labelStyle={styles.inputLabel}
-        placeholderTextColor="#94A3B8"
+        placeholderTextColor={colors.textMuted}
         rules={{
           required: t('login.toasts.missingFieldsMessage'),
           pattern: {
@@ -87,13 +87,13 @@ export const LoginForm: React.FC<LoginFormProps> = ({
         label={t('login.passwordLabel', 'CONTRASEÑA')}
         placeholder={t('login.passwordPlaceholder', '•••••••••••••')}
         isPassword
-        leftIcon={<Lock size={20} color="#4F46E5" />}
+        leftIcon={<Lock size={20} color={colors.primaryLight} />}
         autoCapitalize="none"
         autoCorrect={false}
         containerStyle={styles.inputFieldContainer}
         inputContainerStyle={styles.inputBox}
         labelStyle={styles.inputLabel}
-        placeholderTextColor="#94A3B8"
+        placeholderTextColor={colors.textMuted}
         rules={{
           required: t('login.toasts.missingFieldsMessage'),
           minLength: {
@@ -189,14 +189,14 @@ const styles = StyleSheet.create({
   tabTextActive: {
     fontSize: 18,
     fontWeight: '800',
-    color: '#3B33D1',
+    color: colors.primary,
   },
   activeTabIndicator: {
     height: 3,
     width: 84,
-    borderRadius: 2,
-    backgroundColor: '#3B33D1',
-    marginTop: 6,
+    borderRadius: borderRadius.xs,
+    backgroundColor: colors.primary,
+    marginTop: spacing.xs + 2,
   },
   tabItemInactive: {
     alignItems: 'center',
@@ -205,7 +205,7 @@ const styles = StyleSheet.create({
   tabTextInactive: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#64748B',
+    color: colors.textSecondary,
   },
   inputFieldContainer: {
     marginBottom: spacing.md,
@@ -213,36 +213,36 @@ const styles = StyleSheet.create({
   inputLabel: {
     fontSize: 12,
     fontWeight: '700',
-    color: '#475569',
+    color: colors.textTag,
     letterSpacing: 0.6,
-    marginBottom: 8,
+    marginBottom: spacing.xs + 2,
   },
   inputBox: {
     height: 54,
-    borderRadius: 14,
+    borderRadius: borderRadius.md,
     borderWidth: 1,
-    borderColor: '#E0E7FF',
-    backgroundColor: '#F0F4FF',
-    paddingHorizontal: 14,
+    borderColor: colors.borderHighlight,
+    backgroundColor: colors.surfaceHighlight,
+    paddingHorizontal: spacing.md - 2,
   },
   forgotPasswordContainer: {
     alignSelf: 'flex-end',
-    marginTop: 4,
+    marginTop: spacing.xs,
     marginBottom: spacing.xl,
     paddingVertical: spacing.xs,
   },
   forgotPasswordText: {
-    color: '#3B33D1',
+    color: colors.primary,
     fontWeight: '700',
     fontSize: 14,
   },
   submitButton: {
     height: 54,
-    borderRadius: 14,
-    backgroundColor: '#3B33D1',
+    borderRadius: borderRadius.md,
+    backgroundColor: colors.primary,
     alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: '#3B33D1',
+    shadowColor: colors.primary,
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
     shadowRadius: 10,
@@ -263,7 +263,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   arrowIcon: {
-    marginLeft: 8,
+    marginLeft: spacing.sm,
   },
   dividerRow: {
     flexDirection: 'row',
@@ -273,11 +273,11 @@ const styles = StyleSheet.create({
   dividerLine: {
     flex: 1,
     height: 1,
-    backgroundColor: '#E2E8F0',
+    backgroundColor: colors.border,
   },
   dividerText: {
-    paddingHorizontal: 14,
-    color: '#64748B',
+    paddingHorizontal: spacing.md,
+    color: colors.textSecondary,
     fontSize: 13,
     fontWeight: '500',
   },
@@ -289,12 +289,12 @@ const styles = StyleSheet.create({
     paddingBottom: spacing.xxl,
   },
   footerText: {
-    color: '#64748B',
+    color: colors.textSecondary,
     fontSize: 14,
     fontWeight: '400',
   },
   registerLinkText: {
-    color: '#3B33D1',
+    color: colors.primary,
     fontWeight: '700',
     fontSize: 14,
   },

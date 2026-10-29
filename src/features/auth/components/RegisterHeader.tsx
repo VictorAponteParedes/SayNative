@@ -1,100 +1,175 @@
 import React from 'react';
-import { View, StyleSheet, TouchableOpacity } from 'react-native';
-import { ChevronLeft } from 'lucide-react-native';
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  ImageBackground,
+} from 'react-native';
+import { ChevronLeft, ChevronDown, MessageSquareMore } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
-import { colors, spacing } from '@/theme';
-import { AppText, AppLogo } from '@/components';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { colors, spacing, borderRadius } from '@/theme';
+import { AppText } from '@/components';
 import { getLanguageFlag } from '@/features/profile/components/LanguageSelectorBottomSheet';
 
 export interface RegisterHeaderProps {
-  onBack: () => void;
+  onBack?: () => void;
   onPressLanguage?: () => void;
-  onPressProfile?: () => void;
 }
 
 export const RegisterHeader: React.FC<RegisterHeaderProps> = ({
   onBack,
   onPressLanguage,
-  onPressProfile,
 }) => {
   const { t, i18n } = useTranslation('auth');
+  const insets = useSafeAreaInsets();
   const activeFlag = getLanguageFlag(i18n.language);
-  const handleAction = onPressLanguage || onPressProfile;
+  const activeLangCode = (i18n.language || 'es').split('-')[0].toUpperCase();
 
   return (
-    <View style={styles.header}>
-      <TouchableOpacity
-        activeOpacity={0.7}
-        onPress={onBack}
-        hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
-        style={styles.backButton}
-      >
-        <ChevronLeft size={24} color={colors.textPrimary} />
-      </TouchableOpacity>
+    <ImageBackground
+      source={require('../../../../assets/images/logoLoginFondo.png')}
+      style={[styles.heroBackground, { paddingTop: Math.max(insets.top, 16) }]}
+      resizeMode="cover"
+    >
+      {/* Overlay oscuro para contraste con tokens de tema */}
+      <View style={styles.overlay} />
 
-      <View style={styles.titleRow}>
-        <AppLogo size={24} />
-        <AppText variant="h3" style={styles.headerTitle}>
-          {t('register.headerTitle')}
-        </AppText>
+      {/* Barra superior: flecha volver a la izquierda y selector de idioma a la derecha */}
+      <View style={styles.topBar}>
+        {onBack ? (
+          <TouchableOpacity
+            activeOpacity={0.7}
+            onPress={onBack}
+            hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+            style={styles.backButton}
+            accessibilityLabel="Volver"
+            accessibilityRole="button"
+          >
+            <ChevronLeft size={22} color={colors.white} />
+          </TouchableOpacity>
+        ) : (
+          <View style={styles.sideSpacer} />
+        )}
+
+        <TouchableOpacity
+          activeOpacity={0.75}
+          onPress={onPressLanguage}
+          hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+          style={styles.languagePill}
+          accessibilityLabel="Cambiar idioma"
+          accessibilityRole="button"
+        >
+          <AppText style={styles.flagText}>{activeFlag}</AppText>
+          <AppText style={styles.languageCodeText}>{activeLangCode}</AppText>
+          <ChevronDown size={14} color={colors.white} />
+        </TouchableOpacity>
       </View>
 
-      <TouchableOpacity
-        activeOpacity={0.7}
-        onPress={handleAction}
-        hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
-        style={styles.flagButton}
-        accessibilityLabel="Cambiar idioma"
-        accessibilityRole="button"
-      >
-        <AppText style={styles.flagText}>{activeFlag}</AppText>
-      </TouchableOpacity>
-    </View>
+      {/* Contenido central del Hero: Badge morado con burbujas de diálogo, SayNative y subtítulo */}
+      <View style={styles.heroCenterContent}>
+        <View style={styles.badgeContainer}>
+          <MessageSquareMore size={32} color={colors.white} />
+        </View>
+        <AppText style={styles.heroBrandTitle}>Amist Talk</AppText>
+        <AppText style={styles.heroBrandSubtitle}>
+          {t('register.heroSubtitle', 'Aprende idiomas con nativos reales')}
+        </AppText>
+      </View>
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
-  header: {
+  heroBackground: {
+    width: '100%',
+    height: 310,
+    justifyContent: 'space-between',
+    paddingBottom: 40,
+  },
+  overlay: {
+    ...StyleSheet.absoluteFill,
+    backgroundColor: colors.overlay,
+  },
+  topBar: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: spacing.lg,
-    paddingVertical: spacing.sm,
-    backgroundColor: colors.background,
+    zIndex: 2,
   },
   backButton: {
-    width: 36,
-    height: 36,
-    alignItems: 'flex-start',
+    width: 38,
+    height: 38,
+    borderRadius: borderRadius.full,
+    backgroundColor: colors.overlay,
+    borderWidth: 1,
+    borderColor: colors.borderHighlight,
+    alignItems: 'center',
     justifyContent: 'center',
   },
-  titleRow: {
+  sideSpacer: {
+    width: 38,
+    height: 38,
+  },
+  languagePill: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: spacing.xs + 2,
-  },
-  headerTitle: {
-    fontSize: 16,
-    fontWeight: '800',
-    color: colors.textPrimary,
-  },
-  flagButton: {
-    width: 36,
-    height: 36,
-    borderRadius: 18,
-    backgroundColor: colors.surface,
-    borderWidth: 1,
-    borderColor: colors.border,
-    alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: '#000000',
+    backgroundColor: colors.overlay,
+    borderWidth: 1,
+    borderColor: colors.borderHighlight,
+    borderRadius: borderRadius.full,
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.xs + 2,
+    gap: spacing.xs + 2,
+    shadowColor: colors.shadow,
     shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.06,
-    shadowRadius: 2,
-    elevation: 1,
+    shadowOpacity: 0.15,
+    shadowRadius: 3,
+    elevation: 2,
   },
   flagText: {
-    fontSize: 20,
+    fontSize: 15,
+  },
+  languageCodeText: {
+    fontSize: 13,
+    fontWeight: '700',
+    color: colors.white,
+  },
+  heroCenterContent: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    zIndex: 2,
+  },
+  badgeContainer: {
+    width: 66,
+    height: 66,
+    borderRadius: borderRadius.lg,
+    backgroundColor: colors.primary,
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: colors.shadow,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.25,
+    shadowRadius: 8,
+    elevation: 5,
+  },
+  heroBrandTitle: {
+    fontSize: 26,
+    fontWeight: '800',
+    color: colors.white,
+    marginTop: spacing.sm,
+    letterSpacing: 0.3,
+  },
+  heroBrandSubtitle: {
+    fontSize: 14,
+    fontWeight: '500',
+    color: colors.white,
+    opacity: 0.92,
+    marginTop: spacing.xs,
     textAlign: 'center',
   },
 });
+
+export default RegisterHeader;
