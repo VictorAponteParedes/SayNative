@@ -1,23 +1,23 @@
 import React from 'react';
-import { View, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { ShieldCheck, Smartphone, Award } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
 import { colors, spacing } from '@/theme';
-import { AppText } from '@/components';
+import { AppText, AppAlert } from '@/components';
 
 export const LegalTrustFooter: React.FC = () => {
   const { t } = useTranslation('coins');
 
   const handleRestore = () => {
-    Alert.alert(t('legal.restore'), 'Buscando compras anteriores en tu cuenta de App Store / Play Store...');
+    AppAlert.info(t('legal.restore'), 'Buscando compras anteriores en tu cuenta de App Store / Play Store...');
   };
 
   const handleTerms = () => {
-    Alert.alert(t('legal.terms'), 'Abriendo Términos y Condiciones del servicio.');
+    AppAlert.info(t('legal.terms'), 'Abriendo Términos y Condiciones del servicio.');
   };
 
   const handlePrivacy = () => {
-    Alert.alert(t('legal.privacy'), 'Abriendo Política de Privacidad.');
+    AppAlert.info(t('legal.privacy'), 'Abriendo Política de Privacidad.');
   };
 
   return (

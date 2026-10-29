@@ -4,10 +4,9 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   Platform,
-  Alert,
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { SafeAreaContainer, AppText } from '@/components';
+import { SafeAreaContainer, AppText, AppAlert } from '@/components';
 import { PrivateChatHeader } from '../../components/private/PrivateChatHeader';
 import { LearningContextBanner } from '../../components/private/LearningContextBanner';
 import { PartnerCallPill } from '../../components/private/PartnerCallPill';
@@ -73,42 +72,42 @@ export const PrivateChatScreen: React.FC<PrivateChatScreenProps> = ({ route }) =
   };
 
   const handleOptions = () => {
-    Alert.alert(
+    AppAlert.info(
       t('privateChat.alerts.optionsTitle'),
       t('privateChat.alerts.optionsMessage')
     );
   };
 
   const handleProfile = () => {
-    Alert.alert(
+    AppAlert.info(
       t('privateChat.alerts.profileTitle'),
       t('privateChat.alerts.profileMessage', { name: partnerName })
     );
   };
 
   const handleTopicBanner = () => {
-    Alert.alert(
+    AppAlert.info(
       t('privateChat.alerts.topicsTitle'),
       t('privateChat.alerts.topicsMessage')
     );
   };
 
   const handleAttachment = () => {
-    Alert.alert(
+    AppAlert.info(
       t('privateChat.alerts.attachmentTitle'),
       t('privateChat.alerts.attachmentMessage')
     );
   };
 
   const handleAiAssist = () => {
-    Alert.alert(
+    AppAlert.info(
       t('privateChat.alerts.aiAssistTitle'),
       t('privateChat.alerts.aiAssistMessage')
     );
   };
 
   const handleMic = () => {
-    Alert.alert(
+    AppAlert.info(
       t('privateChat.alerts.micTitle'),
       t('privateChat.alerts.micMessage')
     );

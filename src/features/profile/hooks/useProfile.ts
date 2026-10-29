@@ -4,13 +4,12 @@ import { useAuthStore } from '@/store/useAuthStore';
 import { useCoinsStore } from '@/features/coins';
 import { navigate } from '@/navigation/NavigationRef';
 import { Routes } from '@/navigation/routes';
-import { Toast } from '@/components';
+import { Toast, AppAlert } from '@/components';
 import { profileApi } from '../api/profileApi';
 import {
   pickImageFromGallery,
   takeSelfieWithCamera,
 } from '../utils/photoPicker';
-import { Alert } from 'react-native';
 import { resolveAvatarUrl } from '@/utils/resolveAvatarUrl';
 
 const isValidUuid = (id: string): boolean =>
@@ -21,6 +20,8 @@ export const useProfile = () => {
   const user = useAuthStore(state => state.user);
   const setAvailableToTeach = useAuthStore(state => state.setAvailableToTeach);
   const updateUserProfile = useAuthStore(state => state.updateUserProfile);
+  const setUserFromBackend = useAuthStore(state => state.setUserFromBackend);
+  const removeUserLanguage = useAuthStore(state => state.removeUserLanguage);
   const setAuthenticated = useAuthStore(state => state.setAuthenticated);
   const coins = useCoinsStore(state => state.coins);
   const watchRewardedAd = useCoinsStore(state => state.watchRewardedAd);
@@ -29,6 +30,9 @@ export const useProfile = () => {
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [isLanguageSheetOpen, setIsLanguageSheetOpen] = useState(false);
   const [isPracticeSheetOpen, setIsPracticeSheetOpen] = useState(false);
+  const [editingLanguageCode, setEditingLanguageCode] = useState<string | null>(
+    null,
+  );
   const [isPhotoSheetOpen, setIsPhotoSheetOpen] = useState(false);
 
   const fetchProfile = useCallback(async () => {
@@ -43,32 +47,36 @@ export const useProfile = () => {
         if (backendUser.coins !== undefined) {
           setCoins(Number(backendUser.coins));
         }
-        updateUserProfile({
-          name: backendUser.fullName || user.name,
-          email: backendUser.email || user.email,
-          avatarUrl: resolveAvatarUrl(backendUser.avatar?.url) || user.avatarUrl,
-          phone: backendUser.phone ?? user.phone,
-          bio: backendUser.bio ?? user.bio,
-          countryCode: backendUser.countryCode || user.countryCode,
-          countryFlag: backendUser.countryFlag || user.countryFlag,
-          isVerified: backendUser.isVerified,
-          isAvailableToTeach: backendUser.isAvailableToTeach,
-          earningRatePerMin:
-            backendUser.earningRatePerMin ?? user.earningRatePerMin,
-          learningCostPerMin:
-            backendUser.learningCostPerMin ?? user.learningCostPerMin,
-          rating:
-            backendUser.rating !== undefined && backendUser.rating !== null
-              ? Number(backendUser.rating)
-              : user.rating,
-          totalCalls: backendUser.totalCalls ?? user.totalCalls,
-          hoursPracticed:
-            backendUser.hoursPracticed !== undefined &&
-            backendUser.hoursPracticed !== null
-              ? Number(backendUser.hoursPracticed)
-              : user.hoursPracticed,
-          reviewCount: backendUser.reviewCount ?? user.reviewCount,
-        });
+        if (backendUser.userLanguages && backendUser.userLanguages.length > 0) {
+          setUserFromBackend(backendUser);
+        } else {
+          updateUserProfile({
+            name: backendUser.fullName || user.name,
+            email: backendUser.email || user.email,
+            avatarUrl: resolveAvatarUrl(backendUser.avatar?.url) || user.avatarUrl,
+            phone: backendUser.phone ?? user.phone,
+            bio: backendUser.bio ?? user.bio,
+            countryCode: backendUser.countryCode || user.countryCode,
+            countryFlag: backendUser.countryFlag || user.countryFlag,
+            isVerified: backendUser.isVerified,
+            isAvailableToTeach: backendUser.isAvailableToTeach,
+            earningRatePerMin:
+              backendUser.earningRatePerMin ?? user.earningRatePerMin,
+            learningCostPerMin:
+              backendUser.learningCostPerMin ?? user.learningCostPerMin,
+            rating:
+              backendUser.rating !== undefined && backendUser.rating !== null
+                ? Number(backendUser.rating)
+                : user.rating,
+            totalCalls: backendUser.totalCalls ?? user.totalCalls,
+            hoursPracticed:
+              backendUser.hoursPracticed !== undefined &&
+              backendUser.hoursPracticed !== null
+                ? Number(backendUser.hoursPracticed)
+                : user.hoursPracticed,
+            reviewCount: backendUser.reviewCount ?? user.reviewCount,
+          });
+        }
       }
     } catch (err: unknown) {
       if (__DEV__) {
@@ -112,11 +120,35 @@ export const useProfile = () => {
   };
 
   const handleOpenPracticeSheet = () => {
+    setEditingLanguageCode(null);
+    setIsPracticeSheetOpen(true);
+  };
+
+  const handleOpenEditLanguageItem = (languageCode: string) => {
+    setEditingLanguageCode(languageCode);
     setIsPracticeSheetOpen(true);
   };
 
   const handleClosePracticeSheet = () => {
     setIsPracticeSheetOpen(false);
+    setEditingLanguageCode(null);
+  };
+
+  const handleRemoveLanguageItem = async (languageCode: string) => {
+    removeUserLanguage(languageCode);
+    if (user.id && isValidUuid(user.id)) {
+      try {
+        await profileApi.removeUserLanguage(user.id, languageCode);
+      } catch (err) {
+        if (__DEV__) {
+          console.log('[useProfile] Eliminado local (endpoint pendiente):', err);
+        }
+      }
+    }
+    Toast.success(
+      t('languages.languageRemovedTitle'),
+      t('languages.languageRemovedMessage'),
+    );
   };
 
   const handleOpenPhotoSheet = () => {
@@ -242,20 +274,15 @@ export const useProfile = () => {
   };
 
   const handleLogout = () => {
-    Alert.alert(
-      t('account.logoutConfirmTitle'),
-      t('account.logoutConfirmMessage'),
-      [
-        { text: t('account.cancel'), style: 'cancel' },
-        {
-          text: t('account.confirm'),
-          style: 'destructive',
-          onPress: () => {
-            setAuthenticated(false);
-          },
-        },
-      ],
-    );
+    AppAlert.confirm({
+      title: t('account.logoutConfirmTitle'),
+      message: t('account.logoutConfirmMessage'),
+      cancelText: t('account.cancel'),
+      confirmText: t('account.confirm'),
+      onConfirm: () => {
+        setAuthenticated(false);
+      },
+    });
   };
 
   return {
@@ -267,7 +294,10 @@ export const useProfile = () => {
     handleOpenLanguageSheet,
     handleCloseLanguageSheet,
     isPracticeSheetOpen,
+    editingLanguageCode,
     handleOpenPracticeSheet,
+    handleOpenEditLanguageItem,
+    handleRemoveLanguageItem,
     handleClosePracticeSheet,
     isPhotoSheetOpen,
     handleOpenPhotoSheet,

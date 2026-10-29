@@ -3,7 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { navigationRef } from './src/navigation/NavigationRef';
 import AppNavigation from './src/navigation/AppNavigation';
-import { ToastContainer } from './src/components';
+import { ToastContainer, ConfirmModalContainer } from './src/components';
 import { IncomingCallModal } from './src/features/videocalls';
 import './src/lang'; // Inicialización global de i18n
 
@@ -15,6 +15,7 @@ export const App: React.FC = () => {
         <IncomingCallModal />
       </NavigationContainer>
       <ToastContainer />
+      <ConfirmModalContainer />
     </SafeAreaProvider>
   );
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import {
   User,
   Globe,
@@ -12,7 +12,7 @@ import {
 } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
 import { colors, spacing } from '@/theme';
-import { AppText } from '@/components';
+import { AppText, AppAlert } from '@/components';
 import { navigate } from '@/navigation/NavigationRef';
 import { Routes } from '@/navigation/routes';
 
@@ -47,7 +47,7 @@ export const AccountPreferencesSection: React.FC<
   };
 
   const handleSimpleAlert = (titleKey: string, message: string) => {
-    Alert.alert(t(titleKey), message);
+    AppAlert.info(t(titleKey), message);
   };
 
   return (

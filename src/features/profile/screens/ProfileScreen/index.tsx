@@ -14,8 +14,8 @@ import {
   AccountPreferencesSection,
   LanguageSelectorBottomSheet,
   ChangePhotoBottomSheet,
+  AddLanguageBottomSheet,
 } from '../../components';
-import { PracticeLanguageBottomSheet } from '@/features/home/components/PracticeLanguageBottomSheet';
 import { useProfile } from '../../hooks/useProfile';
 import { styles } from './styles';
 
@@ -29,7 +29,10 @@ export const ProfileScreen: React.FC = () => {
     handleOpenLanguageSheet,
     handleCloseLanguageSheet,
     isPracticeSheetOpen,
+    editingLanguageCode,
     handleOpenPracticeSheet,
+    handleOpenEditLanguageItem,
+    handleRemoveLanguageItem,
     handleClosePracticeSheet,
     isPhotoSheetOpen,
     handleOpenPhotoSheet,
@@ -60,14 +63,12 @@ export const ProfileScreen: React.FC = () => {
           />
         }
       >
-        {/* Identidad del Usuario: Avatar con lápiz, Nombre, Bandera, Correo y Bio */}
         <UserIdentityCard
           user={user}
           onPressEdit={handleEditProfile}
           onPressChangePhoto={handleOpenPhotoSheet}
         />
 
-        {/* Billetera Virtual: Saldo, botón Recargar y botón +5 gratis */}
         <ProfileWalletCard
           coins={coins}
           onPressRecharge={handleGoToCoins}
@@ -75,21 +76,19 @@ export const ProfileScreen: React.FC = () => {
           onPressRewardedAd={handleWatchRewardedAd}
         />
 
-        {/* Fila de Métricas: Horas Practicadas, Llamadas y Reputación */}
         <ProfileStatsRow
           hoursPracticed={user.hoursPracticed}
           totalCalls={user.totalCalls}
           rating={user.rating}
         />
 
-        {/* Sección Mis Idiomas (Nativo y en aprendizaje con barra de progreso) */}
         <LanguagesSection
           user={user}
           onPressAddLanguage={handleOpenPracticeSheet}
-          onPressEditLanguages={handleOpenPracticeSheet}
+          onPressEditLanguageItem={handleOpenEditLanguageItem}
+          onPressRemoveLanguageItem={handleRemoveLanguageItem}
         />
 
-        {/* Sección Modo Enseñar con Toggle persistente y Tarifa fija */}
         <TeachingModeCard
           isAvailable={user.isAvailableToTeach}
           onToggle={handleToggleTeachingMode}
@@ -97,7 +96,6 @@ export const ProfileScreen: React.FC = () => {
           languageName={user.nativeLanguage?.name || 'Español'}
         />
 
-        {/* Cuenta y Preferencias (con acceso a Datos Personales, Idioma, Soporte, Cerrar Sesión) */}
         <AccountPreferencesSection
           onPressPersonalInfo={handleEditProfile}
           onPressLanguage={handleOpenLanguageSheet}
@@ -105,19 +103,17 @@ export const ProfileScreen: React.FC = () => {
         />
       </ScrollView>
 
-      {/* Selector de idioma de práctica con AppBottomSheet */}
-      <PracticeLanguageBottomSheet
+      <AddLanguageBottomSheet
         visible={isPracticeSheetOpen}
         onClose={handleClosePracticeSheet}
+        initialLanguageCode={editingLanguageCode}
       />
 
-      {/* Selector de idioma de la app con AppBottomSheet */}
       <LanguageSelectorBottomSheet
         visible={isLanguageSheetOpen}
         onClose={handleCloseLanguageSheet}
       />
 
-      {/* Selector interactivo para cambiar foto de perfil */}
       <ChangePhotoBottomSheet
         visible={isPhotoSheetOpen}
         onClose={handleClosePhotoSheet}
@@ -125,7 +121,6 @@ export const ProfileScreen: React.FC = () => {
         onTakeSelfie={handleTakeSelfie}
       />
 
-      {/* Barra de navegación inferior */}
       <BottomTabBar activeTab="Perfil" />
     </SafeAreaContainer>
   );

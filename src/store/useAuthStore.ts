@@ -49,6 +49,65 @@ export const useAuthStore = create<AuthState>()(
         set((state) => ({
           user: { ...state.user, learningLanguage: language },
         })),
+      addOrUpdateUserLanguage: (language) =>
+        set((state) => {
+          const currentList = Array.isArray(state.user.learningLanguagesList)
+            ? [...state.user.learningLanguagesList]
+            : [state.user.learningLanguage];
+
+          // Si el usuario edita o marca el idioma nativo principal
+          if (language.code === state.user.nativeLanguage.code && language.isNative) {
+            return {
+              user: {
+                ...state.user,
+                nativeLanguage: {
+                  ...language,
+                  isNative: true,
+                },
+              },
+            };
+          }
+
+          const existingIdx = currentList.findIndex(
+            (item) => item.code === language.code
+          );
+
+          if (existingIdx >= 0) {
+            currentList[existingIdx] = language;
+          } else {
+            currentList.push(language);
+          }
+
+          return {
+            user: {
+              ...state.user,
+              learningLanguage: language.isNative
+                ? state.user.learningLanguage
+                : language,
+              learningLanguagesList: currentList,
+            },
+          };
+        }),
+      removeUserLanguage: (code) =>
+        set((state) => {
+          const currentList = Array.isArray(state.user.learningLanguagesList)
+            ? state.user.learningLanguagesList
+            : [state.user.learningLanguage];
+
+          const filtered = currentList.filter((item) => item.code !== code);
+          const nextLearning =
+            filtered.find((item) => !item.isNative) ||
+            filtered[0] ||
+            state.user.learningLanguage;
+
+          return {
+            user: {
+              ...state.user,
+              learningLanguage: nextLearning,
+              learningLanguagesList: filtered,
+            },
+          };
+        }),
       updateUserProfile: (data) =>
         set((state) => ({
           user: { ...state.user, ...data },

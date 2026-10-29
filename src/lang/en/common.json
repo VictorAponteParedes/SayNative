@@ -12,6 +12,8 @@
     "chat": "Chat",
     "cancel": "Cancel",
     "confirm": "Confirm",
+    "accept": "Accept",
+    "ok": "OK",
     "viewAll": "View all"
   },
   "coins": {

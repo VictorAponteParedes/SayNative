@@ -1,4 +1,4 @@
-import { Platform } from 'react-native';
+import { Platform, View } from 'react-native';
 import { httpClient } from '@/lib/httpClient';
 
 export interface UpdateProfilePayload {
@@ -10,6 +10,16 @@ export interface UpdateProfilePayload {
   countryCode?: string;
   countryFlag?: string;
   isAvailableToTeach?: boolean;
+}
+
+export interface SaveUserLanguagePayload {
+  languageCode: string;
+  languageName: string;
+  flagEmoji: string;
+  type: 'NATIVE' | 'LEARNING';
+  cefrLevel: string;
+  targetLevel?: string;
+  progressPercentage: number;
 }
 
 export interface UserBackendResponse {
@@ -37,6 +47,16 @@ export interface UserBackendResponse {
   hoursPracticed: number;
   reviewCount: number;
   acceptedTerms: boolean;
+  userLanguages?: Array<{
+    id?: string;
+    languageCode: string;
+    languageName: string;
+    flagEmoji?: string;
+    type: 'NATIVE' | 'LEARNING';
+    cefrLevel?: string | null;
+    targetLevel?: string | null;
+    progressPercentage?: number;
+  }>;
   createdAt: string;
   updatedAt: string;
 }
@@ -206,6 +226,41 @@ export const profileApi = {
     }
 
     return response.data as UserBackendResponse;
+  },
+
+  async saveUserLanguage(
+    userId: string,
+    payload: SaveUserLanguagePayload,
+  ): Promise<UserBackendResponse> {
+    const response = await httpClient.post<
+      ApiResponseWrapper<UserBackendResponse> | UserBackendResponse
+    >('/users/me/languages', payload, {
+      headers: {
+        'x-user-id': userId,
+      },
+    });
+
+    if (
+      response.data &&
+      typeof response.data === 'object' &&
+      'data' in response.data &&
+      response.data.data
+    ) {
+      return (response.data as ApiResponseWrapper<UserBackendResponse>).data;
+    }
+
+    return response.data as UserBackendResponse;
+  },
+
+  async removeUserLanguage(
+    userId: string,
+    languageCode: string,
+  ): Promise<void> {
+    await httpClient.delete(`/users/me/languages/${languageCode}`, {
+      headers: {
+        'x-user-id': userId,
+      },
+    });
   },
 };
 

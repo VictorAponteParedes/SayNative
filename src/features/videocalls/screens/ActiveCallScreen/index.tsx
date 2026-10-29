@@ -1,6 +1,7 @@
 import React, { useEffect, useCallback, useRef } from 'react';
-import { View, Alert } from 'react-native';
+import { View } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import { AppAlert } from '@/components';
 import { goBack } from '@/navigation/NavigationRef';
 import { useCoinsStore } from '@/features/coins';
 import { useCallSessionStore } from '../../store/useCallSessionStore';
@@ -124,28 +125,28 @@ export const ActiveCallScreen: React.FC<ActiveCallScreenProps> = ({ route }) => 
         });
       }
       resetCallSession();
-      Alert.alert(
+      AppAlert.info(
         t('summary.title'),
         t('summary.totalMinutes', {
           minutes: Math.floor(payload.durationSeconds / 60),
           seconds: payload.durationSeconds % 60,
         }),
-        [{ text: t('summary.backHome'), onPress: () => goBack() }]
+        () => goBack()
       );
     },
     onPeerBusy: () => {
       stopTimer();
       cleanup();
-      Alert.alert(t('errors.userBusy'), undefined, [
-        { text: 'OK', onPress: () => goBack() },
-      ]);
+      AppAlert.info(t('errors.userBusy'), undefined, () => goBack());
     },
     onCallRejected: () => {
       stopTimer();
       cleanup();
-      Alert.alert(t('errors.callRejected', { name: peerName }), undefined, [
-        { text: 'OK', onPress: () => goBack() },
-      ]);
+      AppAlert.info(
+        t('errors.callRejected', { name: peerName }),
+        undefined,
+        () => goBack()
+      );
     },
   });
 

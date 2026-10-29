@@ -1,7 +1,7 @@
 import React from 'react';
-import { ScrollView, Alert } from 'react-native';
+import { ScrollView } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { SafeAreaContainer, Toast } from '@/components';
+import { SafeAreaContainer, Toast, AppAlert } from '@/components';
 import { CoinsScreenHeader } from '../../components/CoinsScreenHeader';
 import { CoinsHeroSection } from '../../components/CoinsHeroSection';
 import { RewardedAdCard } from '../../components/RewardedAdCard';
@@ -11,6 +11,8 @@ import { BenefitsGuaranteesCard } from '../../components/BenefitsGuaranteesCard'
 import { LegalTrustFooter } from '../../components/LegalTrustFooter';
 import { useCoinPackages } from '../../hooks/useCoinPackages';
 import { CoinPackage } from '../../types';
+import { navigate } from '@/navigation/NavigationRef';
+import { Routes } from '@/navigation/routes';
 import { styles } from './styles';
 
 export const CoinsScreen: React.FC = () => {
@@ -25,7 +27,7 @@ export const CoinsScreen: React.FC = () => {
   } = useCoinPackages();
 
   const handleProfile = () => {
-    Alert.alert('Perfil', 'Abriendo perfil de usuario...');
+    navigate(Routes.App.Profile);
   };
 
   const handleWatchAd = () => {
@@ -47,26 +49,22 @@ export const CoinsScreen: React.FC = () => {
   };
 
   const handleBuyPackage = (pkg: CoinPackage) => {
-    Alert.alert(
-      t('dialog.purchaseTitle'),
-      t('dialog.purchaseMessage', {
+    AppAlert.confirm({
+      title: t('dialog.purchaseTitle'),
+      message: t('dialog.purchaseMessage', {
         title: t(pkg.titleKey),
         price: pkg.price,
       }),
-      [
-        { text: 'Cancelar', style: 'cancel' },
-        {
-          text: 'Comprar',
-          onPress: () => {
-            purchasePackage(pkg);
-            Toast.success(
-              t('toasts.purchaseSuccessTitle'),
-              t('dialog.purchaseSuccess', { coins: pkg.coinsCount })
-            );
-          },
-        },
-      ]
-    );
+      cancelText: t('actions.cancel', { defaultValue: 'Cancelar' }),
+      confirmText: t('packages.buy', { defaultValue: 'Comprar' }),
+      onConfirm: () => {
+        purchasePackage(pkg);
+        Toast.success(
+          t('toasts.purchaseSuccessTitle'),
+          t('dialog.purchaseSuccess', { coins: pkg.coinsCount })
+        );
+      },
+    });
   };
 
   return (

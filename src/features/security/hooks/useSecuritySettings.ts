@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { Alert } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { Toast } from '@/components';
+import { Toast, AppAlert } from '@/components';
 import { useAuthStore } from '@/store/useAuthStore';
+import { colors } from '@/theme';
 import type { BlockedUser, PrivacySettings } from '../types';
 
 const INITIAL_BLOCKED_USERS: BlockedUser[] = [
@@ -52,60 +52,52 @@ export const useSecuritySettings = () => {
   };
 
   const handleUnblockUser = (user: BlockedUser) => {
-    Alert.alert(
-      t('blockedUsers.unblockConfirmTitle'),
-      t('blockedUsers.unblockConfirmMessage', { name: user.name }),
-      [
-        { text: t('blockedUsers.cancel'), style: 'cancel' },
-        {
-          text: t('blockedUsers.confirm'),
-          onPress: () => {
-            setBlockedUsers((prev) => prev.filter((u) => u.id !== user.id));
-            Toast.success(
-              t('toasts.unblockSuccessTitle'),
-              t('toasts.unblockSuccessMessage', { name: user.name })
-            );
-          },
-        },
-      ]
-    );
+    AppAlert.confirm({
+      title: t('blockedUsers.unblockConfirmTitle'),
+      message: t('blockedUsers.unblockConfirmMessage', { name: user.name }),
+      cancelText: t('blockedUsers.cancel'),
+      confirmText: t('blockedUsers.confirm'),
+      onConfirm: () => {
+        setBlockedUsers((prev) => prev.filter((u) => u.id !== user.id));
+        Toast.success(
+          t('toasts.unblockSuccessTitle'),
+          t('toasts.unblockSuccessMessage', { name: user.name })
+        );
+      },
+    });
   };
 
   const handleReadGuidelines = () => {
-    Alert.alert(
+    AppAlert.info(
       t('safeCommunity.guidelinesTitle'),
       t('safeCommunity.guidelinesMessage')
     );
   };
 
   const handleViewReportsStatus = () => {
-    Alert.alert(
+    AppAlert.info(
       t('moderation.reportsModalTitle'),
       t('moderation.reportsModalMessage')
     );
   };
 
   const handleDeleteAccount = () => {
-    Alert.alert(
-      t('moderation.deleteConfirmTitle'),
-      t('moderation.deleteConfirmMessage'),
-      [
-        { text: t('blockedUsers.cancel'), style: 'cancel' },
-        {
-          text: t('moderation.deleteConfirmAction'),
-          style: 'destructive',
-          onPress: () => {
-            Toast.error(
-              t('toasts.accountDeletedTitle'),
-              t('toasts.accountDeletedMessage')
-            );
-            setTimeout(() => {
-              logout();
-            }, 1000);
-          },
-        },
-      ]
-    );
+    AppAlert.confirm({
+      title: t('moderation.deleteConfirmTitle'),
+      message: t('moderation.deleteConfirmMessage'),
+      cancelText: t('blockedUsers.cancel'),
+      confirmText: t('moderation.deleteConfirmAction'),
+      confirmColor: colors.danger,
+      onConfirm: () => {
+        Toast.error(
+          t('toasts.accountDeletedTitle'),
+          t('toasts.accountDeletedMessage')
+        );
+        setTimeout(() => {
+          logout();
+        }, 1000);
+      },
+    });
   };
 
   return {

@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, FlatList, Alert, RefreshControl } from 'react-native';
+import { View, FlatList, RefreshControl } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { SafeAreaContainer, BottomTabBar, AppText, SearchBar } from '@/components';
+import { SafeAreaContainer, BottomTabBar, AppText, SearchBar, AppAlert } from '@/components';
 import { ChatsHeader } from '../../components/ChatsHeader';
 import { OnlinePeersRow } from '../../components/OnlinePeersRow';
 import { OnlinePeersSkeleton } from '../../components/OnlinePeersSkeleton';
@@ -33,15 +33,15 @@ export const ChatsScreen: React.FC = () => {
   } = useChatsList();
 
   const handleNewChat = () => {
-    Alert.alert(t('options.newChat'), t('options.newChatMessage'));
+    AppAlert.info(t('options.newChat'), t('options.newChatMessage'));
   };
 
   const handleOptions = () => {
-    Alert.alert(t('options.title'), t('options.markAllRead'));
+    AppAlert.info(t('options.title'), t('options.markAllRead'));
   };
 
   const handleFilterSearch = () => {
-    Alert.alert('Filtros', 'Filtrar chats por fecha, no leídos o llamadas.');
+    AppAlert.info('Filtros', 'Filtrar chats por fecha, no leídos o llamadas.');
   };
 
   const handlePeerPress = (peer: OnlinePeer) => {
@@ -65,7 +65,7 @@ export const ChatsScreen: React.FC = () => {
   };
 
   const handleTipPress = () => {
-    Alert.alert(
+    AppAlert.info(
       t('tipCard.title'),
       'La práctica diaria de 10 minutos acelera tu fluidez hasta un 70% más rápido que estudiar gramática pasiva.'
     );

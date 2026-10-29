@@ -5,6 +5,7 @@ export interface UserLanguage {
   level?: string;
   progressPercentage?: number;
   targetLevel?: string;
+  isNative?: boolean;
 }
 
 export interface UserProfile {
@@ -90,8 +91,8 @@ export const EMPTY_USER: UserProfile = {
     name: 'Inglés',
     flag: '🇺🇸',
     level: 'Nivel A1 · Principiante',
-    progressPercentage: 0,
-    targetLevel: 'B2',
+    progressPercentage: 20,
+    targetLevel: 'A2',
   },
   learningLanguagesList: [
     {
@@ -99,8 +100,8 @@ export const EMPTY_USER: UserProfile = {
       name: 'Inglés',
       flag: '🇺🇸',
       level: 'Nivel A1 · Principiante',
-      progressPercentage: 0,
-      targetLevel: 'B2',
+      progressPercentage: 20,
+      targetLevel: 'A2',
     },
   ],
   isAvailableToTeach: false,
@@ -125,6 +126,8 @@ export interface AuthState {
   setUserFromBackend: (backendUser: BackendUserPayload) => void;
   setAvailableToTeach: (available: boolean) => void;
   updateLearningLanguage: (language: UserLanguage) => void;
+  addOrUpdateUserLanguage: (language: UserLanguage) => void;
+  removeUserLanguage: (code: string) => void;
   updateUserProfile: (data: Partial<UserProfile>) => void;
   logout: () => void;
   setHydrated: (status: boolean) => void;

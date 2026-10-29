@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { ArrowLeft, Calendar } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
 import { colors, spacing } from '@/theme';
-import { AppText, AppLogo } from '@/components';
+import { AppText, AppLogo, AppAlert } from '@/components';
 import { goBack } from '@/navigation/NavigationRef';
 
 export interface HistoryHeaderProps {
@@ -19,7 +19,7 @@ export const HistoryHeader: React.FC<HistoryHeaderProps> = ({
     if (onPressCalendar) {
       onPressCalendar();
     } else {
-      Alert.alert(
+      AppAlert.info(
         t('history.support.calendarTitle'),
         t('history.support.calendarMessage')
       );

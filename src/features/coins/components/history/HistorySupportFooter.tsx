@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { HelpCircle, ChevronRight, ShieldCheck } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
 import { colors, spacing } from '@/theme';
-import { AppText } from '@/components';
+import { AppText, AppAlert } from '@/components';
 
 export interface HistorySupportFooterProps {
   onPressSupport?: () => void;
@@ -18,7 +18,7 @@ export const HistorySupportFooter: React.FC<HistorySupportFooterProps> = ({
     if (onPressSupport) {
       onPressSupport();
     } else {
-      Alert.alert(
+      AppAlert.info(
         t('history.support.supportTitle'),
         t('history.support.supportMessage')
       );

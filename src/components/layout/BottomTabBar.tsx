@@ -3,7 +3,6 @@ import {
   View,
   TouchableOpacity,
   StyleSheet,
-  Alert,
   useWindowDimensions,
 } from 'react-native';
 import Svg, { Path, Circle } from 'react-native-svg';
@@ -11,6 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors, spacing, borderRadius, fonts } from '@/theme';
 import { AppText } from '@/components/ui/AppText';
+import { AppAlert } from '@/store/useModalStore';
 import { Routes } from '@/navigation/routes';
 import { useAppConfigStore } from '@/store/useAppConfigStore';
 import { navigate } from '@/navigation/NavigationRef';
@@ -237,14 +237,14 @@ export const BottomTabBar: React.FC<BottomTabBarProps> = ({ activeTab }) => {
       navigate(Routes.App.Profile);
     } else {
       const label = t(tab.labelKey);
-      Alert.alert(label, `${label} estará disponible pronto.`);
+      AppAlert.info(label, `${label} estará disponible pronto.`);
     }
   };
 
   const handlePressVideoCall = () => {
     const userCoins = useCoinsStore.getState().coins;
     if (!__DEV__ && userCoins < 10) {
-      Alert.alert(
+      AppAlert.info(
         t('actions.call', { defaultValue: 'Videollamada' }),
         'No tienes monedas suficientes para iniciar una videollamada de práctica.'
       );

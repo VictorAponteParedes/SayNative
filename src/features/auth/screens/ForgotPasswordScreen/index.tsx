@@ -4,10 +4,10 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   Platform,
-  Alert,
   StatusBar,
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import { AppAlert } from '@/components';
 import { ForgotPasswordHeader, ForgotPasswordForm } from '../../components';
 import { LanguageSelectorBottomSheet } from '@/features/profile/components/LanguageSelectorBottomSheet';
 import { useForgotPassword } from '../../hooks/useForgotPassword';
@@ -25,7 +25,7 @@ export const ForgotPasswordScreen: React.FC = () => {
   } = useForgotPassword();
 
   const handleSmsRecovery = () => {
-    Alert.alert(
+    AppAlert.info(
       t('forgotPassword.smsNoticeTitle', 'Recuperación por SMS'),
       t(
         'forgotPassword.smsNoticeMessage',

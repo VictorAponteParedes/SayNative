@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, FlatList, Alert, RefreshControl } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import { SafeAreaContainer, BottomTabBar, AppText, SearchBar } from '@/components';
+import {
+  SafeAreaContainer,
+  BottomTabBar,
+  AppText,
+  SearchBar,
+  ConfirmModal,
+  AppAlert,
+} from '@/components';
 import { HomeHeader } from '@/features/home/components/HomeHeader';
 import { ExploreHeader } from '../../components/ExploreHeader';
 import { FilterPillsRow } from '../../components/FilterPillsRow';
@@ -19,6 +26,7 @@ import { styles } from './styles';
 
 export const ExploreScreen: React.FC = () => {
   const { t } = useTranslation('explore');
+  const [isHelpModalVisible, setIsHelpModalVisible] = useState(false);
   const {
     searchQuery,
     setSearchQuery,
@@ -42,11 +50,11 @@ export const ExploreScreen: React.FC = () => {
   };
 
   const handleHelp = () => {
-    Alert.alert(t('help.title'), t('help.desc'));
+    setIsHelpModalVisible(true);
   };
 
   const handleOpenFilters = () => {
-    Alert.alert(t('advancedFilters.title'), t('advancedFilters.desc'));
+    AppAlert.info(t('advancedFilters.title'), t('advancedFilters.desc'));
   };
 
   const sortLabels: Record<ExploreSortType, string> = {
@@ -88,9 +96,11 @@ export const ExploreScreen: React.FC = () => {
   const handleCallSpeaker = (speaker: SpeakerUser) => {
     const userCoins = useCoinsStore.getState().coins;
     if (!__DEV__ && userCoins < speaker.ratePerMinute) {
-      Alert.alert(
-        'Monedas insuficientes',
-        'No tienes monedas suficientes para iniciar esta llamada.'
+      AppAlert.info(
+        t('errors.insufficientCoins', { defaultValue: 'Monedas insuficientes' }),
+        t('errors.insufficientCoinsMessage', {
+          defaultValue: 'No tienes monedas suficientes para iniciar esta llamada.',
+        })
       );
       return;
     }
@@ -128,10 +138,7 @@ export const ExploreScreen: React.FC = () => {
 
   const renderHeader = () => (
     <View>
-      {/* Título de la sección con badge de total y botón de ayuda */}
       <ExploreHeader totalCount={totalAvailable} onPressHelp={handleHelp} />
-
-      {/* Buscador global y botón de filtros */}
       <SearchBar
         value={searchQuery}
         onChangeText={setSearchQuery}
@@ -139,13 +146,11 @@ export const ExploreScreen: React.FC = () => {
         placeholder={t('searchPlaceholder')}
       />
 
-      {/* Píldoras de filtrado rápido */}
       <FilterPillsRow
         activeFilter={activeFilter}
         onSelectFilter={setActiveFilter}
       />
 
-      {/* Fila con conteo de resultados y ordenamiento */}
       <SpeakersCountSortRow
         count={totalAvailable}
         currentSortLabel={sortLabels[currentSort]}
@@ -156,13 +161,11 @@ export const ExploreScreen: React.FC = () => {
 
   return (
     <SafeAreaContainer>
-      {/* Barra superior de la aplicación */}
       <HomeHeader
         onPressNotifications={handleNotifications}
         onPressProfile={handleProfile}
       />
 
-      {/* Lista vertical de hablantes o Skeletons */}
       {isLoading ? (
         <FlatList
           data={[1, 2, 3, 4]}
@@ -204,7 +207,15 @@ export const ExploreScreen: React.FC = () => {
         />
       )}
 
-      {/* Barra de navegación inferior */}
+      <ConfirmModal
+        visible={isHelpModalVisible}
+        title={t('help.title')}
+        message={t('help.desc')}
+        propInfo={true}
+        onConfirm={() => setIsHelpModalVisible(false)}
+        onClose={() => setIsHelpModalVisible(false)}
+      />
+
       <BottomTabBar activeTab="Explorar" />
     </SafeAreaContainer>
   );

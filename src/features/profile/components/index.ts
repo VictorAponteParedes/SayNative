@@ -7,3 +7,4 @@ export * from './TeachingModeCard';
 export * from './AccountPreferencesSection';
 export * from './LanguageSelectorBottomSheet';
 export * from './ChangePhotoBottomSheet';
+export * from './AddLanguageBottomSheet';

@@ -28,25 +28,29 @@ export const mapBackendUserToUserProfile = (
   const learningList: UserLanguage[] = [];
 
   if (backendUser.userLanguages && backendUser.userLanguages.length > 0) {
+    let foundFirstNative = false;
     for (const ul of backendUser.userLanguages) {
+      const isNativeType = ul.type === 'NATIVE';
       const mapped: UserLanguage = {
         code: ul.languageCode,
         name: ul.languageName,
         flag: ul.flagEmoji || '🌐',
         level: ul.cefrLevel || undefined,
         targetLevel: ul.targetLevel || undefined,
-        progressPercentage: ul.progressPercentage ?? 0,
+        progressPercentage: ul.progressPercentage ?? (isNativeType ? 100 : 20),
+        isNative: isNativeType,
       };
 
-      if (ul.type === 'NATIVE') {
+      if (isNativeType && !foundFirstNative) {
         nativeLang = mapped;
+        foundFirstNative = true;
       } else {
         learningList.push(mapped);
       }
     }
 
     if (learningList.length > 0) {
-      learningLang = learningList[0];
+      learningLang = learningList.find((l) => !l.isNative) || learningList[0];
     }
   }
 

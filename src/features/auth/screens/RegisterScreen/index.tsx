@@ -4,10 +4,10 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   Platform,
-  Alert,
   StatusBar,
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import { AppAlert } from '@/components';
 import { RegisterHeader, RegisterForm } from '../../components';
 import { LanguageSelectorBottomSheet } from '@/features/profile/components/LanguageSelectorBottomSheet';
 import { useRegister } from '../../hooks/useRegister';
@@ -28,7 +28,7 @@ export const RegisterScreen: React.FC = () => {
   } = useRegister();
 
   const handleTerms = () => {
-    Alert.alert(
+    AppAlert.info(
       t('register.termsModalTitle'),
       t('register.termsModalMessage'),
     );
@@ -39,11 +39,11 @@ export const RegisterScreen: React.FC = () => {
   };
 
   const handleAppleAuth = () => {
-    Alert.alert(t('register.appleButton'), t('register.socialComingSoon'));
+    AppAlert.info(t('register.appleButton'), t('register.socialComingSoon'));
   };
 
   const handleGoogleAuth = () => {
-    Alert.alert(t('register.googleButton'), t('register.socialComingSoon'));
+    AppAlert.info(t('register.googleButton'), t('register.socialComingSoon'));
   };
 
   return (

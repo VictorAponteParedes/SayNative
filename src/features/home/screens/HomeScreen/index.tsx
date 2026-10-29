@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { ScrollView, Alert, RefreshControl } from 'react-native';
+import { ScrollView, RefreshControl } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { colors } from '@/theme';
-import { SafeAreaContainer, BottomTabBar } from '@/components';
+import { SafeAreaContainer, BottomTabBar, AppAlert } from '@/components';
 import { HomeHeader } from '../../components/HomeHeader';
 import { UserProfileBar } from '../../components/UserProfileBar';
 import { LanguageFilterBar } from '../../components/LanguageFilterBar';
@@ -49,7 +49,7 @@ export const HomeScreen: React.FC = () => {
   const handleStartSearch = () => {
     const userCoins = useCoinsStore.getState().coins;
     if (!__DEV__ && userCoins < 10) {
-      Alert.alert(
+      AppAlert.info(
         t('errors.insufficientCoins', { defaultValue: 'Monedas insuficientes' }),
         t('lobby.balanceWarning', {
           minutes: 0,
@@ -69,7 +69,7 @@ export const HomeScreen: React.FC = () => {
   const handleCallPeer = (peer: PeerUser) => {
     const userCoins = useCoinsStore.getState().coins;
     if (!__DEV__ && userCoins < peer.ratePerMinute) {
-      Alert.alert(
+      AppAlert.info(
         t('errors.insufficientCoins', { defaultValue: 'Monedas insuficientes' }),
         t('lobby.balanceWarning', {
           minutes: 0,
@@ -103,7 +103,7 @@ export const HomeScreen: React.FC = () => {
   };
 
   const handleChatPeer = (peer: PeerUser) => {
-    Alert.alert(
+    AppAlert.info(
       t('featuredPeers.chatDialogTitle'),
       t('featuredPeers.chatDialogMessage', { name: peer.name })
     );

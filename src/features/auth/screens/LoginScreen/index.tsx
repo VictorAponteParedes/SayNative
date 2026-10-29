@@ -4,10 +4,10 @@ import {
   ScrollView,
   KeyboardAvoidingView,
   Platform,
-  Alert,
   StatusBar,
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import { AppAlert } from '@/components';
 import { LoginHeader, LoginForm } from '../../components';
 import { LanguageSelectorBottomSheet } from '@/features/profile/components/LanguageSelectorBottomSheet';
 import { useLogin } from '../../hooks/useLogin';
@@ -29,11 +29,11 @@ export const LoginScreen: React.FC = () => {
   };
 
   const handleAppleAuth = () => {
-    Alert.alert(t('login.appleButton'), t('login.socialComingSoon'));
+    AppAlert.info(t('login.appleButton'), t('login.socialComingSoon'));
   };
 
   const handleGoogleAuth = () => {
-    Alert.alert(t('login.googleButton'), t('login.socialComingSoon'));
+    AppAlert.info(t('login.googleButton'), t('login.socialComingSoon'));
   };
 
   return (
