@@ -89,6 +89,10 @@ export const mapBackendUserToUserProfile = (
         ? Number(backendUser.hoursPracticed)
         : currentUser.hoursPracticed,
     reviewCount: backendUser.reviewCount ?? currentUser.reviewCount,
+    coins:
+      backendUser.coins !== undefined
+        ? Number(backendUser.coins)
+        : currentUser.coins ?? 0,
     acceptedTerms: backendUser.acceptedTerms ?? currentUser.acceptedTerms,
     nativeLanguage: nativeLang,
     learningLanguage: learningLang,

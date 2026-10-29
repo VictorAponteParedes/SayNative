@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { ChevronRight, Plus, Play } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
-import { colors, spacing } from '@/theme';
+import { colors, spacing, borderRadius, fonts } from '@/theme';
 import { AppText } from '@/components';
 
 export interface ProfileWalletCardProps {
@@ -22,12 +22,12 @@ export const ProfileWalletCard: React.FC<ProfileWalletCardProps> = ({
 
   return (
     <View style={styles.card}>
-      {/* Encabezado: Badge y Enlace a Historial */}
+      {/* Encabezado: Badge Billetera Virtual y Enlace a Historial */}
       <View style={styles.topRow}>
         <View style={styles.badgeRow}>
           <View style={styles.amberDot} />
-          <AppText variant="caption" style={styles.badgeText}>
-            {t('wallet.badge')}
+          <AppText style={styles.badgeText}>
+            {t('wallet.badge', 'BILLETERA VIRTUAL')}
           </AppText>
         </View>
 
@@ -35,46 +35,54 @@ export const ProfileWalletCard: React.FC<ProfileWalletCardProps> = ({
           activeOpacity={0.7}
           onPress={onPressHistory}
           style={styles.historyButton}
+          accessibilityRole="button"
+          accessibilityLabel="Ver historial de consumos"
         >
-          <AppText variant="caption" style={styles.historyText}>
-            {t('wallet.historyLink')}
+          <AppText style={styles.historyText}>
+            {t('wallet.historyLink', 'Historial')}
           </AppText>
-          <ChevronRight size={14} color={colors.textDarkAmber} />
+          <ChevronRight size={13} color={colors.textDarkAmber} />
         </TouchableOpacity>
       </View>
 
-      {/* Saldo de Monedas */}
+      {/* Saldo de Monedas con insignia dorada */}
       <View style={styles.balanceRow}>
-        <AppText style={styles.coinEmoji}>🪙</AppText>
-        <AppText variant="h1" style={styles.balanceNumber}>
+        <View style={styles.coinBadgeCircle}>
+          <AppText style={styles.coinBadgeSymbol}>🪙</AppText>
+        </View>
+        <AppText style={styles.balanceNumber}>
           {coins}
         </AppText>
-        <AppText variant="h3" style={styles.balanceLabel}>
-          {' '}Monedas
+        <AppText style={styles.balanceLabel}>
+          Monedas
         </AppText>
       </View>
 
-      {/* Botones de Acción */}
+      {/* Botones de Acción redondeados */}
       <View style={styles.actionsRow}>
         <TouchableOpacity
-          activeOpacity={0.8}
+          activeOpacity={0.85}
           onPress={onPressRecharge}
           style={styles.rechargeButton}
+          accessibilityRole="button"
+          accessibilityLabel="Recargar monedas"
         >
-          <Plus size={18} color={colors.surface} strokeWidth={2.5} style={styles.actionIcon} />
-          <AppText variant="button" style={styles.rechargeButtonText}>
-            {t('wallet.rechargeButton')}
+          <Plus size={16} color={colors.white} strokeWidth={2.6} style={styles.buttonIcon} />
+          <AppText style={styles.rechargeButtonText}>
+            {t('wallet.rechargeButton', 'Recargar')}
           </AppText>
         </TouchableOpacity>
 
         <TouchableOpacity
-          activeOpacity={0.8}
+          activeOpacity={0.85}
           onPress={onPressRewardedAd}
           style={styles.adButton}
+          accessibilityRole="button"
+          accessibilityLabel="Ver anuncio para ganar 5 monedas gratis"
         >
-          <Play size={16} color={colors.coinDark} fill={colors.coinDark} style={styles.actionIcon} />
-          <AppText variant="button" style={styles.adButtonText}>
-            {t('wallet.freeAdButton', { count: 5 })}
+          <Play size={13} color={colors.coinDark} fill={colors.coinDark} style={styles.buttonIcon} />
+          <AppText style={styles.adButtonText}>
+            {t('wallet.freeAdButton', { count: 5, defaultValue: '+5 gratis' })}
           </AppText>
         </TouchableOpacity>
       </View>
@@ -84,17 +92,18 @@ export const ProfileWalletCard: React.FC<ProfileWalletCardProps> = ({
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: colors.coinLight,
-    borderRadius: 18,
-    padding: spacing.md,
+    backgroundColor: '#FEF9C3',
+    borderRadius: 22,
+    paddingHorizontal: spacing.lg,
+    paddingVertical: spacing.md + 2,
     marginHorizontal: spacing.lg,
     marginVertical: spacing.sm,
-    borderWidth: 1,
-    borderColor: colors.borderHighlight,
+    borderWidth: 1.5,
+    borderColor: '#FEF08A',
     shadowColor: colors.shadow,
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.05,
-    shadowRadius: 6,
+    shadowRadius: 8,
     elevation: 2,
   },
   topRow: {
@@ -108,15 +117,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   amberDot: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    backgroundColor: colors.coinDark,
+    width: 7,
+    height: 7,
+    borderRadius: 3.5,
+    backgroundColor: colors.coin,
     marginRight: 6,
   },
   badgeText: {
+    fontFamily: fonts.bold,
     color: colors.textDarkAmber,
-    fontWeight: '800',
     letterSpacing: 0.8,
     fontSize: 11,
   },
@@ -126,32 +135,46 @@ const styles = StyleSheet.create({
     gap: 2,
   },
   historyText: {
+    fontFamily: fonts.bold,
     color: colors.textDarkAmber,
-    fontWeight: '700',
     fontSize: 12,
   },
   balanceRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: spacing.xs,
+    marginVertical: spacing.md,
   },
-  coinEmoji: {
-    fontSize: 26,
-    marginRight: spacing.xs,
+  coinBadgeCircle: {
+    width: 38,
+    height: 38,
+    borderRadius: borderRadius.full,
+    backgroundColor: '#FDE047',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: spacing.sm,
+    shadowColor: colors.coin,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.15,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  coinBadgeSymbol: {
+    fontSize: 20,
   },
   balanceNumber: {
-    fontSize: 32,
-    fontWeight: '900',
-    color: colors.coinDark,
+    fontFamily: fonts.extraBold,
+    fontSize: 34,
+    color: colors.textPrimary,
+    marginRight: 6,
   },
   balanceLabel: {
+    fontFamily: fonts.bold,
     fontSize: 18,
-    fontWeight: '700',
-    color: colors.coinDark,
+    color: colors.textDarkAmber,
   },
   actionsRow: {
     flexDirection: 'row',
-    gap: spacing.sm,
+    gap: spacing.md,
     marginTop: spacing.sm,
   },
   rechargeButton: {
@@ -160,15 +183,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: colors.primary,
-    paddingVertical: 11,
-    borderRadius: 12,
+    paddingVertical: 12,
+    borderRadius: borderRadius.full,
+    shadowColor: colors.primary,
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.25,
+    shadowRadius: 6,
+    elevation: 3,
   },
-  actionIcon: {
-    marginRight: 6,
+  buttonIcon: {
+    marginRight: 5,
   },
   rechargeButtonText: {
-    color: colors.surface,
-    fontWeight: '700',
+    fontFamily: fonts.bold,
+    color: colors.white,
     fontSize: 14,
   },
   adButton: {
@@ -176,15 +204,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: colors.surface,
-    paddingVertical: 11,
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: colors.border,
+    backgroundColor: '#FEFCE8',
+    paddingVertical: 12,
+    borderRadius: borderRadius.full,
+    borderWidth: 1.5,
+    borderColor: '#FDE047',
   },
   adButtonText: {
+    fontFamily: fonts.bold,
     color: colors.coinDark,
-    fontWeight: '700',
     fontSize: 14,
   },
 });

@@ -1,10 +1,12 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAuthStore } from '@/store/useAuthStore';
+import type { BackendUserPayload } from '@/store/types/auth.types';
 import { useCoinsStore } from '@/features/coins';
 import { navigate } from '@/navigation/NavigationRef';
 import { Routes } from '@/navigation/routes';
 import { Toast, AppAlert } from '@/components';
+import { httpClient } from '@/lib/httpClient';
 import { profileApi } from '../api/profileApi';
 import {
   pickImageFromGallery,
@@ -36,21 +38,52 @@ export const useProfile = () => {
   const [isPhotoSheetOpen, setIsPhotoSheetOpen] = useState(false);
 
   const fetchProfile = useCallback(async () => {
-    if (!user.id || !isValidUuid(user.id)) {
-      setIsRefreshing(false);
-      return;
+    let targetUserId = user.id;
+
+    if (!targetUserId || !isValidUuid(targetUserId)) {
+      if (user.email) {
+        try {
+          const res = await httpClient.get<
+            { success: boolean; data: BackendUserPayload[] } | BackendUserPayload[]
+          >('/users');
+          const list =
+            res.data && typeof res.data === 'object' && 'data' in res.data
+              ? (res.data as { data: BackendUserPayload[] }).data
+              : (res.data as BackendUserPayload[]);
+          if (Array.isArray(list)) {
+            const matched = list.find(
+              (u) => u.email?.toLowerCase() === user.email.toLowerCase()
+            );
+            if (matched) {
+              setUserFromBackend(matched);
+              targetUserId = matched.id;
+            }
+          }
+        } catch (recoverErr) {
+          if (__DEV__) {
+            console.log('[useProfile] Auto-recovery error:', recoverErr);
+          }
+        }
+      }
+
+      if (!targetUserId || !isValidUuid(targetUserId)) {
+        setIsRefreshing(false);
+        return;
+      }
     }
 
     try {
-      const backendUser = await profileApi.getProfile(user.id);
+      const backendUser = await profileApi.getProfile(targetUserId);
       if (backendUser) {
-        if (backendUser.coins !== undefined) {
-          setCoins(Number(backendUser.coins));
-        }
+        const coinsAmount =
+          backendUser.coins !== undefined ? Number(backendUser.coins) : 0;
+        setCoins(coinsAmount);
+
         if (backendUser.userLanguages && backendUser.userLanguages.length > 0) {
           setUserFromBackend(backendUser);
         } else {
           updateUserProfile({
+            coins: coinsAmount,
             name: backendUser.fullName || user.name,
             email: backendUser.email || user.email,
             avatarUrl: resolveAvatarUrl(backendUser.avatar?.url) || user.avatarUrl,
@@ -75,6 +108,7 @@ export const useProfile = () => {
                 ? Number(backendUser.hoursPracticed)
                 : user.hoursPracticed,
             reviewCount: backendUser.reviewCount ?? user.reviewCount,
+            acceptedTerms: backendUser.acceptedTerms ?? user.acceptedTerms,
           });
         }
       }
@@ -285,9 +319,12 @@ export const useProfile = () => {
     });
   };
 
+  const effectiveCoins =
+    user.coins !== undefined && user.coins > 0 ? user.coins : coins;
+
   return {
     user,
-    coins,
+    coins: effectiveCoins,
     isRefreshing,
     onRefresh,
     isLanguageSheetOpen,

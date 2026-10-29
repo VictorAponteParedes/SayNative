@@ -75,6 +75,7 @@ export interface RegisteredUser {
   totalCalls: number;
   hoursPracticed: number;
   reviewCount: number;
+  coins?: number;
   acceptedTerms: boolean;
   termsAcceptedAt?: string | null;
   acceptedPromotions: boolean;

@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Pencil, CheckCircle2, Mail } from 'lucide-react-native';
-import { colors, spacing } from '@/theme';
+import { colors, spacing, borderRadius, fonts } from '@/theme';
 import { AppText, Avatar } from '@/components';
 import type { UserProfile } from '@/store/useAuthStore';
 
@@ -18,25 +18,35 @@ export const UserIdentityCard: React.FC<UserIdentityCardProps> = ({
 }) => {
   return (
     <View style={styles.container}>
-      {/* Avatar con botón de editar foto */}
-      <View style={styles.avatarWrapper}>
-        <Avatar uri={user.avatarUrl} name={user.name} size={92} />
+      {/* Avatar con doble anillo concéntrico y botón de editar */}
+      <View style={styles.avatarOuterRing}>
+        <View style={styles.avatarInnerContainer}>
+          <Avatar
+            uri={user.avatarUrl}
+            name={user.name}
+            size={88}
+          />
+        </View>
         <TouchableOpacity
-          activeOpacity={0.8}
+          activeOpacity={0.85}
           onPress={onPressChangePhoto || onPressEdit}
           style={styles.editBadgeButton}
+          accessibilityRole="button"
+          accessibilityLabel="Cambiar foto de perfil"
         >
-          <Pencil size={15} color={colors.surface} strokeWidth={2.5} />
+          <Pencil size={13} color={colors.white} strokeWidth={2.4} />
         </TouchableOpacity>
       </View>
 
-      {/* Nombre, Bandera y Check de Verificado */}
+      {/* Nombre y Bandera de País */}
       <View style={styles.nameRow}>
-        <AppText variant="h2" style={styles.nameText}>
+        <AppText style={styles.nameText}>
           {user.name}
         </AppText>
         {!!user.countryFlag && (
-          <AppText style={styles.flagEmoji}> {user.countryFlag}</AppText>
+          <View style={styles.flagBadge}>
+            <AppText style={styles.flagEmoji}>{user.countryFlag}</AppText>
+          </View>
         )}
         {user.isVerified && (
           <View style={styles.verifiedIconWrapper}>
@@ -45,23 +55,25 @@ export const UserIdentityCard: React.FC<UserIdentityCardProps> = ({
         )}
       </View>
 
-      {/* Correo electrónico visible sutilmente */}
+      {/* Correo Electrónico en Tarjeta / Pill Blanca Flotante */}
       {!!user.email && (
         <TouchableOpacity
           activeOpacity={0.7}
           onPress={onPressEdit}
           style={styles.emailPill}
+          accessibilityRole="button"
+          accessibilityLabel={`Correo: ${user.email}`}
         >
-          <Mail size={13} color={colors.textSecondary} style={styles.emailIcon} />
-          <AppText variant="caption" style={styles.emailText}>
+          <Mail size={14} color={colors.primary} style={styles.emailIcon} />
+          <AppText style={styles.emailText}>
             {user.email}
           </AppText>
         </TouchableOpacity>
       )}
 
-      {/* Biografía */}
+      {/* Biografía si está presente */}
       {!!user.bio && (
-        <AppText variant="bodySmall" style={styles.bioText}>
+        <AppText style={styles.bioText}>
           {user.bio}
         </AppText>
       )}
@@ -73,52 +85,67 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     paddingHorizontal: spacing.lg,
-    paddingTop: spacing.md,
+    paddingTop: spacing.sm,
     paddingBottom: spacing.sm,
   },
-  avatarWrapper: {
+  avatarOuterRing: {
     position: 'relative',
-    marginBottom: spacing.sm,
+    padding: 3.5,
+    borderRadius: borderRadius.full,
+    borderWidth: 2.5,
+    borderColor: colors.primaryLighter,
+    marginBottom: spacing.xs + 2,
+    shadowColor: colors.primary,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.12,
+    shadowRadius: 8,
+    elevation: 4,
   },
-  avatarImage: {
-    width: 92,
-    height: 92,
-    borderRadius: 46,
-    borderWidth: 3,
-    borderColor: colors.surface,
+  avatarInnerContainer: {
+    borderRadius: borderRadius.full,
+    overflow: 'hidden',
+    backgroundColor: colors.surface,
   },
   editBadgeButton: {
     position: 'absolute',
-    bottom: 0,
-    right: 0,
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-    backgroundColor: colors.primary,
+    bottom: 2,
+    right: 2,
+    width: 28,
+    height: 28,
+    borderRadius: borderRadius.full,
+    backgroundColor: colors.textPrimary,
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 2,
-    borderColor: colors.surface,
-    elevation: 3,
+    borderColor: colors.white,
     shadowColor: colors.shadow,
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.15,
+    shadowOpacity: 0.25,
     shadowRadius: 3,
+    elevation: 4,
   },
   nameRow: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: spacing.xs,
     marginBottom: spacing.xs,
+    gap: 6,
   },
   nameText: {
-    fontSize: 20,
-    fontWeight: '800',
+    fontFamily: fonts.extraBold,
+    fontSize: 22,
     color: colors.textPrimary,
+    letterSpacing: -0.2,
+  },
+  flagBadge: {
+    backgroundColor: colors.surfaceSubtle,
+    paddingHorizontal: 4,
+    paddingVertical: 1,
+    borderRadius: borderRadius.xs,
   },
   flagEmoji: {
-    fontSize: 18,
-    marginHorizontal: 4,
+    fontSize: 16,
   },
   verifiedIconWrapper: {
     marginLeft: 2,
@@ -126,26 +153,34 @@ const styles = StyleSheet.create({
   emailPill: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: colors.surfaceSubtle,
-    paddingHorizontal: spacing.sm,
-    paddingVertical: 3,
-    borderRadius: 12,
+    backgroundColor: colors.surface,
+    paddingHorizontal: spacing.md,
+    paddingVertical: 6,
+    borderRadius: borderRadius.full,
+    marginTop: 2,
     marginBottom: spacing.xs,
     borderWidth: 1,
     borderColor: colors.borderLight,
+    shadowColor: colors.shadow,
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.04,
+    shadowRadius: 3,
+    elevation: 1,
   },
   emailIcon: {
-    marginRight: 4,
+    marginRight: 6,
   },
   emailText: {
+    fontFamily: fonts.medium,
     color: colors.textSecondary,
-    fontWeight: '500',
-    fontSize: 12,
+    fontSize: 13,
   },
   bioText: {
+    fontFamily: fonts.regular,
     textAlign: 'center',
     color: colors.textSecondary,
     lineHeight: 18,
+    fontSize: 12.5,
     marginTop: 2,
     paddingHorizontal: spacing.md,
   },

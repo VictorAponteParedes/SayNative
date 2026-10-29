@@ -30,6 +30,7 @@ export interface UserProfile {
   totalCalls: number;
   rating: number;
   reviewCount: number;
+  coins: number;
   memberSince?: string;
 }
 
@@ -111,6 +112,7 @@ export const EMPTY_USER: UserProfile = {
   totalCalls: 0,
   rating: 5.0,
   reviewCount: 0,
+  coins: 0,
   memberSince: '',
 };
 
