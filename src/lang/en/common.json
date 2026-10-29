@@ -2,6 +2,7 @@
   "tabs": {
     "home": "Home",
     "explore": "Explore",
+    "videoCall": "Video Call",
     "chats": "Chats",
     "profile": "Profile"
   },

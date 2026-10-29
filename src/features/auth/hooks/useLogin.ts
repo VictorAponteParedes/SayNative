@@ -72,7 +72,10 @@ export const useLogin = () => {
           errorMessage = backendMsg.join(', ');
         } else if (typeof backendMsg === 'string') {
           errorMessage = backendMsg;
-        } else if (error.message === 'Network Error') {
+        } else if (error.code === 'ECONNABORTED' || error.message?.includes('timeout')) {
+          errorMessage =
+            'Tiempo de espera agotado. El servidor tardó demasiado en responder.';
+        } else if (error.message === 'Network Error' || error.code === 'ERR_NETWORK') {
           errorMessage =
             'No se pudo conectar con el servidor. Verifica que el backend esté ejecutándose.';
         }
@@ -102,11 +105,13 @@ export const useLogin = () => {
         }
       }
 
-      // En modo desarrollo, si no hay backend activo, permitir probar la app
+      // En modo desarrollo, si no hay backend activo o expira el tiempo de conexión, permitir probar la app
       if (
         __DEV__ &&
         axios.isAxiosError(error) &&
-        (error.message === 'Network Error' || error.code === 'ERR_NETWORK')
+        (error.message === 'Network Error' ||
+          error.code === 'ERR_NETWORK' ||
+          error.code === 'ECONNABORTED')
       ) {
         console.log('[useLogin] Entorno DEV: iniciando sesión offline para pruebas');
         setUser({

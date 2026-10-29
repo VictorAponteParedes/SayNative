@@ -86,7 +86,10 @@ export const useRegister = () => {
           errorMessage = backendMsg.join(', ');
         } else if (typeof backendMsg === 'string') {
           errorMessage = backendMsg;
-        } else if (error.message === 'Network Error') {
+        } else if (error.code === 'ECONNABORTED' || error.message?.includes('timeout')) {
+          errorMessage =
+            'Tiempo de espera agotado. El servidor tardó demasiado en responder.';
+        } else if (error.message === 'Network Error' || error.code === 'ERR_NETWORK') {
           errorMessage =
             'No se pudo conectar con el servidor. Verifica que el backend esté ejecutándose.';
         }
