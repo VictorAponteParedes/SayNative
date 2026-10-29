@@ -9,8 +9,8 @@ export const colors = {
   overlay: 'rgba(15, 23, 42, 0.6)',
 
   // Primarios (Azul / Índigo)
-  primary: '#4338CA',
-  primaryLight: '#6366F1',
+  primary: '#004aad',
+  primaryLight: '#004aad',
   primaryLighter: '#A5B4FC',
   primaryDark: '#3730A3',
   primaryBgSubtle: '#EEF2FF',

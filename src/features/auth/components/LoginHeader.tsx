@@ -67,9 +67,9 @@ export const LoginHeader: React.FC<LoginHeaderProps> = ({
       </View>
       <View style={styles.heroCenterContent}>
         <View style={styles.logoBadgeContainer}>
-          <AppLogo size={46} rounded />
+          <AppLogo size={66} rounded={false} containerStyle={styles.logoInnerContainer} />
         </View>
-        <AppText style={styles.heroBrandTitle}>AmisTalk</AppText>
+        <AppText style={styles.heroBrandTitle}>AmistTalk</AppText>
         <AppText style={styles.heroBrandSubtitle}>
           {t('login.heroSubtitle', 'Habla con nativos de todo el mundo.')}
         </AppText>
@@ -141,8 +141,8 @@ const styles = StyleSheet.create({
     zIndex: 2,
   },
   logoBadgeContainer: {
-    width: 72,
-    height: 72,
+    width: 82,
+    height: 82,
     borderRadius: borderRadius.full,
     backgroundColor: colors.white,
     alignItems: 'center',
@@ -152,6 +152,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 8,
     elevation: 5,
+  },
+  logoInnerContainer: {
+    backgroundColor: 'transparent',
   },
   heroBrandTitle: {
     fontSize: 26,

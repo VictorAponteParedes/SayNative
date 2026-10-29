@@ -5,11 +5,11 @@ import {
   TouchableOpacity,
   ImageBackground,
 } from 'react-native';
-import { ChevronLeft, ChevronDown, MessageSquareMore } from 'lucide-react-native';
+import { ChevronLeft, ChevronDown } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors, spacing, borderRadius } from '@/theme';
-import { AppText } from '@/components';
+import { AppText, AppLogo } from '@/components';
 import { getLanguageFlag } from '@/features/profile/components/LanguageSelectorBottomSheet';
 
 export interface RegisterHeaderProps {
@@ -66,12 +66,12 @@ export const RegisterHeader: React.FC<RegisterHeaderProps> = ({
         </TouchableOpacity>
       </View>
 
-      {/* Contenido central del Hero: Badge morado con burbujas de diálogo, SayNative y subtítulo */}
+      {/* Contenido central del Hero: Badge blanco con el nuevo logo, AmistTalk y subtítulo */}
       <View style={styles.heroCenterContent}>
-        <View style={styles.badgeContainer}>
-          <MessageSquareMore size={32} color={colors.white} />
+        <View style={styles.logoBadgeContainer}>
+          <AppLogo size={66} rounded={false} containerStyle={styles.logoInnerContainer} />
         </View>
-        <AppText style={styles.heroBrandTitle}>Amist Talk</AppText>
+        <AppText style={styles.heroBrandTitle}>AmistTalk</AppText>
         <AppText style={styles.heroBrandSubtitle}>
           {t('register.heroSubtitle', 'Aprende idiomas con nativos reales')}
         </AppText>
@@ -142,18 +142,21 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     zIndex: 2,
   },
-  badgeContainer: {
-    width: 66,
-    height: 66,
-    borderRadius: borderRadius.lg,
-    backgroundColor: colors.primary,
+  logoBadgeContainer: {
+    width: 82,
+    height: 82,
+    borderRadius: borderRadius.full,
+    backgroundColor: colors.white,
     alignItems: 'center',
     justifyContent: 'center',
     shadowColor: colors.shadow,
     shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.25,
+    shadowOpacity: 0.2,
     shadowRadius: 8,
     elevation: 5,
+  },
+  logoInnerContainer: {
+    backgroundColor: 'transparent',
   },
   heroBrandTitle: {
     fontSize: 26,
