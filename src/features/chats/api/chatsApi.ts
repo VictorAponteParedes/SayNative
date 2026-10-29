@@ -108,6 +108,66 @@ export const chatsApi = {
       };
     });
   },
+
+  /**
+   * Crea o abre una sala de chat con un compañero
+   */
+  async createOrGetRoom(currentUserId: string, partnerId: string): Promise<any> {
+    const response = await httpClient.post<any>(
+      '/chats/rooms',
+      { partnerId },
+      {
+        headers: { 'x-user-id': currentUserId },
+      }
+    );
+    return response.data && 'data' in response.data ? response.data.data : response.data;
+  },
+
+  /**
+   * Obtiene el historial de mensajes de una conversación
+   */
+  async getRoomMessages(roomId: string, currentUserId: string): Promise<any[]> {
+    const response = await httpClient.get<any>(`/chats/${roomId}/messages`, {
+      headers: { 'x-user-id': currentUserId },
+    });
+    const list = response.data && 'data' in response.data ? response.data.data : response.data;
+    return Array.isArray(list) ? list : [];
+  },
+
+  /**
+   * Envía un mensaje a una conversación
+   */
+  async sendMessage(
+    currentUserId: string,
+    payload: {
+      roomId?: string;
+      recipientId?: string;
+      text: string;
+      translatedText?: string;
+      isAudio?: boolean;
+      audioUrl?: string;
+      audioDuration?: string;
+      transcription?: string;
+    }
+  ): Promise<any> {
+    const response = await httpClient.post<any>('/chats/messages', payload, {
+      headers: { 'x-user-id': currentUserId },
+    });
+    return response.data && 'data' in response.data ? response.data.data : response.data;
+  },
+
+  /**
+   * Marca los mensajes de la conversación como leídos
+   */
+  async markAsRead(roomId: string, currentUserId: string): Promise<void> {
+    await httpClient.patch(
+      `/chats/${roomId}/read`,
+      {},
+      {
+        headers: { 'x-user-id': currentUserId },
+      }
+    );
+  },
 };
 
 export default chatsApi;
