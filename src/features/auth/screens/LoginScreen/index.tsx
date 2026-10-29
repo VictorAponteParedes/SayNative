@@ -26,16 +26,16 @@ export const LoginScreen: React.FC = () => {
   const handleForgotPassword = () => {
     Alert.alert(
       t('login.forgotPassword'),
-      'Te enviaremos las instrucciones de recuperación a tu correo electrónico.',
+      t('login.forgotPasswordMessage'),
     );
   };
 
   const handleAppleAuth = () => {
-    Alert.alert('Apple', 'Inicio de sesión con Apple próximamente.');
+    Alert.alert(t('login.appleButton'), t('login.socialComingSoon'));
   };
 
   const handleGoogleAuth = () => {
-    Alert.alert('Google', 'Inicio de sesión con Google próximamente.');
+    Alert.alert(t('login.googleButton'), t('login.socialComingSoon'));
   };
 
   return (

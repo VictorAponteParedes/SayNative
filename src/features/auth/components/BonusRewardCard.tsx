@@ -12,8 +12,12 @@ export const BonusRewardCard: React.FC = () => {
       <View style={styles.leftContent}>
         <AppText style={styles.giftEmoji}>🎁</AppText>
         <View style={styles.badgeTitleColumn}>
-          <AppText style={styles.badgeTitle}>Bono de</AppText>
-          <AppText style={styles.badgeTitle}>Bienvenida:</AppText>
+          <AppText style={styles.badgeTitle}>
+            {t('register.bonusBadgeLine1', 'Bono de')}
+          </AppText>
+          <AppText style={styles.badgeTitle}>
+            {t('register.bonusBadgeLine2', 'Bienvenida:')}
+          </AppText>
         </View>
       </View>
 

@@ -7,6 +7,7 @@ import {
   Alert,
   StatusBar,
 } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { RegisterHeader, RegisterForm } from '../../components';
 import { LanguageSelectorBottomSheet } from '@/features/profile/components/LanguageSelectorBottomSheet';
 import { useRegister } from '../../hooks/useRegister';
@@ -14,6 +15,7 @@ import { styles } from './styles';
 import { Routes, navigate } from '@/navigation';
 
 export const RegisterScreen: React.FC = () => {
+  const { t } = useTranslation('auth');
   const [isLanguageSheetOpen, setIsLanguageSheetOpen] = useState(false);
   const {
     control,
@@ -27,8 +29,8 @@ export const RegisterScreen: React.FC = () => {
 
   const handleTerms = () => {
     Alert.alert(
-      'Términos y Privacidad',
-      'SayNative es una comunidad segura de intercambio de idiomas. Al crear tu cuenta aceptas nuestras normas de respeto mutuo y políticas de datos.'
+      t('register.termsModalTitle'),
+      t('register.termsModalMessage'),
     );
   };
 
@@ -37,11 +39,11 @@ export const RegisterScreen: React.FC = () => {
   };
 
   const handleAppleAuth = () => {
-    Alert.alert('Apple', 'Registro con Apple próximamente.');
+    Alert.alert(t('register.appleButton'), t('register.socialComingSoon'));
   };
 
   const handleGoogleAuth = () => {
-    Alert.alert('Google', 'Registro con Google próximamente.');
+    Alert.alert(t('register.googleButton'), t('register.socialComingSoon'));
   };
 
   return (

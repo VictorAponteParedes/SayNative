@@ -97,7 +97,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
           required: t('register.toasts.missingFieldsMessage'),
           minLength: {
             value: 2,
-            message: 'Mínimo 2 caracteres',
+            message: t('register.minChars2', 'Mínimo 2 caracteres'),
           },
         }}
       />
@@ -176,13 +176,13 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
           )}
         </View>
         <AppText style={styles.checkboxText}>
-          Acepto los{' '}
+          {t('register.termsPrefix', 'Acepto los')}{' '}
           <AppText style={styles.linkText} onPress={onPressTerms}>
-            Términos de Servicio
+            {t('register.termsOfService', 'Términos de Servicio')}
           </AppText>{' '}
-          y{' '}
+          {t('register.andConjunction', 'y')}{' '}
           <AppText style={styles.linkText} onPress={onPressTerms}>
-            Privacidad
+            {t('register.privacyPolicy', 'Privacidad')}
           </AppText>
         </AppText>
       </TouchableOpacity>
@@ -198,7 +198,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
         ) : (
           <View style={styles.submitButtonContent}>
             <AppText style={styles.submitButtonText}>
-              {t('register.submitButton', 'Crear Cuenta')}
+              {t('register.submitButton', 'Crear cuenta')}
             </AppText>
             <ArrowRight size={19} color={colors.white} style={styles.arrowIcon} />
           </View>
