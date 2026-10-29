@@ -48,10 +48,11 @@ export const AppText: React.FC<AppTextProps> = ({
   // como 'Outfit-Bold' y se mantiene fontWeight: '700'/'bold', el motor busca 'Outfit-Bold_bold.ttf'
   // y al no encontrarlo hace fallback a la fuente del sistema (Roboto).
   // Al remover fontWeight, Android e iOS cargan directamente el archivo de fuente con su peso nativo.
+  const { fontWeight: _extractedWeight, ...styleWithoutWeight } = baseStyle || {};
+
   const finalStyle: TextStyle = {
-    ...baseStyle,
+    ...styleWithoutWeight,
     fontFamily: resolvedFontFamily,
-    fontWeight: undefined,
   };
 
   return (

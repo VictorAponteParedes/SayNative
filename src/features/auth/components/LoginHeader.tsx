@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   heroBrandTitle: {
-    fontSize: 26,
+    fontSize: 23,
     fontWeight: '800',
     color: colors.white,
     marginTop: spacing.sm,

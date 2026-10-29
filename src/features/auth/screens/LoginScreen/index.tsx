@@ -12,6 +12,7 @@ import { LoginHeader, LoginForm } from '../../components';
 import { LanguageSelectorBottomSheet } from '@/features/profile/components/LanguageSelectorBottomSheet';
 import { useLogin } from '../../hooks/useLogin';
 import { styles } from './styles';
+import { Routes, navigate } from '@/navigation';
 
 export const LoginScreen: React.FC = () => {
   const { t } = useTranslation('auth');
@@ -24,10 +25,7 @@ export const LoginScreen: React.FC = () => {
   } = useLogin();
 
   const handleForgotPassword = () => {
-    Alert.alert(
-      t('login.forgotPassword'),
-      t('login.forgotPasswordMessage'),
-    );
+    navigate(Routes.Auth.ForgotPassword);
   };
 
   const handleAppleAuth = () => {

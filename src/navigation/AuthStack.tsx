@@ -2,7 +2,7 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Routes } from './routes';
 import type { AuthStackParamList } from './types';
-import { RegisterScreen, LoginScreen } from '@/features/auth';
+import { RegisterScreen, LoginScreen, ForgotPasswordScreen } from '@/features/auth';
 
 const Stack = createNativeStackNavigator<AuthStackParamList>();
 
@@ -22,6 +22,10 @@ export const AuthStack: React.FC = () => {
       <Stack.Screen
         name={Routes.Auth.Register as keyof AuthStackParamList}
         component={RegisterScreen}
+      />
+      <Stack.Screen
+        name={Routes.Auth.ForgotPassword as keyof AuthStackParamList}
+        component={ForgotPasswordScreen}
       />
     </Stack.Navigator>
   );
