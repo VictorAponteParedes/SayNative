@@ -38,7 +38,8 @@ export const PrivateChatScreen: React.FC<PrivateChatScreenProps> = ({ route }) =
   const { t } = useTranslation('chats');
   const partnerId = route?.params?.partnerId || route?.params?.chatId;
   const initialRoomId = route?.params?.roomId;
-  const partnerName = route?.params?.partnerName || 'Sarah Jenkins';
+  const partnerName = route?.params?.partnerName || t('privateChat.activeChat');
+  const partnerAvatar = route?.params?.partnerAvatar;
   const partnerFlag = route?.params?.partnerFlag || '🇺🇸';
   const ratePerMinute = route?.params?.ratePerMinute || 10;
 
@@ -128,7 +129,8 @@ export const PrivateChatScreen: React.FC<PrivateChatScreenProps> = ({ route }) =
     <SafeAreaContainer edges={['top', 'left', 'right']}>
       {/* Cabecera superior con botón volver, info y llamadas */}
       <PrivateChatHeader
-        partnerName={t('privateChat.activeChat')}
+        partnerName={partnerName}
+        partnerAvatar={partnerAvatar}
         isOnline
         onPressCall={handleCall}
         onPressOptions={handleOptions}

@@ -3,7 +3,7 @@ import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { ArrowLeft, Video, MoreVertical, User } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
 import { colors, spacing } from '@/theme';
-import { AppText } from '@/components';
+import { AppText, Avatar } from '@/components';
 import { goBack } from '@/navigation/NavigationRef';
 
 export interface PrivateChatHeaderProps {
@@ -17,6 +17,7 @@ export interface PrivateChatHeaderProps {
 
 export const PrivateChatHeader: React.FC<PrivateChatHeaderProps> = ({
   partnerName,
+  partnerAvatar,
   isOnline = true,
   onPressCall,
   onPressOptions,
@@ -38,10 +39,12 @@ export const PrivateChatHeader: React.FC<PrivateChatHeaderProps> = ({
 
       {/* Avatar e información del interlocutor */}
       <View style={styles.userInfo}>
-        <View style={styles.avatarCircle}>
-          <User size={20} color={colors.surface} />
-          {isOnline && <View style={styles.onlineDot} />}
-        </View>
+        <Avatar
+          uri={partnerAvatar}
+          name={displayName}
+          size={42}
+          isOnline={isOnline}
+        />
 
         <View style={styles.textContainer}>
           <AppText variant="h3" style={styles.nameText} numberOfLines={1}>
