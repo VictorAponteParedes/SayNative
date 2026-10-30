@@ -23,19 +23,37 @@ export const useSecuritySettings = () => {
   const fetchBlockedUsers = useCallback(async () => {
     try {
       setIsLoadingBlocked(true);
-      const backendBlocked = await moderationApi.getBlockedUsers();
-      if (Array.isArray(backendBlocked)) {
-        setBlockedUsers(
-          backendBlocked.map((b) => ({
-            id: b.blockedUserId,
-            name: b.name,
-            countryCode: b.countryCode || '🌐',
+      const res = await moderationApi.getBlockedUsers();
+      const rawList = Array.isArray(res)
+        ? res
+        : res && typeof res === 'object' && 'data' in res && Array.isArray((res as unknown as { data: unknown[] }).data)
+        ? (res as unknown as { data: unknown[] }).data
+        : [];
+
+      setBlockedUsers(
+        rawList.map((item: unknown) => {
+          const b = item as {
+            id?: string;
+            blockedUserId?: string;
+            name?: string;
+            countryCode?: string;
+            countryFlag?: string;
+            avatarUrl?: string;
+            blockedAt?: string;
+            reason?: string;
+          };
+          return {
+            id: b.blockedUserId || b.id || '',
+            name: b.name || 'Usuario',
+            countryCode: b.countryCode || b.countryFlag || '🌐',
             avatarUrl: b.avatarUrl || undefined,
-            blockedDate: b.blockedAt ? new Date(b.blockedAt).toLocaleDateString() : 'Reciente',
+            blockedDate: b.blockedAt
+              ? new Date(b.blockedAt).toLocaleDateString()
+              : 'Reciente',
             reasonKey: b.reason || 'blockedUsers.behaviorReason',
-          }))
-        );
-      }
+          };
+        })
+      );
     } catch (error) {
       console.log('[useSecuritySettings] Error fetching blocked users:', error);
     } finally {

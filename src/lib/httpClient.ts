@@ -31,7 +31,7 @@ httpClient.interceptors.request.use(
   },
   (error: AxiosError) => {
     return Promise.reject(error);
-  }
+  },
 );
 
 let isRefreshing = false;
@@ -40,8 +40,11 @@ let failedQueue: Array<{
   reject: (reason?: unknown) => void;
 }> = [];
 
-const processQueue = (error: AxiosError | null, token: string | null = null) => {
-  failedQueue.forEach((prom) => {
+const processQueue = (
+  error: AxiosError | null,
+  token: string | null = null,
+) => {
+  failedQueue.forEach(prom => {
     if (error) {
       prom.reject(error);
     } else {
@@ -52,8 +55,14 @@ const processQueue = (error: AxiosError | null, token: string | null = null) => 
 };
 
 httpClient.interceptors.response.use(
-  (response) => response,
-  async (error: AxiosError<{ message?: string | string[]; error?: string; statusCode?: number }>) => {
+  response => response,
+  async (
+    error: AxiosError<{
+      message?: string | string[];
+      error?: string;
+      statusCode?: number;
+    }>,
+  ) => {
     const originalRequest = error.config as CustomAxiosRequestConfig;
 
     const isAuthEndpoint =
@@ -61,7 +70,11 @@ httpClient.interceptors.response.use(
       originalRequest?.url?.includes('/auth/register') ||
       originalRequest?.url?.includes('/auth/refresh');
 
-    if (error.response?.status === 401 && !originalRequest?._retry && !isAuthEndpoint) {
+    if (
+      error.response?.status === 401 &&
+      !originalRequest?._retry &&
+      !isAuthEndpoint
+    ) {
       const refreshToken = useAuthStore.getState().refreshToken;
 
       if (!refreshToken) {
@@ -72,13 +85,13 @@ httpClient.interceptors.response.use(
         return new Promise((resolve, reject) => {
           failedQueue.push({ resolve, reject });
         })
-          .then((newToken) => {
+          .then(newToken => {
             if (originalRequest.headers) {
               originalRequest.headers.Authorization = `Bearer ${newToken}`;
             }
             return httpClient(originalRequest);
           })
-          .catch((err) => Promise.reject(err));
+          .catch(err => Promise.reject(err));
       }
 
       originalRequest._retry = true;
@@ -94,7 +107,7 @@ httpClient.interceptors.response.use(
               Accept: 'application/json',
               ...(i18n.language ? { 'Accept-Language': i18n.language } : {}),
             },
-          }
+          },
         );
 
         const data = response.data?.data || response.data;
@@ -125,7 +138,7 @@ httpClient.interceptors.response.use(
     }
 
     return Promise.reject(error);
-  }
+  },
 );
 
 export default httpClient;

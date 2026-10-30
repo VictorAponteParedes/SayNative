@@ -113,7 +113,15 @@ export const PrivateChatScreen: React.FC<PrivateChatScreenProps> = ({ route }) =
     });
   };
 
-  const handleOptions = () => {
+  const handleOptions = async () => {
+    if (partnerId) {
+      try {
+        const res = await moderationApi.checkBlockStatus(partnerId);
+        setIsBlockedByMe(Boolean(res?.isBlockedByMe));
+      } catch (e) {
+        console.log('[PrivateChat] error checking block status on open:', e);
+      }
+    }
     setIsOptionsOpen(true);
   };
 

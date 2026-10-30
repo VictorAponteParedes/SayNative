@@ -44,34 +44,49 @@ export const moderationApi = {
    * Bloquea a un usuario y lo persiste en la base de datos
    */
   async blockUser(payload: BlockUserPayload): Promise<ModerationActionResponse> {
-    const response = await httpClient.post<ModerationActionResponse>(
+    const response = await httpClient.post<unknown>(
       '/moderation/blocks',
       payload,
       { headers: getHeaders() }
     );
-    return response.data;
+    const raw = response.data;
+    if (raw && typeof raw === 'object' && 'data' in raw) {
+      return (raw as { data: ModerationActionResponse }).data;
+    }
+    return raw as ModerationActionResponse;
   },
 
   /**
    * Desbloquea a un usuario previamente bloqueado
    */
   async unblockUser(blockedId: string): Promise<ModerationActionResponse> {
-    const response = await httpClient.delete<ModerationActionResponse>(
+    const response = await httpClient.delete<unknown>(
       `/moderation/blocks/${blockedId}`,
       { headers: getHeaders() }
     );
-    return response.data;
+    const raw = response.data;
+    if (raw && typeof raw === 'object' && 'data' in raw) {
+      return (raw as { data: ModerationActionResponse }).data;
+    }
+    return raw as ModerationActionResponse;
   },
 
   /**
    * Obtiene la lista real de usuarios bloqueados desde el backend
    */
   async getBlockedUsers(): Promise<BlockedUserBackendItem[]> {
-    const response = await httpClient.get<BlockedUserBackendItem[]>(
+    const response = await httpClient.get<unknown>(
       '/moderation/blocks',
       { headers: getHeaders() }
     );
-    return response.data || [];
+    const raw = response.data;
+    if (raw && typeof raw === 'object' && 'data' in raw && Array.isArray((raw as { data: unknown }).data)) {
+      return (raw as { data: BlockedUserBackendItem[] }).data;
+    }
+    if (Array.isArray(raw)) {
+      return raw as BlockedUserBackendItem[];
+    }
+    return [];
   },
 
   /**
@@ -81,13 +96,18 @@ export const moderationApi = {
     partnerId: string
   ): Promise<{ isBlockedByMe: boolean; isBlocked: boolean }> {
     try {
-      const response = await httpClient.get<{
-        isBlockedByMe: boolean;
-        isBlocked: boolean;
-      }>(`/moderation/blocks/check/${partnerId}`, {
-        headers: getHeaders(),
-      });
-      return response.data || { isBlockedByMe: false, isBlocked: false };
+      const response = await httpClient.get<unknown>(
+        `/moderation/blocks/check/${partnerId}`,
+        { headers: getHeaders() }
+      );
+      const raw = response.data;
+      if (raw && typeof raw === 'object' && 'data' in raw && (raw as { data: unknown }).data) {
+        return (raw as { data: { isBlockedByMe: boolean; isBlocked: boolean } }).data;
+      }
+      return (raw as { isBlockedByMe: boolean; isBlocked: boolean }) || {
+        isBlockedByMe: false,
+        isBlocked: false,
+      };
     } catch {
       return { isBlockedByMe: false, isBlocked: false };
     }
@@ -97,12 +117,16 @@ export const moderationApi = {
    * Envía un reporte formal a la tabla de moderación en el backend
    */
   async reportUser(payload: ReportUserPayload): Promise<ModerationActionResponse> {
-    const response = await httpClient.post<ModerationActionResponse>(
+    const response = await httpClient.post<unknown>(
       '/moderation/reports',
       payload,
       { headers: getHeaders() }
     );
-    return response.data;
+    const raw = response.data;
+    if (raw && typeof raw === 'object' && 'data' in raw) {
+      return (raw as { data: ModerationActionResponse }).data;
+    }
+    return raw as ModerationActionResponse;
   },
 };
 
