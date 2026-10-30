@@ -64,19 +64,18 @@ export const useChatMessages = ({
           },
           lang: 'es',
         });
-      }
-
-      try {
-        if (currentUserId) {
+      } else if (currentUserId) {
+        // Enviar vía HTTP solo si el WebSocket no está conectado
+        try {
           await chatsApi.sendMessage(currentUserId, {
             roomId: validRoomId,
             recipientId: partnerId,
             text: textToSend,
           });
-        }
-      } catch (err) {
-        if (__DEV__) {
-          console.warn('[useChatMessages] Error enviando mensaje:', err);
+        } catch (err) {
+          if (__DEV__) {
+            console.warn('[useChatMessages] Error enviando mensaje por HTTP:', err);
+          }
         }
       }
     },
@@ -117,10 +116,9 @@ export const useChatMessages = ({
           },
           lang: 'es',
         });
-      }
-
-      try {
-        if (currentUserId) {
+      } else if (currentUserId) {
+        // Enviar vía HTTP solo si el WebSocket no está conectado
+        try {
           await chatsApi.sendMessage(currentUserId, {
             roomId: validRoomId,
             recipientId: partnerId,
@@ -128,10 +126,10 @@ export const useChatMessages = ({
             isAudio: true,
             audioDuration: duration,
           });
-        }
-      } catch (err) {
-        if (__DEV__) {
-          console.warn('[useChatMessages] Error enviando nota de voz:', err);
+        } catch (err) {
+          if (__DEV__) {
+            console.warn('[useChatMessages] Error enviando nota de voz por HTTP:', err);
+          }
         }
       }
     },

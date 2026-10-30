@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import {
   View,
   TouchableOpacity,
@@ -15,6 +15,7 @@ import { Routes } from '@/navigation/routes';
 import { useAppConfigStore } from '@/store/useAppConfigStore';
 import { navigate } from '@/navigation/NavigationRef';
 import { useCoinsStore } from '@/features/coins';
+import { useChatsStore, selectTotalUnreadChats } from '@/features/chats';
 
 export type TabKey = 'Inicio' | 'Explorar' | 'Chats' | 'Perfil';
 
@@ -158,22 +159,6 @@ const LEFT_TABS: TabItem[] = [
   },
 ];
 
-const RIGHT_TABS: TabItem[] = [
-  {
-    key: 'Chats',
-    labelKey: 'tabs.chats',
-    route: 'Chats',
-    badge: 2,
-    icon: (active) => <ChatsIcon active={active} />,
-  },
-  {
-    key: 'Perfil',
-    labelKey: 'tabs.profile',
-    route: 'Profile',
-    icon: (active) => <ProfileIcon active={active} />,
-  },
-];
-
 const BAR_HEIGHT = 68;
 const HORIZONTAL_MARGIN = spacing.md;
 const FAB_SIZE = 58;
@@ -221,6 +206,27 @@ export const BottomTabBar: React.FC<BottomTabBarProps> = ({ activeTab }) => {
   const storeTab = useAppConfigStore((state) => state.currentTab);
   const setStoreTab = useAppConfigStore((state) => state.setCurrentTab);
   const currentTab = activeTab || storeTab;
+
+  const totalUnreadChats = useChatsStore(selectTotalUnreadChats);
+
+  const rightTabs: TabItem[] = useMemo(
+    () => [
+      {
+        key: 'Chats',
+        labelKey: 'tabs.chats',
+        route: 'Chats',
+        badge: totalUnreadChats > 0 ? totalUnreadChats : undefined,
+        icon: (active) => <ChatsIcon active={active} />,
+      },
+      {
+        key: 'Perfil',
+        labelKey: 'tabs.profile',
+        route: 'Profile',
+        icon: (active) => <ProfileIcon active={active} />,
+      },
+    ],
+    [totalUnreadChats],
+  );
 
   const barWidth = Math.max(280, screenWidth - HORIZONTAL_MARGIN * 2);
   const svgPath = buildCurvedBarPath(barWidth, BAR_HEIGHT);
@@ -332,7 +338,7 @@ export const BottomTabBar: React.FC<BottomTabBarProps> = ({ activeTab }) => {
           <View style={styles.centerNotchSpacer} pointerEvents="none" />
 
           <View style={styles.sideGroup}>
-            {RIGHT_TABS.map(renderTabButton)}
+            {rightTabs.map(renderTabButton)}
           </View>
         </View>
       </View>

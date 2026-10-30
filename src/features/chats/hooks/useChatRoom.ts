@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { chatsApi } from '../api/chatsApi';
+import { useChatsStore } from '../store/useChatsStore';
 import { ChatMessage } from '../components/private/ChatMessageItem';
 import { BackendChatMessage } from '../types';
 import { formatMessageTime, isUUID } from '../utils/chatUtils';
@@ -67,6 +68,7 @@ export const useChatRoom = ({
           }
 
           chatsApi.markAsRead(activeRoomId, currentUserId).catch(() => {});
+          useChatsStore.getState().markChatAsRead(activeRoomId);
         } else {
           setInitialMessages([]);
         }

@@ -1,4 +1,5 @@
 import { useState, useMemo, useCallback, useEffect } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 import { useAuthStore } from '@/store/useAuthStore';
 import { getSocket } from '@/lib/socketClient';
 import { useChatsStore } from '../store/useChatsStore';
@@ -38,9 +39,11 @@ export const useChatsList = () => {
     }
   }, [currentUserId, setChats, setOnlinePeers, setIsLoading, setIsRefreshing]);
 
-  useEffect(() => {
-    fetchChats();
-  }, [fetchChats]);
+  useFocusEffect(
+    useCallback(() => {
+      fetchChats();
+    }, [fetchChats]),
+  );
 
   // Escuchar mensajes en tiempo real desde el socket de chats para actualizar la lista
   useEffect(() => {
@@ -50,6 +53,7 @@ export const useChatsList = () => {
     }
 
     if (currentUserId) {
+      socket.emit('register_user', { userId: currentUserId });
       socket.emit('chat:register-user', { userId: currentUserId });
     }
 
@@ -58,9 +62,11 @@ export const useChatsList = () => {
     };
 
     socket.on('new_message', handleNewMessage);
+    socket.on('new_message_notification', handleNewMessage);
 
     return () => {
       socket.off('new_message', handleNewMessage);
+      socket.off('new_message_notification', handleNewMessage);
     };
   }, [currentUserId, fetchChats]);
 
