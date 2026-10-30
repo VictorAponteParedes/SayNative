@@ -26,7 +26,15 @@ export interface ChatConversation {
   ratePerMinute?: number;
 }
 
-export type ChatFilterType = 'all' | 'unread' | 'videocalls';
+export interface BackendChatFilterOption {
+  key: string;
+  label: string;
+  description: string;
+  count: number;
+  icon: string;
+}
+
+export type ChatFilterType = 'all' | 'unread' | 'videocalls' | 'tutors' | 'online' | string;
 
 export interface BackendUserItem {
   id: string;

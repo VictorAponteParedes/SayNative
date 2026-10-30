@@ -4,7 +4,7 @@ import { useAuthStore } from '@/store/useAuthStore';
 import { getSocket } from '@/lib/socketClient';
 import { useChatsStore } from '../store/useChatsStore';
 import { chatsApi } from '../api/chatsApi';
-import { ChatFilterType } from '../types';
+import { ChatFilterType, BackendChatFilterOption } from '../types';
 
 export const useChatsList = () => {
   const currentUserId = useAuthStore(s => s.user.id);
@@ -21,15 +21,21 @@ export const useChatsList = () => {
 
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [activeFilter, setActiveFilter] = useState<ChatFilterType>('all');
+  const [filterOptions, setFilterOptions] = useState<BackendChatFilterOption[]>([]);
+  const [isFilterBottomSheetOpen, setIsFilterBottomSheetOpen] = useState<boolean>(false);
 
   const fetchChats = useCallback(async () => {
     try {
-      const [realConversations, realPeers] = await Promise.all([
-        chatsApi.getConversations(currentUserId),
+      const [realConversations, realPeers, backendFilters] = await Promise.all([
+        chatsApi.getConversations(currentUserId, activeFilter),
         chatsApi.getOnlinePeers(currentUserId),
+        chatsApi.getFilterOptions(currentUserId),
       ]);
       setChats(realConversations);
       setOnlinePeers(realPeers);
+      if (Array.isArray(backendFilters) && backendFilters.length > 0) {
+        setFilterOptions(backendFilters);
+      }
     } catch {
       setChats([]);
       setOnlinePeers([]);
@@ -37,13 +43,17 @@ export const useChatsList = () => {
       setIsLoading(false);
       setIsRefreshing(false);
     }
-  }, [currentUserId, setChats, setOnlinePeers, setIsLoading, setIsRefreshing]);
+  }, [currentUserId, activeFilter, setChats, setOnlinePeers, setIsLoading, setIsRefreshing]);
 
   useFocusEffect(
     useCallback(() => {
       fetchChats();
     }, [fetchChats]),
   );
+
+  useEffect(() => {
+    fetchChats();
+  }, [activeFilter, fetchChats]);
 
   // Escuchar mensajes en tiempo real desde el socket de chats para actualizar la lista
   useEffect(() => {
@@ -76,25 +86,13 @@ export const useChatsList = () => {
   }, [fetchChats, setIsRefreshing]);
 
   const filteredChats = useMemo(() => {
-    return chats.filter(item => {
-      const matchesSearch =
-        searchQuery.trim() === '' ||
+    if (!searchQuery.trim()) return chats;
+    return chats.filter(
+      item =>
         item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.lastMessage.toLowerCase().includes(searchQuery.toLowerCase());
-
-      const matchesFilter =
-        activeFilter === 'all'
-          ? true
-          : activeFilter === 'unread'
-          ? !!item.unreadCount && item.unreadCount > 0
-          : activeFilter === 'videocalls'
-          ? item.messageType === 'videocall_ended' ||
-            item.messageType === 'missed_call'
-          : true;
-
-      return matchesSearch && matchesFilter;
-    });
-  }, [chats, searchQuery, activeFilter]);
+        item.lastMessage.toLowerCase().includes(searchQuery.toLowerCase()),
+    );
+  }, [chats, searchQuery]);
 
   const totalUnread = useMemo(() => {
     return chats.reduce((acc, c) => acc + (c.unreadCount || 0), 0);
@@ -105,6 +103,9 @@ export const useChatsList = () => {
     setSearchQuery,
     activeFilter,
     setActiveFilter,
+    filterOptions,
+    isFilterBottomSheetOpen,
+    setIsFilterBottomSheetOpen,
     onlinePeers,
     chats: filteredChats,
     totalCount: chats.length,

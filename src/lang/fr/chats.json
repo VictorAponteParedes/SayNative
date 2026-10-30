@@ -65,5 +65,9 @@
       "micTitle": "Message vocal",
       "micMessage": "Maintenez appuyé pour enregistrer un audio."
     }
+  },
+  "filtersModal": {
+    "title": "Filtrer les conversations",
+    "subtitle": "Sélectionnez comment organiser vos messages"
   }
 }

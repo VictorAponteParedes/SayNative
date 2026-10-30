@@ -5,7 +5,7 @@ import { SafeAreaContainer, BottomTabBar, AppText, SearchBar, AppAlert } from '@
 import { ChatsHeader } from '../../components/ChatsHeader';
 import { OnlinePeersRow } from '../../components/OnlinePeersRow';
 import { OnlinePeersSkeleton } from '../../components/OnlinePeersSkeleton';
-import { ChatFilterTabs } from '../../components/ChatFilterTabs';
+import { ChatFiltersBottomSheet } from '../../components/ChatFiltersBottomSheet';
 import { ChatItemCard } from '../../components/ChatItemCard';
 import { ChatItemCardSkeleton } from '../../components/ChatItemCardSkeleton';
 import { DailyTipCard } from '../../components/DailyTipCard';
@@ -23,6 +23,9 @@ export const ChatsScreen: React.FC = () => {
     setSearchQuery,
     activeFilter,
     setActiveFilter,
+    filterOptions,
+    isFilterBottomSheetOpen,
+    setIsFilterBottomSheetOpen,
     onlinePeers,
     chats,
     totalCount,
@@ -41,7 +44,7 @@ export const ChatsScreen: React.FC = () => {
   };
 
   const handleFilterSearch = () => {
-    AppAlert.info('Filtros', 'Filtrar chats por fecha, no leídos o llamadas.');
+    setIsFilterBottomSheetOpen(true);
   };
 
   const handlePeerPress = (peer: OnlinePeer) => {
@@ -98,14 +101,6 @@ export const ChatsScreen: React.FC = () => {
         onPressNewPeer={handleNewChat}
         onPressPeer={handlePeerPress}
       />
-
-      {/* Píldoras de filtrado: Todos, No leídos, Videollamadas */}
-      <ChatFilterTabs
-        activeFilter={activeFilter}
-        totalCount={totalCount}
-        unreadCount={totalUnread}
-        onSelectFilter={setActiveFilter}
-      />
     </View>
   );
 
@@ -124,13 +119,6 @@ export const ChatsScreen: React.FC = () => {
         placeholder={t('searchPlaceholder')}
       />
       <OnlinePeersSkeleton />
-      <ChatFilterTabs
-        activeFilter={activeFilter}
-        totalCount={0}
-        unreadCount={0}
-        isLoading={true}
-        onSelectFilter={setActiveFilter}
-      />
     </View>
   );
 
@@ -176,6 +164,15 @@ export const ChatsScreen: React.FC = () => {
 
       {/* Barra de navegación inferior */}
       <BottomTabBar activeTab="Chats" />
+
+      {/* Modal BottomSheet de filtros procedentes del backend */}
+      <ChatFiltersBottomSheet
+        visible={isFilterBottomSheetOpen}
+        onClose={() => setIsFilterBottomSheetOpen(false)}
+        activeFilter={activeFilter}
+        filterOptions={filterOptions}
+        onSelectFilter={setActiveFilter}
+      />
     </SafeAreaContainer>
   );
 };

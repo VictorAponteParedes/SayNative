@@ -8,6 +8,7 @@ import {
   ChatRoom,
   BackendChatMessage,
   SendMessagePayload,
+  BackendChatFilterOption,
 } from '../types';
 
 export const chatsApi = {
@@ -35,13 +36,19 @@ export const chatsApi = {
   },
 
   /**
-   * Obtiene las conversaciones de chat activas desde el backend.
+   * Obtiene las conversaciones de chat activas desde el backend con filtrado dinámico.
    * Si el endpoint /chats no está disponible aún en el backend,
    * mapea automáticamente a los usuarios reales registrados.
    */
-  async getConversations(currentUserId?: string): Promise<ChatConversation[]> {
+  async getConversations(
+    currentUserId?: string,
+    filter?: string,
+  ): Promise<ChatConversation[]> {
     try {
-      const response = await httpClient.get<ApiResponse<ChatConversation[]> | ChatConversation[]>('/chats', {
+      const url = filter && filter !== 'all' ? `/chats?filter=${filter}` : '/chats';
+      const response = await httpClient.get<
+        ApiResponse<ChatConversation[]> | ChatConversation[]
+      >(url, {
         headers: currentUserId ? { 'x-user-id': currentUserId } : {},
       });
 
@@ -90,6 +97,30 @@ export const chatsApi = {
         ratePerMinute: Number(u.learningCostPerMin) || 10,
       };
     });
+  },
+
+  /**
+   * Obtiene las opciones dinámicas de filtrado desde el backend (Backend-Driven)
+   */
+  async getFilterOptions(
+    currentUserId?: string,
+  ): Promise<BackendChatFilterOption[]> {
+    try {
+      const response = await httpClient.get<
+        ApiResponse<BackendChatFilterOption[]> | BackendChatFilterOption[]
+      >('/chats/filters', {
+        headers: currentUserId ? { 'x-user-id': currentUserId } : {},
+      });
+
+      const rawData =
+        response.data && typeof response.data === 'object' && 'data' in response.data
+          ? (response.data as ApiResponse<BackendChatFilterOption[]>).data
+          : (response.data as BackendChatFilterOption[]);
+
+      return Array.isArray(rawData) ? rawData : [];
+    } catch {
+      return [];
+    }
   },
 
   /**

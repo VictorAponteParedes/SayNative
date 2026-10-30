@@ -65,5 +65,9 @@
       "micTitle": "Voice Note",
       "micMessage": "Hold down to record audio."
     }
+  },
+  "filtersModal": {
+    "title": "Filter conversations",
+    "subtitle": "Select how you want to organize your messages"
   }
 }

@@ -65,5 +65,9 @@
       "micTitle": "音声メッセージ",
       "micMessage": "長押しして音声を録音します。"
     }
+  },
+  "filtersModal": {
+    "title": "チャットを絞り込む",
+    "subtitle": "メッセージの整理方法を選択してください"
   }
 }

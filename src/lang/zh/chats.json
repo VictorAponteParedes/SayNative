@@ -65,5 +65,9 @@
       "micTitle": "语音消息",
       "micMessage": "长按录制语音留言。"
     }
+  },
+  "filtersModal": {
+    "title": "篩選對話",
+    "subtitle": "選擇您希望如何整理您的訊息"
   }
 }

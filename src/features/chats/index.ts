@@ -6,6 +6,7 @@ export * from './components/ChatItemCard';
 export * from './components/OnlinePeersRow';
 export * from './components/ChatsHeader';
 export * from './components/ChatFilterTabs';
+export * from './components/ChatFiltersBottomSheet';
 export * from './components/DailyTipCard';
 export * from './hooks/useChatsList';
 export * from './hooks/usePrivateChat';
