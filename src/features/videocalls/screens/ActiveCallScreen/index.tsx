@@ -26,6 +26,7 @@ export interface ActiveCallScreenProps {
       peerName?: string;
       peerAvatar?: string;
       ratePerMinute?: number;
+      autoAccept?: boolean;
     };
   };
 }
@@ -81,8 +82,11 @@ export const ActiveCallScreen: React.FC<ActiveCallScreenProps> = ({ route }) => 
   });
 
   // Hook de Señalización Socket.IO
+  const hasAutoAcceptedRef = useRef(false);
+
   const {
     initiateCall,
+    acceptCall,
     sendSignal,
     sendIceCandidate,
     endCall: signalEndCall,
@@ -202,6 +206,16 @@ export const ActiveCallScreen: React.FC<ActiveCallScreenProps> = ({ route }) => 
 
     const setupCall = async () => {
       await startLocalMedia();
+
+      // Callee: aceptar recién ahora que el listener 'call:signal' está activo,
+      // así la oferta SDP del caller no se pierde
+      const incomingCallId = route?.params?.callId;
+      if (route?.params?.autoAccept && incomingCallId && !hasAutoAcceptedRef.current) {
+        hasAutoAcceptedRef.current = true;
+        acceptCall(incomingCallId);
+        return;
+      }
+
       const peerIdToCall = currentCall?.peer?.id || route?.params?.peerId;
       const isCallingStatus = (currentCall?.status || 'calling') === 'calling';
       if (peerIdToCall && isCallingStatus && !isCallerRef.current) {
@@ -211,7 +225,7 @@ export const ActiveCallScreen: React.FC<ActiveCallScreenProps> = ({ route }) => 
     };
 
     setupCall();
-  }, [currentCall?.peer?.id, currentCall?.status, initiateCall, peerAvatar, peerName, ratePerMinute, route?.params?.callId, route?.params?.peerId, startLocalMedia]);
+  }, [acceptCall, currentCall?.peer?.id, currentCall?.status, initiateCall, peerAvatar, peerName, ratePerMinute, route?.params?.autoAccept, route?.params?.callId, route?.params?.peerId, startLocalMedia]);
 
   const handleToggleAudio = () => {
     toggleAudio();

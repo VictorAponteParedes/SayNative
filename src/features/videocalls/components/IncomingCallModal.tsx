@@ -76,12 +76,8 @@ export const IncomingCallModal: React.FC = () => {
   const ratePerMinute = incomingCall.caller?.ratePerMinute || 10;
 
   const handleAccept = () => {
-    const socket = getSocket();
-    socket.emit('call:accept', {
-      callId: incomingCall.callId,
-      userId: user.id,
-    });
-
+    // La aceptación ('call:accept') la emite ActiveCallScreen al montar (autoAccept),
+    // para que el listener de la oferta SDP ya exista cuando el caller la envíe.
     initCallSession(
       {
         id: incomingCall.caller?.id || 'caller-id',
@@ -103,6 +99,7 @@ export const IncomingCallModal: React.FC = () => {
       peerName: callerName,
       peerAvatar: callerAvatar,
       ratePerMinute,
+      autoAccept: true,
     });
   };
 

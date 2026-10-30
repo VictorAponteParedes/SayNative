@@ -237,12 +237,6 @@ export const LobbyScreen: React.FC<LobbyScreenProps> = ({ route }) => {
         t('lobby.partnerFound', { defaultValue: '¡Compañero encontrado! Conectando...' })
       );
 
-      // Auto-aceptar la llamada entrante generada por la sala
-      socket.emit('call:accept', {
-        callId: payload.callId,
-        userId: user.id,
-      });
-
       initCallSession(
         {
           id: payload.caller?.id || 'caller',
@@ -262,6 +256,7 @@ export const LobbyScreen: React.FC<LobbyScreenProps> = ({ route }) => {
           peerName: payload.caller?.name || 'Compañero',
           peerAvatar: payload.caller?.avatarUrl,
           ratePerMinute: payload.caller?.ratePerMinute || 10,
+          autoAccept: true,
         });
       }, 600);
     });

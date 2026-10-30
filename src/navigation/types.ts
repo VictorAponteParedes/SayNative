@@ -18,6 +18,7 @@ export type AppStackParamList = {
     peerAvatar?: string;
     peerFlag?: string;
     ratePerMinute?: number;
+    autoAccept?: boolean;
   };
   CallLobby?: {
     peerId?: string;
