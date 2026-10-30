@@ -30,6 +30,53 @@ export const ChatMessageItem: React.FC<ChatMessageItemProps> = ({ message }) => 
   const isUser = message.sender === 'user';
 
   if (isUser) {
+    if (message.isAudio) {
+      return (
+        <View style={styles.userMessageContainer}>
+          <View style={[styles.userBubble, styles.userAudioBubble]}>
+            <View style={styles.audioPlayerRow}>
+              <TouchableOpacity
+                activeOpacity={0.8}
+                onPress={() => setIsPlayingAudio(!isPlayingAudio)}
+                style={styles.userPlayButton}
+              >
+                {isPlayingAudio ? (
+                  <Pause size={16} color={colors.primary} fill={colors.primary} />
+                ) : (
+                  <Play size={16} color={colors.primary} fill={colors.primary} />
+                )}
+              </TouchableOpacity>
+
+              <View style={styles.waveformContainer}>
+                <View style={[styles.bar, { height: 14, backgroundColor: colors.surface }]} />
+                <View style={[styles.bar, { height: 24, backgroundColor: colors.surface }]} />
+                <View style={[styles.bar, { height: 18, backgroundColor: colors.surface }]} />
+                <View style={[styles.bar, { height: 28, backgroundColor: colors.surface }]} />
+                <View style={[styles.bar, { height: 20, backgroundColor: colors.surface }]} />
+                <View style={[styles.bar, { height: 12, backgroundColor: colors.surface }]} />
+                <View style={[styles.bar, { height: 22, backgroundColor: colors.surface }]} />
+                <View style={[styles.bar, { height: 16, backgroundColor: colors.surface }]} />
+                <View style={[styles.bar, { height: 10, backgroundColor: colors.surface }]} />
+              </View>
+
+              <View style={styles.durationWrapper}>
+                <AppText variant="caption" style={[styles.audioDurationText, { color: colors.surface }]}>
+                  {message.audioDuration || '0:15'}
+                </AppText>
+              </View>
+            </View>
+
+            <View style={styles.userFooter}>
+              <AppText variant="caption" style={styles.userTime}>
+                {message.time}
+              </AppText>
+              <CheckCheck size={16} color={colors.primaryLighter} />
+            </View>
+          </View>
+        </View>
+      );
+    }
+
     return (
       <View style={styles.userMessageContainer}>
         <View style={styles.userBubble}>
@@ -167,6 +214,19 @@ const styles = StyleSheet.create({
     paddingVertical: spacing.md,
     borderRadius: 20,
     borderBottomRightRadius: 4,
+  },
+  userAudioBubble: {
+    paddingVertical: spacing.sm + 2,
+    paddingHorizontal: spacing.md,
+  },
+  userPlayButton: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: colors.surface,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: spacing.sm,
   },
   userText: {
     color: colors.textWhite,

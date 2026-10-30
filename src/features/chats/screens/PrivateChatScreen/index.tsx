@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import {
   View,
   ScrollView,
@@ -14,16 +14,18 @@ import { ChatMessageItem } from '../../components/private/ChatMessageItem';
 import { RecommendedTopicsRow } from '../../components/private/RecommendedTopicsRow';
 import { TypingIndicator } from '../../components/private/TypingIndicator';
 import { ChatInputBar } from '../../components/private/ChatInputBar';
-import { usePrivateChat } from '../../hooks/usePrivateChat';
 import { navigate } from '@/navigation/NavigationRef';
 import { Routes } from '@/navigation/routes';
 import { useCallSessionStore } from '@/features/videocalls';
 import { styles } from './styles';
+import usePrivateChat from '../../hooks/usePrivateChat';
 
 export interface PrivateChatScreenProps {
   route?: {
     params?: {
       chatId?: string;
+      roomId?: string;
+      partnerId?: string;
       partnerName?: string;
       partnerAvatar?: string;
       partnerFlag?: string;
@@ -34,18 +36,33 @@ export interface PrivateChatScreenProps {
 
 export const PrivateChatScreen: React.FC<PrivateChatScreenProps> = ({ route }) => {
   const { t } = useTranslation('chats');
+  const partnerId = route?.params?.partnerId || route?.params?.chatId;
+  const initialRoomId = route?.params?.roomId;
   const partnerName = route?.params?.partnerName || 'Sarah Jenkins';
   const partnerFlag = route?.params?.partnerFlag || '🇺🇸';
   const ratePerMinute = route?.params?.ratePerMinute || 10;
+
+  const scrollViewRef = useRef<React.ElementRef<typeof ScrollView>>(null);
 
   const {
     messages,
     inputText,
     setInputText,
     sendMessage,
+    sendAudioMessage,
     selectTopic,
     isPartnerTyping,
-  } = usePrivateChat();
+  } = usePrivateChat({
+    partnerId,
+    initialRoomId,
+    partnerName,
+    partnerFlag,
+    ratePerMinute,
+  });
+
+  useEffect(() => {
+    scrollViewRef.current?.scrollToEnd({ animated: true });
+  }, [messages.length, isPartnerTyping]);
 
   const handleCall = () => {
     const peerId = route?.params?.chatId || 'partner-chat-1';
@@ -100,17 +117,11 @@ export const PrivateChatScreen: React.FC<PrivateChatScreenProps> = ({ route }) =
   };
 
   const handleAiAssist = () => {
-    AppAlert.info(
-      t('privateChat.alerts.aiAssistTitle'),
-      t('privateChat.alerts.aiAssistMessage')
-    );
+    setInputText("That's very interesting! Could you explain that with an example?");
   };
 
   const handleMic = () => {
-    AppAlert.info(
-      t('privateChat.alerts.micTitle'),
-      t('privateChat.alerts.micMessage')
-    );
+    sendAudioMessage('0:14');
   };
 
   return (
@@ -130,6 +141,7 @@ export const PrivateChatScreen: React.FC<PrivateChatScreenProps> = ({ route }) =
         keyboardVerticalOffset={Platform.OS === 'ios' ? 10 : 0}
       >
         <ScrollView
+          ref={scrollViewRef}
           style={styles.container}
           contentContainerStyle={styles.scrollContent}
           showsVerticalScrollIndicator={false}

@@ -11,6 +11,7 @@ export type ChatMessageType = 'text' | 'videocall_ended' | 'missed_call';
 
 export interface ChatConversation {
   id: string;
+  partnerId?: string;
   name: string;
   avatarUrl: string;
   countryFlag: string;
@@ -47,3 +48,47 @@ export interface BackendUserItem {
     isNative: boolean;
   }[];
 }
+
+export interface ChatRoom {
+  id: string;
+  partnerId?: string;
+  partner?: {
+    id: string;
+    fullName?: string;
+    avatar?: { url?: string } | null;
+    countryFlag?: string | null;
+    isOnline?: boolean;
+    learningCostPerMin?: number;
+  };
+  lastMessage?: string;
+  updatedAt?: string;
+}
+
+export interface BackendChatMessage {
+  id: string;
+  roomId?: string;
+  senderId: string;
+  recipientId?: string;
+  text?: string;
+  content?: string;
+  translatedText?: string;
+  isAudio?: boolean;
+  audioUrl?: string;
+  audioDuration?: string;
+  audioSpeed?: string;
+  transcription?: string;
+  createdAt: string;
+  isRead?: boolean;
+}
+
+export interface SendMessagePayload {
+  roomId?: string;
+  recipientId?: string;
+  text: string;
+  translatedText?: string;
+  isAudio?: boolean;
+  audioUrl?: string;
+  audioDuration?: string;
+  transcription?: string;
+}
+

@@ -2,6 +2,7 @@ import { useState, useCallback, useEffect } from 'react';
 import { getSocket } from '@/lib/socketClient';
 import { chatsApi } from '../api/chatsApi';
 import { ChatMessage } from '../components/private/ChatMessageItem';
+import { isUUID } from '../utils/chatUtils';
 
 interface UseChatMessagesParams {
   roomId: string | null;
@@ -50,12 +51,14 @@ export const useChatMessages = ({
 
       setMessages(prev => [...prev, optimisticMessage]);
 
+      const validRoomId = roomId && isUUID(roomId) ? roomId : undefined;
       const socket = getSocket({ namespace: '/chats' });
-      if (socket.connected && roomId && currentUserId) {
+
+      if (socket.connected && currentUserId && (validRoomId || partnerId)) {
         socket.emit('send_message', {
           senderId: currentUserId,
           dto: {
-            roomId,
+            ...(validRoomId ? { roomId: validRoomId } : {}),
             recipientId: partnerId,
             text: textToSend,
           },
@@ -66,7 +69,7 @@ export const useChatMessages = ({
       try {
         if (currentUserId) {
           await chatsApi.sendMessage(currentUserId, {
-            roomId: roomId || undefined,
+            roomId: validRoomId,
             recipientId: partnerId,
             text: textToSend,
           });
@@ -99,12 +102,14 @@ export const useChatMessages = ({
 
       setMessages(prev => [...prev, optimisticAudioMessage]);
 
+      const validRoomId = roomId && isUUID(roomId) ? roomId : undefined;
       const socket = getSocket({ namespace: '/chats' });
-      if (socket.connected && roomId && currentUserId) {
+
+      if (socket.connected && currentUserId && (validRoomId || partnerId)) {
         socket.emit('send_message', {
           senderId: currentUserId,
           dto: {
-            roomId,
+            ...(validRoomId ? { roomId: validRoomId } : {}),
             recipientId: partnerId,
             text: '🎤 Mensaje de voz',
             isAudio: true,
@@ -117,7 +122,7 @@ export const useChatMessages = ({
       try {
         if (currentUserId) {
           await chatsApi.sendMessage(currentUserId, {
-            roomId: roomId || undefined,
+            roomId: validRoomId,
             recipientId: partnerId,
             text: '🎤 Mensaje de voz',
             isAudio: true,

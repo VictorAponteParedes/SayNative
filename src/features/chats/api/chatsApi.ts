@@ -1,7 +1,14 @@
 import httpClient from '@/lib/httpClient';
 import { ApiResponse } from '@/types';
 import { resolveAvatarUrl } from '@/utils/resolveAvatarUrl';
-import { ChatConversation, OnlinePeer, BackendUserItem } from '../types';
+import {
+  ChatConversation,
+  OnlinePeer,
+  BackendUserItem,
+  ChatRoom,
+  BackendChatMessage,
+  SendMessagePayload,
+} from '../types';
 
 export const chatsApi = {
   /**
@@ -44,7 +51,17 @@ export const chatsApi = {
           : (response.data as ChatConversation[]);
 
       if (Array.isArray(rawData) && rawData.length > 0) {
-        return rawData;
+        return rawData.map((item) => {
+          const hasLastMsg = Boolean(item.lastMessage && item.lastMessage.trim().length > 0);
+          return {
+            ...item,
+            lastMessage: hasLastMsg
+              ? item.lastMessage
+              : '¡Hola! Me encantaría practicar idiomas contigo.',
+            time: item.time || 'Hoy',
+            countryFlag: item.countryFlag || '🇪🇸',
+          };
+        });
       }
     } catch {
       // Fallback a los usuarios reales
@@ -57,9 +74,10 @@ export const chatsApi = {
 
       return {
         id: u.id,
+        partnerId: u.id,
         name: u.fullName || 'Compañero',
         avatarUrl: resolveAvatarUrl(u.avatar?.url || ''),
-        countryFlag: u.countryFlag || '🌐',
+        countryFlag: u.countryFlag || '🇪🇸',
         isOnline: true,
         badge: isTeacher ? 'Super Tutor' : undefined,
         lastMessage: hasBio
@@ -112,26 +130,46 @@ export const chatsApi = {
   /**
    * Crea o abre una sala de chat con un compañero
    */
-  async createOrGetRoom(currentUserId: string, partnerId: string): Promise<any> {
-    const response = await httpClient.post<any>(
-      '/chats/rooms',
-      { partnerId },
-      {
-        headers: { 'x-user-id': currentUserId },
+  async createOrGetRoom(currentUserId: string, partnerId: string): Promise<ChatRoom | null> {
+    try {
+      const response = await httpClient.post<ApiResponse<ChatRoom> | ChatRoom>(
+        '/chats/rooms',
+        { partnerId },
+        {
+          headers: { 'x-user-id': currentUserId },
+        }
+      );
+      if (response.data && typeof response.data === 'object' && 'data' in response.data) {
+        return (response.data as ApiResponse<ChatRoom>).data;
       }
-    );
-    return response.data && 'data' in response.data ? response.data.data : response.data;
+      return response.data as ChatRoom;
+    } catch (err: any) {
+      if (__DEV__) {
+        console.warn('[chatsApi] Error al crear/obtener sala:', err?.response?.data || err?.message);
+      }
+      return null;
+    }
   },
 
   /**
    * Obtiene el historial de mensajes de una conversación
    */
-  async getRoomMessages(roomId: string, currentUserId: string): Promise<any[]> {
-    const response = await httpClient.get<any>(`/chats/${roomId}/messages`, {
-      headers: { 'x-user-id': currentUserId },
-    });
-    const list = response.data && 'data' in response.data ? response.data.data : response.data;
-    return Array.isArray(list) ? list : [];
+  async getRoomMessages(roomId: string, currentUserId: string): Promise<BackendChatMessage[]> {
+    try {
+      const response = await httpClient.get<ApiResponse<BackendChatMessage[]> | BackendChatMessage[]>(
+        `/chats/${roomId}/messages`,
+        {
+          headers: { 'x-user-id': currentUserId },
+        }
+      );
+      const list =
+        response.data && typeof response.data === 'object' && 'data' in response.data
+          ? (response.data as ApiResponse<BackendChatMessage[]>).data
+          : (response.data as BackendChatMessage[]);
+      return Array.isArray(list) ? list : [];
+    } catch {
+      return [];
+    }
   },
 
   /**
@@ -139,34 +177,40 @@ export const chatsApi = {
    */
   async sendMessage(
     currentUserId: string,
-    payload: {
-      roomId?: string;
-      recipientId?: string;
-      text: string;
-      translatedText?: string;
-      isAudio?: boolean;
-      audioUrl?: string;
-      audioDuration?: string;
-      transcription?: string;
+    payload: SendMessagePayload
+  ): Promise<BackendChatMessage | null> {
+    try {
+      const response = await httpClient.post<ApiResponse<BackendChatMessage> | BackendChatMessage>(
+        '/chats/messages',
+        payload,
+        {
+          headers: { 'x-user-id': currentUserId },
+        }
+      );
+      if (response.data && typeof response.data === 'object' && 'data' in response.data) {
+        return (response.data as ApiResponse<BackendChatMessage>).data;
+      }
+      return response.data as BackendChatMessage;
+    } catch {
+      return null;
     }
-  ): Promise<any> {
-    const response = await httpClient.post<any>('/chats/messages', payload, {
-      headers: { 'x-user-id': currentUserId },
-    });
-    return response.data && 'data' in response.data ? response.data.data : response.data;
   },
 
   /**
    * Marca los mensajes de la conversación como leídos
    */
   async markAsRead(roomId: string, currentUserId: string): Promise<void> {
-    await httpClient.patch(
-      `/chats/${roomId}/read`,
-      {},
-      {
-        headers: { 'x-user-id': currentUserId },
-      }
-    );
+    try {
+      await httpClient.patch(
+        `/chats/${roomId}/read`,
+        {},
+        {
+          headers: { 'x-user-id': currentUserId },
+        }
+      );
+    } catch {
+      // Ignorar errores al marcar como leído
+    }
   },
 };
 

@@ -47,6 +47,7 @@ export const ChatsScreen: React.FC = () => {
   const handlePeerPress = (peer: OnlinePeer) => {
     navigate(Routes.App.PrivateChat, {
       chatId: peer.id,
+      partnerId: peer.id,
       partnerName: peer.name,
       partnerAvatar: peer.avatarUrl,
       partnerFlag: peer.countryFlag,
@@ -56,7 +57,9 @@ export const ChatsScreen: React.FC = () => {
 
   const handleChatPress = (chat: ChatConversation) => {
     navigate(Routes.App.PrivateChat, {
-      chatId: chat.id,
+      chatId: chat.partnerId || chat.id,
+      roomId: chat.id,
+      partnerId: chat.partnerId,
       partnerName: chat.name,
       partnerAvatar: chat.avatarUrl,
       partnerFlag: chat.countryFlag,

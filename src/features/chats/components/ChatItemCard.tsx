@@ -52,7 +52,7 @@ export const ChatItemCard: React.FC<ChatItemCardProps> = ({ chat, onPress }) => 
               chat.unreadCount ? styles.timeUnread : undefined,
             ]}
           >
-            {chat.time}
+            {chat.time || 'Hoy'}
           </AppText>
         </View>
 
@@ -74,7 +74,7 @@ export const ChatItemCard: React.FC<ChatItemCardProps> = ({ chat, onPress }) => 
                 chat.unreadCount ? styles.unreadMessageText : undefined,
               ]}
             >
-              {chat.lastMessage}
+              {chat.lastMessage || '¡Hola! Me encantaría practicar idiomas contigo.'}
             </AppText>
           </View>
 

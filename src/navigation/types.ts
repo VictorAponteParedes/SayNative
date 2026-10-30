@@ -3,7 +3,9 @@ export type AppStackParamList = {
   Explore: undefined;
   Chats: undefined;
   PrivateChat?: {
-    chatId: string;
+    chatId?: string;
+    roomId?: string;
+    partnerId?: string;
     partnerName?: string;
     partnerAvatar?: string;
     partnerFlag?: string;

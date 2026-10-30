@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, useCallback } from 'react';
 import { getSocket } from '@/lib/socketClient';
 import { BackendChatMessage } from '../types';
 import { ChatMessage } from '../components/private/ChatMessageItem';
-import { formatMessageTime } from '../utils/chatUtils';
+import { formatMessageTime, isUUID } from '../utils/chatUtils';
 
 interface UseChatSocketParams {
   roomId: string | null;
@@ -29,7 +29,7 @@ export const useChatSocket = ({
       socket.emit('chat:register-user', { userId: currentUserId });
     }
 
-    if (roomId && currentUserId) {
+    if (roomId && isUUID(roomId) && currentUserId) {
       socket.emit('join_room', { roomId, userId: currentUserId });
     }
 
@@ -37,6 +37,10 @@ export const useChatSocket = ({
       if (payload.senderId === currentUserId) return;
 
       setIsPartnerTyping(false);
+
+      if (payload.roomId && isUUID(payload.roomId) && currentUserId) {
+        socket.emit('join_room', { roomId: payload.roomId, userId: currentUserId });
+      }
 
       const newMsg: ChatMessage = {
         id: payload.id || `msg_${Date.now()}`,
@@ -91,7 +95,7 @@ export const useChatSocket = ({
       lastTypingEmittedRef.current = now;
       const socket = getSocket({ namespace: '/chats' });
 
-      if (socket.connected && roomId && currentUserId) {
+      if (socket.connected && roomId && isUUID(roomId) && currentUserId) {
         socket.emit('typing', {
           roomId,
           userId: currentUserId,

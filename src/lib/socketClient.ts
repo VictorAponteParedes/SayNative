@@ -9,7 +9,7 @@ const getSocketUrl = (): string => {
   return base.replace(/\/api(\/v1)?\/?$/, '');
 };
 
-let socketInstance: Socket | null = null;
+const socketInstances: Record<string, Socket> = {};
 
 export interface SocketConnectionOptions {
   token?: string;
@@ -17,21 +17,21 @@ export interface SocketConnectionOptions {
 }
 
 /**
- * Obtiene o inicializa la conexión singleton de Socket.IO
+ * Obtiene o inicializa la conexión singleton de Socket.IO según el namespace
  */
 export const getSocket = (options?: SocketConnectionOptions): Socket => {
-  if (socketInstance && socketInstance.connected) {
-    return socketInstance;
+  const rawNamespace = options?.namespace || '/calls';
+  const namespace = rawNamespace.startsWith('/') ? rawNamespace : `/${rawNamespace}`;
+
+  if (socketInstances[namespace] && socketInstances[namespace].connected) {
+    return socketInstances[namespace];
   }
 
   const socketUrl = getSocketUrl();
-  const namespace = options?.namespace || '/calls';
-  const fullUrl = `${socketUrl}${
-    namespace.startsWith('/') ? namespace : `/${namespace}`
-  }`;
+  const fullUrl = `${socketUrl}${namespace}`;
 
-  if (!socketInstance) {
-    socketInstance = io(fullUrl, {
+  if (!socketInstances[namespace]) {
+    const socket = io(fullUrl, {
       autoConnect: false,
       reconnection: true,
       reconnectionAttempts: 5,
@@ -48,41 +48,56 @@ export const getSocket = (options?: SocketConnectionOptions): Socket => {
       },
     });
 
-    socketInstance.on('connect', () => {
+    socket.on('connect', () => {
       if (__DEV__) {
-        console.log('[Socket] Conectado exitosamente a:', fullUrl);
+        console.log(`[Socket ${namespace}] Conectado exitosamente a:`, fullUrl);
       }
       const authUser = require('@/store/useAuthStore').useAuthStore.getState()
         .user;
       if (authUser && authUser.id) {
-        socketInstance?.emit('call:register-user', { userId: authUser.id });
+        if (namespace === '/calls') {
+          socket.emit('call:register-user', { userId: authUser.id });
+        } else if (namespace === '/chats') {
+          socket.emit('chat:register-user', { userId: authUser.id });
+        }
       }
     });
 
-    socketInstance.on('disconnect', reason => {
+    socket.on('disconnect', reason => {
       if (__DEV__) {
-        console.log('[Socket] Desconectado. Razón:', reason);
+        console.log(`[Socket ${namespace}] Desconectado. Razón:`, reason);
       }
     });
 
-    socketInstance.on('connect_error', error => {
+    socket.on('connect_error', error => {
       if (__DEV__) {
-        console.warn('[Socket] Error de conexión a', fullUrl, error.message);
+        console.warn(`[Socket ${namespace}] Error de conexión a`, fullUrl, error.message);
       }
     });
+
+    socketInstances[namespace] = socket;
   }
 
-  return socketInstance;
+  return socketInstances[namespace];
 };
 
 /**
- * Desconecta y limpia la instancia de socket
+ * Desconecta y limpia la instancia de socket del namespace especificado, o todas si no se especifica.
  */
-export const disconnectSocket = (): void => {
-  if (socketInstance) {
-    socketInstance.removeAllListeners();
-    socketInstance.disconnect();
-    socketInstance = null;
+export const disconnectSocket = (namespace?: string): void => {
+  if (namespace) {
+    const cleanNamespace = namespace.startsWith('/') ? namespace : `/${namespace}`;
+    if (socketInstances[cleanNamespace]) {
+      socketInstances[cleanNamespace].removeAllListeners();
+      socketInstances[cleanNamespace].disconnect();
+      delete socketInstances[cleanNamespace];
+    }
+  } else {
+    Object.keys(socketInstances).forEach(key => {
+      socketInstances[key].removeAllListeners();
+      socketInstances[key].disconnect();
+      delete socketInstances[key];
+    });
   }
 };
 
