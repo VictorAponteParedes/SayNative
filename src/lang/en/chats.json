@@ -69,5 +69,47 @@
   "filtersModal": {
     "title": "Filter conversations",
     "subtitle": "Select how you want to organize your messages"
+  },
+  "partnerOptions": {
+    "title": "Contact options",
+    "subtitle": "Actions and privacy settings with {{name}}",
+    "viewProfile": "View profile",
+    "viewProfileDesc": "View bio, spoken languages and ratings",
+    "blockUser": "Block profile",
+    "blockUserDesc": "They won't be able to message or call you",
+    "reportUser": "Report profile",
+    "reportUserDesc": "Report inappropriate behavior or spam to moderation",
+    "blockConfirmTitle": "Block {{name}}?",
+    "blockConfirmMessage": "Are you sure you want to block this user? You will no longer receive messages or calls from them.",
+    "blockConfirmAction": "Block",
+    "cancel": "Cancel",
+    "blockSuccessTitle": "User blocked",
+    "blockSuccessMessage": "You have blocked {{name}} successfully.",
+    "unblockUser": "Unblock profile",
+    "unblockUserDesc": "Allow interacting and sending messages again",
+    "unblockConfirmTitle": "Unblock {{name}}?",
+    "unblockConfirmMessage": "Do you want to unblock this user? You will be able to message and call each other again.",
+    "unblockConfirmAction": "Unblock",
+    "unblockSuccessTitle": "User unblocked",
+    "unblockSuccessMessage": "You have unblocked {{name}} successfully.",
+    "blockedBannerText": "You have blocked this user.",
+    "blockedBannerAction": "Unblock",
+    "reportConfirmTitle": "Report {{name}}?",
+    "reportConfirmMessage": "Do you want to submit a report about this user to our moderation team?",
+    "reportConfirmAction": "Report",
+    "reportSuccessTitle": "Report submitted",
+    "reportSuccessMessage": "Thank you for helping keep our community safe.",
+    "profileSheet": {
+      "title": "User Profile",
+      "subtitle": "Public peer information",
+      "speaks": "Native language",
+      "learning": "Learning",
+      "rate": "Rate",
+      "ratePerMin": "🪙 {{rate}} / min",
+      "startCall": "Start video call",
+      "reviews": "{{count}} reviews",
+      "about": "About me",
+      "defaultBio": "Hi! I love language exchange and exploring new cultures. Let's talk!"
+    }
   }
 }

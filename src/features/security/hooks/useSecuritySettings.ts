@@ -1,26 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 import { useTranslation } from 'react-i18next';
 import { Toast, AppAlert } from '@/components';
 import { useAuthStore } from '@/store/useAuthStore';
 import { colors } from '@/theme';
+import { moderationApi } from '../api/moderationApi';
 import type { BlockedUser, PrivacySettings } from '../types';
-
-const INITIAL_BLOCKED_USERS: BlockedUser[] = [
-  {
-    id: 'block_1',
-    name: 'Marcus_K88',
-    countryCode: 'DE',
-    blockedDate: '12 de Octubre',
-    reasonKey: 'blockedUsers.spamReason',
-  },
-  {
-    id: 'block_2',
-    name: 'User_9104',
-    countryCode: 'US',
-    blockedDate: '28 de Septiembre',
-    reasonKey: 'blockedUsers.behaviorReason',
-  },
-];
 
 export const useSecuritySettings = () => {
   const { t } = useTranslation('security');
@@ -32,8 +17,41 @@ export const useSecuritySettings = () => {
     antiShock: true,
   });
 
-  const [blockedUsers, setBlockedUsers] =
-    useState<BlockedUser[]>(INITIAL_BLOCKED_USERS);
+  const [blockedUsers, setBlockedUsers] = useState<BlockedUser[]>([]);
+  const [isLoadingBlocked, setIsLoadingBlocked] = useState(false);
+
+  const fetchBlockedUsers = useCallback(async () => {
+    try {
+      setIsLoadingBlocked(true);
+      const backendBlocked = await moderationApi.getBlockedUsers();
+      if (Array.isArray(backendBlocked)) {
+        setBlockedUsers(
+          backendBlocked.map((b) => ({
+            id: b.blockedUserId,
+            name: b.name,
+            countryCode: b.countryCode || '🌐',
+            avatarUrl: b.avatarUrl || undefined,
+            blockedDate: b.blockedAt ? new Date(b.blockedAt).toLocaleDateString() : 'Reciente',
+            reasonKey: b.reason || 'blockedUsers.behaviorReason',
+          }))
+        );
+      }
+    } catch (error) {
+      console.log('[useSecuritySettings] Error fetching blocked users:', error);
+    } finally {
+      setIsLoadingBlocked(false);
+    }
+  }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      fetchBlockedUsers();
+    }, [fetchBlockedUsers])
+  );
+
+  useEffect(() => {
+    fetchBlockedUsers();
+  }, [fetchBlockedUsers]);
 
   const handleTogglePrivacy = (key: keyof PrivacySettings, value: boolean) => {
     setPrivacy((prev) => ({ ...prev, [key]: value }));
@@ -57,12 +75,21 @@ export const useSecuritySettings = () => {
       message: t('blockedUsers.unblockConfirmMessage', { name: user.name }),
       cancelText: t('blockedUsers.cancel'),
       confirmText: t('blockedUsers.confirm'),
-      onConfirm: () => {
-        setBlockedUsers((prev) => prev.filter((u) => u.id !== user.id));
-        Toast.success(
-          t('toasts.unblockSuccessTitle'),
-          t('toasts.unblockSuccessMessage', { name: user.name })
-        );
+      onConfirm: async () => {
+        try {
+          await moderationApi.unblockUser(user.id);
+          setBlockedUsers((prev) => prev.filter((u) => u.id !== user.id));
+          Toast.success(
+            t('toasts.unblockSuccessTitle'),
+            t('toasts.unblockSuccessMessage', { name: user.name })
+          );
+        } catch (error: unknown) {
+          const err = error as { response?: { data?: { message?: string } } };
+          Toast.error(
+            'Error',
+            err?.response?.data?.message || 'No se pudo desbloquear al usuario.'
+          );
+        }
       },
     });
   };
@@ -103,6 +130,8 @@ export const useSecuritySettings = () => {
   return {
     privacy,
     blockedUsers,
+    isLoadingBlocked,
+    refetchBlockedUsers: fetchBlockedUsers,
     handleTogglePrivacy,
     handleUnblockUser,
     handleReadGuidelines,

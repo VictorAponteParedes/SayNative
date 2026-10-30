@@ -69,5 +69,47 @@
   "filtersModal": {
     "title": "チャットを絞り込む",
     "subtitle": "メッセージの整理方法を選択してください"
+  },
+  "partnerOptions": {
+    "title": "連絡先オプション",
+    "subtitle": "{{name}}さんに関する操作とプライバシー設定",
+    "viewProfile": "プロフィールを見る",
+    "viewProfileDesc": "自己紹介、言語スキル、評価を確認する",
+    "blockUser": "プロフィールをブロック",
+    "blockUserDesc": "相手はメッセージや通話を送信できなくなります",
+    "reportUser": "プロフィールを通報",
+    "reportUserDesc": "不適切な行動やスパムを運営チームに通報する",
+    "blockConfirmTitle": "{{name}}さんをブロックしますか？",
+    "blockConfirmMessage": "このユーザーをブロックしてもよろしいですか？今後メッセージや通話が届かなくなります。",
+    "blockConfirmAction": "ブロック",
+    "cancel": "キャンセル",
+    "blockSuccessTitle": "ユーザーをブロックしました",
+    "blockSuccessMessage": "{{name}}さんを正常にブロックしました。",
+    "unblockUser": "プロフィールをブロック解除",
+    "unblockUserDesc": "メッセージの送受信や通話を再び許可する",
+    "unblockConfirmTitle": "{{name}} さんのブロックを解除しますか？",
+    "unblockConfirmMessage": "このユーザーのブロックを解除しますか？ 再びメッセージや通話ができるようになります。",
+    "unblockConfirmAction": "解除",
+    "unblockSuccessTitle": "ブロックを解除しました",
+    "unblockSuccessMessage": "{{name}} さんのブロックを解除しました。",
+    "blockedBannerText": "このユーザーをブロックしています。",
+    "blockedBannerAction": "ブロック解除",
+    "reportConfirmTitle": "{{name}}さんを通報しますか？",
+    "reportConfirmMessage": "このユーザーに関する通報をモデレーションチームに送信しますか？",
+    "reportConfirmAction": "通報する",
+    "reportSuccessTitle": "通報を送信しました",
+    "reportSuccessMessage": "安全なコミュニティ作りにご協力いただきありがとうございます。",
+    "profileSheet": {
+      "title": "ユーザープロフィール",
+      "subtitle": "相手の公開プロフィール情報",
+      "speaks": "母国語",
+      "learning": "学習中",
+      "rate": "料金",
+      "ratePerMin": "🪙 {{rate}} / 分",
+      "startCall": "ビデオ通話を開始",
+      "reviews": "{{count}}件の評価",
+      "about": "自己紹介",
+      "defaultBio": "こんにちは！言語交換と異文化交流が大好きです。ぜひ気軽にお話ししましょう！"
+    }
   }
 }

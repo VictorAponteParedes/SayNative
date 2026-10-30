@@ -69,5 +69,47 @@
   "filtersModal": {
     "title": "Filtrar conversaciones",
     "subtitle": "Selecciona cómo deseas organizar tus mensajes"
+  },
+  "partnerOptions": {
+    "title": "Opciones del contacto",
+    "subtitle": "Acciones y privacidad con {{name}}",
+    "viewProfile": "Ver perfil",
+    "viewProfileDesc": "Ver biografía, idiomas que domina y valoraciones",
+    "blockUser": "Bloquear perfil",
+    "blockUserDesc": "No podrá enviarte mensajes ni realizar llamadas",
+    "reportUser": "Reportar perfil",
+    "reportUserDesc": "Notificar conducta inapropiada o spam a moderación",
+    "blockConfirmTitle": "¿Bloquear a {{name}}?",
+    "blockConfirmMessage": "¿Estás seguro de que deseas bloquear a este usuario? Dejarás de recibir sus mensajes y llamadas.",
+    "blockConfirmAction": "Bloquear",
+    "cancel": "Cancelar",
+    "blockSuccessTitle": "Usuario bloqueado",
+    "blockSuccessMessage": "Has bloqueado a {{name}} correctamente.",
+    "unblockUser": "Desbloquear perfil",
+    "unblockUserDesc": "Permitir volver a interactuar y enviar mensajes",
+    "unblockConfirmTitle": "¿Desbloquear a {{name}}?",
+    "unblockConfirmMessage": "¿Deseas desbloquear a este usuario? Podrán volver a enviarse mensajes y realizar llamadas.",
+    "unblockConfirmAction": "Desbloquear",
+    "unblockSuccessTitle": "Usuario desbloqueado",
+    "unblockSuccessMessage": "Has desbloqueado a {{name}} correctamente.",
+    "blockedBannerText": "Has bloqueado a este usuario.",
+    "blockedBannerAction": "Desbloquear",
+    "reportConfirmTitle": "¿Reportar a {{name}}?",
+    "reportConfirmMessage": "¿Deseas enviar un reporte sobre este usuario a nuestro equipo de moderación?",
+    "reportConfirmAction": "Reportar",
+    "reportSuccessTitle": "Reporte recibido",
+    "reportSuccessMessage": "Gracias por ayudarnos a mantener una comunidad segura.",
+    "profileSheet": {
+      "title": "Perfil de usuario",
+      "subtitle": "Información pública del compañero",
+      "speaks": "Idioma nativo",
+      "learning": "Aprendiendo",
+      "rate": "Tarifa",
+      "ratePerMin": "🪙 {{rate}} / min",
+      "startCall": "Iniciar videollamada",
+      "reviews": "{{count}} valoraciones",
+      "about": "Acerca de mí",
+      "defaultBio": "¡Hola! Me encanta intercambiar idiomas y aprender sobre nuevas culturas. ¡Hablemos!"
+    }
   }
 }

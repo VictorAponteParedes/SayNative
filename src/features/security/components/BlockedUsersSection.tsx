@@ -3,7 +3,7 @@ import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ban, UserX } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
 import { colors, spacing } from '@/theme';
-import { AppText } from '@/components';
+import { AppText, Avatar } from '@/components';
 import type { BlockedUser } from '../types';
 
 export interface BlockedUsersSectionProps {
@@ -37,22 +37,33 @@ export const BlockedUsersSection: React.FC<BlockedUsersSectionProps> = ({
           <React.Fragment key={user.id}>
             {index > 0 && <View style={styles.divider} />}
             <View style={styles.userRow}>
-              {/* Avatar con icono de bloqueo */}
-              <View style={styles.avatarPlaceholder}>
-                <UserX size={18} color={colors.textSecondary} />
-              </View>
+              {/* Avatar del usuario o icono de bloqueo */}
+              {user.avatarUrl ? (
+                <Avatar
+                  uri={user.avatarUrl}
+                  name={user.name}
+                  size={42}
+                  flag={user.countryCode}
+                />
+              ) : (
+                <View style={styles.avatarPlaceholder}>
+                  <UserX size={18} color={colors.textSecondary} />
+                </View>
+              )}
 
               {/* Información del usuario */}
               <View style={styles.userInfoColumn}>
                 <AppText variant="body" style={styles.userName}>
-                  {user.name} · {user.countryCode}
+                  {user.name} {user.countryCode ? `· ${user.countryCode}` : ''}
                 </AppText>
                 <AppText variant="caption" style={styles.blockedDate}>
                   {t('blockedUsers.blockedDate', { date: user.blockedDate })}
                 </AppText>
                 <View style={styles.reasonPill}>
                   <AppText variant="caption" style={styles.reasonText}>
-                    {t(user.reasonKey)}
+                    {user.reasonKey?.includes('.')
+                      ? t(user.reasonKey)
+                      : user.reasonKey || t('blockedUsers.behaviorReason')}
                   </AppText>
                 </View>
               </View>

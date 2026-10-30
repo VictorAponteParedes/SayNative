@@ -69,5 +69,47 @@
   "filtersModal": {
     "title": "Filtrar conversas",
     "subtitle": "Selecione como deseja organizar suas mensagens"
+  },
+  "partnerOptions": {
+    "title": "Opções do contato",
+    "subtitle": "Ações e privacidade com {{name}}",
+    "viewProfile": "Ver perfil",
+    "viewProfileDesc": "Ver biografia, idiomas e avaliações",
+    "blockUser": "Bloquear perfil",
+    "blockUserDesc": "O usuário não poderá enviar mensagens nem ligar para você",
+    "reportUser": "Denunciar perfil",
+    "reportUserDesc": "Notificar comportamento inadequado ou spam à moderação",
+    "blockConfirmTitle": "Bloquear {{name}}?",
+    "blockConfirmMessage": "Tem certeza de que deseja bloquear este usuário? Você não receberá mais mensagens ou chamadas dele.",
+    "blockConfirmAction": "Bloquear",
+    "cancel": "Cancelar",
+    "blockSuccessTitle": "Usuário bloqueado",
+    "blockSuccessMessage": "Você bloqueou {{name}} com sucesso.",
+    "unblockUser": "Desbloquear perfil",
+    "unblockUserDesc": "Permitir interagir e enviar mensagens novamente",
+    "unblockConfirmTitle": "Desbloquear {{name}}?",
+    "unblockConfirmMessage": "Deseja desbloquear este usuário? Vocês poderão voltar a enviar mensagens e realizar chamadas.",
+    "unblockConfirmAction": "Desbloquear",
+    "unblockSuccessTitle": "Usuário desbloqueado",
+    "unblockSuccessMessage": "Você desbloqueou {{name}} com sucesso.",
+    "blockedBannerText": "Você bloqueou este usuário.",
+    "blockedBannerAction": "Desbloquear",
+    "reportConfirmTitle": "Denunciar {{name}}?",
+    "reportConfirmMessage": "Deseja enviar uma denúncia sobre este usuário à nossa equipe de moderação?",
+    "reportConfirmAction": "Denunciar",
+    "reportSuccessTitle": "Denúncia enviada",
+    "reportSuccessMessage": "Obrigado por ajudar a manter nossa comunidade segura.",
+    "profileSheet": {
+      "title": "Perfil do usuário",
+      "subtitle": "Informações públicas do parceiro",
+      "speaks": "Idioma nativo",
+      "learning": "Aprendendo",
+      "rate": "Tarifa",
+      "ratePerMin": "🪙 {{rate}} / min",
+      "startCall": "Iniciar videochamada",
+      "reviews": "{{count}} avaliações",
+      "about": "Sobre mim",
+      "defaultBio": "Olá! Adoro intercâmbio de idiomas e conhecer novas culturas. Vamos conversar!"
+    }
   }
 }

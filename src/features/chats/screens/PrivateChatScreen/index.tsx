@@ -1,12 +1,15 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState, useCallback } from 'react';
 import {
   View,
   ScrollView,
   KeyboardAvoidingView,
   Platform,
+  TouchableOpacity,
 } from 'react-native';
+import { Ban } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
-import { SafeAreaContainer, AppText, AppAlert } from '@/components';
+import { SafeAreaContainer, AppText, AppAlert, Toast } from '@/components';
+import { colors } from '@/theme';
 import { PrivateChatHeader } from '../../components/private/PrivateChatHeader';
 import { LearningContextBanner } from '../../components/private/LearningContextBanner';
 import { PartnerCallPill } from '../../components/private/PartnerCallPill';
@@ -14,7 +17,10 @@ import { ChatMessageItem } from '../../components/private/ChatMessageItem';
 import { RecommendedTopicsRow } from '../../components/private/RecommendedTopicsRow';
 import { TypingIndicator } from '../../components/private/TypingIndicator';
 import { ChatInputBar } from '../../components/private/ChatInputBar';
-import { navigate } from '@/navigation/NavigationRef';
+import { ChatPartnerOptionsBottomSheet } from '../../components/private/ChatPartnerOptionsBottomSheet';
+import { PartnerProfileBottomSheet } from '../../components/private/PartnerProfileBottomSheet';
+import { moderationApi } from '@/features/security/api/moderationApi';
+import { navigate, goBack } from '@/navigation/NavigationRef';
 import { Routes } from '@/navigation/routes';
 import { useCallSessionStore } from '@/features/videocalls';
 import { styles } from './styles';
@@ -42,6 +48,24 @@ export const PrivateChatScreen: React.FC<PrivateChatScreenProps> = ({ route }) =
   const partnerAvatar = route?.params?.partnerAvatar;
   const partnerFlag = route?.params?.partnerFlag || '🇺🇸';
   const ratePerMinute = route?.params?.ratePerMinute || 10;
+
+  const [isOptionsOpen, setIsOptionsOpen] = useState(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [isBlockedByMe, setIsBlockedByMe] = useState(false);
+
+  useEffect(() => {
+    let isMounted = true;
+    if (partnerId) {
+      moderationApi.checkBlockStatus(partnerId).then((res) => {
+        if (isMounted) {
+          setIsBlockedByMe(Boolean(res.isBlockedByMe));
+        }
+      });
+    }
+    return () => {
+      isMounted = false;
+    };
+  }, [partnerId]);
 
   const scrollViewRef = useRef<React.ElementRef<typeof ScrollView>>(null);
 
@@ -90,17 +114,159 @@ export const PrivateChatScreen: React.FC<PrivateChatScreenProps> = ({ route }) =
   };
 
   const handleOptions = () => {
-    AppAlert.info(
-      t('privateChat.alerts.optionsTitle'),
-      t('privateChat.alerts.optionsMessage')
-    );
+    setIsOptionsOpen(true);
   };
 
   const handleProfile = () => {
-    AppAlert.info(
-      t('privateChat.alerts.profileTitle'),
-      t('privateChat.alerts.profileMessage', { name: partnerName })
-    );
+    setIsProfileOpen(true);
+  };
+
+  const handleViewProfile = () => {
+    setIsProfileOpen(true);
+  };
+
+  const handleBlockUser = () => {
+    AppAlert.confirm({
+      title: t('partnerOptions.blockConfirmTitle', {
+        name: partnerName,
+        defaultValue: `¿Bloquear a ${partnerName}?`,
+      }),
+      message: t('partnerOptions.blockConfirmMessage', {
+        name: partnerName,
+        defaultValue:
+          '¿Estás seguro de que deseas bloquear a este usuario? Dejarás de recibir sus mensajes y llamadas.',
+      }),
+      cancelText: t('partnerOptions.cancel', { defaultValue: 'Cancelar' }),
+      confirmText: t('partnerOptions.blockConfirmAction', {
+        defaultValue: 'Bloquear',
+      }),
+      confirmColor: colors.danger,
+      onConfirm: async () => {
+        try {
+          if (partnerId) {
+            await moderationApi.blockUser({ blockedId: partnerId });
+          }
+          setIsBlockedByMe(true);
+          Toast.success(
+            t('partnerOptions.blockSuccessTitle', {
+              defaultValue: 'Usuario bloqueado',
+            }),
+            t('partnerOptions.blockSuccessMessage', {
+              name: partnerName,
+              defaultValue: `Has bloqueado a ${partnerName} correctamente.`,
+            })
+          );
+        } catch (error: unknown) {
+          const err = error as { response?: { data?: { message?: string } } };
+          const errMsg =
+            err?.response?.data?.message ||
+            t('partnerOptions.blockError', {
+              defaultValue: 'No se pudo completar el bloqueo en este momento.',
+            });
+          Toast.error(
+            t('partnerOptions.errorTitle', { defaultValue: 'Error' }),
+            errMsg
+          );
+        }
+      },
+    });
+  };
+
+  const handleUnblockUser = () => {
+    AppAlert.confirm({
+      title: t('partnerOptions.unblockConfirmTitle', {
+        name: partnerName,
+        defaultValue: `¿Desbloquear a ${partnerName}?`,
+      }),
+      message: t('partnerOptions.unblockConfirmMessage', {
+        name: partnerName,
+        defaultValue:
+          '¿Deseas desbloquear a este usuario? Podrán volver a enviarse mensajes y realizar llamadas.',
+      }),
+      cancelText: t('partnerOptions.cancel', { defaultValue: 'Cancelar' }),
+      confirmText: t('partnerOptions.unblockConfirmAction', {
+        defaultValue: 'Desbloquear',
+      }),
+      confirmColor: colors.action,
+      onConfirm: async () => {
+        try {
+          if (partnerId) {
+            await moderationApi.unblockUser(partnerId);
+          }
+          setIsBlockedByMe(false);
+          Toast.success(
+            t('partnerOptions.unblockSuccessTitle', {
+              defaultValue: 'Usuario desbloqueado',
+            }),
+            t('partnerOptions.unblockSuccessMessage', {
+              name: partnerName,
+              defaultValue: `Has desbloqueado a ${partnerName} correctamente.`,
+            })
+          );
+        } catch (error: unknown) {
+          const err = error as { response?: { data?: { message?: string } } };
+          const errMsg =
+            err?.response?.data?.message ||
+            t('partnerOptions.unblockError', {
+              defaultValue: 'No se pudo desbloquear al usuario.',
+            });
+          Toast.error(
+            t('partnerOptions.errorTitle', { defaultValue: 'Error' }),
+            errMsg
+          );
+        }
+      },
+    });
+  };
+
+  const handleReportUser = () => {
+    AppAlert.confirm({
+      title: t('partnerOptions.reportConfirmTitle', {
+        name: partnerName,
+        defaultValue: `¿Reportar a ${partnerName}?`,
+      }),
+      message: t('partnerOptions.reportConfirmMessage', {
+        name: partnerName,
+        defaultValue:
+          '¿Deseas enviar un reporte sobre este usuario a nuestro equipo de moderación?',
+      }),
+      cancelText: t('partnerOptions.cancel', { defaultValue: 'Cancelar' }),
+      confirmText: t('partnerOptions.reportConfirmAction', {
+        defaultValue: 'Reportar',
+      }),
+      confirmColor: colors.primary,
+      onConfirm: async () => {
+        try {
+          if (partnerId) {
+            await moderationApi.reportUser({
+              reportedId: partnerId,
+              reason: 'inappropriate_content',
+              details: 'Reportado desde la vista de chat privado',
+            });
+          }
+          Toast.success(
+            t('partnerOptions.reportSuccessTitle', {
+              defaultValue: 'Reporte recibido',
+            }),
+            t('partnerOptions.reportSuccessMessage', {
+              defaultValue:
+                'Gracias por ayudarnos a mantener una comunidad segura.',
+            })
+          );
+        } catch (error: unknown) {
+          const err = error as { response?: { data?: { message?: string } } };
+          const errMsg =
+            err?.response?.data?.message ||
+            t('partnerOptions.reportError', {
+              defaultValue: 'No se pudo enviar el reporte en este momento.',
+            });
+          Toast.error(
+            t('partnerOptions.errorTitle', { defaultValue: 'Error' }),
+            errMsg
+          );
+        }
+      },
+    });
   };
 
   const handleTopicBanner = () => {
@@ -136,6 +302,31 @@ export const PrivateChatScreen: React.FC<PrivateChatScreenProps> = ({ route }) =
         onPressOptions={handleOptions}
         onPressProfile={handleProfile}
       />
+
+      {/* Banner de usuario bloqueado con acción directa de desbloqueo */}
+      {isBlockedByMe && (
+        <View style={styles.blockedBanner}>
+          <View style={styles.blockedBannerLeft}>
+            <Ban size={16} color={colors.danger} />
+            <AppText variant="caption" style={styles.blockedBannerText}>
+              {t('partnerOptions.blockedBannerText', {
+                defaultValue: 'Has bloqueado a este usuario.',
+              })}
+            </AppText>
+          </View>
+          <TouchableOpacity
+            activeOpacity={0.7}
+            onPress={handleUnblockUser}
+            style={styles.unblockBannerButton}
+          >
+            <AppText variant="caption" style={styles.unblockBannerButtonText}>
+              {t('partnerOptions.blockedBannerAction', {
+                defaultValue: 'Desbloquear',
+              })}
+            </AppText>
+          </TouchableOpacity>
+        </View>
+      )}
 
       <KeyboardAvoidingView
         style={styles.keyboardAvoid}
@@ -196,6 +387,32 @@ export const PrivateChatScreen: React.FC<PrivateChatScreenProps> = ({ route }) =
           onPressMic={handleMic}
         />
       </KeyboardAvoidingView>
+
+      {/* BottomSheet de opciones del compañero (Ver perfil, Bloquear, Reportar) */}
+      <ChatPartnerOptionsBottomSheet
+        visible={isOptionsOpen}
+        onClose={() => setIsOptionsOpen(false)}
+        partnerName={partnerName}
+        partnerAvatar={partnerAvatar}
+        partnerFlag={partnerFlag}
+        ratePerMinute={ratePerMinute}
+        isBlocked={isBlockedByMe}
+        onViewProfile={handleViewProfile}
+        onBlockUser={handleBlockUser}
+        onUnblockUser={handleUnblockUser}
+        onReportUser={handleReportUser}
+      />
+
+      {/* BottomSheet de vista rápida de perfil público */}
+      <PartnerProfileBottomSheet
+        visible={isProfileOpen}
+        onClose={() => setIsProfileOpen(false)}
+        partnerName={partnerName}
+        partnerAvatar={partnerAvatar}
+        partnerFlag={partnerFlag}
+        ratePerMinute={ratePerMinute}
+        onStartCall={handleCall}
+      />
     </SafeAreaContainer>
   );
 };

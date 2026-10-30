@@ -69,5 +69,47 @@
   "filtersModal": {
     "title": "篩選對話",
     "subtitle": "選擇您希望如何整理您的訊息"
+  },
+  "partnerOptions": {
+    "title": "联系人选项",
+    "subtitle": "与 {{name}} 的操作与隐私设置",
+    "viewProfile": "查看个人资料",
+    "viewProfileDesc": "查看个人简介、语言技能与用户评价",
+    "blockUser": "屏蔽个人资料",
+    "blockUserDesc": "该用户将无法向你发送消息或发起通话",
+    "reportUser": "举报个人资料",
+    "reportUserDesc": "向管理团队举报不当行为或垃圾信息",
+    "blockConfirmTitle": "屏蔽 {{name}}？",
+    "blockConfirmMessage": "确定要屏蔽该用户吗？你将不再接收来自该用户的消息和通话。",
+    "blockConfirmAction": "屏蔽",
+    "cancel": "取消",
+    "blockSuccessTitle": "已屏蔽用户",
+    "blockSuccessMessage": "你已成功屏蔽 {{name}}。",
+    "unblockUser": "解除屏蔽资料",
+    "unblockUserDesc": "恢复双方互动与发送消息的权限",
+    "unblockConfirmTitle": "解除屏蔽 {{name}}？",
+    "unblockConfirmMessage": "确定要解除对该用户的屏蔽吗？双方将能够恢复互发消息和语音通话。",
+    "unblockConfirmAction": "解除屏蔽",
+    "unblockSuccessTitle": "已解除屏蔽",
+    "unblockSuccessMessage": "已成功解除对 {{name}} 的屏蔽。",
+    "blockedBannerText": "你已屏蔽该用户。",
+    "blockedBannerAction": "解除屏蔽",
+    "reportConfirmTitle": "举报 {{name}}？",
+    "reportConfirmMessage": "确定要向审核团队提交关于该用户的举报吗？",
+    "reportConfirmAction": "举报",
+    "reportSuccessTitle": "举报已提交",
+    "reportSuccessMessage": "感谢你协助维护安全友善的社区环境。",
+    "profileSheet": {
+      "title": "用户资料",
+      "subtitle": "交流伙伴公开信息",
+      "speaks": "母语",
+      "learning": "正在学习",
+      "rate": "费率",
+      "ratePerMin": "🪙 {{rate}} / 分钟",
+      "startCall": "发起视频通话",
+      "reviews": "{{count}} 条评价",
+      "about": "关于我",
+      "defaultBio": "你好！我很喜欢语言交换与探索不同文化。很高兴认识你，期待一起交流！"
+    }
   }
 }

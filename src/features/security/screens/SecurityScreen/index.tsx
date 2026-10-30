@@ -1,6 +1,7 @@
 import React from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, RefreshControl } from 'react-native';
 import { SafeAreaContainer } from '@/components';
+import { colors } from '@/theme';
 import {
   SecurityHeader,
   SafeCommunityBanner,
@@ -15,6 +16,8 @@ export const SecurityScreen: React.FC = () => {
   const {
     privacy,
     blockedUsers,
+    isLoadingBlocked,
+    refetchBlockedUsers,
     handleTogglePrivacy,
     handleUnblockUser,
     handleReadGuidelines,
@@ -30,6 +33,14 @@ export const SecurityScreen: React.FC = () => {
       <ScrollView
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl
+            refreshing={isLoadingBlocked}
+            onRefresh={refetchBlockedUsers}
+            tintColor={colors.primary}
+            colors={[colors.primary]}
+          />
+        }
       >
         {/* Banner Comunidad Segura / SayShield */}
         <SafeCommunityBanner onPressGuidelines={handleReadGuidelines} />

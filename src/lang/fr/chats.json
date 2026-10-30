@@ -69,5 +69,47 @@
   "filtersModal": {
     "title": "Filtrer les conversations",
     "subtitle": "Sélectionnez comment organiser vos messages"
+  },
+  "partnerOptions": {
+    "title": "Options du contact",
+    "subtitle": "Actions et confidentialité avec {{name}}",
+    "viewProfile": "Voir le profil",
+    "viewProfileDesc": "Voir la bio, les langues parlées et les avis",
+    "blockUser": "Bloquer le profil",
+    "blockUserDesc": "Cette personne ne pourra plus vous envoyer de messages ni vous appeler",
+    "reportUser": "Signaler le profil",
+    "reportUserDesc": "Signaler un comportement inapproprié ou du spam à la modération",
+    "blockConfirmTitle": "Bloquer {{name}} ?",
+    "blockConfirmMessage": "Êtes-vous sûr de vouloir bloquer cet utilisateur ? Vous ne recevrez plus ses messages ni ses appels.",
+    "blockConfirmAction": "Bloquer",
+    "cancel": "Annuler",
+    "blockSuccessTitle": "Utilisateur bloqué",
+    "blockSuccessMessage": "Vous avez bloqué {{name}} avec succès.",
+    "unblockUser": "Débloquer le profil",
+    "unblockUserDesc": "Autoriser à nouveau l'échange et l'envoi de messages",
+    "unblockConfirmTitle": "Débloquer {{name}} ?",
+    "unblockConfirmMessage": "Voulez-vous débloquer cet utilisateur ? Vous pourrez de nouveau vous envoyer des messages et passer des appels.",
+    "unblockConfirmAction": "Débloquer",
+    "unblockSuccessTitle": "Utilisateur débloqué",
+    "unblockSuccessMessage": "Vous avez débloqué {{name}} avec succès.",
+    "blockedBannerText": "Vous avez bloqué cet utilisateur.",
+    "blockedBannerAction": "Débloquer",
+    "reportConfirmTitle": "Signaler {{name}} ?",
+    "reportConfirmMessage": "Souhaitez-vous envoyer un signalement concernant cet utilisateur à notre équipe de modération ?",
+    "reportConfirmAction": "Signaler",
+    "reportSuccessTitle": "Signalement envoyé",
+    "reportSuccessMessage": "Merci de nous aider à maintenir une communauté sûre.",
+    "profileSheet": {
+      "title": "Profil utilisateur",
+      "subtitle": "Informations publiques du partenaire",
+      "speaks": "Langue maternelle",
+      "learning": "Apprentissage",
+      "rate": "Tarif",
+      "ratePerMin": "🪙 {{rate}} / min",
+      "startCall": "Lancer l'appel vidéo",
+      "reviews": "{{count}} avis",
+      "about": "À propos de moi",
+      "defaultBio": "Bonjour ! J'adore échanger et découvrir de nouvelles cultures. Parlons ensemble !"
+    }
   }
 }
