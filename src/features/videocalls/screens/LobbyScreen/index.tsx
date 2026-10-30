@@ -134,16 +134,15 @@ export const LobbyScreen: React.FC<LobbyScreenProps> = ({ route }) => {
   // Proceso de emparejamiento en tiempo real vía WebSockets
   useEffect(() => {
     const socket = getSocket();
-    if (!socket.connected) {
-      socket.connect();
-    }
-
-    if (user.id) {
-      socket.emit('call:register-user', { userId: user.id });
-    }
 
     // Si vino con un compañero específico (ej. llamada directa)
     if (initialPeerId && !isInstantMatch) {
+      if (!socket.connected) {
+        socket.connect();
+      }
+      if (user.id) {
+        socket.emit('call:register-user', { userId: user.id });
+      }
       handleConnectWithPeer({
         id: initialPeerId,
         name: initialPeerName || 'Compañero',
@@ -159,15 +158,33 @@ export const LobbyScreen: React.FC<LobbyScreenProps> = ({ route }) => {
       t('lobby.waitingTitle', { defaultValue: 'Esperando a alguien...' })
     );
 
-    socket.emit('call:lobby:join', {
-      userId: user.id,
-      name: user.name,
-      avatarUrl: user.avatarUrl,
-      countryFlag: user.countryFlag,
-      ratePerMinute,
-    });
+    const emitJoin = () => {
+      if (user.id) {
+        if (__DEV__) {
+          console.log('[Lobby] Registrando usuario y uniéndose a lobby:', user.id);
+        }
+        socket.emit('call:register-user', { userId: user.id });
+        socket.emit('call:lobby:join', {
+          userId: user.id,
+          name: user.name,
+          avatarUrl: user.avatarUrl,
+          countryFlag: user.countryFlag,
+          ratePerMinute,
+        });
+      }
+    };
+
+    if (socket.connected) {
+      emitJoin();
+    } else {
+      socket.on('connect', emitJoin);
+      socket.connect();
+    }
 
     socket.on('call:lobby:waiting', () => {
+      if (__DEV__) {
+        console.log('[Lobby] En cola de espera del servidor...');
+      }
       setStatusMessage(
         t('lobby.waitingTitle', { defaultValue: 'Esperando a alguien...' })
       );
@@ -262,6 +279,7 @@ export const LobbyScreen: React.FC<LobbyScreenProps> = ({ route }) => {
     });
 
     return () => {
+      socket.off('connect', emitJoin);
       socket.emit('call:lobby:leave', { userId: user.id });
       socket.off('call:lobby:waiting');
       socket.off('call:lobby:matched');

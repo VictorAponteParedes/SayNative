@@ -18,7 +18,7 @@ export const resolveAvatarUrl = (url?: string | null): string => {
   }
 
   // Si es una ruta relativa del backend (ej: /api/v1/files/..., /files/..., /uploads/...)
-  const baseUrl = API_CONFIG.BASE_URL.replace(/\/api\/v1\/?$/, '');
+  const baseUrl = API_CONFIG.BASE_URL.replace(/\/api(\/v1)?\/?$/, '');
   const cleanPath = url.startsWith('/') ? url : `/${url}`;
   return `${baseUrl}${cleanPath}`;
 };

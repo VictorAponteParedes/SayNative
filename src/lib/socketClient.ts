@@ -6,7 +6,7 @@ import { API_CONFIG } from '@/config/api';
  */
 const getSocketUrl = (): string => {
   const base = API_CONFIG.BASE_URL;
-  return base.replace(/\/api\/v1\/?$/, '');
+  return base.replace(/\/api(\/v1)?\/?$/, '');
 };
 
 let socketInstance: Socket | null = null;
@@ -49,6 +49,9 @@ export const getSocket = (options?: SocketConnectionOptions): Socket => {
     });
 
     socketInstance.on('connect', () => {
+      if (__DEV__) {
+        console.log('[Socket] Conectado exitosamente a:', fullUrl);
+      }
       const authUser = require('@/store/useAuthStore').useAuthStore.getState()
         .user;
       if (authUser && authUser.id) {
@@ -56,12 +59,16 @@ export const getSocket = (options?: SocketConnectionOptions): Socket => {
       }
     });
 
-    socketInstance.on('disconnect', _reason => {
-      // Conexión terminada
+    socketInstance.on('disconnect', reason => {
+      if (__DEV__) {
+        console.log('[Socket] Desconectado. Razón:', reason);
+      }
     });
 
-    socketInstance.on('connect_error', _error => {
-      // Error de conexión
+    socketInstance.on('connect_error', error => {
+      if (__DEV__) {
+        console.warn('[Socket] Error de conexión a', fullUrl, error.message);
+      }
     });
   }
 

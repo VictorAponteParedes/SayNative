@@ -64,8 +64,11 @@ export const useRegister = () => {
       setUserFromBackend(createdUser);
 
       const regToken = createdUser.accessToken || createdUser.token;
-      if (regToken) {
-        setTokens({ token: regToken });
+      if (regToken || createdUser.refreshToken) {
+        setTokens({
+          token: regToken || null,
+          refreshToken: createdUser.refreshToken || null,
+        });
       }
 
       // Acreditar el bono de +50 monedas de bienvenida en el store de monedas
