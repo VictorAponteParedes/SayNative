@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { Languages, CheckCheck, Play, Pause, FileText } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
 import { colors, spacing } from '@/theme';
 import { AppText } from '@/components';
+import { useAuthStore } from '@/store/useAuthStore';
+import { chatsApi } from '../../api/chatsApi';
 
 export interface ChatMessage {
   id: string;
@@ -22,10 +24,49 @@ export interface ChatMessageItemProps {
 }
 
 export const ChatMessageItem: React.FC<ChatMessageItemProps> = ({ message }) => {
-  const { t } = useTranslation('chats');
+  const { t, i18n } = useTranslation('chats');
+  const currentUserId = useAuthStore(s => s.user?.id);
   const [showTranslation, setShowTranslation] = useState<boolean>(false);
   const [isPlayingAudio, setIsPlayingAudio] = useState<boolean>(false);
   const [showTranscription, setShowTranscription] = useState<boolean>(false);
+  const [translatedText, setTranslatedText] = useState<string | null>(
+    message.translatedText || null,
+  );
+  const [isTranslating, setIsTranslating] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (message.translatedText) {
+      setTranslatedText(message.translatedText);
+    }
+  }, [message.translatedText]);
+
+  const handleToggleTranslation = async () => {
+    if (showTranslation) {
+      setShowTranslation(false);
+      return;
+    }
+
+    if (translatedText) {
+      setShowTranslation(true);
+      return;
+    }
+
+    setIsTranslating(true);
+    try {
+      const targetLang = (i18n.language || 'es').toUpperCase();
+      const res = await chatsApi.translateMessage(
+        message.id,
+        currentUserId,
+        targetLang,
+      );
+      if (res?.translatedText) {
+        setTranslatedText(res.translatedText);
+        setShowTranslation(true);
+      }
+    } finally {
+      setIsTranslating(false);
+    }
+  };
 
   const isUser = message.sender === 'user';
 
@@ -171,10 +212,13 @@ export const ChatMessageItem: React.FC<ChatMessageItemProps> = ({ message }) => 
       <View style={styles.partnerBubble}>
         <AppText style={styles.partnerText}>{message.text}</AppText>
 
-        {showTranslation && (
+        {showTranslation && Boolean(translatedText) && (
           <View style={styles.translationBox}>
             <AppText variant="bodySmall" style={styles.translatedText}>
-              {message.translatedText || t('privateChat.translated')}
+              <AppText variant="caption" style={{ fontWeight: '700', color: colors.primary }}>
+                {t('privateChat.translated')}{' '}
+              </AppText>
+              {translatedText}
             </AppText>
           </View>
         )}
@@ -183,12 +227,21 @@ export const ChatMessageItem: React.FC<ChatMessageItemProps> = ({ message }) => 
         <View style={styles.partnerFooter}>
           <TouchableOpacity
             activeOpacity={0.7}
-            onPress={() => setShowTranslation(!showTranslation)}
+            onPress={handleToggleTranslation}
+            disabled={isTranslating}
             style={styles.actionLink}
           >
-            <Languages size={15} color={colors.primary} />
+            {isTranslating ? (
+              <ActivityIndicator size="small" color={colors.primary} />
+            ) : (
+              <Languages size={15} color={colors.primary} />
+            )}
             <AppText variant="caption" style={styles.actionLinkText}>
-              {t('privateChat.translate')}
+              {isTranslating
+                ? t('privateChat.translating')
+                : showTranslation
+                ? t('privateChat.hideTranslation')
+                : t('privateChat.translate')}
             </AppText>
           </TouchableOpacity>
 

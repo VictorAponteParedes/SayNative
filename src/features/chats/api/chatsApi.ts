@@ -212,6 +212,41 @@ export const chatsApi = {
       // Ignorar errores al marcar como leído
     }
   },
+
+  /**
+   * Traduce un mensaje de chat usando DeepL con soporte de caché y circuit breaker
+   */
+  async translateMessage(
+    messageId: string,
+    currentUserId?: string,
+    targetLang = 'ES',
+  ): Promise<{ translatedText: string } | null> {
+    try {
+      const response = await httpClient.post<
+        ApiResponse<{ translatedText: string }> | { translatedText: string }
+      >(
+        `/translations/messages/${messageId}`,
+        { targetLang },
+        {
+          headers: currentUserId ? { 'x-user-id': currentUserId } : {},
+        },
+      );
+
+      if (
+        response.data &&
+        typeof response.data === 'object' &&
+        'data' in response.data
+      ) {
+        return (response.data as ApiResponse<{ translatedText: string }>).data;
+      }
+      return response.data as { translatedText: string };
+    } catch (err: any) {
+      if (__DEV__) {
+        console.warn('[chatsApi] Error al traducir mensaje:', err?.response?.data || err?.message);
+      }
+      return null;
+    }
+  },
 };
 
 export default chatsApi;
