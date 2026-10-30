@@ -1,64 +1,77 @@
 import { useState, useCallback } from 'react';
-import { ChatMessage } from '../components/private/ChatMessageItem';
+import { useAuthStore } from '@/store/useAuthStore';
+import { useChatRoom } from './useChatRoom';
+import { useChatSocket } from './useChatSocket';
+import { useChatMessages } from './useChatMessages';
 
-const INITIAL_MESSAGES: ChatMessage[] = [
-  {
-    id: 'm1',
-    sender: 'partner',
-    text: 'Hi Victor! How are you doing with your English practice?',
-    translatedText: '¡Hola Víctor! ¿Cómo te va con tu práctica de inglés?',
-    time: '10:15 AM',
-  },
-  {
-    id: 'm2',
-    sender: 'user',
-    text: 'Hello Sarah! Pretty good, I want to practice vocabulary today.',
-    time: '10:16 AM',
-  },
-  {
-    id: 'm3',
-    sender: 'partner',
-    isAudio: true,
-    audioDuration: '0:28',
-    audioSpeed: '1x',
-    transcription:
-      "Sounds great! Let's focus on daily conversational vocabulary and idioms.",
-    time: '10:18 AM',
-  },
-];
+export interface UsePrivateChatProps {
+  partnerId?: string;
+  partnerName?: string;
+  partnerFlag?: string;
+  ratePerMinute?: number;
+  initialRoomId?: string;
+}
 
-export const usePrivateChat = () => {
-  const [messages, setMessages] = useState<ChatMessage[]>(INITIAL_MESSAGES);
-  const [inputText, setInputText] = useState<string>('');
-  const [isPartnerTyping] = useState<boolean>(true);
+export const usePrivateChat = (props: UsePrivateChatProps = {}) => {
+  const { partnerId, initialRoomId } = props;
+  const user = useAuthStore(s => s.user);
+  const currentUserId = user?.id;
 
-  const sendMessage = useCallback(() => {
-    if (inputText.trim() === '') return;
+  const [inputText, setInputText] = useState('');
 
-    const newMessage: ChatMessage = {
-      id: `msg_${Date.now()}`,
-      sender: 'user',
-      text: inputText.trim(),
-      time: new Date().toLocaleTimeString([], {
-        hour: '2-digit',
-        minute: '2-digit',
-      }),
-    };
+  // 1. Sala + historial
+  const { roomId, isLoadingMessages, initialMessages } = useChatRoom({
+    currentUserId,
+    partnerId,
+    initialRoomId,
+  });
 
-    setMessages((prev) => [...prev, newMessage]);
+  // 3. Mensajes + envío
+  const { messages, addMessage, sendMessage, sendAudioMessage } =
+    useChatMessages({
+      roomId,
+      currentUserId,
+      partnerId,
+      initialMessages,
+    });
+
+  // 2. Socket (recibe mensajes y typing)
+  const { isPartnerTyping, emitTyping } = useChatSocket({
+    roomId,
+    currentUserId,
+    onIncomingMessage: addMessage,
+  });
+
+  // Input + notificación de escritura
+  const handleInputChange = useCallback(
+    (text: string) => {
+      setInputText(text);
+      emitTyping(text.trim().length > 0);
+    },
+    [emitTyping],
+  );
+
+  const handleSendMessage = useCallback(async () => {
+    if (!inputText.trim()) return;
+    const text = inputText;
     setInputText('');
-  }, [inputText]);
+    await sendMessage(text);
+  }, [inputText, sendMessage]);
 
   const selectTopic = useCallback((topic: string) => {
-    setInputText(`Let's talk about: ${topic}.`);
+    setInputText(`Let's talk about: ${topic}. What do you think?`);
   }, []);
 
   return {
     messages,
     inputText,
-    setInputText,
-    sendMessage,
+    setInputText: handleInputChange,
+    sendMessage: handleSendMessage,
+    sendAudioMessage,
     selectTopic,
     isPartnerTyping,
+    isLoadingMessages,
   };
 };
+
+export default usePrivateChat;

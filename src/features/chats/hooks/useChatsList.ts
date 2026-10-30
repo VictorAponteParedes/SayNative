@@ -1,11 +1,12 @@
 import { useState, useMemo, useCallback, useEffect } from 'react';
 import { useAuthStore } from '@/store/useAuthStore';
+import { getSocket } from '@/lib/socketClient';
 import { useChatsStore } from '../store/useChatsStore';
 import { chatsApi } from '../api/chatsApi';
 import { ChatFilterType } from '../types';
 
 export const useChatsList = () => {
-  const currentUserId = useAuthStore((s) => s.user.id);
+  const currentUserId = useAuthStore(s => s.user.id);
   const {
     chats,
     onlinePeers,
@@ -41,13 +42,35 @@ export const useChatsList = () => {
     fetchChats();
   }, [fetchChats]);
 
+  // Escuchar mensajes en tiempo real desde el socket de chats para actualizar la lista
+  useEffect(() => {
+    const socket = getSocket({ namespace: '/chats' });
+    if (!socket.connected) {
+      socket.connect();
+    }
+
+    if (currentUserId) {
+      socket.emit('chat:register-user', { userId: currentUserId });
+    }
+
+    const handleNewMessage = () => {
+      fetchChats();
+    };
+
+    socket.on('new_message', handleNewMessage);
+
+    return () => {
+      socket.off('new_message', handleNewMessage);
+    };
+  }, [currentUserId, fetchChats]);
+
   const onRefresh = useCallback(async () => {
     setIsRefreshing(true);
     await fetchChats();
   }, [fetchChats, setIsRefreshing]);
 
   const filteredChats = useMemo(() => {
-    return chats.filter((item) => {
+    return chats.filter(item => {
       const matchesSearch =
         searchQuery.trim() === '' ||
         item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
