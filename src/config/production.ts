@@ -2,7 +2,7 @@ import { AppConfig } from './types';
 
 export const config: AppConfig = {
   appName: 'AmistTalk',
-  baseUrl: 'https://api.amistappofficial.com/api',
+  baseUrl: 'https://amisttalk-backend.onrender.com/api/v1',
   environment: 'production',
   timeout: 10000,
   googleWebClientId:
