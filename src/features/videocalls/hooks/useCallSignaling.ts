@@ -71,9 +71,12 @@ export const useCallSignaling = (handlers?: UseCallSignalingHandlers) => {
     });
 
     // Escuchar señalización SDP (oferta o respuesta)
-    socket.on('call:signal', async (payload: { callId: string; signal: SignalData; senderId?: string }) => {
-      // Ignorar señales reflejadas emitidas por el propio cliente
-      if (payload.senderId && payload.senderId === currentUserId) {
+    socket.on('call:signal', async (payload: { callId: string; signal: SignalData; senderId?: string; senderSocketId?: string }) => {
+      // Ignorar señales reflejadas emitidas por el propio socket cliente
+      if (payload.senderSocketId && payload.senderSocketId === socket.id) {
+        return;
+      }
+      if (!payload.senderSocketId && payload.senderId && payload.senderId === currentUserId) {
         return;
       }
 
@@ -85,9 +88,12 @@ export const useCallSignaling = (handlers?: UseCallSignalingHandlers) => {
     });
 
     // Escuchar candidato ICE remoto
-    socket.on('call:ice-candidate', async (payload: { callId: string; candidate: IceCandidateData; senderId?: string }) => {
+    socket.on('call:ice-candidate', async (payload: { callId: string; candidate: IceCandidateData; senderId?: string; senderSocketId?: string }) => {
       // Ignorar candidatos ICE propios
-      if (payload.senderId && payload.senderId === currentUserId) {
+      if (payload.senderSocketId && payload.senderSocketId === socket.id) {
+        return;
+      }
+      if (!payload.senderSocketId && payload.senderId && payload.senderId === currentUserId) {
         return;
       }
 
