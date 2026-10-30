@@ -16,6 +16,7 @@ export * from './ui/AppLogo';
 export * from './ui/Skeleton';
 export * from './ui/ConfirmModal';
 export * from './ui/ConfirmModalContainer';
+export * from './ui/ChatBubbleIcon';
 export { AppAlert, useModalStore } from '@/store/useModalStore';
 export type { ModalOptions } from '@/store/useModalStore';
 export * from './layout/SafeAreaContainer';

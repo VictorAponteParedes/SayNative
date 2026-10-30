@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
-import { Star, MessageSquare, Video } from 'lucide-react-native';
+import { Star, Video } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
 import { colors, spacing, borderRadius } from '@/theme';
-import { AppText, Avatar, Tag } from '@/components';
+import { AppText, Avatar, Tag, ChatBubbleIcon } from '@/components';
 import { PeerUser } from '../types';
 
 export interface PeerCardProps {
@@ -77,7 +77,7 @@ export const PeerCard: React.FC<PeerCardProps> = ({
           onPress={() => onPressChat(peer)}
           style={styles.chatButton}
         >
-          <MessageSquare size={16} color={colors.textSecondary} />
+          <ChatBubbleIcon size={18} color={colors.textSecondary} />
         </TouchableOpacity>
 
         <TouchableOpacity

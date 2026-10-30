@@ -1,9 +1,9 @@
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
-import { Star, MessageSquare, Video, Check } from 'lucide-react-native';
+import { Star, Video, Check } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
 import { colors, spacing, borderRadius } from '@/theme';
-import { AppText, Avatar, Tag } from '@/components';
+import { AppText, Avatar, Tag, ChatBubbleIcon } from '@/components';
 import { SpeakerUser } from '../types';
 
 export interface SpeakerCardProps {
@@ -102,7 +102,7 @@ export const SpeakerCard: React.FC<SpeakerCardProps> = ({
           onPress={() => onPressChat(speaker)}
           style={styles.chatButton}
         >
-          <MessageSquare size={18} color={colors.textPrimary} />
+          <ChatBubbleIcon size={20} color={colors.textPrimary} />
         </TouchableOpacity>
 
         <TouchableOpacity
