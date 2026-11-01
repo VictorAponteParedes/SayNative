@@ -63,7 +63,7 @@ export const RegisterScreen: React.FC = () => {
           keyboardShouldPersistTaps="handled"
           bounces={false}
         >
-          {/* Header con imagen de fondo, icono morado, SayNative y selector de idioma */}
+          {/* Header con imagen de fondo, icono morado, AmistTalk y selector de idioma */}
           <RegisterHeader
             onBack={handleBack}
             onPressLanguage={() => setIsLanguageSheetOpen(true)}

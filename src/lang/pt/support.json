@@ -31,9 +31,9 @@
     "q1": "Como ganho moedas ensinando meu idioma?",
     "a1": "Ative o 'Modo Ensinar' no seu perfil e permaneça disponível. Quando um aluno ligar para você, você ganhará moedas automaticamente por minuto de conversa.",
     "q2": "Por que as chamadas são cobradas por minuto?",
-    "a2": "O SayNative funciona com uma economia comunitária fechada. A tarifa remunera o tempo e a dedicação do falante nativo, garantindo alta disponibilidade.",
+    "a2": "O AmistTalk funciona com uma economia comunitária fechada. A tarifa remunera o tempo e a dedicação do falante nativo, garantindo alta disponibilidade.",
     "q3": "Posso resgatar minhas moedas em dinheiro real?",
-    "a3": "No momento, as moedas são de uso exclusivo dentro do SayNative para praticar com tutores. Em breve lançaremos um programa para criadores verificados.",
+    "a3": "No momento, as moedas são de uso exclusivo dentro do AmistTalk para praticar com tutores. Em breve lançaremos um programa para criadores verificados.",
     "q4": "O que acontece se a chamada cair nos primeiros segundos?",
     "a4": "Se uma chamada for encerrada nos primeiros 15 segundos devido a problemas técnicos ou queda de conexão, nenhuma moeda será descontada do seu saldo."
   },
@@ -52,6 +52,6 @@
     "sentSuccessMessage": "Sua solicitação foi enviada ao suporte. Responderemos em menos de 2 horas."
   },
   "footer": {
-    "text": "SayNative Help Center v1.0.0 · Guias e Diretrizes da Comunidade"
+    "text": "AmistTalk Help Center v1.0.0 · Guias e Diretrizes da Comunidade"
   }
 }

@@ -4,11 +4,11 @@
   },
   "safeCommunity": {
     "title": "安全社区保障",
-    "badge": "SayShield",
-    "description": "在 SayNative，我们提倡相互尊重与多元包容的语言交流环境。对任何骚扰、不当言论或违规举动坚决实施零容忍严惩政策。",
+    "badge": "AmistShield",
+    "description": "在 AmistTalk，我们提倡相互尊重与多元包容的语言交流环境。对任何骚扰、不当言论或违规举动坚决实施零容忍严惩政策。",
     "guidelinesLink": "阅读社区文明守则 →",
     "guidelinesTitle": "社区文明守则",
-    "guidelinesMessage": "SayNative 致力于构建安全健康的环境。严厉禁止骚扰、露骨敏感内容以及任何形式的歧视。"
+    "guidelinesMessage": "AmistTalk 致力于构建安全健康的环境。严厉禁止骚扰、露骨敏感内容以及任何形式的歧视。"
   },
   "privacy": {
     "sectionTitle": "隐私安全设置",
@@ -17,9 +17,6 @@
     "hideAgeDesc": "其他语伴将仅能查看你所在的国家/地区以及对应的外语水平等级。",
     "reputationFilterTitle": "通话好评门槛过滤",
     "reputationFilterDesc": "仅接收综合好评度高于 4.0 星级的语伴发起的语音/视频请求。",
-    "antiShockTitle": "通话防意外防窥保护",
-    "recommendedBadge": "官方推荐",
-    "antiShockDesc": "在视频接通的前 5 秒内自动虚化对方摄像头画面，直到你手动确认网络安全。",
     "readReceiptsTitle": "已读回执",
     "readReceiptsDesc": "允许你查看其他人是否已阅读你的消息，并在你阅读他们的消息时发送确认。"
   },
@@ -59,8 +56,10 @@
     "readReceiptsEnabledMessage": "你现在可以查看其他人是否已阅读你的消息。",
     "readReceiptsDisabledTitle": "已禁用已读回执",
     "readReceiptsDisabledMessage": "你将不会发送或看到已读确认。",
-    "antiShockEnabledTitle": "防窥保护已开启",
-    "antiShockEnabledMessage": "视频通话接通前 5 秒内将自动对摄像头画面应用虚化滤镜。",
+    "reputationFilterEnabledTitle": "好评门槛过滤已开启",
+    "reputationFilterEnabledMessage": "你将仅接收综合评分 4.0 星级以上的通话请求。",
+    "reputationFilterDisabledTitle": "好评门槛过滤已关闭",
+    "reputationFilterDisabledMessage": "你现在可以接收来自所有用户的通话请求。",
     "accountDeletedTitle": "账号已彻底注销",
     "accountDeletedMessage": "你的所有个人数据已从系统中完全抹除并安全退出。"
   }

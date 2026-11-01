@@ -58,6 +58,9 @@
     "peerDisconnected": "{{name}} 已离开通话。",
     "connectionFailed": "无法与同伴建立点对点直连。",
     "callRejected": "{{name}} 拒绝了通话。",
+    "callFilteredTitle": "通话已过滤",
+    "callFilteredMessage": "已自动拦截来自评分低于 4.0 星级用户的来电。",
+    "callFilteredByRecipient": "{{name}} 仅接收好评度高于 4.0 星级语伴的通话请求。",
     "callTimeout": "通话无应答。"
   }
 }

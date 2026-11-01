@@ -55,7 +55,7 @@
     "guaranteed": "公式品質保証"
   },
   "legal": {
-    "disclaimer": "購入を確定すると、Apple App Store または Google Play アカウントに請求されます。仮想コインは SayNative 内での通話やレッスン専用であり、法定通貨としての価値や払い戻しはありません。",
+    "disclaimer": "購入を確定すると、Apple App Store または Google Play アカウントに請求されます。仮想コインは AmistTalk 内での通話やレッスン専用であり、法定通貨としての価値や払い戻しはありません。",
     "restore": "購入を復元",
     "terms": "利用規約",
     "privacy": "プライバシーポリシー"
@@ -106,7 +106,7 @@
       "accountId": "アカウントID: LL-849204 · SSL暗号化による安全な取引",
       "calendarTitle": "日付で絞り込み",
       "calendarMessage": "確認したい期間を選択してください。",
-      "supportTitle": "SayNative サポート",
+      "supportTitle": "AmistTalk サポート",
       "supportMessage": "サポート担当者がコイン明細について詳しくお答えします。"
     }
   },

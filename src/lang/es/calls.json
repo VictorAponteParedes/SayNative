@@ -58,6 +58,9 @@
     "peerDisconnected": "{{name}} se ha desconectado de la llamada.",
     "connectionFailed": "No se pudo establecer la conexión directa con el compañero.",
     "callRejected": "{{name}} rechazó la llamada.",
+    "callFilteredTitle": "Llamada filtrada",
+    "callFilteredMessage": "Se rechazó automáticamente una llamada con valoración inferior a 4.0 estrellas.",
+    "callFilteredByRecipient": "{{name}} solo acepta solicitudes con valoración superior a 4.0 estrellas.",
     "callTimeout": "No hubo respuesta a la llamada."
   }
 }

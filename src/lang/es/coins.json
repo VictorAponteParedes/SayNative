@@ -55,7 +55,7 @@
     "guaranteed": "Garantizado"
   },
   "legal": {
-    "disclaimer": "El importe se cargará a tu cuenta de Apple App Store o Google Play al confirmar la compra. Las monedas virtuales son de uso exclusivo dentro de SayNative para videollamadas y tutorías comunitarias; no tienen valor en moneda de curso legal ni son reembolsables.",
+    "disclaimer": "El importe se cargará a tu cuenta de Apple App Store o Google Play al confirmar la compra. Las monedas virtuales son de uso exclusivo dentro de AmistTalk para videollamadas y tutorías comunitarias; no tienen valor en moneda de curso legal ni son reembolsables.",
     "restore": "Restaurar compras",
     "terms": "Términos",
     "privacy": "Privacidad"
@@ -106,7 +106,7 @@
       "accountId": "ID de Cuenta: LL-849204 · Transacciones seguras con cifrado SSL",
       "calendarTitle": "Filtrar por fecha",
       "calendarMessage": "Selecciona un rango de fechas para consultar tus transacciones.",
-      "supportTitle": "Soporte SayNative",
+      "supportTitle": "Soporte AmistTalk",
       "supportMessage": "Nuestro equipo de soporte revisará cualquier consulta sobre tus cobros."
     }
   },

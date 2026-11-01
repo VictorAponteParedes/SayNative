@@ -4,11 +4,11 @@
   },
   "safeCommunity": {
     "title": "Comunidade Segura",
-    "badge": "SayShield",
-    "description": "No SayNative promovemos um espaço de respeito e enriquecimento mútuo. Assédio, linguagem inadequada ou má conduta são estritamente proibidos com tolerância zero.",
+    "badge": "AmistShield",
+    "description": "No AmistTalk promovemos um espaço de respeito e enriquecimento mútuo. Assédio, linguagem inadequada ou má conduta são estritamente proibidos com tolerância zero.",
     "guidelinesLink": "Ler Normas de Convivência →",
     "guidelinesTitle": "Normas de Convivência",
-    "guidelinesMessage": "O SayNative promove respeito, diversidade e integridade. É estritamente proibido assédio, conteúdo sensível e discriminação."
+    "guidelinesMessage": "O AmistTalk promove respeito, diversidade e integridade. É estritamente proibido assédio, conteúdo sensível e discriminação."
   },
   "privacy": {
     "sectionTitle": "AJUSTES DE PRIVACIDADE",
@@ -17,9 +17,6 @@
     "hideAgeDesc": "Outros estudantes verão apenas seu país de residência e nível de proficiência no idioma.",
     "reputationFilterTitle": "Filtro de reputação para chamadas",
     "reputationFilterDesc": "Aceitar apenas solicitações de voz/vídeo de colegas com avaliação superior a 4.0 estrelas.",
-    "antiShockTitle": "Proteção anti-shock",
-    "recommendedBadge": "Recomendado",
-    "antiShockDesc": "Desfoca a câmera recebida durante os primeiros 5 segundos de cada chamada até você confirmar a conexão.",
     "readReceiptsTitle": "Confirmações de leitura",
     "readReceiptsDesc": "Permite ver se outros usuários leram suas mensagens e confirma quando você ler as deles."
   },
@@ -59,8 +56,10 @@
     "readReceiptsEnabledMessage": "Agora você poderá ver quando lerem suas mensagens.",
     "readReceiptsDisabledTitle": "Confirmações de leitura desativadas",
     "readReceiptsDisabledMessage": "Você não verá nem enviará confirmações de leitura.",
-    "antiShockEnabledTitle": "Anti-shock ativado",
-    "antiShockEnabledMessage": "A câmera recebida será desfocada durante os primeiros 5 segundos.",
+    "reputationFilterEnabledTitle": "Filtro de reputação ativado",
+    "reputationFilterEnabledMessage": "Você só receberá chamadas de usuários com mais de 4.0 estrelas.",
+    "reputationFilterDisabledTitle": "Filtro de reputação desativado",
+    "reputationFilterDisabledMessage": "Você poderá receber chamadas de qualquer usuário.",
     "accountDeletedTitle": "Conta excluída",
     "accountDeletedMessage": "Sua conta e dados pessoais foram removidos do sistema."
   }

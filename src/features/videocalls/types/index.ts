@@ -24,6 +24,7 @@ export interface CallParticipant {
   countryFlag?: string;
   role: 'caller' | 'callee';
   ratePerMinute: number;
+  rating?: number;
 }
 
 export interface CallSession {

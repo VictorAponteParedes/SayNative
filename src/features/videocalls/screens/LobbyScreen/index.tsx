@@ -19,6 +19,7 @@ import { navigate, goBack } from '@/navigation/NavigationRef';
 import { Routes } from '@/navigation/routes';
 import { useAuthStore } from '@/store/useAuthStore';
 import { useCoinsStore } from '@/features/coins';
+import { usePrivacyStore } from '@/features/security';
 import { getSocket } from '@/lib/socketClient';
 import { IncomingCallPayload } from '../../types';
 import { useCallSessionStore } from '../../store/useCallSessionStore';
@@ -163,6 +164,7 @@ export const LobbyScreen: React.FC<LobbyScreenProps> = ({ route }) => {
         if (__DEV__) {
           console.log('[Lobby] Registrando usuario y uniéndose a lobby:', user.id);
         }
+        const reputationFilterActive = usePrivacyStore.getState().settings.reputationFilter;
         socket.emit('call:register-user', { userId: user.id });
         socket.emit('call:lobby:join', {
           userId: user.id,
@@ -170,6 +172,8 @@ export const LobbyScreen: React.FC<LobbyScreenProps> = ({ route }) => {
           avatarUrl: user.avatarUrl,
           countryFlag: user.countryFlag,
           ratePerMinute,
+          rating: user.rating,
+          minRating: reputationFilterActive ? 4.0 : 0,
         });
       }
     };

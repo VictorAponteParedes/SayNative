@@ -4,11 +4,11 @@
   },
   "safeCommunity": {
     "title": "Communauté sécurisée",
-    "badge": "SayShield",
-    "description": "Chez SayNative, nous encourageons un espace d'échange respectueux et bienveillant. Le harcèlement, les propos inappropriés ou les comportements abusifs sont strictement interdits selon le principe de tolérance zéro.",
+    "badge": "AmistShield",
+    "description": "Chez AmistTalk, nous encourageons un espace d'échange respectueux et bienveillant. Le harcèlement, les propos inappropriés ou les comportements abusifs sont strictement interdits selon le principe de tolérance zéro.",
     "guidelinesLink": "Consulter les règles de la communauté →",
     "guidelinesTitle": "Règles de la communauté",
-    "guidelinesMessage": "SayNative prône le respect, la diversité et l'intégrité. Tout harcèlement, contenu sensible ou comportement discriminatoire est formellement interdit."
+    "guidelinesMessage": "AmistTalk prône le respect, la diversité et l'intégrité. Tout harcèlement, contenu sensible ou comportement discriminatoire est formellement interdit."
   },
   "privacy": {
     "sectionTitle": "PARAMÈTRES DE CONFIDENTIALITÉ",
@@ -17,9 +17,6 @@
     "hideAgeDesc": "Les autres apprenants verront uniquement votre pays de résidence et votre niveau linguistique.",
     "reputationFilterTitle": "Filtre de réputation pour les appels",
     "reputationFilterDesc": "N'accepter que les demandes vocales/vidéo de partenaires ayant une note supérieure à 4,0 étoiles.",
-    "antiShockTitle": "Protection anti-choc",
-    "recommendedBadge": "Recommandé",
-    "antiShockDesc": "Floute la caméra entrante pendant les 5 premières secondes de chaque appel jusqu'à ce que vous confirmiez la connexion.",
     "readReceiptsTitle": "Confirmations de lecture",
     "readReceiptsDesc": "Permet de voir si d'autres utilisateurs ont lu vos messages et confirme quand vous lisez les leurs."
   },
@@ -59,8 +56,10 @@
     "readReceiptsEnabledMessage": "Vous pouvez maintenant voir quand vos messages sont lus.",
     "readReceiptsDisabledTitle": "Confirmations de lecture désactivées",
     "readReceiptsDisabledMessage": "Vous ne verrez ni n'enverrez de confirmations de lecture.",
-    "antiShockEnabledTitle": "Anti-choc activé",
-    "antiShockEnabledMessage": "La caméra entrante sera floutée pendant les 5 premières secondes d'appel vidéo.",
+    "reputationFilterEnabledTitle": "Filtre de réputation activé",
+    "reputationFilterEnabledMessage": "Vous ne recevrez que les appels des utilisateurs ayant plus de 4,0 étoiles.",
+    "reputationFilterDisabledTitle": "Filtre de réputation désactivé",
+    "reputationFilterDisabledMessage": "Vous pouvez désormais recevoir des appels de n'importe quel utilisateur.",
     "accountDeletedTitle": "Compte supprimé",
     "accountDeletedMessage": "Votre compte et vos données ont été définitivement supprimés."
   }

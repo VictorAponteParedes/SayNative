@@ -58,6 +58,9 @@
     "peerDisconnected": "{{name}} s'est déconnecté.",
     "connectionFailed": "Impossible d'établir la connexion directe avec le partenaire.",
     "callRejected": "{{name}} a refusé l'appel.",
+    "callFilteredTitle": "Appel filtré",
+    "callFilteredMessage": "Appel entrant refusé automatiquement car la note est inférieure à 4,0 étoiles.",
+    "callFilteredByRecipient": "{{name}} n'accepte que les appels de partenaires notés à plus de 4,0 étoiles.",
     "callTimeout": "Pas de réponse à l'appel."
   }
 }

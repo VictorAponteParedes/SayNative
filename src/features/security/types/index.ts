@@ -11,6 +11,5 @@ export interface BlockedUser {
 export interface PrivacySettings {
   hideAge: boolean;
   reputationFilter: boolean;
-  antiShock: boolean;
   readReceipts: boolean;
 }

@@ -33,7 +33,7 @@ export const requestCameraPermission = async (): Promise<boolean> => {
         }),
         message: i18n.t('profile:changePhotoSheet.permissionDeniedMessage', {
           defaultValue:
-            'SayNative necesita acceso a tu cámara para que puedas tomarte una foto de perfil.',
+            'AmistTalk necesita acceso a tu cámara para que puedas tomarte una foto de perfil.',
         }),
         buttonNeutral: i18n.t('profile:account.cancel', {
           defaultValue: 'Preguntar luego',
@@ -84,7 +84,7 @@ const handlePickerResponse = (response: ImagePickerResponse): string | null => {
         }),
         i18n.t('profile:changePhotoSheet.permissionDeniedMessage', {
           defaultValue:
-            'SayNative necesita permisos para acceder a tus fotos o cámara.',
+            'AmistTalk necesita permisos para acceder a tus fotos o cámara.',
         }),
       );
       return null;
@@ -151,7 +151,7 @@ export const takeSelfieWithCamera = async (): Promise<string | null> => {
       }),
       i18n.t('profile:changePhotoSheet.permissionDeniedMessage', {
         defaultValue:
-          'SayNative necesita acceso a la cámara para tomar tu foto de perfil.',
+          'AmistTalk necesita acceso a la cámara para tomar tu foto de perfil.',
       }),
     );
     return null;

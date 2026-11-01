@@ -94,7 +94,7 @@
     "confirm": "Salir"
   },
   "footer": {
-    "version": "SayNative v1.0.0 · Hecho con pasión"
+    "version": "AmistTalk v1.0.0 · Hecho con pasión"
   },
   "editProfile": {
     "title": "Datos Personales",
@@ -141,7 +141,7 @@
     "photoUpdatedTitle": "Foto de perfil actualizada",
     "photoUpdatedMessage": "Tu foto de perfil se ha guardado exitosamente.",
     "permissionDeniedTitle": "Permiso de cámara denegado",
-    "permissionDeniedMessage": "SayNative necesita acceso a tu cámara para que puedas tomarte una foto de perfil.",
+    "permissionDeniedMessage": "AmistTalk necesita acceso a tu cámara para que puedas tomarte una foto de perfil.",
     "cameraUnavailableTitle": "Cámara no disponible",
     "cameraUnavailableMessage": "No se detectó una cámara disponible en este dispositivo.",
     "errorSelectingImage": "No se pudo seleccionar la imagen. Intenta nuevamente."

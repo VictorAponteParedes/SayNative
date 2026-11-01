@@ -42,7 +42,7 @@ export const SecurityScreen: React.FC = () => {
           />
         }
       >
-        {/* Banner Comunidad Segura / SayShield */}
+        {/* Banner Comunidad Segura / AmistShield */}
         <SafeCommunityBanner onPressGuidelines={handleReadGuidelines} />
 
         {/* Ajustes de Privacidad con Protección Activa */}

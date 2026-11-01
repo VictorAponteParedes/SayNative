@@ -55,7 +55,7 @@
     "guaranteed": "Garanti"
   },
   "legal": {
-    "disclaimer": "Le montant sera débité de votre compte Apple App Store ou Google Play lors de la confirmation d'achat. Les pièces virtuelles sont strictement réservées à SayNative pour les appels vidéo et le tutorat communautaire ; elles n'ont aucune valeur monétaire légale et ne sont pas remboursables.",
+    "disclaimer": "Le montant sera débité de votre compte Apple App Store ou Google Play lors de la confirmation d'achat. Les pièces virtuelles sont strictement réservées à AmistTalk pour les appels vidéo et le tutorat communautaire ; elles n'ont aucune valeur monétaire légale et ne sont pas remboursables.",
     "restore": "Restaurer les achats",
     "terms": "Conditions",
     "privacy": "Confidentialité"
@@ -96,7 +96,7 @@
       "adRewardSub": "Vidéo récompensée · Hier 16:45",
       "callEmma": "Appel vidéo avec Emma...",
       "callEmmaSub": "Durée : 15 min · Mardi",
-      "welcomeBonus": "Bonus de bienvenue SayNative...",
+      "welcomeBonus": "Bonus de bienvenue AmistTalk...",
       "welcomeBonusSub": "Cadeau de bienvenue · 15 Sep",
       "basicPurchase": "Achat Pack Découverte",
       "googlePlay": "Google Play ($2.99 USD) · 15 Sep"
@@ -106,7 +106,7 @@
       "accountId": "ID Compte : LL-849204 · Transactions sécurisées cryptées SSL",
       "calendarTitle": "Filtrer par date",
       "calendarMessage": "Sélectionnez une période pour consulter vos transactions.",
-      "supportTitle": "Assistance SayNative",
+      "supportTitle": "Assistance AmistTalk",
       "supportMessage": "Notre équipe d'assistance examinera toute question relative à vos facturations."
     }
   },

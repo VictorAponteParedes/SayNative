@@ -31,9 +31,9 @@
     "q1": "How do I earn coins teaching my native language?",
     "a1": "Enable 'Teaching Mode' in your profile and stay available. When a student calls you, you automatically earn coins for each minute of conversation completed.",
     "q2": "Why are calls charged per minute?",
-    "a2": "SayNative operates with a closed community economy. The per-minute fee rewards the time and commitment of native speakers, ensuring high quality and instant availability.",
+    "a2": "AmistTalk operates with a closed community economy. The per-minute fee rewards the time and commitment of native speakers, ensuring high quality and instant availability.",
     "q3": "Can I cash out my coins for real money?",
-    "a3": "Currently, coins are exclusively for use within SayNative to learn and practice with tutors. A verified creator payout program will be launched soon.",
+    "a3": "Currently, coins are exclusively for use within AmistTalk to learn and practice with tutors. A verified creator payout program will be launched soon.",
     "q4": "What happens if a call drops in the first few seconds?",
     "a4": "If a call ends within the first 15 seconds due to technical glitches or unexpected disconnection, no coins are deducted from your balance."
   },
@@ -52,6 +52,6 @@
     "sentSuccessMessage": "Your inquiry has been submitted to support. We will get back to you in under 2 hours."
   },
   "footer": {
-    "text": "SayNative Help Center v1.0.0 · Community Guides & Policies"
+    "text": "AmistTalk Help Center v1.0.0 · Community Guides & Policies"
   }
 }

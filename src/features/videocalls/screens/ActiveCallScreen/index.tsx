@@ -143,11 +143,15 @@ export const ActiveCallScreen: React.FC<ActiveCallScreenProps> = ({ route }) => 
       cleanup();
       AppAlert.info(t('errors.userBusy'), undefined, () => goBack());
     },
-    onCallRejected: () => {
+    onCallRejected: (reason?: string) => {
       stopTimer();
       cleanup();
+      const message =
+        reason === 'reputation_filter_rejected'
+          ? t('errors.callFilteredByRecipient', { name: peerName })
+          : t('errors.callRejected', { name: peerName });
       AppAlert.info(
-        t('errors.callRejected', { name: peerName }),
+        message,
         undefined,
         () => goBack()
       );

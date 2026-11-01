@@ -55,7 +55,7 @@
     "guaranteed": "Guaranteed"
   },
   "legal": {
-    "disclaimer": "Payment will be charged to your Apple App Store or Google Play account at confirmation of purchase. Virtual coins are for exclusive use within SayNative for video calls and community tutoring; they have no legal tender value and are non-refundable.",
+    "disclaimer": "Payment will be charged to your Apple App Store or Google Play account at confirmation of purchase. Virtual coins are for exclusive use within AmistTalk for video calls and community tutoring; they have no legal tender value and are non-refundable.",
     "restore": "Restore purchases",
     "terms": "Terms",
     "privacy": "Privacy"
@@ -106,7 +106,7 @@
       "accountId": "Account ID: LL-849204 · Secure transactions with SSL encryption",
       "calendarTitle": "Filter by date",
       "calendarMessage": "Select a date range to view your transactions.",
-      "supportTitle": "SayNative Support",
+      "supportTitle": "AmistTalk Support",
       "supportMessage": "Our support team will review any questions regarding your transactions."
     }
   },

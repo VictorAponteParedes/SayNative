@@ -55,7 +55,7 @@
     "guaranteed": "官方正品保障"
   },
   "legal": {
-    "disclaimer": "确认购买后，费用将记入你的 Apple App Store 或 Google Play 账户。虚拟金币仅供在 SayNative 平台内用于母语通话和辅导，不具备法定货币价值，不支持退款。",
+    "disclaimer": "确认购买后，费用将记入你的 Apple App Store 或 Google Play 账户。虚拟金币仅供在 AmistTalk 平台内用于母语通话和辅导，不具备法定货币价值，不支持退款。",
     "restore": "恢复购买",
     "terms": "服务条款",
     "privacy": "隐私政策"
@@ -106,7 +106,7 @@
       "accountId": "账户 ID: LL-849204 · SSL 银行级加密传输",
       "calendarTitle": "按日期筛选",
       "calendarMessage": "请选择日期区间查询明细。",
-      "supportTitle": "SayNative 官方客服",
+      "supportTitle": "AmistTalk 官方客服",
       "supportMessage": "我们的客服专员将为你核实任何费用明细。"
     }
   },

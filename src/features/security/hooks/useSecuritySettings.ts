@@ -73,11 +73,18 @@ export const useSecuritySettings = () => {
   const handleTogglePrivacy = (key: keyof PrivacySettings, value: boolean) => {
     updateSetting(key, value);
 
-    if (key === 'antiShock' && value) {
-      Toast.success(
-        t('toasts.antiShockEnabledTitle'),
-        t('toasts.antiShockEnabledMessage')
-      );
+    if (key === 'reputationFilter') {
+      if (value) {
+        Toast.success(
+          t('toasts.reputationFilterEnabledTitle', { defaultValue: 'Filtro de reputación activado' }),
+          t('toasts.reputationFilterEnabledMessage', { defaultValue: 'Solo recibirás llamadas de usuarios con más de 4.0 estrellas.' })
+        );
+      } else {
+        Toast.warning(
+          t('toasts.reputationFilterDisabledTitle', { defaultValue: 'Filtro de reputación desactivado' }),
+          t('toasts.reputationFilterDisabledMessage', { defaultValue: 'Podrás recibir llamadas de cualquier usuario.' })
+        );
+      }
     } else if (key === 'readReceipts') {
       if (value) {
         Toast.success(

@@ -138,12 +138,13 @@ export const useCallSignaling = (handlers?: UseCallSignalingHandlers) => {
         callerId: currentUserId,
         callerName: user.name,
         callerAvatar: user.avatarUrl,
+        callerRating: user.rating,
         receiverId,
         ratePerMinute,
         callType: 'video',
       });
     },
-    [currentUserId, setCallStatus, user.avatarUrl, user.name]
+    [currentUserId, setCallStatus, user.avatarUrl, user.name, user.rating]
   );
 
   const acceptCall = useCallback(

@@ -15,7 +15,6 @@ export const usePrivacyStore = create<PrivacyState>()(
       settings: {
         hideAge: true,
         reputationFilter: true,
-        antiShock: true,
         readReceipts: true,
       },
       updateSetting: (key, value) =>

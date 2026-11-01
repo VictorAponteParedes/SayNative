@@ -52,7 +52,7 @@ const TOPIC_DETAILS: Record<
         id: '1',
         title: 'Permisos de cámara y micrófono',
         description:
-          'Ve a los ajustes de tu teléfono > Aplicaciones > SayNative y asegúrate de otorgar acceso permanente al micrófono y cámara.',
+          'Ve a los ajustes de tu teléfono > Aplicaciones > AmistTalk y asegúrate de otorgar acceso permanente al micrófono y cámara.',
       },
       {
         id: '2',
@@ -62,9 +62,9 @@ const TOPIC_DETAILS: Record<
       },
       {
         id: '3',
-        title: 'Protección Anti-Shock activa',
+        title: 'Filtro de reputación para llamadas',
         description:
-          'Si la cámara de tu compañero aparece borrosa los primeros 5 segundos, es la protección anti-shock configurada en Seguridad.',
+          'Puedes activar el filtro en Seguridad para recibir llamadas únicamente de compañeros con valoración superior a 4.0 estrellas.',
       },
     ],
   },

@@ -4,11 +4,11 @@
   },
   "safeCommunity": {
     "title": "Safe Community",
-    "badge": "SayShield",
-    "description": "At SayNative we foster a space of mutual respect and learning. Harassment, inappropriate language or misconduct are strictly prohibited with zero tolerance.",
+    "badge": "AmistShield",
+    "description": "At AmistTalk we foster a space of mutual respect and learning. Harassment, inappropriate language or misconduct are strictly prohibited with zero tolerance.",
     "guidelinesLink": "Read Community Guidelines →",
     "guidelinesTitle": "Community Guidelines",
-    "guidelinesMessage": "SayNative promotes respect, diversity, and integrity. Harassment, sensitive content, and discrimination are strictly prohibited."
+    "guidelinesMessage": "AmistTalk promotes respect, diversity, and integrity. Harassment, sensitive content, and discrimination are strictly prohibited."
   },
   "privacy": {
     "sectionTitle": "PRIVACY SETTINGS",
@@ -17,9 +17,6 @@
     "hideAgeDesc": "Other students will only see your country of residence and language proficiency level.",
     "reputationFilterTitle": "Reputation filter for calls",
     "reputationFilterDesc": "Only accept voice/video requests from peers with ratings above 4.0 stars.",
-    "antiShockTitle": "Anti-shock protection",
-    "recommendedBadge": "Recommended",
-    "antiShockDesc": "Blurs the incoming camera feed during the first 5 seconds of each call until you confirm connection.",
     "readReceiptsTitle": "Read receipts",
     "readReceiptsDesc": "Allows you to see if other users have read your messages and confirms when you read theirs."
   },
@@ -59,8 +56,10 @@
     "readReceiptsEnabledMessage": "You can now see when others read your messages.",
     "readReceiptsDisabledTitle": "Read receipts disabled",
     "readReceiptsDisabledMessage": "You will not send or see read confirmations.",
-    "antiShockEnabledTitle": "Anti-shock enabled",
-    "antiShockEnabledMessage": "Incoming video will be blurred for the first 5 seconds.",
+    "reputationFilterEnabledTitle": "Reputation filter enabled",
+    "reputationFilterEnabledMessage": "You will only receive calls from users with more than 4.0 stars.",
+    "reputationFilterDisabledTitle": "Reputation filter disabled",
+    "reputationFilterDisabledMessage": "You can now receive calls from any user.",
     "accountDeletedTitle": "Account deleted",
     "accountDeletedMessage": "Your account and personal data have been removed from the system."
   }

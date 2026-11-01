@@ -94,7 +94,7 @@
     "confirm": "退出"
   },
   "footer": {
-    "version": "SayNative v1.0.0 · 匠心打造"
+    "version": "AmistTalk v1.0.0 · 匠心打造"
   },
   "editProfile": {
     "title": "个人信息",
@@ -139,7 +139,7 @@
     "photoUpdatedTitle": "照片已更新",
     "photoUpdatedMessage": "您的个人资料照片已成功保存。",
     "permissionDeniedTitle": "相机权限被拒绝",
-    "permissionDeniedMessage": "SayNative需要相机权限来拍摄个人资料照片。",
+    "permissionDeniedMessage": "AmistTalk需要相机权限来拍摄个人资料照片。",
     "cameraUnavailableTitle": "相机不可用",
     "cameraUnavailableMessage": "此设备上未检测到可用相机。",
     "errorSelectingImage": "无法选择图片，请重试。"

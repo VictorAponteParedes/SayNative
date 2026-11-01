@@ -4,11 +4,11 @@
   },
   "safeCommunity": {
     "title": "安心のコミュニティ設計",
-    "badge": "SayShield",
-    "description": "SayNative では、互いを尊重し高め合える環境づくりを推進しています。嫌がらせ、不適切な発言、違反行為は一切禁止されており、厳格に対処されます。",
+    "badge": "AmistShield",
+    "description": "AmistTalk では、互いを尊重し高め合える環境づくりを推進しています。嫌がらせ、不適切な発言、違反行為は一切禁止されており、厳格に対処されます。",
     "guidelinesLink": "コミュニティガイドラインを読む →",
     "guidelinesTitle": "コミュニティガイドライン",
-    "guidelinesMessage": "SayNative は尊重、多様性、健全性を大切にしています。嫌がらせ、不適切なコンテンツ、差別行為は禁止されています。"
+    "guidelinesMessage": "AmistTalk は尊重、多様性、健全性を大切にしています。嫌がらせ、不適切なコンテンツ、差別行為は禁止されています。"
   },
   "privacy": {
     "sectionTitle": "プライバシー設定",
@@ -17,9 +17,6 @@
     "hideAgeDesc": "他の生徒には居住国と語学レベルのみが表示されます。",
     "reputationFilterTitle": "高評価パートナー限定フィルター",
     "reputationFilterDesc": "総合評価が4.0以上のユーザーからの通話リクエストのみを受信します。",
-    "antiShockTitle": "通話前の安心ぼかし機能",
-    "recommendedBadge": "推奨",
-    "antiShockDesc": "通話開始時の最初の5秒間、お互いのカメラ映像にぼかしを適用します。",
     "readReceiptsTitle": "開封確認",
     "readReceiptsDesc": "相手があなたのメッセージを読んだかどうかを確認し、あなたが読んだ時も相手に伝えます。"
   },
@@ -59,8 +56,10 @@
     "readReceiptsEnabledMessage": "相手がメッセージを読んだか確認できるようになりました。",
     "readReceiptsDisabledTitle": "開封確認が無効になりました",
     "readReceiptsDisabledMessage": "開封確認の送受信を行いません。",
-    "antiShockEnabledTitle": "ぼかし保護を有効化しました",
-    "antiShockEnabledMessage": "通話開始時の最初の5秒間、カメラ画面がぼかされます。",
+    "reputationFilterEnabledTitle": "評価フィルターを有効化しました",
+    "reputationFilterEnabledMessage": "評価4.0以上のユーザーからの通話のみを受信します。",
+    "reputationFilterDisabledTitle": "評価フィルターを無効化しました",
+    "reputationFilterDisabledMessage": "すべてのユーザーからの通話を受信できます。",
     "accountDeletedTitle": "アカウント削除完了",
     "accountDeletedMessage": "アカウントとすべての個人データが正常に削除されました。"
   }

@@ -58,6 +58,9 @@
     "peerDisconnected": "{{name}} disconnected from the call.",
     "connectionFailed": "Unable to establish direct peer-to-peer connection.",
     "callRejected": "{{name}} declined the call.",
+    "callFilteredTitle": "Call filtered",
+    "callFilteredMessage": "Automatically declined an incoming call with a rating below 4.0 stars.",
+    "callFilteredByRecipient": "{{name}} only accepts calls from peers with a rating above 4.0 stars.",
     "callTimeout": "No response to the call."
   }
 }

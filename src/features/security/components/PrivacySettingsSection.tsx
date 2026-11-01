@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Switch } from 'react-native';
-import { EyeOff, Star, Sparkles, CheckCheck } from 'lucide-react-native';
+import { EyeOff, Star, CheckCheck } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
 import { colors, spacing } from '@/theme';
 import { AppText } from '@/components';
@@ -79,37 +79,7 @@ export const PrivacySettingsSection: React.FC<PrivacySettingsSectionProps> = ({
 
         <View style={styles.divider} />
 
-        {/* Item 3: Protección anti-shock */}
-        <View style={styles.settingRow}>
-          <View style={[styles.iconCircle, { backgroundColor: colors.dangerBgSubtle }]}>
-            <Sparkles size={18} color={colors.danger} />
-          </View>
-          <View style={styles.textColumn}>
-            <View style={styles.titleBadgeRow}>
-              <AppText variant="body" style={styles.itemTitle}>
-                {t('privacy.antiShockTitle')}
-              </AppText>
-              <View style={styles.recommendedBadge}>
-                <AppText variant="caption" style={styles.recommendedText}>
-                  {t('privacy.recommendedBadge')}
-                </AppText>
-              </View>
-            </View>
-            <AppText variant="caption" style={styles.itemDesc}>
-              {t('privacy.antiShockDesc')}
-            </AppText>
-          </View>
-          <Switch
-            value={settings.antiShock}
-            onValueChange={(val) => onToggle('antiShock', val)}
-            trackColor={{ false: colors.borderDark, true: colors.primary }}
-            thumbColor={colors.surface}
-          />
-        </View>
-
-        <View style={styles.divider} />
-
-        {/* Item 4: Confirmaciones de lectura */}
+        {/* Item 3: Confirmaciones de lectura */}
         <View style={styles.settingRow}>
           <View style={[styles.iconCircle, { backgroundColor: colors.primaryBgSubtle }]}>
             <CheckCheck size={18} color={colors.primary} />
@@ -206,23 +176,6 @@ const styles = StyleSheet.create({
     color: colors.textSecondary,
     fontSize: 12,
     lineHeight: 16,
-  },
-  titleBadgeRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 6,
-    marginBottom: 2,
-  },
-  recommendedBadge: {
-    backgroundColor: colors.dangerBgSubtle,
-    paddingHorizontal: spacing.xs + 2,
-    paddingVertical: 1,
-    borderRadius: 6,
-  },
-  recommendedText: {
-    color: colors.dangerDark,
-    fontSize: 10,
-    fontWeight: '800',
   },
   divider: {
     height: 1,

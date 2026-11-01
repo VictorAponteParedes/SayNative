@@ -3,9 +3,10 @@ import { View, StyleSheet, Modal, TouchableOpacity } from 'react-native';
 import { Video, PhoneOff } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
 import { colors, spacing, borderRadius } from '@/theme';
-import { AppText, Avatar } from '@/components';
+import { AppText, Avatar, Toast } from '@/components';
 import { getSocket } from '@/lib/socketClient';
 import { useAuthStore } from '@/store/useAuthStore';
+import { usePrivacyStore } from '@/features/security';
 import { useCallSessionStore } from '../store/useCallSessionStore';
 import { navigate } from '@/navigation/NavigationRef';
 import { Routes } from '@/navigation/routes';
@@ -49,6 +50,26 @@ export const IncomingCallModal: React.FC = () => {
       ) {
         return;
       }
+
+      const reputationFilterActive = usePrivacyStore.getState().settings.reputationFilter;
+      const callerRating = Number(payload.caller?.rating ?? 5.0);
+
+      if (reputationFilterActive && callerRating < 4.0) {
+        if (__DEV__) {
+          console.log(`[IncomingCallModal] Filtrando llamada de ${payload.caller?.name} con reputación ${callerRating}`);
+        }
+        socket.emit('call:reject', {
+          callId: payload.callId,
+          userId,
+          reason: 'reputation_filter_rejected',
+        });
+        Toast.warning(
+          t('errors.callFilteredTitle'),
+          t('errors.callFilteredMessage')
+        );
+        return;
+      }
+
       setIncomingCall(payload);
     });
 

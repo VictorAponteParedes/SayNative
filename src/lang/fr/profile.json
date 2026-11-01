@@ -94,7 +94,7 @@
     "confirm": "Quitter"
   },
   "footer": {
-    "version": "SayNative v1.0.0 · Créé avec passion"
+    "version": "AmistTalk v1.0.0 · Créé avec passion"
   },
   "editProfile": {
     "title": "Informations personnelles",
@@ -139,7 +139,7 @@
     "photoUpdatedTitle": "Photo de profil mise à jour",
     "photoUpdatedMessage": "Votre photo de profil a été enregistrée avec succès.",
     "permissionDeniedTitle": "Autorisation de la caméra refusée",
-    "permissionDeniedMessage": "SayNative a besoin d'accéder à votre caméra pour prendre une photo de profil.",
+    "permissionDeniedMessage": "AmistTalk a besoin d'accéder à votre caméra pour prendre une photo de profil.",
     "cameraUnavailableTitle": "Caméra indisponible",
     "cameraUnavailableMessage": "Aucune caméra disponible n'a été détectée sur cet appareil.",
     "errorSelectingImage": "Impossible de sélectionner l'image. Veuillez réessayer."

@@ -58,6 +58,9 @@
     "peerDisconnected": "{{name}} が通話から退出しました。",
     "connectionFailed": "ピアツーピア直接接続を確立できませんでした。",
     "callRejected": "{{name}} が通話を拒否しました。",
+    "callFilteredTitle": "通話が除外されました",
+    "callFilteredMessage": "評価が4.0未満のユーザーからの通話を自動的に拒否しました。",
+    "callFilteredByRecipient": "{{name}} さんは評価4.0以上のパートナーからの通話のみ受け付けています。",
     "callTimeout": "応答がありませんでした。"
   }
 }
