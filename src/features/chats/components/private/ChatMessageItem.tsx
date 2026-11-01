@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native';
-import { Languages, CheckCheck, Play, Pause, FileText } from 'lucide-react-native';
+import { Languages, Check, CheckCheck, Clock, Play, Pause, FileText } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
 import { colors, spacing } from '@/theme';
 import { AppText } from '@/components';
@@ -17,6 +17,8 @@ export interface ChatMessage {
   audioDuration?: string;
   audioSpeed?: string;
   transcription?: string;
+  status?: 'pending' | 'sent' | 'read';
+  isRead?: boolean;
 }
 
 export interface ChatMessageItemProps {
@@ -126,7 +128,13 @@ export const ChatMessageItem: React.FC<ChatMessageItemProps> = ({ message }) => 
             <AppText variant="caption" style={styles.userTime}>
               {message.time}
             </AppText>
-            <CheckCheck size={16} color={colors.primaryLighter} />
+            {message.status === 'pending' ? (
+              <Clock size={13} color="rgba(255, 255, 255, 0.65)" />
+            ) : message.status === 'read' || message.isRead ? (
+              <CheckCheck size={16} color="#67E8F9" />
+            ) : (
+              <Check size={15} color="rgba(255, 255, 255, 0.75)" />
+            )}
           </View>
         </View>
       </View>

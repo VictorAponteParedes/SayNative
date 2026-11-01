@@ -8,12 +8,16 @@ interface UseChatSocketParams {
   roomId: string | null;
   currentUserId?: string;
   onIncomingMessage: (message: ChatMessage) => void;
+  onMessageSentConfirmation?: (message: BackendChatMessage) => void;
+  onMessagesRead?: () => void;
 }
 
 export const useChatSocket = ({
   roomId,
   currentUserId,
   onIncomingMessage,
+  onMessageSentConfirmation,
+  onMessagesRead,
 }: UseChatSocketParams) => {
   const [isPartnerTyping, setIsPartnerTyping] = useState(false);
   const typingTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -31,15 +35,20 @@ export const useChatSocket = ({
 
     if (roomId && isUUID(roomId) && currentUserId) {
       socket.emit('join_room', { roomId, userId: currentUserId });
+      socket.emit('mark_as_read', { roomId, userId: currentUserId });
     }
 
     const handleIncomingMessage = (payload: BackendChatMessage) => {
-      if (payload.senderId === currentUserId) return;
+      if (payload.senderId === currentUserId) {
+        onMessageSentConfirmation?.(payload);
+        return;
+      }
 
       setIsPartnerTyping(false);
 
       if (payload.roomId && isUUID(payload.roomId) && currentUserId) {
         socket.emit('join_room', { roomId: payload.roomId, userId: currentUserId });
+        socket.emit('mark_as_read', { roomId: payload.roomId, userId: currentUserId });
       }
 
       const newMsg: ChatMessage = {
@@ -55,6 +64,12 @@ export const useChatSocket = ({
       };
 
       onIncomingMessage(newMsg);
+    };
+
+    const handleMessagesRead = (data: { roomId?: string; readBy?: string }) => {
+      if (data.readBy && data.readBy !== currentUserId) {
+        onMessagesRead?.();
+      }
     };
 
     const handlePartnerTyping = (data: {
@@ -75,6 +90,7 @@ export const useChatSocket = ({
 
     // Eventos oficiales del backend NestJS ChatsGateway
     socket.on('new_message', handleIncomingMessage);
+    socket.on('messages_read', handleMessagesRead);
     socket.on('partner_typing', handlePartnerTyping);
 
     return () => {
@@ -82,10 +98,17 @@ export const useChatSocket = ({
         socket.emit('leave_room', { roomId, userId: currentUserId });
       }
       socket.off('new_message', handleIncomingMessage);
+      socket.off('messages_read', handleMessagesRead);
       socket.off('partner_typing', handlePartnerTyping);
       if (typingTimeoutRef.current) clearTimeout(typingTimeoutRef.current);
     };
-  }, [currentUserId, roomId, onIncomingMessage]);
+  }, [
+    currentUserId,
+    roomId,
+    onIncomingMessage,
+    onMessageSentConfirmation,
+    onMessagesRead,
+  ]);
 
   const emitTyping = useCallback(
     (isTyping: boolean) => {

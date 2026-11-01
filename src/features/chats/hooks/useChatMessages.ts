@@ -31,6 +31,51 @@ export const useChatMessages = ({
     });
   }, []);
 
+  const confirmMessageSent = useCallback((backendMsg: { id: string; isRead?: boolean }) => {
+    setMessages(prev => {
+      // 1. Si ya existe por id, actualizar status
+      if (prev.some(m => m.id === backendMsg.id)) {
+        return prev.map(m =>
+          m.id === backendMsg.id
+            ? {
+                ...m,
+                status: backendMsg.isRead ? 'read' : 'sent',
+                isRead: Boolean(backendMsg.isRead),
+              }
+            : m
+        );
+      }
+      // 2. Si no, actualizar el mensaje 'pending' más antiguo del usuario
+      let updated = false;
+      return prev.map(m => {
+        if (!updated && m.sender === 'user' && m.status === 'pending') {
+          updated = true;
+          return {
+            ...m,
+            id: backendMsg.id,
+            status: backendMsg.isRead ? 'read' : 'sent',
+            isRead: Boolean(backendMsg.isRead),
+          };
+        }
+        return m;
+      });
+    });
+  }, []);
+
+  const markAllUserMessagesAsRead = useCallback(() => {
+    setMessages(prev =>
+      prev.map(m =>
+        m.sender === 'user'
+          ? {
+              ...m,
+              status: 'read',
+              isRead: true,
+            }
+          : m
+      )
+    );
+  }, []);
+
   const sendMessage = useCallback(
     async (text: string) => {
       if (!text.trim()) return;
@@ -47,6 +92,8 @@ export const useChatMessages = ({
         sender: 'user',
         text: textToSend,
         time: currentTime,
+        status: 'pending',
+        isRead: false,
       };
 
       setMessages(prev => [...prev, optimisticMessage]);
@@ -55,23 +102,34 @@ export const useChatMessages = ({
       const socket = getSocket({ namespace: '/chats' });
 
       if (socket.connected && currentUserId && (validRoomId || partnerId)) {
-        socket.emit('send_message', {
-          senderId: currentUserId,
-          dto: {
-            ...(validRoomId ? { roomId: validRoomId } : {}),
-            recipientId: partnerId,
-            text: textToSend,
+        socket.emit(
+          'send_message',
+          {
+            senderId: currentUserId,
+            dto: {
+              ...(validRoomId ? { roomId: validRoomId } : {}),
+              recipientId: partnerId,
+              text: textToSend,
+            },
+            lang: 'es',
           },
-          lang: 'es',
-        });
+          (res?: { success: boolean; data?: { id: string; isRead?: boolean } }) => {
+            if (res?.success && res.data?.id) {
+              confirmMessageSent(res.data);
+            }
+          }
+        );
       } else if (currentUserId) {
         // Enviar vía HTTP solo si el WebSocket no está conectado
         try {
-          await chatsApi.sendMessage(currentUserId, {
+          const res = await chatsApi.sendMessage(currentUserId, {
             roomId: validRoomId,
             recipientId: partnerId,
             text: textToSend,
           });
+          if (res?.id) {
+            confirmMessageSent(res);
+          }
         } catch (err) {
           if (__DEV__) {
             console.warn('[useChatMessages] Error enviando mensaje por HTTP:', err);
@@ -79,7 +137,7 @@ export const useChatMessages = ({
         }
       }
     },
-    [currentUserId, partnerId, roomId],
+    [confirmMessageSent, currentUserId, partnerId, roomId],
   );
 
   const sendAudioMessage = useCallback(
@@ -97,6 +155,8 @@ export const useChatMessages = ({
         audioDuration: duration,
         audioSpeed: '1x',
         time: currentTime,
+        status: 'pending',
+        isRead: false,
       };
 
       setMessages(prev => [...prev, optimisticAudioMessage]);
@@ -105,27 +165,37 @@ export const useChatMessages = ({
       const socket = getSocket({ namespace: '/chats' });
 
       if (socket.connected && currentUserId && (validRoomId || partnerId)) {
-        socket.emit('send_message', {
-          senderId: currentUserId,
-          dto: {
-            ...(validRoomId ? { roomId: validRoomId } : {}),
-            recipientId: partnerId,
-            text: '🎤 Mensaje de voz',
-            isAudio: true,
-            audioDuration: duration,
+        socket.emit(
+          'send_message',
+          {
+            senderId: currentUserId,
+            dto: {
+              ...(validRoomId ? { roomId: validRoomId } : {}),
+              recipientId: partnerId,
+              text: '🎤 Mensaje de voz',
+              isAudio: true,
+              audioDuration: duration,
+            },
+            lang: 'es',
           },
-          lang: 'es',
-        });
+          (res?: { success: boolean; data?: { id: string; isRead?: boolean } }) => {
+            if (res?.success && res.data?.id) {
+              confirmMessageSent(res.data);
+            }
+          }
+        );
       } else if (currentUserId) {
-        // Enviar vía HTTP solo si el WebSocket no está conectado
         try {
-          await chatsApi.sendMessage(currentUserId, {
+          const res = await chatsApi.sendMessage(currentUserId, {
             roomId: validRoomId,
             recipientId: partnerId,
             text: '🎤 Mensaje de voz',
             isAudio: true,
             audioDuration: duration,
           });
+          if (res?.id) {
+            confirmMessageSent(res);
+          }
         } catch (err) {
           if (__DEV__) {
             console.warn('[useChatMessages] Error enviando nota de voz por HTTP:', err);
@@ -133,12 +203,14 @@ export const useChatMessages = ({
         }
       }
     },
-    [currentUserId, partnerId, roomId],
+    [confirmMessageSent, currentUserId, partnerId, roomId],
   );
 
   return {
     messages,
     addMessage,
+    confirmMessageSent,
+    markAllUserMessagesAsRead,
     sendMessage,
     sendAudioMessage,
   };

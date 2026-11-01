@@ -60,6 +60,8 @@ export const useChatRoom = ({
                 audioDuration: bm.audioDuration,
                 audioSpeed: bm.audioSpeed || '1x',
                 transcription: bm.transcription,
+                status: bm.isRead ? 'read' : 'sent',
+                isRead: Boolean(bm.isRead),
               }),
             );
             setInitialMessages(mapped);

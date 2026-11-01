@@ -27,19 +27,27 @@ export const usePrivateChat = (props: UsePrivateChatProps = {}) => {
   });
 
   // 3. Mensajes + envío
-  const { messages, addMessage, sendMessage, sendAudioMessage } =
-    useChatMessages({
-      roomId,
-      currentUserId,
-      partnerId,
-      initialMessages,
-    });
+  const {
+    messages,
+    addMessage,
+    confirmMessageSent,
+    markAllUserMessagesAsRead,
+    sendMessage,
+    sendAudioMessage,
+  } = useChatMessages({
+    roomId,
+    currentUserId,
+    partnerId,
+    initialMessages,
+  });
 
-  // 2. Socket (recibe mensajes y typing)
+  // 2. Socket (recibe mensajes, confirmaciones de entrega, lecturas y typing)
   const { isPartnerTyping, emitTyping } = useChatSocket({
     roomId,
     currentUserId,
     onIncomingMessage: addMessage,
+    onMessageSentConfirmation: confirmMessageSent,
+    onMessagesRead: markAllUserMessagesAsRead,
   });
 
   // Input + notificación de escritura
