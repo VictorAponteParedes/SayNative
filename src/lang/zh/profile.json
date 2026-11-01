@@ -12,6 +12,9 @@
     "badge": "虚拟钱包",
     "historyLink": "消费明细",
     "coins": "{{count}} 金币",
+    "coinsLabel": "金币",
+    "availableBalance": "可用余额",
+    "practiceEquivalent": "约{{minutes}}分钟视频通话",
     "rechargeButton": "充值",
     "freeAdButton": "+{{count}} 免费"
   },

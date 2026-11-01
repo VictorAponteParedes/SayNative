@@ -12,6 +12,9 @@
     "badge": "PORTEFEUILLE VIRTUEL",
     "historyLink": "Historique des transactions",
     "coins": "{{count}} Pièces",
+    "coinsLabel": "PIÈCES",
+    "availableBalance": "Solde disponible",
+    "practiceEquivalent": "~{{minutes}} min d'appel vidéo",
     "rechargeButton": "Recharger",
     "freeAdButton": "+{{count}} gratuites"
   },

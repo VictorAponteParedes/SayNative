@@ -12,6 +12,9 @@
     "badge": "CARTEIRA VIRTUAL",
     "historyLink": "Histórico de uso",
     "coins": "{{count}} Moedas",
+    "coinsLabel": "MOEDAS",
+    "availableBalance": "Saldo disponível",
+    "practiceEquivalent": "~{{minutes}} min de chamada",
     "rechargeButton": "Recarregar",
     "freeAdButton": "+{{count}} grátis"
   },

@@ -12,6 +12,9 @@
     "badge": "VIRTUAL WALLET",
     "historyLink": "Usage history",
     "coins": "{{count}} Coins",
+    "coinsLabel": "COINS",
+    "availableBalance": "Available balance",
+    "practiceEquivalent": "~{{minutes}} min of practice",
     "rechargeButton": "Recharge",
     "freeAdButton": "+{{count}} free"
   },

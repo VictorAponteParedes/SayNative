@@ -12,6 +12,9 @@
     "badge": "ウォレット",
     "historyLink": "利用履歴",
     "coins": "{{count}} コイン",
+    "coinsLabel": "コイン",
+    "availableBalance": "利用可能残高",
+    "practiceEquivalent": "約{{minutes}}分の通話",
     "rechargeButton": "チャージ",
     "freeAdButton": "+{{count}} 無料"
   },

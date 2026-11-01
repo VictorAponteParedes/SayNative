@@ -12,6 +12,9 @@
     "badge": "BILLETERA VIRTUAL",
     "historyLink": "Historial de consumos",
     "coins": "{{count}} Monedas",
+    "coinsLabel": "MONEDAS",
+    "availableBalance": "Saldo disponible",
+    "practiceEquivalent": "~{{minutes}} min de videollamada",
     "rechargeButton": "Recargar",
     "freeAdButton": "+{{count}} gratis"
   },
