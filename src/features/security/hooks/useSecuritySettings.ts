@@ -45,7 +45,8 @@ export const useSecuritySettings = () => {
           return {
             id: b.blockedUserId || b.id || '',
             name: b.name || 'Usuario',
-            countryCode: b.countryCode || b.countryFlag || '🌐',
+            countryCode: b.countryCode || '',
+            countryFlag: b.countryFlag || '🌐',
             avatarUrl: b.avatarUrl || undefined,
             blockedDate: b.blockedAt
               ? new Date(b.blockedAt).toLocaleDateString()

@@ -38,22 +38,24 @@ export const BlockedUsersSection: React.FC<BlockedUsersSectionProps> = ({
             {index > 0 && <View style={styles.divider} />}
             <View style={styles.userRow}>
               {/* Avatar del usuario o icono de bloqueo */}
-              {user.avatarUrl ? (
-                <Avatar
-                  uri={user.avatarUrl}
-                  name={user.name}
-                  size={42}
-                  flag={user.countryCode}
-                />
-              ) : (
-                <View style={styles.avatarPlaceholder}>
-                  <UserX size={18} color={colors.textSecondary} />
-                </View>
-              )}
+              <View style={styles.avatarWrapper}>
+                {user.avatarUrl ? (
+                  <Avatar
+                    uri={user.avatarUrl}
+                    name={user.name}
+                    size={44}
+                    flag={user.countryFlag}
+                  />
+                ) : (
+                  <View style={styles.avatarPlaceholder}>
+                    <UserX size={20} color={colors.textSecondary} />
+                  </View>
+                )}
+              </View>
 
               {/* Información del usuario */}
               <View style={styles.userInfoColumn}>
-                <AppText variant="body" style={styles.userName}>
+                <AppText variant="body" style={styles.userName} numberOfLines={1}>
                   {user.name} {user.countryCode ? `· ${user.countryCode}` : ''}
                 </AppText>
                 <AppText variant="caption" style={styles.blockedDate}>
@@ -130,6 +132,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: spacing.md,
   },
+  avatarWrapper: {
+    marginRight: spacing.md,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   avatarPlaceholder: {
     width: 44,
     height: 44,
@@ -139,7 +146,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderWidth: 1,
     borderColor: colors.border,
-    marginRight: spacing.sm,
   },
   userInfoColumn: {
     flex: 1,
