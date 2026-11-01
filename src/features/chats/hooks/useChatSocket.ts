@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { getSocket } from '@/lib/socketClient';
+import { usePrivacyStore } from '@/features/security';
 import { BackendChatMessage } from '../types';
 import { ChatMessage } from '../components/private/ChatMessageItem';
 import { formatMessageTime, isUUID } from '../utils/chatUtils';
@@ -35,7 +36,10 @@ export const useChatSocket = ({
 
     if (roomId && isUUID(roomId) && currentUserId) {
       socket.emit('join_room', { roomId, userId: currentUserId });
-      socket.emit('mark_as_read', { roomId, userId: currentUserId });
+      const readReceiptsEnabled = usePrivacyStore.getState().settings.readReceipts;
+      if (readReceiptsEnabled) {
+        socket.emit('mark_as_read', { roomId, userId: currentUserId });
+      }
     }
 
     const handleIncomingMessage = (payload: BackendChatMessage) => {
@@ -48,7 +52,10 @@ export const useChatSocket = ({
 
       if (payload.roomId && isUUID(payload.roomId) && currentUserId) {
         socket.emit('join_room', { roomId: payload.roomId, userId: currentUserId });
-        socket.emit('mark_as_read', { roomId: payload.roomId, userId: currentUserId });
+        const readReceiptsEnabled = usePrivacyStore.getState().settings.readReceipts;
+        if (readReceiptsEnabled) {
+          socket.emit('mark_as_read', { roomId: payload.roomId, userId: currentUserId });
+        }
       }
 
       const newMsg: ChatMessage = {

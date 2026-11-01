@@ -19,7 +19,9 @@
     "reputationFilterDesc": "Aceptar únicamente solicitudes de voz/video de compañeros con valoración superior a 4.0 estrellas.",
     "antiShockTitle": "Protección anti-shock",
     "recommendedBadge": "Recomendado",
-    "antiShockDesc": "Difumina la cámara entrante durante los primeros 5 segundos de cada llamada hasta que confirmes la conexión."
+    "antiShockDesc": "Difumina la cámara entrante durante los primeros 5 segundos de cada llamada hasta que confirmes la conexión.",
+    "readReceiptsTitle": "Confirmaciones de lectura",
+    "readReceiptsDesc": "Permite ver si otros usuarios leyeron tus mensajes y confirma cuando leas los suyos."
   },
   "blockedUsers": {
     "sectionTitle": "USUARIOS BLOQUEADOS ({{count}})",
@@ -53,6 +55,10 @@
     "unblockSuccessMessage": "Has desbloqueado a {{name}} con éxito.",
     "privacyUpdatedTitle": "Privacidad actualizada",
     "privacyUpdatedMessage": "Tus preferencias de privacidad se han guardado.",
+    "readReceiptsEnabledTitle": "Confirmaciones de lectura activadas",
+    "readReceiptsEnabledMessage": "Ahora podrás ver si leyeron tus mensajes.",
+    "readReceiptsDisabledTitle": "Confirmaciones de lectura desactivadas",
+    "readReceiptsDisabledMessage": "No verás ni enviarás confirmaciones de lectura.",
     "antiShockEnabledTitle": "Anti-shock activado",
     "antiShockEnabledMessage": "La cámara entrante se difuminará durante los primeros 5 segundos de videollamada.",
     "accountDeletedTitle": "Cuenta eliminada",

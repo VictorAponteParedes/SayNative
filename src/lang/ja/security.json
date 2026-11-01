@@ -19,7 +19,9 @@
     "reputationFilterDesc": "総合評価が4.0以上のユーザーからの通話リクエストのみを受信します。",
     "antiShockTitle": "通話前の安心ぼかし機能",
     "recommendedBadge": "推奨",
-    "antiShockDesc": "通話開始時の最初の5秒間、お互いのカメラ映像にぼかしを適用します。"
+    "antiShockDesc": "通話開始時の最初の5秒間、お互いのカメラ映像にぼかしを適用します。",
+    "readReceiptsTitle": "開封確認",
+    "readReceiptsDesc": "相手があなたのメッセージを読んだかどうかを確認し、あなたが読んだ時も相手に伝えます。"
   },
   "blockedUsers": {
     "sectionTitle": "ブロック中のユーザー ({{count}})",
@@ -53,6 +55,10 @@
     "unblockSuccessMessage": "{{name}} さんのブロックを解除しました。",
     "privacyUpdatedTitle": "設定を保存しました",
     "privacyUpdatedMessage": "プライバシー設定が更新されました。",
+    "readReceiptsEnabledTitle": "開封確認が有効になりました",
+    "readReceiptsEnabledMessage": "相手がメッセージを読んだか確認できるようになりました。",
+    "readReceiptsDisabledTitle": "開封確認が無効になりました",
+    "readReceiptsDisabledMessage": "開封確認の送受信を行いません。",
     "antiShockEnabledTitle": "ぼかし保護を有効化しました",
     "antiShockEnabledMessage": "通話開始時の最初の5秒間、カメラ画面がぼかされます。",
     "accountDeletedTitle": "アカウント削除完了",

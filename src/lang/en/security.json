@@ -19,7 +19,9 @@
     "reputationFilterDesc": "Only accept voice/video requests from peers with ratings above 4.0 stars.",
     "antiShockTitle": "Anti-shock protection",
     "recommendedBadge": "Recommended",
-    "antiShockDesc": "Blurs the incoming camera feed during the first 5 seconds of each call until you confirm connection."
+    "antiShockDesc": "Blurs the incoming camera feed during the first 5 seconds of each call until you confirm connection.",
+    "readReceiptsTitle": "Read receipts",
+    "readReceiptsDesc": "Allows you to see if other users have read your messages and confirms when you read theirs."
   },
   "blockedUsers": {
     "sectionTitle": "BLOCKED USERS ({{count}})",
@@ -53,6 +55,10 @@
     "unblockSuccessMessage": "You have unblocked {{name}} successfully.",
     "privacyUpdatedTitle": "Privacy updated",
     "privacyUpdatedMessage": "Your privacy settings have been saved.",
+    "readReceiptsEnabledTitle": "Read receipts enabled",
+    "readReceiptsEnabledMessage": "You can now see when others read your messages.",
+    "readReceiptsDisabledTitle": "Read receipts disabled",
+    "readReceiptsDisabledMessage": "You will not send or see read confirmations.",
     "antiShockEnabledTitle": "Anti-shock enabled",
     "antiShockEnabledMessage": "Incoming video will be blurred for the first 5 seconds.",
     "accountDeletedTitle": "Account deleted",

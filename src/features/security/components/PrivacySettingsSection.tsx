@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Switch } from 'react-native';
-import { EyeOff, Star, Sparkles } from 'lucide-react-native';
+import { EyeOff, Star, Sparkles, CheckCheck } from 'lucide-react-native';
 import { useTranslation } from 'react-i18next';
 import { colors, spacing } from '@/theme';
 import { AppText } from '@/components';
@@ -102,6 +102,29 @@ export const PrivacySettingsSection: React.FC<PrivacySettingsSectionProps> = ({
           <Switch
             value={settings.antiShock}
             onValueChange={(val) => onToggle('antiShock', val)}
+            trackColor={{ false: colors.borderDark, true: colors.primary }}
+            thumbColor={colors.surface}
+          />
+        </View>
+
+        <View style={styles.divider} />
+
+        {/* Item 4: Confirmaciones de lectura */}
+        <View style={styles.settingRow}>
+          <View style={[styles.iconCircle, { backgroundColor: colors.primaryBgSubtle }]}>
+            <CheckCheck size={18} color={colors.primary} />
+          </View>
+          <View style={styles.textColumn}>
+            <AppText variant="body" style={styles.itemTitle}>
+              {t('privacy.readReceiptsTitle')}
+            </AppText>
+            <AppText variant="caption" style={styles.itemDesc}>
+              {t('privacy.readReceiptsDesc')}
+            </AppText>
+          </View>
+          <Switch
+            value={settings.readReceipts}
+            onValueChange={(val) => onToggle('readReceipts', val)}
             trackColor={{ false: colors.borderDark, true: colors.primary }}
             thumbColor={colors.surface}
           />

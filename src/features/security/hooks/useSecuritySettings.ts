@@ -5,17 +5,15 @@ import { Toast, AppAlert } from '@/components';
 import { useAuthStore } from '@/store/useAuthStore';
 import { colors } from '@/theme';
 import { moderationApi } from '../api/moderationApi';
+import { usePrivacyStore } from '../store/usePrivacyStore';
 import type { BlockedUser, PrivacySettings } from '../types';
 
 export const useSecuritySettings = () => {
   const { t } = useTranslation('security');
   const logout = useAuthStore((state) => state.logout);
 
-  const [privacy, setPrivacy] = useState<PrivacySettings>({
-    hideAge: true,
-    reputationFilter: true,
-    antiShock: true,
-  });
+  const privacy = usePrivacyStore((state) => state.settings);
+  const updateSetting = usePrivacyStore((state) => state.updateSetting);
 
   const [blockedUsers, setBlockedUsers] = useState<BlockedUser[]>([]);
   const [isLoadingBlocked, setIsLoadingBlocked] = useState(false);
@@ -73,13 +71,25 @@ export const useSecuritySettings = () => {
   }, [fetchBlockedUsers]);
 
   const handleTogglePrivacy = (key: keyof PrivacySettings, value: boolean) => {
-    setPrivacy((prev) => ({ ...prev, [key]: value }));
+    updateSetting(key, value);
 
     if (key === 'antiShock' && value) {
       Toast.success(
         t('toasts.antiShockEnabledTitle'),
         t('toasts.antiShockEnabledMessage')
       );
+    } else if (key === 'readReceipts') {
+      if (value) {
+        Toast.success(
+          t('toasts.readReceiptsEnabledTitle'),
+          t('toasts.readReceiptsEnabledMessage')
+        );
+      } else {
+        Toast.warning(
+          t('toasts.readReceiptsDisabledTitle'),
+          t('toasts.readReceiptsDisabledMessage')
+        );
+      }
     } else {
       Toast.success(
         t('toasts.privacyUpdatedTitle'),

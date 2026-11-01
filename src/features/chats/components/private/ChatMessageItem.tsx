@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { colors, spacing } from '@/theme';
 import { AppText } from '@/components';
 import { useAuthStore } from '@/store/useAuthStore';
+import { usePrivacyStore } from '@/features/security';
 import { chatsApi } from '../../api/chatsApi';
 
 export interface ChatMessage {
@@ -28,6 +29,7 @@ export interface ChatMessageItemProps {
 export const ChatMessageItem: React.FC<ChatMessageItemProps> = ({ message }) => {
   const { t, i18n } = useTranslation('chats');
   const currentUserId = useAuthStore(s => s.user?.id);
+  const readReceiptsEnabled = usePrivacyStore(s => s.settings.readReceipts);
   const [showTranslation, setShowTranslation] = useState<boolean>(false);
   const [isPlayingAudio, setIsPlayingAudio] = useState<boolean>(false);
   const [showTranscription, setShowTranscription] = useState<boolean>(false);
@@ -113,7 +115,13 @@ export const ChatMessageItem: React.FC<ChatMessageItemProps> = ({ message }) => 
               <AppText variant="caption" style={styles.userTime}>
                 {message.time}
               </AppText>
-              <CheckCheck size={16} color={colors.primaryLighter} />
+              {message.status === 'pending' ? (
+                <Clock size={13} color="rgba(255, 255, 255, 0.65)" />
+              ) : readReceiptsEnabled && (message.status === 'read' || message.isRead) ? (
+                <CheckCheck size={16} color="#67E8F9" />
+              ) : (
+                <Check size={15} color="rgba(255, 255, 255, 0.75)" />
+              )}
             </View>
           </View>
         </View>
@@ -130,7 +138,7 @@ export const ChatMessageItem: React.FC<ChatMessageItemProps> = ({ message }) => 
             </AppText>
             {message.status === 'pending' ? (
               <Clock size={13} color="rgba(255, 255, 255, 0.65)" />
-            ) : message.status === 'read' || message.isRead ? (
+            ) : readReceiptsEnabled && (message.status === 'read' || message.isRead) ? (
               <CheckCheck size={16} color="#67E8F9" />
             ) : (
               <Check size={15} color="rgba(255, 255, 255, 0.75)" />

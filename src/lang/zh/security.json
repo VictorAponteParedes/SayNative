@@ -19,7 +19,9 @@
     "reputationFilterDesc": "仅接收综合好评度高于 4.0 星级的语伴发起的语音/视频请求。",
     "antiShockTitle": "通话防意外防窥保护",
     "recommendedBadge": "官方推荐",
-    "antiShockDesc": "在视频接通的前 5 秒内自动虚化对方摄像头画面，直到你手动确认网络安全。"
+    "antiShockDesc": "在视频接通的前 5 秒内自动虚化对方摄像头画面，直到你手动确认网络安全。",
+    "readReceiptsTitle": "已读回执",
+    "readReceiptsDesc": "允许你查看其他人是否已阅读你的消息，并在你阅读他们的消息时发送确认。"
   },
   "blockedUsers": {
     "sectionTitle": "黑名单用户 ({{count}})",
@@ -53,6 +55,10 @@
     "unblockSuccessMessage": "已成功将 {{name}} 从黑名单中移除。",
     "privacyUpdatedTitle": "隐私偏好已保存",
     "privacyUpdatedMessage": "你的个人隐私安全策略设置已同步生效。",
+    "readReceiptsEnabledTitle": "已启用已读回执",
+    "readReceiptsEnabledMessage": "你现在可以查看其他人是否已阅读你的消息。",
+    "readReceiptsDisabledTitle": "已禁用已读回执",
+    "readReceiptsDisabledMessage": "你将不会发送或看到已读确认。",
     "antiShockEnabledTitle": "防窥保护已开启",
     "antiShockEnabledMessage": "视频通话接通前 5 秒内将自动对摄像头画面应用虚化滤镜。",
     "accountDeletedTitle": "账号已彻底注销",
